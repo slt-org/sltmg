@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button type="submit" onclick="runTests()">Run Tests</button>
+<script src="src/metric.js"></script>
+<script>
+  function runTests(){
+    console.log("TestRunner.html:runTests: Begin test .................");
+    var testData = new Object();
+    testData.length = 11;
+    testData.width = 12;
+    testData.height = .3;
+    testData.inputUnits = "metric";
+    testData.outputUnits = "imperial";
+    var testrun = getSlabRecipe(testData);
+    console.log(testrun);
+    console.log("TestRunner.html:runTests: End test .................");
+  }
+</script>
+
+</body>
+</html>
