@@ -87,25 +87,39 @@
   </style>
 </head>
 <body>
-<!-- code example from this site. https://codepen.io/Amerey/pen/MWYvLYp -->
+
 <div class="container">
   <div class="row">
-    <div class="col-8 col-md-8 mx-md-auto mt-5">
+    <div class="col-12 col-md-8 mx-md-auto mt-5">
       <form class="px-2 px-sm-5 py-5">
-        <p class="h4 sm-4 text-center">Slab Calculations</p><br>
         <div class="form-group">
-          <!--<div class="form-floating mb-3">-->
-           <!-- <label for="length">Length inches</label>-->
-            <input type="text" class="form-control" id="length" placeholder="Length in inches" >
-            <small id="lengthHelp" class="form-text">Length examples 6.3, .3, 6, 6 1/4 or 1/2</small>
-          <!--</div>-->
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" placeholder="Enter your username">
+          <small id="usernameHelp" class="form-text">Username must be between 5 - 12 characters.</small>
         </div>
 
-        <button  class="btn d-block mx-auto" onclick="handleMe()">Submit</button>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Enter your password">
+          <small id="passwordHelp" class="form-text">Password must be alphanumeric, 8 - 20 characters (@, _ and - are allowed).</small>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" id="email" placeholder="@">
+          <small id="emailHelp" class="form-text">Enter valid email address.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="text" class="form-control" id="phone" placeholder="Enter your phone number">
+          <small id="phoneHelp" class="form-text">Phone number must be in format 222-222-2222.</small>
+        </div>
+
+        <button  class="btn d-block mx-auto">Submit</button>
       </form>
     </div>
   </div>
-  <div id="result"> No result yet</div>
 </div>
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script crossorigin="anonymous"
@@ -115,7 +129,10 @@
   const inputs = document.querySelectorAll('input');
 
   const patterns = {
-    length: /^[-]?[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/,
+    username: /^[a-z\d]{5,12}$/i,
+    password: /^[\d\w@-]{8,20}$/i,
+    email: /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/,
+    phone: /^\d{3}-\d{3}-\d{4}$/
   };
 
   inputs.forEach((input) => {
@@ -131,24 +148,6 @@
       field.className = 'form-control invalid';
     }
   }
-
-</script>
-<script>
-  function handleMe(){
-    let updateLocation = document.getElementById('result');
-    updateLocation.innerHTML = "I got here";
-    console.log("I got here");
-  }
-
-  function preventFormSubmit(){
-    var forms=document.querySelectorAll('form');
-    for (var i=0;i<forms.length;i++){
-      forms[i].addEventListener('submit',function(event){
-        event.preventDefault();
-      });
-    }
-  }
-  window.addEventListener('load',preventFormSubmit);
 
 </script>
 </body>

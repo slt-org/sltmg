@@ -21,9 +21,12 @@
         </div><br>
         <div class="form-row align-items-center">
           <div class="col-sm-auto">
+            <div class="form-group">
             <div class="form-floating mb-3">
-              <input  type="text" class="form-control" id="radius" required pattern=[-]?[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*>
+              <input  type="text" class="form-control" id="radius" pattern="[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*"  required >
               <label for="radius">Radius inches</label>
+              <small id="lengthHelp" class="form-text">decimals & fractions e.g. 0.3, 6, 6 1/4 & 1/2</small>
+            </div>
             </div>
           </div>
           <div class="col-sm-auto">
