@@ -144,7 +144,7 @@
 <script crossorigin="anonymous"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Constants -->
+<!-- 1. Constants -->
 <script>
     const GLASS = .614;
     const WATER = .326;
@@ -171,7 +171,7 @@
     const VERSION = "1.0";
     const REL = "15";
 </script>
-<!-- validation for input fields -->
+<!-- 2. validation for input fields -->
 <script>
     const inputs = document.querySelectorAll('input');
 
@@ -194,7 +194,7 @@
         }
     }
 </script>
-<!-- Initial input handling different for each page-->
+<!-- 3. Initial input handling different for each page-->
 <script>
     function handleFormSubmit() {
         console.log("*************** in tDisk.html:handleFormSubmit ");
@@ -208,9 +208,6 @@
         // all inputs are in inches so volume will be in inches
         var radius = math.fraction(_radius);
         var height = math.fraction(_height);
-
-        // var valid = validateInputs(_radius, _height);
-        // if (!valid) {return;};
 
         // We've turned the fraction or decimal text input into numbers.
         // the numbers are still in the imperial units number system.
