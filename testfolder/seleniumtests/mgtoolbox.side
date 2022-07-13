@@ -1,0 +1,296 @@
+{
+  "id": "ea639a1b-9cc0-491d-8c5d-0e6a55225409",
+  "version": "2.0",
+  "name": "mgtoolbox",
+  "url": "http://localhost:63342/sltmg/iSlab.html",
+  "tests": [{
+    "id": "d3435c71-8c63-4dae-89c1-f695e3848ce8",
+    "name": "testtest",
+    "commands": [{
+      "id": "f23e0f05-aa89-4fb9-840b-8af20d8790d6",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:63342/sltmg/mSlabVolume.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ba357dc1-3d21-49f4-a618-cc91b7519203",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1762x978",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "00cdc059-d206-4c99-a4c2-7512a32fc056",
+      "comment": "",
+      "command": "click",
+      "target": "id=length",
+      "targets": [
+        ["id=length", "id"],
+        ["css=#length", "css:finder"],
+        ["xpath=//input[@id='length']", "xpath:attributes"],
+        ["xpath=//form[@id='myForm']/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a9fe3314-7b13-443b-bfa3-3ab582459c81",
+      "comment": "",
+      "command": "type",
+      "target": "id=length",
+      "targets": [
+        ["id=length", "id"],
+        ["css=#length", "css:finder"],
+        ["xpath=//input[@id='length']", "xpath:attributes"],
+        ["xpath=//form[@id='myForm']/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "12"
+    }, {
+      "id": "e0b41e27-721a-40ff-a29f-484f522589ff",
+      "comment": "",
+      "command": "click",
+      "target": "id=width",
+      "targets": [
+        ["id=width", "id"],
+        ["css=#width", "css:finder"],
+        ["xpath=//input[@id='width']", "xpath:attributes"],
+        ["xpath=//form[@id='myForm']/div/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2c27572b-ed9b-4b8d-b8bf-0dbbc3457419",
+      "comment": "",
+      "command": "type",
+      "target": "id=width",
+      "targets": [
+        ["id=width", "id"],
+        ["css=#width", "css:finder"],
+        ["xpath=//input[@id='width']", "xpath:attributes"],
+        ["xpath=//form[@id='myForm']/div/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "11"
+    }, {
+      "id": "fc266eae-f77c-4167-9d93-a5ad2af0b1a1",
+      "comment": "",
+      "command": "click",
+      "target": "id=height",
+      "targets": [
+        ["id=height", "id"],
+        ["css=#height", "css:finder"],
+        ["xpath=//input[@id='height']", "xpath:attributes"],
+        ["xpath=//form[@id='myForm']/div/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "504f1b55-2d60-466d-b4a3-8ed821e68d44",
+      "comment": "",
+      "command": "type",
+      "target": "id=height",
+      "targets": [
+        ["id=height", "id"],
+        ["css=#height", "css:finder"],
+        ["xpath=//input[@id='height']", "xpath:attributes"],
+        ["xpath=//form[@id='myForm']/div/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": ".3"
+    }, {
+      "id": "d56117d8-b0c5-407d-86cb-f6066a9c2e88",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form[@id='myForm']/div[2]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Calculate')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f88222e3-f996-4369-8178-6f904deff819",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "xpath=//h5[contains(.,'Volume of Slab: 39.600 cm3')]",
+      "targets": [
+        ["css=h5", "css:finder"],
+        ["xpath=//div[@id='recipe']/h5", "xpath:idRelative"],
+        ["xpath=//h5", "xpath:position"],
+        ["xpath=//h5[contains(.,'Volume of Slab: 39.600 cm3')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "f4793eb3-db7c-46df-ba4e-3fdef2fa3112",
+    "name": "iSlab",
+    "commands": [{
+      "id": "dda5c12d-fa3b-4081-95a2-097239738064",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:63342/sltmg/iSlab.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3e791d10-b522-412f-8cce-984a9443510b",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1762x978",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "db1e062f-cfa5-4ea6-b00a-3dcf4800ab91",
+      "comment": "",
+      "command": "click",
+      "target": "id=length",
+      "targets": [
+        ["id=length", "id"],
+        ["css=#length", "css:finder"],
+        ["xpath=//input[@id='length']", "xpath:attributes"],
+        ["xpath=//form[@id='myForm']/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8f86386e-923f-49e9-be82-ca69ce6ad174",
+      "comment": "",
+      "command": "type",
+      "target": "id=length",
+      "targets": [
+        ["id=length", "id"],
+        ["css=#length", "css:finder"],
+        ["xpath=//input[@id='length']", "xpath:attributes"],
+        ["xpath=//form[@id='myForm']/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "5 1/3"
+    }, {
+      "id": "ca652e07-1cd1-46cf-ade2-cebaf03115bf",
+      "comment": "",
+      "command": "click",
+      "target": "id=width",
+      "targets": [
+        ["id=width", "id"],
+        ["css=#width", "css:finder"],
+        ["xpath=//input[@id='width']", "xpath:attributes"],
+        ["xpath=//form[@id='myForm']/div/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "29fe0515-e9d1-4cc4-86e3-928d5c0930e2",
+      "comment": "",
+      "command": "type",
+      "target": "id=width",
+      "targets": [
+        ["id=width", "id"],
+        ["css=#width", "css:finder"],
+        ["xpath=//input[@id='width']", "xpath:attributes"],
+        ["xpath=//form[@id='myForm']/div/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "4.25"
+    }, {
+      "id": "96a16aee-7cfc-4694-ac42-0d185001f8ca",
+      "comment": "",
+      "command": "click",
+      "target": "id=height",
+      "targets": [
+        ["id=height", "id"],
+        ["css=#height", "css:finder"],
+        ["xpath=//input[@id='height']", "xpath:attributes"],
+        ["xpath=//form[@id='myForm']/div/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "29ad41b5-2a60-4ff7-84ab-f932f6c4a2b8",
+      "comment": "",
+      "command": "type",
+      "target": "id=height",
+      "targets": [
+        ["id=height", "id"],
+        ["css=#height", "css:finder"],
+        ["xpath=//input[@id='height']", "xpath:attributes"],
+        ["xpath=//form[@id='myForm']/div/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": ".3"
+    }, {
+      "id": "037b8f88-5d8a-418f-b74b-48eaed4853b0",
+      "comment": "",
+      "command": "type",
+      "target": "id=height",
+      "targets": [
+        ["id=height", "id"],
+        ["css=#height", "css:finder"],
+        ["xpath=//input[@id='height']", "xpath:attributes"],
+        ["xpath=//form[@id='myForm']/div/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": "0.3"
+    }, {
+      "id": "5bb66da1-42d9-40bc-b9e0-62213499bec3",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form[@id='myForm']/div[2]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5dc87f25-e553-48c3-8749-26a5af236d9d",
+      "comment": "",
+      "command": "click",
+      "target": "id=imperial",
+      "targets": [
+        ["id=imperial", "id"],
+        ["css=#imperial", "css:finder"],
+        ["xpath=//input[@id='imperial']", "xpath:attributes"],
+        ["xpath=//form[@id='myForm']/div/div[4]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "76e53a89-9a1d-4bbf-b380-1a19ae4048df",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form[@id='myForm']/div[2]/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b08f6ad7-f159-4d70-ac86-c556177dd19a",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=recipe",
+      "targets": [
+        ["id=recipe", "id"],
+        ["css=#recipe", "css:finder"],
+        ["xpath=//div[@id='recipe']", "xpath:attributes"],
+        ["xpath=//div[3]/div/div/div", "xpath:position"]
+      ],
+      "value": "MG total volume: 7.14 in3\\nMG total weight: 8.25 ounces\\nIngredient\tAmount\\nGlass\t1/2 cup + 3 tblsp + 1/4 tsp.\\nH2O\t1/4 cup + 2 tblsp +\\nBinder\t1 tblsp +\\nLiquid Medium\t1 1/4 tsp."
+    }]
+  }],
+  "suites": [{
+    "id": "fdb4a9df-0d15-408b-8de3-9cf799044427",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["d3435c71-8c63-4dae-89c1-f695e3848ce8", "f4793eb3-db7c-46df-ba4e-3fdef2fa3112"]
+  }],
+  "urls": ["http://localhost:63342/sltmg/mSlabVolume.html", "http://localhost:63342/sltmg/iSlab.html"],
+  "plugins": []
+}
