@@ -89,28 +89,26 @@
 <div class="container">
     <div class="row">
         <div class="col-8">
-            <form class="row g-3" id="myForm" onsubmit="handleFormSubmit()">
-                <p class="h4 sm-4 text-center">Disk Recipe</p><br>
+            <form id="myForm" class="row g-3" onsubmit="handleFormSubmit()">
+                <p class="h4 sm-4 text-center">Spherical Bowl Recipe</p><br>
                 <div class="form-row align-items-center">
                     <div class="col-sm-auto">
                         <div class="form-group">
-                            <label for="radius">radius</label>
-                            <input type="number" class="form-control" id="radius" min="1" max="100" step=".1"
-                                   placeholder="radius in centimeters" required>
-                            <small id="radiusHelp" class="form-text">decimals allowed e.g. 0.3 & 6.3</small>
+                            <label for="insideRadius">inside radius</label>
+                            <input type="number" id="insideRadius" class="form-control" min="1" max="100" step=".1"
+                                   placeholder="inside radius in cm" required>
                         </div>
                     </div>
                     <div class="col-sm-auto">
                         <div class="form-group">
-                            <label for="height"> height</label>
-                            <input type="number" id="height" class="form-control" min=".1" max="100" step=".1"
-                                   placeholder="height in inches" required>
-                            <small id="heightHelp" class="form-text">decimals allowed e.g. 0.3 & 6.3</small>
+                            <label for="outsideRadius">outside radius</label>
+                            <input type="number" id="outsideRadius" class="form-control" min="1" max="100" step=".1"
+                                   placeholder="outside radius in cm" required>
                         </div>
                     </div>
                     <div class="form-group col-sm-6">
+                        <br>
                         <p class="h5 sm-4 ">Recipe output units</p>
-
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="output" id="metric" value="metric"
                                    checked>
@@ -124,8 +122,9 @@
                     <br>
                 </div>
                 <div class="col-12">
-                    <button type="submit" class="btn btn-primary btn-block">recipe</button>
+                    <button type="submit" class="btn btn-primary btn-block">Recipe</button>
                 </div>
+
             </form>
             <br>
             <div class="col-sm-auto" id="recipe">
@@ -167,11 +166,11 @@
     <br>
     <div id="ver"><p>MGToolbox ver. 1.0.15 </p></div>
 </div>
+
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous">
-</script>
+        crossorigin="anonymous"></script>
 <!-- 1. Constants -->
 <script>
     const GLASS = .614;
@@ -199,39 +198,42 @@
     const VERSION = "1.0";
     const REL = "15";
 </script>
-<!-- 2. inline validation for input fields -->
+<!-- 2. Initial input handling different for each page-->
 <script>
     function handleFormSubmit() {
-        console.log("*************** in tDisk.html:handleFormSubmit ");
+        console.log("*************** in tSlab.html:handleFormSubmit ");
+
         let inputUnits = "metric";
-        let radius = document.querySelector('#radius').value;
-        let height = document.querySelector('#height').value;
+        let insideRadius = document.querySelector('#insideRadius').value;
+        let outsideRadius = document.querySelector('#outsideRadius').value;
         let outputUnits = document.querySelector('input[name=output]:checked').value;
 
-        var dataToSend = createData(radius, height, outputUnits, inputUnits);
+        var dataToSend = createData(insideRadius, outsideRadius, outputUnits, inputUnits);
 
-        var generatedRecipe = getDiskRecipe(dataToSend)
+        var generatedRecipe = getSphericalBowlRecipe(dataToSend);
 
         let updateLocation = document.getElementById('recipe');
         updateLocation.innerHTML = generatedRecipe;
 
-        console.log("*************** out tDisk.html:handleFormSubmit ");
+        console.log("*************** out tSlab.html:handleFormSubmit ");
     };
 
     /**
      * this method takes the text input values and turns
-     * them into json
+     * them into a data object.
      */
-    function createData(_radius, _height, _outputUnits, _inputUnits) {
-        console.log("in tDisk.html:createData ***************************");
+    function createData(insideRadius, outsideRadius, _outputUnits, _inputUnits) {
+        console.log("in tSphere.html:createData ***************************");
         var data = new Object();
-        data.radius = _radius;
-        data.height = _height;
+        data.insideRadius = insideRadius;
+        data.outsideRadius = outsideRadius;
         data.outputUnits = _outputUnits;
         data.inputUnits = _inputUnits;
-        console.log("out tDisk.html:createData ***************************");
+
+        console.log("out tSphere.html:createData ***************************");
         return data;
     };
+
 
     function preventFormSubmit() {
         var forms = document.querySelectorAll('form');
@@ -243,19 +245,18 @@
     }
 
     window.addEventListener('load', preventFormSubmit);
+
 </script>
-<!-- Calculators by Shape Disk -->
+<!-- 3. Calculators by Shape Spherical Bowl -->
 <script>
-    /**#####################################
-     *
+    /**
      *
      * @param {object} dataObject  - data object from input
      * @return {string} as html for MG batch recipe.
      */
-    function getDiskRecipe(dataObject) {
-        console.log("in  tDisk.html.gs:getDiskRecipe:*******************");
-
-        var volumeObject = diskCalcMetric(dataObject.radius, dataObject.height, dataObject.inputUnits, dataObject.outputUnits);
+    function getSphericalBowlRecipe(dataObject){
+        console.log("in tSphere.html:getSphericalBowlRecipe");
+        var volumeObject = sphericalBowlCalcMetric(dataObject.insideRadius,dataObject.outsideRadius, dataObject.outputUnits, dataObject.inputUnits)
         var resultHtml;
 
         if (volumeObject.outputUnits == "metric") {
@@ -266,38 +267,41 @@
             // need to take the volumeObject down the Imperial path.
             resultHtml = iCreateRecipeTableHtml(volumeObject);
         } else {
-            Logger.log("We should never get here 'Big old Error'");
-            resultHtml = "<h3>Failed to create recipe...  ERROR</h3>";
+            console.log("We should never get here 'Big old Error'");
+            resultHtml = "Failed to create recipe...  ERROR";
         }
-        console.log("out  tDisk.html:getDiskRecipeFromWebAPP:*******************");
-        // Logger.log("mGetCuboidRecipeFromWebAPP: html from server to send back: " + resultHtml);
 
+        console.log("out tSphere.html:getSphericalBowlRecipe");
         return resultHtml;
+
     };
 
     /**
-     * This function will calculate a disk volume based on
+     * This function will calculate a spherical bowl volume based on
      * centimeter inputs, generating a volume in cubic centimeters.
-     *
+     *  @param {number} insideRadius.
+     *  @param {number} outsideRadius.
+     *  @return {object} contains input values and calculated volume.
      */
-    function diskCalcMetric(radius, height, inputUnits, outputUnits) {
-        console.log("in tDisk.html:diskCalcMetric:*******************");
-        console.log("value parameters on call radius=" + radius + " height=" + height + " inputUnits=" + inputUnits + " outputUnits=" + outputUnits);
+    function sphericalBowlCalcMetric(insideRadius, outsideRadius, outputUnits, inputUnits ){
+        console.log("in tSphere.html:sphericalBowlCalcMetric");
         var volumeObject = new Object();
-        volumeObject.volume = PI * radius * radius * height;
-        volumeObject.radius = radius;
-        volumeObject.height = height;
-        volumeObject.inputUnits = inputUnits;
+        var R3 = outsideRadius*outsideRadius*outsideRadius;
+        var r3 = insideRadius*insideRadius*insideRadius;
+        volumeObject.volume = ((4/3)*PI*(R3-r3))/2;
+        volumeObject.insideRadius = insideRadius;
+        volumeObject.outsideRadius = outsideRadius;
         volumeObject.outputUnits = outputUnits;
+        volumeObject.inputUnits = inputUnits;
 
-        console.log("raw volume = " + volumeObject.volume);
-        console.log("out tDisk.html:diskCalcMetric:*******************");
-
-        return volumeObject
+        console.log("out tSphere.html:sphericalBowlCalcMetric");
+        return volumeObject;
     }
 
+
+
 </script>
-<!-- Volume base Recipe calculations independent of Shape -->
+<!-- 4. Volume base Recipe calculations independent of Shape -->
 <script>
     /********************************************************************************************************
      *
@@ -404,14 +408,14 @@
         var oz = "oz";
         var impVolume;
         var impWeight;
-        if (volumeObject.outputUnits == "imperial") {
+        if(volumeObject.outputUnits == "imperial"){
             // convert volume from cc to ci and weight from gm to oz.
-            impVolume = (volumeObject.volume / CITOCC).toFixed(2);
-            impWeight = (volumeObject.total_weight / OZTOGM).toFixed(2);
+            impVolume=(volumeObject.volume/CITOCC).toFixed(2);
+            impWeight=(volumeObject.total_weight/OZTOGM).toFixed(2);
         }
 
         // Logger.log("glassAmount : " + glassAmount.toString());
-        recipe = "<b>MG total volume:</b> " + impVolume + " " + cubicInches + "<br> <b>MG total weight:</b> " + impWeight + " ounces\n" +
+        recipe = "<b>MG total volume:</b> " + impVolume +" "+ cubicInches +"<br> <b>MG total weight:</b> " + impWeight +" ounces\n" +
             "                <table class=\"table table-hover\">\n" +
             "                    <thead>\n" +
             "                    <tr><th scope=\"col\">Ingredient</th><th scope=\"col\">Amount</th></tr>\n" +
@@ -510,39 +514,33 @@
         while (tsp > 48) {
             conObj.cups = conObj.cups + 1;
             tsp = tsp - 48;
-        }
-        ;
+        };
 
         if (tsp <= 47.99 && tsp >= 36) {
             conObj.threeqtrCup = 1;
             tsp = tsp - 36;
-        }
-        ;
+        };
 
         if (tsp <= 35.99 && tsp >= 24) {
             conObj.halfCup = 1;
             tsp = tsp - 24;
-        }
-        ;
+        };
 
         if (tsp <= 23.99 && tsp >= 12) {
             conObj.qtrCup = 1;
             tsp = tsp - 12;
-        }
-        ;
+        };
 
         while (tsp <= 11.99 && tsp >= 3) {
             conObj.tblsp = conObj.tblsp + 1;
             tsp = tsp - 3;
-        }
-        ;
+        };
 
         while (tsp < 2.99 && tsp >= 1) {
             tsp = tsp.toFixed(2);
             conObj.tsp = conObj.tsp + 1;
             tsp = tsp - 1;
-        }
-        ;
+        };
 
         console.log("after here there is less than 1 teaspoon left. " + tsp.toFixed(2));
 
