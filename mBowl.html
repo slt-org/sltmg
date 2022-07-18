@@ -201,7 +201,7 @@
 <!-- 2. Initial input handling different for each page-->
 <script>
     function handleFormSubmit() {
-        console.log("*************** in tSlab.html:handleFormSubmit ");
+        console.log("*************** in mBowl.html:handleFormSubmit ");
 
         let inputUnits = "metric";
         let insideRadius = document.querySelector('#insideRadius').value;
@@ -215,7 +215,7 @@
         let updateLocation = document.getElementById('recipe');
         updateLocation.innerHTML = generatedRecipe;
 
-        console.log("*************** out tSlab.html:handleFormSubmit ");
+        console.log("*************** out mBowl.html:handleFormSubmit ");
     };
 
     /**
@@ -223,14 +223,14 @@
      * them into a data object.
      */
     function createData(insideRadius, outsideRadius, _outputUnits, _inputUnits) {
-        console.log("in tSphere.html:createData ***************************");
+        console.log("in mBowl.html:createData ***************************");
         var data = new Object();
         data.insideRadius = insideRadius;
         data.outsideRadius = outsideRadius;
         data.outputUnits = _outputUnits;
         data.inputUnits = _inputUnits;
 
-        console.log("out tSphere.html:createData ***************************");
+        console.log("out mBowl.html:createData ***************************");
         return data;
     };
 
@@ -255,7 +255,7 @@
      * @return {string} as html for MG batch recipe.
      */
     function getSphericalBowlRecipe(dataObject){
-        console.log("in tSphere.html:getSphericalBowlRecipe");
+        console.log("in mBowl.html:getSphericalBowlRecipe");
         var volumeObject = sphericalBowlCalcMetric(dataObject.insideRadius,dataObject.outsideRadius, dataObject.outputUnits, dataObject.inputUnits)
         var resultHtml;
 
@@ -271,7 +271,7 @@
             resultHtml = "Failed to create recipe...  ERROR";
         }
 
-        console.log("out tSphere.html:getSphericalBowlRecipe");
+        console.log("out mBowl.html:getSphericalBowlRecipe");
         return resultHtml;
 
     };
@@ -284,7 +284,7 @@
      *  @return {object} contains input values and calculated volume.
      */
     function sphericalBowlCalcMetric(insideRadius, outsideRadius, outputUnits, inputUnits ){
-        console.log("in tSphere.html:sphericalBowlCalcMetric");
+        console.log("in mBowl.html:sphericalBowlCalcMetric");
         var volumeObject = new Object();
         var R3 = outsideRadius*outsideRadius*outsideRadius;
         var r3 = insideRadius*insideRadius*insideRadius;
@@ -294,11 +294,9 @@
         volumeObject.outputUnits = outputUnits;
         volumeObject.inputUnits = inputUnits;
 
-        console.log("out tSphere.html:sphericalBowlCalcMetric");
+        console.log("out mBowl.html:sphericalBowlCalcMetric");
         return volumeObject;
     }
-
-
 
 </script>
 <!-- 4. Volume base Recipe calculations independent of Shape -->
