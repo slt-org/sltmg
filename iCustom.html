@@ -159,7 +159,7 @@
     </div>
   </div>
   <br>
-  <div id="ver"><p>MGToolbox ver. 1.0.15 </p></div>
+  <div id="ver"><p>MGToolbox ver. 1.0.16 </p></div>
 </div>
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -248,7 +248,7 @@
   function convertInputsToMetric(_volume) {
     console.log("in iCustom.html.html:convertInputsToMetric ***************************");
     var wellChosen = (1 * INTOCM).toFixed(3);
-    var volume = (_volume * INTOCM).toFixed(3);
+    var volume = (_volume * CITOCC).toFixed(3);
     var convertedObject = new Object();
     convertedObject.volume = volume;
     console.log("out iCustom.html:convertInputsToMetric ***************************");
