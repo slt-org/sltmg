@@ -1,0 +1,12 @@
+I would like to announce the release of the Modeling Glass Toolbox. It is an online set of tools for calculating shapes and auto-generating batch recipes. It will help you answer questions like "How much Modeling Glass do I need to make a disk ten inches in diameter?" and "What size piece can I make with my leftover Modeling Glass?".
+
+https://sites.google.com/view/slt-mg/home
+
+The MG Toolbox is free to use and requires no signup. I made modest efforts to make sure it worked for most modern web browsers on computers, tablets and phones. If there are questions or issues please feel free to email me at sterry1@protonmail.com. Please be patient if I don't immediately respond as I only check email once a day.
+
+To all those who beta tested or reviewed the site, Thank you. Every suggestion and encouragement made the application a little better.
+
+Here are some images of a project in progress where I used the toolbox. I hope others will find it useful as well.
+
+ 
+   
