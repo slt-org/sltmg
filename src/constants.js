@@ -2,7 +2,13 @@ const GLASS   = .614;
 const WATER   = .326;
 const BINDER  = .032;
 const LMEDIUM = .027;
+// proportion values for coe96
+const GLASS96   = .579;
+const WATER96   = .359;
+const BINDER96  = .036;
+const LMEDIUM96 = .026;
 const CUBICCM = 'cm<sup>3</sup>';
+const CUBICIN = 'in<sup>3</sup>';
 const PI = 3.1416;
 const GLASSCONV   = 0.232;
 const WATERCONV   = 0.236;

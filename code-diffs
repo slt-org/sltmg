@@ -1,0 +1,58 @@
+1. add coe toggle to html body
+                    <div class="form-group col-sm-6">
+                        <p class="h5 sm-4 ">COE 90 or 96 Recipe</p>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="coe" id="90" value="90"
+                                   checked>
+                            <label class="form-check-label" for="metric">COE 90</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="coe" id="96" value="96">
+                            <label class="form-check-label" for="imperial">COE 96</label>
+                        </div>
+                    </div>
+
+2. add 96 ratio constants
+    const GLASS96   = .579;
+    const WATER96   = .359;
+    const BINDER96  = .036;
+    const LMEDIUM96 = .026;
+
+3. collect 96 toggle value
+       let _coe =  document.querySelector('input[name=coe]:checked').value;
+
+4. modify createData call
+        var dataToSend = createData(convertedInputs.radius, convertedInputs.height, _outputUnits, _inputUnits, _coe);
+
+5. modify createData signature and body
+    function createData(_radius, _height, _outputUnits, _inputUnits, _coe) {
+        data.coe = _coe;
+
+6. modify getDiskRecipe diskCalcMetric call
+        var volumeObject = diskCalcMetric(dataObject.radius, dataObject.height, dataObject.inputUnits, dataObject.outputUnits, dataObject.coe);
+
+7. modify diskCalcMetric signature
+    function diskCalcMetric(radius, height, inputUnits, outputUnits, coe) {
+        volumeObject.coe = coe;
+8. add if for coe toggle in createBaseVolume
+        if(volumeObject.coe == "90"){
+            volumeObject.glass = (volumeObject.total_weight * GLASS).toFixed(1); // grams of glass powder to use
+            volumeObject.water = (volumeObject.total_weight * WATER).toFixed(1);
+            volumeObject.binder = (volumeObject.total_weight * BINDER).toFixed(1);
+            volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM).toFixed(1);
+            return volumeObject;
+        };
+
+        if(volumeObject.coe == "96"){
+            volumeObject.glass = (volumeObject.total_weight * GLASS96).toFixed(1); // grams of glass powder to use
+            volumeObject.water = (volumeObject.total_weight * WATER96).toFixed(1);
+            volumeObject.binder = (volumeObject.total_weight * BINDER96).toFixed(1);
+            volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM96).toFixed(1);
+            return volumeObject;
+        };
+
+        console.log("out metric.js:createBaseVolume ***********************");
+       // return volumeObject;
+
+

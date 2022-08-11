@@ -112,6 +112,19 @@
                         </div>
                     </div>
                     <div class="form-group col-sm-6">
+                        <p class="h5 sm-4 ">COE 90 or 96 Recipe</p>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="coe" id="90" value="90"
+                                   checked>
+                            <label class="form-check-label" for="metric">COE 90</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="coe" id="96" value="96">
+                            <label class="form-check-label" for="imperial">COE 96</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
                         <p class="h5 sm-4 ">Recipe output units</p>
 
                         <div class="form-check form-check-inline">
@@ -181,6 +194,10 @@
     const WATER = .326;
     const BINDER = .032;
     const LMEDIUM = .027;
+    const GLASS96   = .579;
+    const WATER96   = .359;
+    const BINDER96  = .036;
+    const LMEDIUM96 = .026;
     const CUBICCM = 'cm<sup>3</sup>';
     const PI = 3.1416;
     const GLASSCONV = 0.232;
@@ -240,6 +257,7 @@
         let _radius = document.querySelector('#radius').value;
         let _height = document.querySelector('#height').value;
         let _outputUnits = document.querySelector('input[name=output]:checked').value;
+        let _coe =  document.querySelector('input[name=coe]:checked').value;
 
         // inputs pass the validity test so turn them into numbers
         // all inputs are in inches so volume will be in inches
@@ -252,7 +270,7 @@
         var convertedInputs = convertInputsToMetric(Number(radius), Number(height));
 
         // calculate the volume using imperial units converted to metric
-        var dataToSend = createData(convertedInputs.radius, convertedInputs.height, _outputUnits, _inputUnits);
+        var dataToSend = createData(convertedInputs.radius, convertedInputs.height, _outputUnits, _inputUnits, _coe);
 
         let updateLocation = document.querySelector('#recipe');
 
@@ -266,13 +284,14 @@
      * this method takes the text input values and turns
      * them into json
      */
-    function createData(_radius, _height, _outputUnits, _inputUnits) {
+    function createData(_radius, _height, _outputUnits, _inputUnits, _coe) {
         console.log("in tDisk.html:createData ***************************");
         var data = new Object();
         data.radius = _radius;
         data.height = _height;
         data.outputUnits = _outputUnits;
         data.inputUnits = _inputUnits;
+        data.coe = _coe;
         console.log("out tDisk.html:createData ***************************");
         return data;
     };
@@ -313,7 +332,7 @@
     function getDiskRecipe(dataObject) {
         console.log("in  tDisk.html.gs:getDiskRecipe:*******************");
 
-        var volumeObject = diskCalcMetric(dataObject.radius, dataObject.height, dataObject.inputUnits, dataObject.outputUnits);
+        var volumeObject = diskCalcMetric(dataObject.radius, dataObject.height, dataObject.inputUnits, dataObject.outputUnits, dataObject.coe);
         var resultHtml;
 
         if (volumeObject.outputUnits == "metric") {
@@ -338,15 +357,16 @@
      * centimeter inputs, generating a volume in cubic centimeters.
      *
      */
-    function diskCalcMetric(radius, height, inputUnits, outputUnits) {
+    function diskCalcMetric(radius, height, inputUnits, outputUnits, coe) {
         console.log("in tDisk.html:diskCalcMetric:*******************");
-        console.log("value parameters on call radius=" + radius + " height=" + height + " inputUnits=" + inputUnits + " outputUnits=" + outputUnits);
+        console.log("value parameters on call radius=" + radius + " height=" + height + " inputUnits=" + inputUnits + " outputUnits=" + outputUnits+ " coe=" + coe);
         var volumeObject = new Object();
         volumeObject.volume = PI * radius * radius * height;
         volumeObject.radius = radius;
         volumeObject.height = height;
         volumeObject.inputUnits = inputUnits;
         volumeObject.outputUnits = outputUnits;
+        volumeObject.coe = coe;
 
         console.log("raw volume = " + volumeObject.volume);
         console.log("out tDisk.html:diskCalcMetric:*******************");
@@ -416,15 +436,24 @@
         // Now multiply the total weight by the ratio for each ingredient.
         // That we give you the weight amount for each ingredient.
         volumeObject.total_weight = volumeObject.volume * 2;
-        volumeObject.glass = (volumeObject.total_weight * GLASS).toFixed(1); // grams of glass powder to use
-        volumeObject.water = (volumeObject.total_weight * WATER).toFixed(1);
-        volumeObject.binder = (volumeObject.total_weight * BINDER).toFixed(1);
-        volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM).toFixed(1);
+        if(volumeObject.coe == "90"){
+            volumeObject.glass = (volumeObject.total_weight * GLASS).toFixed(1); // grams of glass powder to use
+            volumeObject.water = (volumeObject.total_weight * WATER).toFixed(1);
+            volumeObject.binder = (volumeObject.total_weight * BINDER).toFixed(1);
+            volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM).toFixed(1);
+            return volumeObject;
+        };
+
+        if(volumeObject.coe == "96"){
+            volumeObject.glass = (volumeObject.total_weight * GLASS96).toFixed(1); // grams of glass powder to use
+            volumeObject.water = (volumeObject.total_weight * WATER96).toFixed(1);
+            volumeObject.binder = (volumeObject.total_weight * BINDER96).toFixed(1);
+            volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM96).toFixed(1);
+            return volumeObject;
+        };
 
         console.log("out metric.js:createBaseVolume ***********************");
-
-        return volumeObject;
-
+       // return volumeObject;
     };
 
     /********************************************************************************************************

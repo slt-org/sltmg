@@ -4,3 +4,9 @@ The ratio for mixing Modeling Glass with Spectrum/Uroboros or other powders is s
 INCREASE BINDER from 2 1/2 level teaspoons (6g) to 1 level tablespoon (7g). 
 INCREASE WATER from 1/4 cup plus 2 teaspoons (60g) to 1/4 cup plus 2 1/4 teaspoons (70g). 
 That's it!
+
+glass	113	0.579
+h2o	70	0.359
+binder	7	0.036
+lm	5	0.026
+	195
