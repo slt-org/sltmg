@@ -102,8 +102,21 @@
                 1/2</small>
             </div>
           </div>
-          <div class="form-group col-sm-6"><br>
-            <p class="h5 sm-4 ">Recipe output units</p>
+          <div class="form-group col-sm-6">
+              <p class="h6 sm-4 ">COE 90 or 96 Recipe</p>
+
+              <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="coe" id="90" value="90"
+                         checked>
+                  <label class="form-check-label" for="metric">COE 90</label>
+              </div>
+              <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="coe" id="96" value="96">
+                  <label class="form-check-label" for="imperial">COE 96</label>
+              </div>
+          </div>
+          <div class="form-group col-sm-6">
+            <p class="h6 sm-4 ">Recipe output units</p>
 
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="output" id="metric" value="metric"
@@ -126,36 +139,15 @@
         <b>MG total volume:</b> 0 cm<sup>3</sup><br> <b>MG total weight:</b> 0 grams
         <table class="table table-hover">
           <thead>
-          <tr>
-            <th scope="col">Ingredient</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Units</th>
-          </tr>
+          <tr><th scope="col">Ingredient</th><th scope="col">Amount</th><th scope="col">Units</th></tr>
           </thead>
           <tbody>
-          <tr>
-            <th scope="row">Glass</th>
-            <td>0</td>
-            <td>grams</td>
-          </tr>
-          <tr>
-            <th scope="row">H2O</th>
-            <td>0</td>
-            <td>grams</td>
-          </tr>
-          <tr>
-            <th scope="row">Binder</th>
-            <td>0</td>
-            <td>grams</td>
-          </tr>
-          <tr>
-            <th scope="row">Liquid Medium</th>
-            <td>0</td>
-            <td>grams</td>
-          </tr>
+          <tr><th scope="row">Glass</th><td>0</td><td>grams</td></tr>
+          <tr><th scope="row">H2O</th><td>0</td><td>grams</td></tr>
+          <tr><th scope="row">Binder</th><td>0</td><td>grams</td></tr>
+          <tr><th scope="row">Liquid Medium</th><td>0</td><td>grams</td></tr>
           </tbody>
-        </table>
-      </div>
+        </table>      </div>
     </div>
   </div>
   <br>
@@ -171,6 +163,10 @@
   const WATER = .326;
   const BINDER = .032;
   const LMEDIUM = .027;
+    const GLASS96   = .579;
+    const WATER96   = .359;
+    const BINDER96  = .036;
+    const LMEDIUM96 = .026;
   const CUBICCM = 'cm<sup>3</sup>';
   const PI = 3.1416;
   const GLASSCONV = 0.232;
@@ -227,6 +223,7 @@
     var _inputUnits = "metric";
     let _volume = document.querySelector('#volume').value;
     let _outputUnits = document.querySelector('input[name=output]:checked').value;
+    let _coe =  document.querySelector('input[name=coe]:checked').value;
 
     // inputs pass the validity test so turn them into numbers
     // all inputs are in inches so volume will be in inches
@@ -237,7 +234,7 @@
     // Convert them to metric and use the metric path.
     var convertedInputs = convertInputsToMetric(Number(volume));
 
-    var data = createData(convertedInputs.volume, _outputUnits, _inputUnits);
+    var data = createData(convertedInputs.volume, _outputUnits, _inputUnits, _coe);
     var generatedRecipe = getCustomRecipe(data);
 
     let updateLocation = document.getElementById('recipe');
@@ -259,12 +256,14 @@
    * this method takes the text input values and turns
    * them into a data transfer object
    */
-  function createData(_volume,_outputUnits,_inputUnits){
+  function createData(_volume,_outputUnits,_inputUnits,_coe){
     console.log("in createData");
     var data = new Object();
     data.volume = _volume;
     data.outputUnits  = _outputUnits;
     data.inputUnits  = _inputUnits;
+    data.coe = _coe;
+
     return data;
   };
 
@@ -289,7 +288,7 @@
   function getCustomRecipe(dataObject) {
     console.log("in tCustom.html:getCustomRecipe:*******************");
 
-    var volumeObject = customCalcMetric(dataObject.volume,dataObject.outputUnits,dataObject.inputUnits);
+    var volumeObject = customCalcMetric(dataObject.volume,dataObject.outputUnits,dataObject.inputUnits,dataObject.coe);
     var resultHtml;
 
     if (volumeObject.outputUnits == "metric") {
@@ -313,12 +312,13 @@
    * centimeter inputs, generating a volume in cubic centimeters.
    *
    */
-  function customCalcMetric(volume,outputUnits,inputUnits) {
+  function customCalcMetric(volume,outputUnits,inputUnits,coe) {
     console.log("value parameters on call volume=" + volume);
     var volumeObject = new Object();
     volumeObject.volume = Number(volume);
     volumeObject.outputUnits = outputUnits;
     volumeObject.inputUnits = inputUnits;
+    volumeObject.coe = coe;
 
     console.log("raw volume in "+inputUnits+" : "+ volumeObject.volume);
 
@@ -387,15 +387,24 @@
     // Now multiply the total weight by the ratio for each ingredient.
     // That we give you the weight amount for each ingredient.
     volumeObject.total_weight = volumeObject.volume * 2;
+        if(volumeObject.coe == "90"){
     volumeObject.glass = (volumeObject.total_weight * GLASS).toFixed(1); // grams of glass powder to use
     volumeObject.water = (volumeObject.total_weight * WATER).toFixed(1);
     volumeObject.binder = (volumeObject.total_weight * BINDER).toFixed(1);
     volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM).toFixed(1);
+            return volumeObject;
+        };
 
-    console.log("out metric.js:createBaseVolume ***********************");
-
+        if(volumeObject.coe == "96"){
+            volumeObject.glass = (volumeObject.total_weight * GLASS96).toFixed(1); // grams of glass powder to use
+            volumeObject.water = (volumeObject.total_weight * WATER96).toFixed(1);
+            volumeObject.binder = (volumeObject.total_weight * BINDER96).toFixed(1);
+            volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM96).toFixed(1);
     return volumeObject;
+        };
 
+        console.log("out metric.js:createBaseVolume ***********************");
+       // return volumeObject;
   };
 
   /********************************************************************************************************
@@ -569,7 +578,7 @@
 
     console.log("after here there is less than 1 teaspoon left. " + tsp.toFixed(2));
 
-    if (tsp < 0.99 && tsp >= .75) {
+    if (tsp < 1.0 && tsp >= .75) {
       conObj.threeqtrTsp = conObj.threeqtrTsp + 1;
       tsp = 0;
     }

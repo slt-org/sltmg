@@ -119,6 +119,19 @@
             </div>
           </div>
           <div class="form-group col-sm-6">
+            <p class="h6 sm-4 ">COE 90 or 96 Recipe</p>
+
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="coe" id="90" value="90"
+                     checked>
+              <label class="form-check-label" for="metric">COE 90</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="coe" id="96" value="96">
+              <label class="form-check-label" for="imperial">COE 96</label>
+            </div>
+          </div>
+          <div class="form-group col-sm-6">
             <br>
             <p class="h6 sm-4 ">Recipe output units</p>
 
@@ -153,10 +166,10 @@
           </tbody>
         </table>
       </div>
-      <br>
-      <div id="ver"><p>MGToolbox ver. 1.0.16 </p></div>
     </div>
   </div>
+    <br>
+    <div id="ver"><p>MGToolbox ver. 1.0.16 </p></div>
 </div>
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script crossorigin="anonymous"
@@ -168,6 +181,10 @@
   const WATER = .326;
   const BINDER = .032;
   const LMEDIUM = .027;
+  const GLASS96   = .579;
+  const WATER96   = .359;
+  const BINDER96  = .036;
+  const LMEDIUM96 = .026;
   const CUBICCM = 'cm<sup>3</sup>';
   const PI = 3.1416;
   const GLASSCONV = 0.232;
@@ -223,6 +240,7 @@
     let _width = document.querySelector('#width').value;
     let _height = document.querySelector('#height').value;
     let _outputUnits = document.querySelector('input[name=output]:checked').value;
+    let _coe =  document.querySelector('input[name=coe]:checked').value;
 
     // inputs pass the validity test so turn them into numbers
     // all inputs are in inches so volume will be in inches
@@ -235,15 +253,13 @@
     // Convert them to metric and use the metric path.
     var convertedInputs = convertInputsToMetric(Number(length),Number(width), Number(height));
 
-    var dataToSend = createData(convertedInputs.length,convertedInputs.width,convertedInputs.height,_outputUnits,_inputUnits);
+    var dataToSend = createData(convertedInputs.length,convertedInputs.width,convertedInputs.height,_outputUnits,_inputUnits,_coe);
 
     var generatedRecipe = getSlabRecipe(dataToSend)
 
     let updateLocation = document.getElementById('recipe');
     updateLocation.innerHTML = generatedRecipe;
 
-    // updateLocation.innerHTML = "<p>L = " + length + ", W = " + width + ", H = " + height + ", inputUnits = " + inputUnits + ", outputUnits = " + outputUnits+"</p>";
-    // console.log("L = " + length + " W = " + width + " H = " + height + " inputUnits = " + inputUnits + " outputUnits = " + outputUnits);
     console.log("*************** out tSlab.html:handleFormSubmit ");
   };
 
@@ -251,7 +267,7 @@
    * this method takes the text input values and turns
    * them into a data object.
    */
-  function createData(_length,_width,_height,_outputUnits,_inputUnits){
+  function createData(_length,_width,_height,_outputUnits,_inputUnits,_coe){
     console.log("in origTSlab.html:createData ***************************");
     var data = new Object();
     data.length = _length;
@@ -259,6 +275,7 @@
     data.height = _height;
     data.outputUnits = _outputUnits;
     data.inputUnits = _inputUnits;
+    data.coe = _coe;
 
     console.log("out origTSlab.html:createData ***************************");
     return data;
@@ -300,7 +317,7 @@
     console.log("in metric.js:getSlabRecipe")
     console.log(dataObject);
 
-    var volumeObject = slabCalcMetric(dataObject.length, dataObject.width, dataObject.height, dataObject.outputUnits, dataObject.inputUnits);
+    var volumeObject = slabCalcMetric(dataObject.length, dataObject.width, dataObject.height, dataObject.outputUnits, dataObject.inputUnits, dataObject.coe);
     var resultHtml;
 
     if (volumeObject.outputUnits == "metric") {
@@ -326,7 +343,7 @@
    *  @param {string} height - number as text.
    *  @return {object} contains input values and calculated volume.
    */
-  function slabCalcMetric(length, width, height, outputUnits, inputUnits) {
+  function slabCalcMetric(length, width, height, outputUnits, inputUnits, coe) {
     console.log("in metric.js:slabCalcMetric");
     console.log("metric.js:slabCalcMetric: value parameters on call length=" + length + " width=" + width + " height=" + height + " outputUnits=" + outputUnits + " inputUnits=" + inputUnits);
     var volumeObject = new Object();
@@ -336,6 +353,7 @@
     volumeObject.height = height;
     volumeObject.outputUnits = outputUnits;
     volumeObject.inputUnits = inputUnits;
+    volumeObject.coe = coe;
 
     console.log("metric.js:slabCalcMetric: raw volume in " + outputUnits + "= " + volumeObject.volume);
     console.log("out metric.js:slabCalcMetric");
@@ -404,15 +422,24 @@
     // Now multiply the total weight by the ratio for each ingredient.
     // That we give you the weight amount for each ingredient.
     volumeObject.total_weight = volumeObject.volume * 2;
-    volumeObject.glass = (volumeObject.total_weight * GLASS).toFixed(1); // grams of glass powder to use
-    volumeObject.water = (volumeObject.total_weight * WATER).toFixed(1);
-    volumeObject.binder = (volumeObject.total_weight * BINDER).toFixed(1);
-    volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM).toFixed(1);
+    if(volumeObject.coe == "90"){
+      volumeObject.glass = (volumeObject.total_weight * GLASS).toFixed(1); // grams of glass powder to use
+      volumeObject.water = (volumeObject.total_weight * WATER).toFixed(1);
+      volumeObject.binder = (volumeObject.total_weight * BINDER).toFixed(1);
+      volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM).toFixed(1);
+      return volumeObject;
+    };
+
+    if(volumeObject.coe == "96"){
+      volumeObject.glass = (volumeObject.total_weight * GLASS96).toFixed(1); // grams of glass powder to use
+      volumeObject.water = (volumeObject.total_weight * WATER96).toFixed(1);
+      volumeObject.binder = (volumeObject.total_weight * BINDER96).toFixed(1);
+      volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM96).toFixed(1);
+      return volumeObject;
+    };
 
     console.log("out metric.js:createBaseVolume ***********************");
-
-    return volumeObject;
-
+       // return volumeObject;
   };
 
   /********************************************************************************************************
@@ -586,7 +613,7 @@
 
     console.log("after here there is less than 1 teaspoon left. " + tsp.toFixed(2));
 
-    if (tsp < 0.99 && tsp >= .75) {
+    if (tsp < 1.0 && tsp >= .75) {
       conObj.threeqtrTsp = conObj.threeqtrTsp + 1;
       tsp = 0;
     }
