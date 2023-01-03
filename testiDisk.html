@@ -91,31 +91,37 @@
 <div class="container">
     <div class="row">
         <div class="col-8">
-            <form class="row g-3" id="myForm" onsubmit="handleFormSubmit()">
+            <form class="row g-3 was-validated" id="myForm" onsubmit="handleFormSubmit()">
                 <p class="h4 sm-4 text-center">Disk Recipe</p><br>
-                <small id="hint" class="form-text">fractions 1 1/4 and 11/4 are not the same!</small>
+                <small id="hint" class="form-text">acceptable values are any numbers as
+                    <br>whole, decimals or fractions
+                    <br> e.g. 3, 0.3, 3.6, 6 1/4 & 1/2
+                    <br> be aware! 1 1/4 and 11/4 are not the same!</small>
                 <div class="form-row align-items-center">
                     <div class="input-group mb-3"> <!--"col-sm-auto"-->
-                            <label for="radius">radius</label>
-                            <input type="text" class="form-control" id="radius" placeholder="radius in inches" required>
-                            <select class="form-select-sm"  id="radiusUnits" >
-                                <option selected>units</option>
-                                <option value="in">inches</option>
-                                <option value="mm">millimeters</option>
-                                <option value="cm">centimeters</option>
+                            <input type="text" class="form-control" id="diameter" placeholder="diameter" required>
+                            <select class="form-select-sm"  id="diameterInputUnits" >
+                                <option value="in">in</option>
+                                <option value="mm">mm</option>
+                                <option value="cm">cm</option>
                             </select>
-                            <small id="radiusHelp" class="form-text">decimals & fractions e.g. 0.3, 6, 6 1/4 &
-                                1/2</small>
+                            <!--<small id="radiusHelp" class="form-text">decimals & fractions e.g. 0.3, 6, 6 1/4 &
+                                1/2</small>-->
                     </div>
                     <div class="col-sm-auto">
-                        <div class="form-group">
-                            <label for="height"> height</label>
-                            <input type="text" class="form-control" id="height" placeholder="height in inches" required>
-                            <small id="heightHelp" class="form-text">decimals & fractions e.g. 0.3, 6, 6 1/4 &
-                                1/2</small>
+                        <div class="form-group input-group">
+                            <input type="text" class="form-control" id="height" placeholder="height" required>
+                            <select class="form-select-sm"  id="heightInputUnits" >
+                                <option value="in">in</option>
+                                <option value="mm">mm</option>
+                                <option value="cm">cm</option>
+                            </select>
+                            <!--<small id="radiusHelp" class="form-text">decimals & fractions e.g. 0.3, 6, 6 1/4 &
+                                1/2</small>-->
                         </div>
                     </div>
                     <div class="form-group col-sm-6">
+                        <br>
                         <p class="h6 sm-4 ">Recipe output units</p>
 
                         <div class="form-check form-check-inline">
@@ -179,6 +185,10 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous">
 </script>
+<!-- 0. page -->
+<script>
+    const PAGENAME = "disk";
+</script>
 <!-- 1. Constants -->
 <script>
     const GLASS = .614;
@@ -211,7 +221,7 @@
     const inputs = document.querySelectorAll('input');
 
     const patterns = {
-        radius: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/,
+        diameter: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/,
         height: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/
     };
 
@@ -238,10 +248,33 @@
 <!-- 3. Initial input handling with form submit-->
 <script>
     function handleFormSubmit() {
-        console.log("*************** in tDisk.html:handleFormSubmit ");
+        console.log("*************** in testiDisk.html:handleFormSubmit ");
+        // inputs are valid
+        // page specific function here for gathering named inputs, units and output units
+        switch(PAGENAME) {
+            case "disk":
+                // disk specific input collector
+                diskInputCollector();
+                break;
+            case "slab":
+                // code block
+                break;
+            case "bowl":
+                // code block
+                break;
+            case "custom":
+                // code block
+                break;
+            case "reverse":
+                // code block
+                break;
+            default:
+            // code block
+        }
+
         var _inputUnits = "imperial";
         //Get inputted number and result div
-        let _radius = document.querySelector('#radius').value;
+        let _radius = document.querySelector('#diameter').value;
         let _height = document.querySelector('#height').value;
         let _outputUnits = document.querySelector('input[name=output]:checked').value;
 
@@ -265,6 +298,28 @@
 
         console.log("*************** out tDisk.html:handleFormSubmit ");
     };
+
+    /**
+     * this method takes the form input values and turns
+     * them into normalized metric numbers and output unit preferences
+     */
+    function diskInputCollector() {
+        console.log("in testiDisk.html:diskCollector ***************************");
+        var data = new Object();
+        data.diameter = document.querySelector('#diameter').value;
+        data.diameterInputUnits = document.querySelector('#diameterInputUnits').value;
+        data.height =  document.querySelector('#height').value;
+        data.heightInputUnits = document.querySelector('#heightInputUnits').value;
+        data.outputUnits = document.querySelector('input[name=output]:checked').value;
+        console.log("out testiDisk.html:diskCollector ***************************");
+        return data;
+    };
+
+    class Disk {
+        constructor(diameter,height,outputUnits){
+
+        };
+    }
 
     /**
      * this method takes the text input values and turns
