@@ -99,20 +99,20 @@
                     <br> be aware! 1 1/4 and 11/4 are not the same!</small>
                 <div class="form-row align-items-center">
                     <div class="input-group mb-3"> <!--"col-sm-auto"-->
-                            <input type="text" class="form-control" id="diameter" placeholder="diameter" required>
-                            <select class="form-select-sm"  id="diameterInputUnits" >
-                                <option value="in">in</option>
-                                <option value="mm">mm</option>
-                                <option value="cm">cm</option>
-                            </select>
-                            <!--<small id="radiusHelp" class="form-text">decimals & fractions e.g. 0.3, 6, 6 1/4 &
-                                1/2</small>-->
+                        <input type="text" class="form-control" id="diameter" placeholder="diameter" required>
+                        <select class="form-select-sm" id="diameterInputUnits">
+                            <option value="in" selected>in</option>
+                            <option value="mm">mm</option>
+                            <option value="cm">cm</option>
+                        </select>
+                        <!--<small id="radiusHelp" class="form-text">decimals & fractions e.g. 0.3, 6, 6 1/4 &
+                            1/2</small>-->
                     </div>
                     <div class="col-sm-auto">
                         <div class="form-group input-group">
                             <input type="text" class="form-control" id="height" placeholder="height" required>
-                            <select class="form-select-sm"  id="heightInputUnits" >
-                                <option value="in">in</option>
+                            <select class="form-select-sm" id="heightInputUnits">
+                                <option value="in" selected>in</option>
                                 <option value="mm">mm</option>
                                 <option value="cm">cm</option>
                             </select>
@@ -251,10 +251,16 @@
         console.log("*************** in testiDisk.html:handleFormSubmit ");
         // inputs are valid
         // page specific function here for gathering named inputs, units and output units
-        switch(PAGENAME) {
+        let updateLocation = document.querySelector('#recipe');
+
+        switch (PAGENAME) {
             case "disk":
                 // disk specific input collector
-                diskInputCollector();
+                let disk = new Disk(diskInputCollector());
+                disk.normalizeUnits();
+                disk.calculateVolume();
+                var generatedRecipe = disk.getDiskRecipe();
+                updateLocation.innerHTML = generatedRecipe;
                 break;
             case "slab":
                 // code block
@@ -272,29 +278,28 @@
             // code block
         }
 
-        var _inputUnits = "imperial";
-        //Get inputted number and result div
-        let _radius = document.querySelector('#diameter').value;
-        let _height = document.querySelector('#height').value;
-        let _outputUnits = document.querySelector('input[name=output]:checked').value;
-
         // inputs pass the validity test so turn them into numbers
         // all inputs are in inches so volume will be in inches
+/*
         var radius = math.fraction(_radius);
         var height = math.fraction(_height);
+*/
 
         // We've turned the fraction or decimal text input into numbers.
         // the numbers are still in the imperial units number system.
         // Convert them to metric and use the metric path.
+/*
         var convertedInputs = convertInputsToMetric(Number(radius), Number(height));
+*/
 
         // calculate the volume using imperial units converted to metric
-        var dataToSend = createData(convertedInputs.radius, convertedInputs.height, _outputUnits, _inputUnits);
+        //** var dataToSend = createData(convertedInputs.radius, convertedInputs.height, _outputUnits, _inputUnits);
 
+/*
         let updateLocation = document.querySelector('#recipe');
-
         var generatedRecipe = getDiskRecipe(dataToSend);
         updateLocation.innerHTML = generatedRecipe;
+*/
 
         console.log("*************** out tDisk.html:handleFormSubmit ");
     };
@@ -307,24 +312,112 @@
         console.log("in testiDisk.html:diskCollector ***************************");
         var data = new Object();
         data.diameter = document.querySelector('#diameter').value;
-        data.diameterInputUnits = document.querySelector('#diameterInputUnits').value;
-        data.height =  document.querySelector('#height').value;
-        data.heightInputUnits = document.querySelector('#heightInputUnits').value;
+        var selectDiameterUnits = document.getElementById('diameterInputUnits');
+        data.diameterUnits = selectDiameterUnits.options[selectDiameterUnits.selectedIndex].value;
+        // console.log(value); // en
+
+        data.height = document.querySelector('#height').value;
+        var selectHeightUnits = document.getElementById('heightInputUnits');
+        data.heightUnits = selectHeightUnits.options[selectHeightUnits.selectedIndex].value;
+
         data.outputUnits = document.querySelector('input[name=output]:checked').value;
         console.log("out testiDisk.html:diskCollector ***************************");
         return data;
     };
 
     class Disk {
-        constructor(diameter,height,outputUnits){
+        diameter;
+        diameterUnits;
+        height;
+        heightUnits;
+        volume;
+        outputUnits;
 
+
+        constructor(data) {
+            this.diameter = data.diameter;
+            this.diameterUnits = data.diameterUnits;
+            this.height = data.height;
+            this.heightUnits = data.heightUnits;
+            this.outputUnits = data.outputUnits;
         };
+
+        /**
+         * turns all units of measurement into centimeters.
+         */
+        normalizeUnits() {
+            console.log("in testiDisk.html:Disk.normalize ***************************");
+            // turn all values that might be fractions into numbers.
+            var _diameter = math.number(math.fraction(this.diameter));
+            var _height = math.number(math.fraction(this.height));
+            this.diameter = this.convertToMetric(_diameter,this.diameterUnits);
+            this.diameterUnits = "cm";
+            this.height = this.convertToMetric(_height,this.heightUnits);
+            this.heightUnits = "cm";
+            console.log("out testiDisk.html:Disk.normalize ***************************");
+            return "todo";
+        };
+
+        /**
+         * calculate volume from dimensions.
+         */
+        calculateVolume(){
+            var radius = this.diameter/2;
+            this.volume = PI * radius * radius * this.height;
+            // volume here is always in cm^3
+        }
+
+        /**
+         * turns all units of measurement into centimeters.
+         */
+        convertToMetric(value, units) {
+            switch (units) {
+                case "in": {
+                    // convert to cm
+                    value = (value * INTOCM).toFixed(3);
+                    break;
+                }
+                case "mm": {
+                    // convert to cm
+                    value = (value / 10).toFixed(3);
+                    break;
+                }
+                default: {
+                    // no conversion necessary
+                    // do nothing and return the value
+                }
+            }
+            return value;
+        };
+
+        getDiskRecipe() {
+            console.log("in Disk:getDiskRecipe:*******************");
+            var resultHtml;
+
+            if (this.outputUnits == "metric") {
+                // produce the metric version of recipe
+                resultHtml = mCreateRecipeTableHtml(this);
+            } else if (this.outputUnits == "imperial") {
+                // produce the imperial version of recipe
+                // need to take the volumeObject down the Imperial path.
+                resultHtml = iCreateRecipeTableHtml(this);
+            } else {
+                Logger.log("We should never get here 'Big old Error'");
+                resultHtml = "<h3>Failed to create recipe...  ERROR</h3>";
+            }
+            console.log("out  Disk:getDiskRecipe:*******************");
+            // Logger.log("mGetCuboidRecipeFromWebAPP: html from server to send back: " + resultHtml);
+
+            return resultHtml;
+        };
+
     }
 
     /**
      * this method takes the text input values and turns
      * them into json
      */
+/*
     function createData(_radius, _height, _outputUnits, _inputUnits) {
         console.log("in tDisk.html:createData ***************************");
         var data = new Object();
@@ -335,6 +428,7 @@
         console.log("out tDisk.html:createData ***************************");
         return data;
     };
+*/
 
     function preventFormSubmit() {
         var forms = document.querySelectorAll('form');
@@ -345,8 +439,12 @@
         }
     }
 
-    window.addEventListener('load', preventFormSubmit);
+    window
+        .addEventListener(
+            'load', preventFormSubmit
+        );
 
+/*
     function convertInputsToMetric(_radius, _height) {
         console.log("in sitesDiskVolumeImperial.html:convertInputsToMetric ***************************");
         var wellChosen = (1 * INTOCM).toFixed(3);
@@ -359,6 +457,7 @@
         console.log("out sitesDiskVolumeImperial.html:convertInputsToMetric ***************************");
         return convertedObject;
     };
+*/
 
 </script>
 <!-- 4. Calculators by Shape Disk -->
@@ -369,6 +468,7 @@
      * @param {object} dataObject  - data object from input
      * @return {string} as html for MG batch recipe.
      */
+/*
     function getDiskRecipe(dataObject) {
         console.log("in  tDisk.html.gs:getDiskRecipe:*******************");
 
@@ -391,12 +491,14 @@
 
         return resultHtml;
     };
+*/
 
     /**
      * This function will calculate a disk volume based on
      * centimeter inputs, generating a volume in cubic centimeters.
      *
      */
+/*
     function diskCalcMetric(radius, height, inputUnits, outputUnits) {
         console.log("in tDisk.html:diskCalcMetric:*******************");
         console.log("value parameters on call radius=" + radius + " height=" + height + " inputUnits=" + inputUnits + " outputUnits=" + outputUnits);
@@ -412,6 +514,7 @@
 
         return volumeObject
     }
+*/
 
 </script>
 <!-- 5. Volume base Recipe calculations independent of Shape -->
