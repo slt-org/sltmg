@@ -93,8 +93,7 @@
         <div class="col-8">
             <form class="row g-3 was-validated" id="myForm" onsubmit="handleFormSubmit()">
                 <p class="h4 sm-4 text-center">Disk Recipe</p><br>
-                <small id="hint" class="form-text">acceptable values are any numbers as
-                    <br>whole, decimals or fractions
+                <small id="hint" class="form-text">acceptable values are any numbers whole, decimals or fractions
                     <br> e.g. 3, 0.3, 3.6, 6 1/4 & 1/2
                     <br> be aware! 1 1/4 and 11/4 are not the same!</small>
                 <div class="form-row align-items-center">
@@ -178,19 +177,16 @@
         </div>
     </div>
     <br>
-    <div id="ver"><p>MGToolbox ver. 1.0.16 </p></div>
+    <div id="ver"><p>MGToolbox ver. 1.2 candidate </p></div>
 </div>
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous">
 </script>
-<!-- 0. page -->
 <script>
+    // 1. Constants -->
     const PAGENAME = "disk";
-</script>
-<!-- 1. Constants -->
-<script>
     const GLASS = .614;
     const WATER = .326;
     const BINDER = .032;
@@ -213,11 +209,10 @@
     const INTOCM = 2.54;
     const OZTOGM = 28.3495;
     const AUTHOR = "Steve Terry";
-    const VERSION = "1.0";
-    const REL = "15";
-</script>
-<!-- 2. inline validation for input fields -->
-<script>
+    const VERSION = "1.2";
+    const REL = "candidate";
+
+    // 2. inline validation for input fields -->
     const inputs = document.querySelectorAll('input');
 
     const patterns = {
@@ -244,85 +239,30 @@
             field.className = 'form-control invalid';
         }
     }
-</script>
-<!-- 3. Initial input handling with form submit-->
-<script>
-    function handleFormSubmit() {
-        console.log("*************** in testiDisk.html:handleFormSubmit ");
-        // inputs are valid
-        // page specific function here for gathering named inputs, units and output units
-        let updateLocation = document.querySelector('#recipe');
 
-/*
-        switch (PAGENAME) {
-            case "disk":
-*/
-                // disk specific input collector
-                let disk = new Disk(diskInputCollector());
-                disk.normalizeUnits();
-                disk.calculateVolume();
-                var generatedRecipe = disk.getDiskRecipe();
-                updateLocation.innerHTML = generatedRecipe;
-/*
-                break;
-            case "slab":
-                // code block
-                break;
-            case "bowl":
-                // code block
-                break;
-            case "custom":
-                // code block
-                break;
-            case "reverse":
-                // code block
-                break;
-            default:
-            // code block
-        }
-*/
-
-        console.log("*************** out tDisk.html:handleFormSubmit ");
-    };
-
+    // 3. Initial input handling with form submit-->
     /**
      * this method takes the form input values and turns
      * them into normalized metric numbers and output unit preferences
      */
     function diskInputCollector() {
-        console.log("in testiDisk.html:diskCollector ***************************");
-        var data = new Object();
+        console.log("in diskInputCollector ***************************");
+        let data = new Object();
         data.diameter = document.querySelector('#diameter').value;
-        var selectDiameterUnits = document.getElementById('diameterInputUnits');
+        let selectDiameterUnits = document.getElementById('diameterInputUnits');
         data.diameterUnits = selectDiameterUnits.options[selectDiameterUnits.selectedIndex].value;
         // console.log(value); // en
 
         data.height = document.querySelector('#height').value;
-        var selectHeightUnits = document.getElementById('heightInputUnits');
+        let selectHeightUnits = document.getElementById('heightInputUnits');
         data.heightUnits = selectHeightUnits.options[selectHeightUnits.selectedIndex].value;
 
         data.outputUnits = document.querySelector('input[name=output]:checked').value;
-        console.log("out testiDisk.html:diskCollector ***************************");
+        console.log("out diskInputCollector ***************************");
         return data;
-    };
-
-    function preventFormSubmit() {
-        var forms = document.querySelectorAll('form');
-        for (var i = 0; i < forms.length; i++) {
-            forms[i].addEventListener('submit', function (event) {
-                event.preventDefault();
-            });
-        }
     }
 
-    window
-        .addEventListener(
-            'load', preventFormSubmit
-        );
-
-</script>
-<!-- 4. Calculators by Shape Disk -->
-<script>
+    // 4. Calculators by Shape Disk -->
     // This is handled by a Shape object now
     class Disk {
         diameter;
@@ -347,8 +287,8 @@
         normalizeUnits() {
             console.log("in testiDisk.html:Disk.normalize ***************************");
             // turn all values that might be fractions into numbers.
-            var _diameter = math.number(math.fraction(this.diameter));
-            var _height = math.number(math.fraction(this.height));
+            let _diameter = math.number(math.fraction(this.diameter));
+            let _height = math.number(math.fraction(this.height));
             this.diameter = this.convertToMetric(_diameter,this.diameterUnits);
             this.diameterUnits = "cm";
             this.height = this.convertToMetric(_height,this.heightUnits);
@@ -361,7 +301,7 @@
          * calculate volume from dimensions.
          */
         calculateVolume(){
-            var radius = this.diameter/2;
+            let radius = this.diameter/2;
             this.volume = PI * radius * radius * this.height;
             // volume here is always in cm^3
         }
@@ -382,8 +322,7 @@
                     break;
                 }
                 default: {
-                    // no conversion necessary
-                    // do nothing and return the value
+                    // no conversion necessary do nothing and return the value
                 }
             }
             return value;
@@ -391,7 +330,7 @@
 
         getDiskRecipe() {
             console.log("in Disk:getDiskRecipe:*******************");
-            var resultHtml;
+            let resultHtml;
 
             if (this.outputUnits == "metric") {
                 // produce the metric version of recipe
@@ -401,19 +340,65 @@
                 // need to take the volumeObject down the Imperial path.
                 resultHtml = iCreateRecipeTableHtml(this);
             } else {
-                Logger.log("We should never get here 'Big old Error'");
+                cosole.log("We should never get here 'Big old Error'");
                 resultHtml = "<h3>Failed to create recipe...  ERROR</h3>";
             }
             console.log("out  Disk:getDiskRecipe:*******************");
-            // Logger.log("mGetCuboidRecipeFromWebAPP: html from server to send back: " + resultHtml);
-
             return resultHtml;
         };
-
     }
-</script>
-<!-- 5. Volume base Recipe calculations independent of Shape -->
-<script>
+
+
+    function handleFormSubmit() {
+        console.log("*************** in handleFormSubmit ");
+        // inputs are valid
+        // page specific function here for gathering named inputs, units and output units
+        let updateLocation = document.querySelector('#recipe');
+
+        switch (PAGENAME) {
+            case "disk":
+                // disk specific input collector
+                let disk = new Disk(diskInputCollector());
+                disk.normalizeUnits();
+                disk.calculateVolume();
+                let generatedRecipe = disk.getDiskRecipe();
+                updateLocation.innerHTML = generatedRecipe;
+                break;
+            case "slab":
+                // code block
+                break;
+            case "bowl":
+                // code block
+                break;
+            case "custom":
+                // code block
+                break;
+            case "reverse":
+                // code block
+                break;
+            default:
+            // code block
+        }
+
+        console.log("*************** out handleFormSubmit ");
+    }
+
+
+    function preventFormSubmit() {
+        let forms = document.querySelectorAll('form');
+        for (let i = 0; i < forms.length; i++) {
+            forms[i].addEventListener('submit', function (event) {
+                event.preventDefault();
+            });
+        }
+    }
+
+    window
+        .addEventListener(
+            'load', preventFormSubmit
+        );
+
+    // 5. Volume base Recipe calculations independent of Shape -->
     /********************************************************************************************************
      *
      *   Shape independent Recipe output
@@ -430,7 +415,6 @@
         console.log("metric.js:mCreateRecipeTableHtml: object passed to createRecipe " + JSON.stringify(volumeObject));
 
         volumeObject = createBaseVolume(volumeObject);
-
         let recipe = "";
 
         if (volumeObject.outputUnits != "imperial") {
@@ -455,7 +439,6 @@
         }
         return recipe;
     };
-
 
     /**
      * this method takes json and turns it into
@@ -686,6 +669,5 @@
     };
 
 </script>
-
 </body>
 </html>

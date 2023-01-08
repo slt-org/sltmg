@@ -1,6 +1,6 @@
 <script>
 // 1. Constants -->
-    const PAGENAME = "disk";
+    const PAGENAME = "";
     const GLASS = .614;
     const WATER = .326;
     const BINDER = .032;
@@ -23,8 +23,8 @@
     const INTOCM = 2.54;
     const OZTOGM = 28.3495;
     const AUTHOR = "Steve Terry";
-    const VERSION = "1.0";
-    const REL = "15";
+    const VERSION = "1.2";
+    const REL = "candidate";
 
 // 2. inline validation for input fields -->
     const inputs = document.querySelectorAll('input');
@@ -147,7 +147,7 @@
          * turns all units of measurement into centimeters.
          */
         normalizeUnits() {
-            console.log("in testiDisk.html:Disk.normalize ***************************");
+            console.log("in Disk.normalizeUnits ***************************");
             // turn all values that might be fractions into numbers.
             let _diameter = math.number(math.fraction(this.diameter));
             let _height = math.number(math.fraction(this.height));
@@ -155,7 +155,7 @@
             this.diameterUnits = "cm";
             this.height = this.convertToMetric(_height,this.heightUnits);
             this.heightUnits = "cm";
-            console.log("out testiDisk.html:Disk.normalize ***************************");
+            console.log("out Disk.normalizeUnits ***************************");
             return "todo";
         };
 
@@ -228,7 +228,7 @@
      *  @param {object} volumeObject - DTO for aggregating data.
      */
     function mCreateRecipeTableHtml(volumeObject) {
-        console.log("metric.js:mCreateRecipeTableHtml: object passed to createRecipe " + JSON.stringify(volumeObject));
+        console.log("mCreateRecipeTableHtml: object passed to createRecipe " + JSON.stringify(volumeObject));
 
         volumeObject = createBaseVolume(volumeObject);
 
@@ -251,7 +251,7 @@
                 "                </table>\n";
 
         } else {
-            console.log("metric.js:mCreateRecipeTableHtml: needs to call function for Imperial transform");
+            console.log("mCreateRecipeTableHtml: needs to call function for Imperial transform");
             recipe = iCreateRecipeTableHtml(volumeObject);
         }
         return recipe;
@@ -267,7 +267,7 @@
      * @param {string} employee.department - The employee's department.
      */
     function createBaseVolume(volumeObject) {
-        console.log("in metric.js:createBaseVolume ***********************");
+        console.log("in createBaseVolume ***********************");
         console.log("createBaseVolume: object passed to createRecipe " + JSON.stringify(volumeObject));
         // The total volume multiplied by 2 (the sg of MG) will give you the weight
         //  of the MG needed to fill the volume.
@@ -279,7 +279,7 @@
         volumeObject.binder = (volumeObject.total_weight * BINDER).toFixed(1);
         volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM).toFixed(1);
 
-        console.log("out metric.js:createBaseVolume ***********************");
+        console.log("out createBaseVolume ***********************");
 
         return volumeObject;
 
@@ -298,8 +298,8 @@
      * have the 4 fields of glass,water,binder and liquid medium.
      */
     function iCreateRecipeTableHtml(volumeObject) {     // a portion of this is duplicate code for metric and imperial
-        console.log("in imperial.gs : iCreateRecipeTableHtml ***********************");
-        console.log("iCreateRecipeTableHtml: object passed to createRecipe " + JSON.stringify(volumeObject));
+        console.log("in iCreateRecipeTableHtml ***********************");
+        console.log("object passed to createRecipe " + JSON.stringify(volumeObject));
 
         volumeObject = createBaseVolume(volumeObject);
 
@@ -340,13 +340,13 @@
             "                    </tbody>\n" +
             "                </table>\n";
 
-        console.log("out imperial.gs : iCreateRecipeTableHtml ***********************");
+        console.log("out iCreateRecipeTableHtml ***********************");
         return recipe;
     };
 
     // finalObject has collected values from conversion
     function formatIngredientList(formatObject) {
-        console.log("in imperial.gs : formatIngredientList ***********************");
+        console.log("in formatIngredientList ***********************");
         // Walk the possible values and format for
         // html template.
 
@@ -396,7 +396,7 @@
             result = result + " tsp.";
         }
 
-        console.log("out imperial.gs : formatIngredientList ***********************");
+        console.log("out formatIngredientList ***********************");
 
         return result;
     }
@@ -406,7 +406,7 @@
      * @param {number} ingredientWeightInGrams
      */
     function convert(ingredientWeightInGrams, ingredientConversionFactor) {
-        console.log("in imperial.gs : convert ***********************");
+        console.log("in convert ***********************");
         console.log("input value in grams " + ingredientWeightInGrams + " input conversion factor " + ingredientConversionFactor);
         var tsp = ingredientWeightInGrams * ingredientConversionFactor;
         console.log("teaspoons from weight: " + tsp.toFixed(2));
@@ -482,7 +482,7 @@
             tsp = 0;
         }
 
-        console.log("out imperial.gs : convert ***********************");
+        console.log("out convert ***********************");
         return conObj;
     };
 
