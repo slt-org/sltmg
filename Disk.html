@@ -186,7 +186,6 @@
 </script>
 <script>
     // 1. Constants -->
-    const PAGENAME = "disk";
     const GLASS = .614;
     const WATER = .326;
     const BINDER = .032;
@@ -240,10 +239,13 @@
         }
     }
 
-    // 3. Initial input handling with form submit-->
     /**
-     * this method takes the form input values and turns
-     * them into normalized metric numbers and output unit preferences
+     * Disk page specific code for
+     * * Initial input handling with form submit
+     * * Calculations by Shape Disk object
+     * takes the form input values and turns
+     * them into normalized metric numbers and output unit preferences1
+     * @type {Disk}
      */
     function diskInputCollector() {
         console.log("in diskInputCollector ***************************");
@@ -262,8 +264,6 @@
         return data;
     }
 
-    // 4. Calculators by Shape Disk -->
-    // This is handled by a Shape object now
     class Disk {
         diameter;
         diameterUnits;
@@ -355,34 +355,17 @@
         // page specific function here for gathering named inputs, units and output units
         let updateLocation = document.querySelector('#recipe');
 
-        switch (PAGENAME) {
-            case "disk":
-                // disk specific input collector
-                let disk = new Disk(diskInputCollector());
-                disk.normalizeUnits();
-                disk.calculateVolume();
-                let generatedRecipe = disk.getDiskRecipe();
-                updateLocation.innerHTML = generatedRecipe;
-                break;
-            case "slab":
-                // code block
-                break;
-            case "bowl":
-                // code block
-                break;
-            case "custom":
-                // code block
-                break;
-            case "reverse":
-                // code block
-                break;
-            default:
-            // code block
-        }
+
+        let disk = new Disk(diskInputCollector());
+        disk.normalizeUnits();
+        disk.calculateVolume();
+        let generatedRecipe = disk.getDiskRecipe();
+        updateLocation.innerHTML = generatedRecipe;
 
         console.log("*************** out handleFormSubmit ");
     }
-
+// the last line of page specific code in the script.
+// All the code from this point on is common to all pages.
 
     function preventFormSubmit() {
         let forms = document.querySelectorAll('form');
