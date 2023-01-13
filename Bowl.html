@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -92,14 +92,15 @@
     <div class="row">
         <div class="col-8">
             <form class="row g-3 was-validated" id="myForm" onsubmit="handleFormSubmit()">
-                <p class="h4 sm-4 text-center">Disk Recipe</p><br>
+                <p class="h4 sm-4 text-center">Bowl Recipe</p><br>
                 <small id="hint" class="form-text">acceptable values are any numbers whole, decimals or fractions
                     <br> e.g. 3, 0.3, 3.6, 6 1/4 & 1/2
                     <br> be aware! 1 1/4 and 11/4 are not the same!</small>
                 <div class="form-row align-items-center">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" id="diameter" placeholder="diameter" required>
-                        <select class="form-select-sm" id="diameterInputUnits">
+                        <input type="text" id="insideDiameter" class="form-control" placeholder="inside diameter"
+                               required>
+                        <select class="form-select-sm" id="insideDiameterInputUnits">
                             <option value="in" selected>in</option>
                             <option value="mm">mm</option>
                             <option value="cm">cm</option>
@@ -107,8 +108,9 @@
                     </div>
                     <div class="col-sm-auto">
                         <div class="form-group input-group">
-                            <input type="text" class="form-control" id="height" placeholder="height" required>
-                            <select class="form-select-sm" id="heightInputUnits">
+                            <input type="text" id="outsideDiameter" class="form-control" placeholder="outside diameter"
+                                   required>
+                            <select class="form-select-sm" id="outsideDiameterInputUnits">
                                 <option value="in" selected>in</option>
                                 <option value="mm">mm</option>
                                 <option value="cm">cm</option>
@@ -141,7 +143,6 @@
                             <label class="form-check-label" for="imperial">Imperial</label>
                         </div>
                     </div>
-                    <br>
                 </div>
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary btn-block">Recipe</button>
@@ -192,15 +193,15 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous">
 </script>
+<!-- 1. Constants -->
 <script>
-    // 1. Constants -->
     const GLASS = .614;
     const WATER = .326;
     const BINDER = .032;
     const LMEDIUM = .027;
-    const GLASS96   = .579;
-    const WATER96   = .359;
-    const BINDER96  = .036;
+    const GLASS96 = .579;
+    const WATER96 = .359;
+    const BINDER96 = .036;
     const LMEDIUM96 = .026;
     const CUBICCM = 'cm<sup>3</sup>';
     const PI = 3.1416;
@@ -227,8 +228,8 @@
     const inputs = document.querySelectorAll('input');
 
     const patterns = {
-        diameter: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/,
-        height: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/
+        insideRadius: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/,
+        outsideRadius: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/
     };
 
     inputs.forEach((input) => {
@@ -251,47 +252,44 @@
         }
     }
 
+    // <!-- 3. Initial input handling different for each page -->
     /**
-     * Disk page specific code for
+     * Bowl page specific code for
      * * Initial input handling with form submit
-     * * Calculations by Shape Disk object
+     * * Calculations by Shape Bowl object
      * takes the form input values and turns
      * them into normalized metric numbers and output unit preferences1
-     * @type {Disk}
+     * @type {Bowl}
      */
-    function diskInputCollector() {
-        console.log("in diskInputCollector ***************************");
-        let data = new Object();
-        data.diameter = document.querySelector('#diameter').value;
-        let selectDiameterUnits = document.getElementById('diameterInputUnits');
-        data.diameterUnits = selectDiameterUnits.options[selectDiameterUnits.selectedIndex].value;
-        // console.log(value); // en
-
-        data.height = document.querySelector('#height').value;
-        let selectHeightUnits = document.getElementById('heightInputUnits');
-        data.heightUnits = selectHeightUnits.options[selectHeightUnits.selectedIndex].value;
-
+    function bowlInputCollector() {
+        console.log("in bowlInputCollector ***************************");
+        var data = new Object();
+        data.insideDiameter = document.querySelector('#insideDiameter').value;
+        data.insideDiameterUnits = document.getElementById('insideDiameterInputUnits').value;
+        // let selectInsideDiameterInputUnits = document.getElementById('insideDiameterInputUnits');
+        data.outsideDiameter = document.querySelector('#outsideDiameter').value;
+        data.outsideDiameterUnits = document.querySelector('#outsideDiameterInputUnits').value;
         data.outputUnits = document.querySelector('input[name=output]:checked').value;
-        data.coe =  document.querySelector('input[name=coe]:checked').value;
-        console.log("out diskInputCollector ***************************");
+        data.coe = document.querySelector('input[name=coe]:checked').value;
 
+        console.log("out bowlInputCollector ***************************");
         return data;
     }
 
-    class Disk {
-        diameter;
-        diameterUnits;
-        height;
-        heightUnits;
+    class Bowl {
+        insideDiameter;
+        insideDiameterUnits;
+        outsideDiameter;
+        outsideDiameterUnits;
         volume;
         outputUnits;
         coe;
 
         constructor(data) {
-            this.diameter = data.diameter;
-            this.diameterUnits = data.diameterUnits;
-            this.height = data.height;
-            this.heightUnits = data.heightUnits;
+            this.insideDiameter = data.insideDiameter;
+            this.insideDiameterUnits = data.insideDiameterUnits;
+            this.outsideDiameter = data.outsideDiameter;
+            this.outsideDiameterUnits = data.outsideDiameterUnits;
             this.outputUnits = data.outputUnits;
             this.coe = data.coe;
         };
@@ -300,25 +298,33 @@
          * turns all units of measurement into centimeters.
          */
         normalizeUnits() {
-            console.log("in Disk.normalize ***************************");
+            console.log("in Bowl.normalize ***************************");
             // turn all values that might be fractions into numbers.
-            let _diameter = math.number(math.fraction(this.diameter));
-            let _height = math.number(math.fraction(this.height));
-            this.diameter = this.convertToMetric(_diameter,this.diameterUnits);
-            this.diameterUnits = "cm";
-            this.height = this.convertToMetric(_height,this.heightUnits);
-            this.heightUnits = "cm";
-            console.log("out Disk.normalize ***************************");
+            // and convert into centimeters.
+            let _insideDiameter = math.number(math.fraction(this.insideDiameter));
+            let _outsideDiameter = math.number(math.fraction(this.outsideDiameter));
+            this.insideDiameter = this.convertToMetric(_insideDiameter, this.insideDiameterUnits);
+            this.outsideDiameter = this.convertToMetric(_outsideDiameter, this.outsideDiameterUnits);
+            this.insideDiameterUnits = "cm";
+            this.outsideDiameterUnits = "cm";
+            console.log("out Bowl.normalize ***************************");
             return "todo";
         };
 
         /**
          * calculate volume from dimensions.
          */
-        calculateVolume(){
-            let radius = this.diameter/2;
-            this.volume = PI * radius * radius * this.height;
+        calculateVolume() {
+            console.log("in Bowl.calculateVolume ***************************");
+            let insideRadius = this.insideDiameter / 2;
+            let outsideRadius = this.outsideDiameter / 2;
+            let r3 = insideRadius * insideRadius * insideRadius;
+            let R3 = outsideRadius * outsideRadius * outsideRadius;
+            this.volume = ((4 / 3) * PI * (R3 - r3)) / 2;
+            this.insideRadius = insideRadius;
+            this.outsideRadius = outsideRadius;
             // volume here is always in cm^3
+            console.log("out Bowl.calculateVolume ***************************");
         }
 
         /**
@@ -343,8 +349,8 @@
             return value;
         };
 
-        getDiskRecipe() {
-            console.log("in Disk:getDiskRecipe:*******************");
+        getBowlRecipe() {
+            console.log("in Bowl:getBowlRecipe:*******************");
             let resultHtml;
 
             if (this.outputUnits == "metric") {
@@ -358,7 +364,7 @@
                 cosole.log("We should never get here 'Big old Error'");
                 resultHtml = "<h3>Failed to create recipe...  ERROR</h3>";
             }
-            console.log("out  Disk:getDiskRecipe:*******************");
+            console.log("out  Bowl:getBowlRecipe:*******************");
             return resultHtml;
         };
     }
@@ -370,32 +376,29 @@
         // page specific function here for gathering named inputs, units and output units
         let updateLocation = document.querySelector('#recipe');
 
-        let disk = new Disk(diskInputCollector());
-        disk.normalizeUnits();
-        disk.calculateVolume();
-        let generatedRecipe = disk.getDiskRecipe();
+        let bowl = new Bowl(bowlInputCollector());
+        bowl.normalizeUnits();
+        bowl.calculateVolume();
+        let generatedRecipe = bowl.getBowlRecipe();
         updateLocation.innerHTML = generatedRecipe;
 
         console.log("*************** out handleFormSubmit ");
     }
-// the last line of page specific code in the script.
-// All the code from this point on is common to all pages.
 
     function preventFormSubmit() {
-        let forms = document.querySelectorAll('form');
-        for (let i = 0; i < forms.length; i++) {
+        var forms = document.querySelectorAll('form');
+        for (var i = 0; i < forms.length; i++) {
             forms[i].addEventListener('submit', function (event) {
                 event.preventDefault();
             });
         }
-    }
+    };
 
-    window
-        .addEventListener(
-            'load', preventFormSubmit
-        );
+    window.addEventListener('load', preventFormSubmit);
 
-    // 5. Volume base Recipe calculations independent of Shape -->
+</script>
+<!-- 5. Volume base Recipe calculations independent of Shape -->
+<script>
     /********************************************************************************************************
      *
      *   Shape independent Recipe output
@@ -412,6 +415,7 @@
         console.log("metric.js:mCreateRecipeTableHtml: object passed to createRecipe " + JSON.stringify(volumeObject));
 
         volumeObject = createBaseVolume(volumeObject);
+
         let recipe = "";
 
         if (volumeObject.outputUnits != "imperial") {
@@ -437,12 +441,14 @@
         return recipe;
     };
 
+
     /**
      * this method takes json and turns it into
      * an html table of the MG recipe to be displayed to the user
      * json should have the 4 fields of glass,water,binder and liquid medium.
      * @param {Object} volumeObject - volume DTO.
      * @param {string} volumeObject.volume -
+     * @param {string} employee.department - The employee's department.
      */
     function createBaseVolume(volumeObject) {
         console.log("in metric.js:createBaseVolume ***********************");
@@ -452,21 +458,23 @@
         // Now multiply the total weight by the ratio for each ingredient.
         // That we give you the weight amount for each ingredient.
         volumeObject.total_weight = volumeObject.volume * 2;
-        if(volumeObject.coe == "90"){
+        if (volumeObject.coe == "90") {
             volumeObject.glass = (volumeObject.total_weight * GLASS).toFixed(1); // grams of glass powder to use
             volumeObject.water = (volumeObject.total_weight * WATER).toFixed(1);
             volumeObject.binder = (volumeObject.total_weight * BINDER).toFixed(1);
             volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM).toFixed(1);
             return volumeObject;
-        };
+        }
+        ;
 
-        if(volumeObject.coe == "96"){
+        if (volumeObject.coe == "96") {
             volumeObject.glass = (volumeObject.total_weight * GLASS96).toFixed(1); // grams of glass powder to use
             volumeObject.water = (volumeObject.total_weight * WATER96).toFixed(1);
             volumeObject.binder = (volumeObject.total_weight * BINDER96).toFixed(1);
             volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM96).toFixed(1);
             return volumeObject;
-        };
+        }
+        ;
 
         console.log("out metric.js:createBaseVolume ***********************");
         // return volumeObject;
@@ -613,55 +621,67 @@
         while (tsp > 48) {
             conObj.cups = conObj.cups + 1;
             tsp = tsp - 48;
-        };
+        }
+        ;
 
         if (tsp <= 47.99 && tsp >= 36) {
             conObj.threeqtrCup = 1;
             tsp = tsp - 36;
-        };
+        }
+        ;
 
         if (tsp <= 35.99 && tsp >= 24) {
             conObj.halfCup = 1;
             tsp = tsp - 24;
-        };
+        }
+        ;
 
         if (tsp <= 23.99 && tsp >= 12) {
             conObj.qtrCup = 1;
             tsp = tsp - 12;
-        };
+        }
+        ;
 
         while (tsp <= 11.99 && tsp >= 3) {
             conObj.tblsp = conObj.tblsp + 1;
             tsp = tsp - 3;
-        };
+        }
+        ;
 
         while (tsp < 2.99 && tsp >= 1) {
             tsp = tsp.toFixed(2);
             conObj.tsp = conObj.tsp + 1;
             tsp = tsp - 1;
-        };
+        }
+        ;
 
         console.log("after here there is less than 1 teaspoon left. " + tsp.toFixed(2));
+
         if (tsp < 0.99 && tsp >= .75) {
             conObj.threeqtrTsp = conObj.threeqtrTsp + 1;
             tsp = 0;
         }
+
         if (tsp < .749 && tsp >= .50) {
             conObj.halfTsp = conObj.halfTsp + 1;
             tsp = 0;
         }
+
         if (tsp < .499 && tsp >= .25) {
             conObj.qtrTsp = conObj.qtrTsp + 1;
             tsp = 0;
         }
+
         if (tsp < .249 && tsp >= .125) {
             conObj.eightTsp = conObj.eightTsp + 1;
             tsp = 0;
         }
+
         console.log("out imperial.gs : convert ***********************");
         return conObj;
     };
 
 </script>
+
 </body>
 </html>
