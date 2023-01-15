@@ -246,6 +246,68 @@
       this.coe = data.coe;
     };
 
+    /**
+     * turns all units of measurement into centimeters.
+     */
+    normalizeUnits() {
+      console.log("in Custom.normalize ***************************");
+      // turn all values that might be fractions into numbers.
+      let _volume = math.number(math.fraction(this.volume));
+      // volume needs to be a number not a string.
+      this.volume = math.number(this.convertToMetric(_volume,this.volumeUnits));
+      this.volumeUnits = "cm³";
+      console.log("out Custom.normalize ***************************");
+      return "todo";
+    };
+
+    calculateVolume(){
+      console.log(" value should already be in cm³ : "+ this.volume);
+    }
+
+    /**
+     * turns all units of measurement into centimeters.
+     */
+    convertToMetric(value, units) {
+      switch (units) {
+        case "in": {
+          // convert to cm
+          value = (value * CITOCC).toFixed(3);
+          break;
+        }
+        case "mm": {
+          // convert to cm
+          value = (value * .001).toFixed(3);
+          break;
+        }
+        default: {
+          // no conversion necessary do nothing and return the value
+        }
+      }
+      return value;
+    };
+
+    getRecipe() {
+      console.log("in Custom:getRecipe:*******************");
+      let resultHtml;
+
+      if (this.outputUnits == "metric") {
+        // produce the metric version of recipe
+        resultHtml = mCreateRecipeTableHtml(this);
+      } else if (this.outputUnits == "imperial") {
+        // produce the imperial version of recipe
+        // need to take the volumeObject down the Imperial path.
+        resultHtml = iCreateRecipeTableHtml(this);
+      } else {
+        cosole.log("We should never get here 'Big old Error'");
+        resultHtml = "<h3>Failed to create recipe...  ERROR</h3>";
+      }
+      console.log("out  Custom:getRecipe:*******************");
+      return resultHtml;
+    };
+
+
+
+
   }
 // <!-- 3. Initial input handling with form submit-->
 
@@ -255,8 +317,8 @@
 
     let custom = new Custom(customInputCollector());
     custom.normalizeUnits();
-    custom.calculateVolume();
-    let generatedRecipe = custom.getDiskRecipe();
+    custom.calculateVolume(); // use this to set new volume value and metric cubic cm.
+    let generatedRecipe = custom.getRecipe();
     updateLocation.innerHTML = generatedRecipe;
 
 

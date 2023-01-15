@@ -349,7 +349,7 @@
             return value;
         };
 
-        getBowlRecipe() {
+        getRecipe() {
             console.log("in Bowl:getBowlRecipe:*******************");
             let resultHtml;
 
@@ -379,7 +379,7 @@
         let bowl = new Bowl(bowlInputCollector());
         bowl.normalizeUnits();
         bowl.calculateVolume();
-        let generatedRecipe = bowl.getBowlRecipe();
+        let generatedRecipe = bowl.getRecipe();
         updateLocation.innerHTML = generatedRecipe;
 
         console.log("*************** out handleFormSubmit ");

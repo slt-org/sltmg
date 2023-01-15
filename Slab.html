@@ -4,7 +4,6 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-
     <!-- Bootstrap CSS -->
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
@@ -92,18 +91,30 @@
     <div class="row">
         <div class="col-8">
             <form class="row g-3 was-validated" id="myForm" onsubmit="handleFormSubmit()">
-                <p class="h4 sm-4 text-center">Disk Recipe</p><br>
+                <p class="h4 sm-4 text-center">Slab Recipe</p><br>
                 <small id="hint" class="form-text">acceptable values are any numbers whole, decimals or fractions
                     <br> e.g. 3, 0.3, 3.6, 6 1/4 & 1/2
                     <br> be aware! 1 1/4 and 11/4 are not the same!</small>
                 <div class="form-row align-items-center">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" id="diameter" placeholder="diameter" required>
-                        <select class="form-select-sm" id="diameterInputUnits">
-                            <option value="in" selected>in</option>
-                            <option value="mm">mm</option>
-                            <option value="cm">cm</option>
-                        </select>
+                    <div class="col-sm-auto">
+                        <div class="form-group input-group">
+                            <input type="text" class="form-control" id="length" placeholder="length" required>
+                            <select class="form-select-sm" id="lengthInputUnits">
+                                <option value="in" selected>in</option>
+                                <option value="mm">mm</option>
+                                <option value="cm">cm</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-auto">
+                        <div class="form-group input-group">
+                            <input type="text" class="form-control" id="width" placeholder="width" required>
+                            <select class="form-select-sm" id="widthInputUnits">
+                                <option value="in" selected>in</option>
+                                <option value="mm">mm</option>
+                                <option value="cm">cm</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="col-sm-auto">
                         <div class="form-group input-group">
@@ -130,7 +141,6 @@
                     </div>
                     <div class="form-group col-sm-6">
                         <p class="h6 sm-4 ">Recipe output units</p>
-
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="output" id="metric" value="metric"
                                    checked>
@@ -187,19 +197,18 @@
     <div id="ver"><p>MGToolbox ver. 1.2 candidate </p></div>
 </div>
 <!-- Option 1: Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+<script crossorigin="anonymous"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous">
-</script>
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- 1. Constants -->
 <script>
-    // 1. Constants -->
     const GLASS = .614;
     const WATER = .326;
     const BINDER = .032;
     const LMEDIUM = .027;
-    const GLASS96   = .579;
-    const WATER96   = .359;
-    const BINDER96  = .036;
+    const GLASS96 = .579;
+    const WATER96 = .359;
+    const BINDER96 = .036;
     const LMEDIUM96 = .026;
     const CUBICCM = 'cm<sup>3</sup>';
     const PI = 3.1416;
@@ -219,14 +228,16 @@
     const INTOCM = 2.54;
     const OZTOGM = 28.3495;
     const AUTHOR = "Steve Terry";
-    const VERSION = "1.2";
-    const REL = "candidate";
-
-    // 2. inline validation for input fields -->
+    const VERSION = "1.0";
+    const REL = "15";
+</script>
+<!-- 2. validation for input fields -->
+<script>
     const inputs = document.querySelectorAll('input');
 
     const patterns = {
-        diameter: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/,
+        length: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/,
+        width: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/,
         height: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/
     };
 
@@ -249,22 +260,27 @@
             field.className = 'form-control invalid';
         }
     }
-
+</script>
+<!-- 3. Initial input handling different for each page-->
+<script>
     /**
-     * Disk page specific code for
+     * Slab page specific code for
      * * Initial input handling with form submit
-     * * Calculations by Shape Disk object
+     * * Calculations by Shape Slab object
      * takes the form input values and turns
      * them into normalized metric numbers and output unit preferences1
-     * @type {Disk}
+     * @type {Slab}
      */
-    function diskInputCollector() {
-        console.log("in diskInputCollector ***************************");
+    function slabInputCollector() {
+        console.log("in slabInputCollector ***************************");
         let data = new Object();
-        data.diameter = document.querySelector('#diameter').value;
-        let selectDiameterUnits = document.getElementById('diameterInputUnits');
-        data.diameterUnits = selectDiameterUnits.options[selectDiameterUnits.selectedIndex].value;
-        // console.log(value); // en
+        data.length = document.querySelector('#length').value;
+        let selectLengthUnits = document.getElementById('lengthInputUnits');
+        data.lengthUnits = selectLengthUnits.options[selectLengthUnits.selectedIndex].value;
+
+        data.width = document.querySelector('#width').value;
+        let selectWidthUnits = document.getElementById('widthInputUnits');
+        data.widthUnits = selectWidthUnits.options[selectWidthUnits.selectedIndex].value;
 
         data.height = document.querySelector('#height').value;
         let selectHeightUnits = document.getElementById('heightInputUnits');
@@ -272,14 +288,16 @@
 
         data.outputUnits = document.querySelector('input[name=output]:checked').value;
         data.coe =  document.querySelector('input[name=coe]:checked').value;
-        console.log("out diskInputCollector ***************************");
+        console.log("out slabInputCollector ***************************");
 
         return data;
     }
 
-    class Disk {
-        diameter;
-        diameterUnits;
+    class Slab {
+        length;
+        lengthUnits;
+        width;
+        widthUnits;
         height;
         heightUnits;
         volume;
@@ -287,8 +305,10 @@
         coe;
 
         constructor(data) {
-            this.diameter = data.diameter;
-            this.diameterUnits = data.diameterUnits;
+            this.length = data.length;
+            this.lengthUnits = data.lengthUnits;
+            this.width = data.width;
+            this.widthUnits = data.widthUnits;
             this.height = data.height;
             this.heightUnits = data.heightUnits;
             this.outputUnits = data.outputUnits;
@@ -299,15 +319,18 @@
          * turns all units of measurement into centimeters.
          */
         normalizeUnits() {
-            console.log("in Disk.normalize ***************************");
+            console.log("in Slab.normalize ***************************");
             // turn all values that might be fractions into numbers.
-            let _diameter = math.number(math.fraction(this.diameter));
+            let _length = math.number(math.fraction(this.length));
+            let _width = math.number(math.fraction(this.width));
             let _height = math.number(math.fraction(this.height));
-            this.diameter = this.convertToMetric(_diameter,this.diameterUnits);
-            this.diameterUnits = "cm";
+            this.length = this.convertToMetric(_length,this.lengthUnits);
+            this.lengthUnits = "cm";
+            this.width = this.convertToMetric(_width,this.widthUnits);
+            this.widthUnits = "cm";
             this.height = this.convertToMetric(_height,this.heightUnits);
             this.heightUnits = "cm";
-            console.log("out Disk.normalize ***************************");
+            console.log("out Slab.normalize ***************************");
             return "todo";
         };
 
@@ -315,8 +338,7 @@
          * calculate volume from dimensions.
          */
         calculateVolume(){
-            let radius = this.diameter/2;
-            this.volume = PI * radius * radius * this.height;
+            this.volume = this.length * this.width * this.height;
             // volume here is always in cm^3
         }
 
@@ -343,7 +365,7 @@
         };
 
         getRecipe() {
-            console.log("in Disk:getDiskRecipe:*******************");
+            console.log("in Slab:getRecipe:*******************");
             let resultHtml;
 
             if (this.outputUnits == "metric") {
@@ -357,44 +379,101 @@
                 cosole.log("We should never get here 'Big old Error'");
                 resultHtml = "<h3>Failed to create recipe...  ERROR</h3>";
             }
-            console.log("out  Disk:getDiskRecipe:*******************");
+            console.log("out  Slab:getRecipe:*******************");
             return resultHtml;
         };
     }
 
-
     function handleFormSubmit() {
-        console.log("*************** in handleFormSubmit ");
-        // inputs are valid
-        // page specific function here for gathering named inputs, units and output units
+        console.log("*************** in Slab.html:handleFormSubmit ");
+
         let updateLocation = document.querySelector('#recipe');
 
-        let disk = new Disk(diskInputCollector());
-        disk.normalizeUnits();
-        disk.calculateVolume();
-        let generatedRecipe = disk.getRecipe();
+        let slab = new Slab(slabInputCollector());
+        slab.normalizeUnits();
+        slab.calculateVolume();
+        let generatedRecipe = slab.getRecipe();
         updateLocation.innerHTML = generatedRecipe;
 
-        console.log("*************** out handleFormSubmit ");
-    }
-// the last line of page specific code in the script.
-// All the code from this point on is common to all pages.
+/*
+        let _inputUnits = "imperial";
+        let _length = document.querySelector('#length').value;
+        let _width = document.querySelector('#width').value;
+        let _height = document.querySelector('#height').value;
+        let _outputUnits = document.querySelector('input[name=output]:checked').value;
+        let _coe = document.querySelector('input[name=coe]:checked').value;
+
+        // inputs pass the validity test so turn them into numbers
+        // all inputs are in inches so volume will be in inches
+        var length = math.fraction(_length);
+        var width = math.fraction(_width);
+        var height = math.fraction(_height);
+
+        // We've turned the fraction or decimal text input into numbers.
+        // the numbers are still in the imperial units number system.
+        // Convert them to metric and use the metric path.
+        var convertedInputs = convertInputsToMetric(Number(length), Number(width), Number(height));
+
+        var dataToSend = createData(convertedInputs.length, convertedInputs.width, convertedInputs.height, _outputUnits, _inputUnits, _coe);
+
+        var generatedRecipe = getSlabRecipe(dataToSend)
+
+        updateLocation.innerHTML = generatedRecipe;
+
+*/
+        console.log("*************** out tSlab.html:handleFormSubmit ");
+    };
+
+/*    /!**
+     * this method takes the text input values and turns
+     * them into a data object.
+     *!/
+    function createData(_length, _width, _height, _outputUnits, _inputUnits, _coe) {
+        console.log("in origTSlab.html:createData ***************************");
+        var data = new Object();
+        data.length = _length;
+        data.width = _width;
+        data.height = _height;
+        data.outputUnits = _outputUnits;
+        data.inputUnits = _inputUnits;
+        data.coe = _coe;
+
+        console.log("out origTSlab.html:createData ***************************");
+        return data;
+    };*/
 
     function preventFormSubmit() {
-        let forms = document.querySelectorAll('form');
-        for (let i = 0; i < forms.length; i++) {
+        var forms = document.querySelectorAll('form');
+        for (var i = 0; i < forms.length; i++) {
             forms[i].addEventListener('submit', function (event) {
                 event.preventDefault();
             });
         }
     }
 
-    window
-        .addEventListener(
-            'load', preventFormSubmit
-        );
+    window.addEventListener('load', preventFormSubmit);
 
-    // 5. Volume base Recipe calculations independent of Shape -->
+</script>
+<!-- 4. Calculators by Shape Slab-->
+<script>
+    /**
+     *
+     * @param {object} dataObject  - data object from input
+     * @return {string} as html for MG batch recipe.
+     */
+
+    /**
+     * This function will calculate a slab volume based on
+     * centimeter inputs, generating a volume in cubic centimeters.
+     *  @param {string} length - number as text.
+     *  @param {string} width - number as text.
+     *  @param {string} height - number as text.
+     *  @return {object} contains input values and calculated volume.
+     */
+
+</script>
+<!-- 5. Volume base Recipe calculations independent of Shape -->
+<script>
     /********************************************************************************************************
      *
      *   Shape independent Recipe output
@@ -411,6 +490,7 @@
         console.log("metric.js:mCreateRecipeTableHtml: object passed to createRecipe " + JSON.stringify(volumeObject));
 
         volumeObject = createBaseVolume(volumeObject);
+
         let recipe = "";
 
         if (volumeObject.outputUnits != "imperial") {
@@ -436,12 +516,14 @@
         return recipe;
     };
 
+
     /**
      * this method takes json and turns it into
      * an html table of the MG recipe to be displayed to the user
      * json should have the 4 fields of glass,water,binder and liquid medium.
      * @param {Object} volumeObject - volume DTO.
      * @param {string} volumeObject.volume -
+     * @param {string} employee.department - The employee's department.
      */
     function createBaseVolume(volumeObject) {
         console.log("in metric.js:createBaseVolume ***********************");
@@ -451,21 +533,23 @@
         // Now multiply the total weight by the ratio for each ingredient.
         // That we give you the weight amount for each ingredient.
         volumeObject.total_weight = volumeObject.volume * 2;
-        if(volumeObject.coe == "90"){
+        if (volumeObject.coe == "90") {
             volumeObject.glass = (volumeObject.total_weight * GLASS).toFixed(1); // grams of glass powder to use
             volumeObject.water = (volumeObject.total_weight * WATER).toFixed(1);
             volumeObject.binder = (volumeObject.total_weight * BINDER).toFixed(1);
             volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM).toFixed(1);
             return volumeObject;
-        };
+        }
+        ;
 
-        if(volumeObject.coe == "96"){
+        if (volumeObject.coe == "96") {
             volumeObject.glass = (volumeObject.total_weight * GLASS96).toFixed(1); // grams of glass powder to use
             volumeObject.water = (volumeObject.total_weight * WATER96).toFixed(1);
             volumeObject.binder = (volumeObject.total_weight * BINDER96).toFixed(1);
             volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM96).toFixed(1);
             return volumeObject;
-        };
+        }
+        ;
 
         console.log("out metric.js:createBaseVolume ***********************");
         // return volumeObject;
@@ -612,55 +696,67 @@
         while (tsp > 48) {
             conObj.cups = conObj.cups + 1;
             tsp = tsp - 48;
-        };
+        }
+        ;
 
         if (tsp <= 47.99 && tsp >= 36) {
             conObj.threeqtrCup = 1;
             tsp = tsp - 36;
-        };
+        }
+        ;
 
         if (tsp <= 35.99 && tsp >= 24) {
             conObj.halfCup = 1;
             tsp = tsp - 24;
-        };
+        }
+        ;
 
         if (tsp <= 23.99 && tsp >= 12) {
             conObj.qtrCup = 1;
             tsp = tsp - 12;
-        };
+        }
+        ;
 
         while (tsp <= 11.99 && tsp >= 3) {
             conObj.tblsp = conObj.tblsp + 1;
             tsp = tsp - 3;
-        };
+        }
+        ;
 
         while (tsp < 2.99 && tsp >= 1) {
             tsp = tsp.toFixed(2);
             conObj.tsp = conObj.tsp + 1;
             tsp = tsp - 1;
-        };
+        }
+        ;
 
         console.log("after here there is less than 1 teaspoon left. " + tsp.toFixed(2));
-        if (tsp < 0.99 && tsp >= .75) {
+
+        if (tsp < 1.0 && tsp >= .75) {
             conObj.threeqtrTsp = conObj.threeqtrTsp + 1;
             tsp = 0;
         }
+
         if (tsp < .749 && tsp >= .50) {
             conObj.halfTsp = conObj.halfTsp + 1;
             tsp = 0;
         }
+
         if (tsp < .499 && tsp >= .25) {
             conObj.qtrTsp = conObj.qtrTsp + 1;
             tsp = 0;
         }
+
         if (tsp < .249 && tsp >= .125) {
             conObj.eightTsp = conObj.eightTsp + 1;
             tsp = 0;
         }
+
         console.log("out imperial.gs : convert ***********************");
         return conObj;
     };
 
 </script>
+
 </body>
 </html>
