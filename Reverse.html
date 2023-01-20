@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <!-- Bootstrap CSS -->
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
+  <script src="https://unpkg.com/mathjs@10.6.0/lib/browser/math.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:600i&display=swap');
+
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: #333;
+      background: white;
+    }
+
+    form {
+      background: white;
+    }
+
+    label {
+      margin-bottom: .5rem;
+      text-align: right;
+      display: block;
+      letter-spacing: 2px;
+      color: #adb5bd;
+      text-transform: uppercase;
+    }
+
+    .form-control {
+      border: none;
+      background: none;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+      transition: border-color .4s ease-out;
+      border-radius: 0;
+    }
+
+    .form-control:active,
+    .form-control:focus,
+    .btn.focus,
+    .btn:focus {
+      outline: none;
+      box-shadow: none;
+      border-color: black;
+    }
+
+    .form-control.valid {
+      border-color: green;
+    }
+
+    .form-control.invalid {
+      border-color: red;
+    }
+
+    .form-control + small {
+      color: red;
+      opacity: 0;
+      height: 0;
+      transition: opacity .4s ease-out;
+    }
+
+    .form-control.invalid + small {
+      opacity: 1;
+      height: auto;
+      margin-bottom: 20px;
+      transition: opacity .4s ease-out;
+    }
+
+    .btn {
+      border: 2px solid black;
+      padding: 0.375rem 2.75rem;
+      text-transform: uppercase;
+      font-weight: 900;
+      border-radius: 0;
+    }
+
+    .btn:hover {
+      color: white;
+      background: black;
+      transition: all .4s ease-out;
+    }
+
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <form id="myForm" class="row g-3 was-validated" onsubmit="handleFormSubmit()">
+        <p class="h4 sm-4 text-center">Reverse Calculations</p><br>
+        <small id="hint" class="form-text">acceptable values are any numbers whole, decimals or fractions
+          <br> e.g. 3, 0.3, 3.6, 6 1/4 & 1/2
+          <br> be aware! 1 1/4 and 11/4 are not the same!</small>
+        <div class="form-row align-items-center">
+          <div class="col-sm-auto">
+            <div class="input-group mb-3">
+              <input type="text" id="weight" class="form-control" min="10" max="1000" step=".1"
+                     placeholder="weight" required>
+              <select class="form-select-sm" id="weightInputUnits">
+                <option value="g" >grams</option>
+                <option value="oz" selected>oz</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group col-sm-6">
+            <br>
+            <p class="h6 sm-4 ">Dimension Units </p>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="output" id="metric" value="metric"
+                     checked>
+              <label class="form-check-label" for="metric">Metric</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="output" id="imperial" value="imperial">
+              <label class="form-check-label" for="imperial">Imperial</label>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary btn-block">Shapes</button>
+        </div>
+      </form>
+      <br>
+      <div class="col-sm-auto">
+        <div id="dimensions">
+          <p><em>Possible shapes dimensions:</em></p>
+          <b>MG total volume:</b> 0 cm<sup>3</sup>
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th scope="col">Disk dimensions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th scope="row">diameter</th>
+              <td>0</td>
+              <td>centimeters</td>
+            </tr>
+            <tr>
+              <th scope="row">height</th>
+              <td>0</td>
+              <td>centimeters</td>
+            </tr>
+            </tbody>
+          </table>
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th scope="col">Slab dimensions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th scope="row">length</th>
+              <td>0</td>
+              <td>centimeters</td>
+            </tr>
+            <tr>
+              <th scope="row">width</th>
+              <td>0</td>
+              <td>centimeters</td>
+            </tr>
+            <tr>
+              <th scope="row">height</th>
+              <td>0</td>
+              <td>centimeters</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div id="ver"><p>MGToolbox ver. 1.0.16 </p></div>
+</div>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<!-- 1. Constants -->
+<script>
+  const GLASS = .614;
+  const WATER = .326;
+  const BINDER = .032;
+  const LMEDIUM = .027;
+  const CUBICCM = 'cm<sup>3</sup>';
+  const PI = 3.1416;
+  const GLASSCONV = 0.232;
+  const WATERCONV = 0.236;
+  const BINDERCONV = 0.416;
+  const LMEDIUMCONV = 0.2;
+  const CUP = "cup";
+  const a3QTR = "3/4";
+  const aHALF = "1/2";
+  const a1QTR = "1/4"
+  const TBSP = "tbsp";
+  const TSP = "tsp";
+  const IMPERIAL = "imperial";
+  const METRIC = "metric";
+  const CITOCC = 16.387;
+  const INTOCM = 2.54;
+  const OZTOGM = 28.3495;
+  const AUTHOR = "Steve Terry";
+  const VERSION = "1.0";
+  const REL = "15";
+</script>
+<!-- 2. inline validation for input fields -->
+<script>
+  const inputs = document.querySelectorAll('input');
+
+  const patterns = {
+    weight: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/,
+  };
+
+  inputs.forEach((input) => {
+    input.addEventListener('keyup', (e) => {
+      validate(e.target, patterns[e.target.attributes.id.value]);
+    });
+  });
+
+  /**
+   * This validation framework could enhanced to do more complex validation
+   * this could include checking the to see if the value fell into a range
+   * we define. It could possibly be applied to numbers. Walk the debugger
+   * to see how it works.
+   */
+  function validate(field, regex) {
+    if (regex.test(field.value)) {
+      field.className = 'form-control valid';
+    } else {
+      field.className = 'form-control invalid';
+    }
+  }
+</script>
+<!-- 3. Initial input handling different for each page-->
+<script>
+  function reverseInputCollector(){
+    console.log("in reverseInputCollector ***************************");
+
+    let data = new Object();
+    data.weight = document.querySelector('#weight').value;
+    let selectWeightUnits = document.getElementById('weightInputUnits');
+    data.weightUnits = selectWeightUnits.options[selectWeightUnits.selectedIndex].value;
+    data.outputUnits = document.querySelector('input[name=output]:checked').value;
+    console.log("in reverseInputCollector ***************************");
+
+    return data;
+  }
+
+  class Reverse {
+    weight;
+    weightUnits;
+    diameter
+    slabSide;
+    outputUnits;
+
+    constructor(data) {
+      this.weight = data.weight;
+      this.weightUnits = data.weightUnits;
+      this.outputUnits = data.outputUnits;
+    }
+
+    normalizeUnits() {
+      console.log("in Reverse.normalize ***************************");
+      // inputs pass the validity test so turn them into numbers
+      // all inputs are in inches so volume will be in inches
+      let _weight = math.number(math.fraction(this.weight));
+      this.weight = this.convertToMetric(_weight, this.weightUnits);
+      this.weightUnits = "g";
+
+      console.log("out Reverse.normalize ***************************");
+    }
+
+    convertToMetric(value, units) {
+      switch (units) {
+        case "oz": {
+          // var convertedWeight = Number(weight)*OZTOGM;
+          value = value * OZTOGM;
+          break;
+        }
+        default: {
+          // must be grams so
+          // no conversion necessary do nothing and return the value
+        }
+      }
+      return value;
+    }
+
+    calculateShapes(){
+      console.log("*************** in Reverse.calculateShapes ");
+      this.volume = this.weight / 2;
+      this.volume = this.volume.toFixed(1);
+      // Disk dimensions based on 1 cm height.
+      var radius = Math.sqrt(this.volume / (PI * 1));
+      this.diameter = radius.toFixed(1) * 2;
+      // Slab dimensions based on 1 cm height
+      this.slabSide = Math.sqrt(this.volume).toFixed(1);
+      console.log("*************** out Reverse.calculateShapes ");
+    }
+
+    convertToImperial(){
+      let imperial = new Object();
+      // wellchosen 1 cm is .3937 in
+      // these values of this are in metric form
+      // they may be >= 1 or <= 1
+      // if < 1 they can be turned into fractions directly
+      // if > 1 they need to be split then a fractional part
+      //     created.
+      imperial.volume = (this.volume / CITOCC).toFixed(3);
+      imperial.volume = this.splitDecimal(imperial.volume);
+
+      imperial.diameter = (this.diameter / INTOCM).toFixed(3);
+      imperial.diameter = this.splitDecimal(imperial.diameter);
+
+      imperial.slabSide = (this.slabSide / INTOCM).toFixed(1);
+      imperial.slabSide = this.splitDecimal(imperial.slabSide);
+
+      /*
+            if(imperial.volume < 1){
+              imperial.volume =  convertDecimalToFraction(this.volume);
+            }else{
+              imperial.volume = this.splitDecimal(imperial.volume);
+            }
+
+            imperial.diameter = (this.diameter / INTOCM).toFixed(3);
+            if(imperial.diameter < 1){
+              imperial.diameter =  convertDecimalToFraction(imperial.diameter);
+            }else{
+              imperial.diameter = this.splitDecimal(imperial.diameter);
+            }
+
+            imperial.slabSide = (this.slabSide / INTOCM).toFixed(1);
+            if(imperial.slabSide < 1){
+              imperial.slabSide =  convertDecimalToFraction(imperial.slabSide);
+            }else{
+              imperial.slabSide = this.splitDecimal(imperial.slabSide);
+            }
+      */
+
+      return imperial;
+    }
+
+    /**
+     * we guaranteed this number is greater than 1
+     * so we pass back a string of mixed number
+     * @param value
+     * @return string value
+     */
+    splitDecimal(value){
+      if(value < 1){
+        value =  convertDecimalToFraction(value);
+      }else{
+        let whole = value.toString().split(".")[0];
+        let decimal = "."+value.toString().split(".")[1];
+        let newFraction = convertDecimalToFraction(decimal);
+        return whole+" "+newFraction;
+      }
+      return value;
+    }
+
+
+
+  }
+  function handleFormSubmit() {
+    console.log("*************** in tReverse.html:handleFormSubmit ");
+
+    let updateLocation = document.querySelector('#dimensions');
+
+    let reverse = new Reverse(reverseInputCollector());
+    reverse.normalizeUnits();
+    // calculate the dimensions for disk and slab
+    reverse.calculateShapes();
+    //
+
+    if (reverse.outputUnits == "metric") {
+      var output = outputTableMetric(reverse.volume,reverse.diameter,reverse.slabSide);
+      updateLocation.innerHTML = output;
+      // updateLocation.innerHTML = "<em> Volume: " + volume + "cm<sup>3</sup></em><br><em> Disk dimensions: </em> radius: " + radius + "cm, height: 1cm <br> " + "<em> Slab dimensions: </em> length: " + dimension + "cm, width: " + dimension + "cm, height: 1cm ";
+    } else if (reverse.outputUnits  == "imperial") {
+      // convert the metric units to imperial units
+      /* todo: do we want a conversion to fractional representation here
+      *   with a clean call to outputTableImperial
+      */
+      let imperial = reverse.convertToImperial();
+      updateLocation.innerHTML = outputTableImperial(imperial.volume, imperial.diameter, imperial.slabSide);
+    } else {
+      Logger.log("We should never get here 'Big old Error'");
+      resultHtml = "Failed to create recipe...  ERROR";
+    }
+    console.log("*************** out tReverse.html:handleFormSubmit ");
+  };
+
+
+
+  /**
+   *  imperial values passed for
+   *  table output for possible shape dimensions
+   * @param _volume
+   * @param _diameter
+   * @param _dimension
+   */
+  function outputTableImperial(volume, diameter, dimension) {
+    let wellChosen = "7/16"; // this is always the value
+
+    return "     <p class=\"h5 sm-4 \"><em>Possible shape dimensions:</em></p>\n" +
+            "        <b>MG total volume:</b> " + volume + " in<sup>3</sup>\n" +
+            "        <table class=\"table table-hover\">\n" +
+            "          <thead>\n" +
+            "          <tr><th scope=\"col\">Disk dimensions</th></tr>\n" +
+            "          </thead>\n" +
+            "          <tbody>\n" +
+            "          <tr><th scope=\"row\">diameter</th><td>" + diameter + "</td><td>in</td></tr>\n" +
+            "          <tr><th scope=\"row\">height</th><td>" + wellChosen + "</td><td>in</td></tr>\n" +
+            "          </tbody>\n" +
+            "        </table>\n" +
+            "        <table class=\"table table-hover\">\n" +
+            "          <thead>\n" +
+            "          <tr><th scope=\"col\">Slab dimensions</th></tr>\n" +
+            "          </thead>\n" +
+            "          <tbody>\n" +
+            "          <tr><th scope=\"row\">length</th><td>" + dimension + "</td><td>in</td></tr>\n" +
+            "          <tr><th scope=\"row\">width</th><td>" + dimension + "</td><td>in</td></tr>\n" +
+            "          <tr><th scope=\"row\">height</th><td>" + wellChosen + "</td><td>in</td></tr>\n" +
+            "          </tbody>\n" +
+            "        </table>\n";
+  }
+
+
+
+  function convertDecimalToFraction(value){
+    // value is always less than 1 and greater than 0
+    // round to 1/16th of an inch.
+    let _value = Number(value);
+    if (value == 0) return "";
+    switch (true) {
+      case ((_value > 0) && (_value <= .125)) : {
+        return "1/8";
+      }
+      case (_value > .125 && _value <= .25) : {
+        return "1/4";
+      }
+      case ((_value > .25) && (_value <= .375)) : {
+        return "3/8";
+      }
+      case ((_value > .375) && (_value <= .4375)) : {
+        return "7/16";
+      }
+      case (_value > .4375 && _value <= .5) : {
+        return "1/2";
+      }
+      case (_value > .5 && _value <= .625) : {
+        return "5/8";
+      }
+      case (_value > .625 && _value <= .75) : {
+        return "3/4";
+      }
+      case (_value > .75 && _value <= .875) : {
+        return "7/8";
+      }
+      case (_value > .875 && _value < 1) : {
+        return "15/16";
+      }
+    }
+    return result;
+  }
+  /**
+   *  Metric output
+   *  to table for possible shape dimensions
+   * @param _volume
+   * @param _radius
+   * @param _dimension
+   */
+  function outputTableMetric(_volume, _diameter, _dimension) {
+    console.log("in tReverse.html:outputTableMetric");
+    return "     <p class=\"h5 sm-4 \"><em>Possible shape dimensions:</em></p>" +
+            "        <b>MG total volume:</b> " + _volume + " cm<sup>3</sup>" +
+            "        <table class=\"table table-hover\">" +
+            "          <thead>" +
+            "          <tr><th scope=\"col\">Disk dimensions</th></tr>" +
+            "          </thead>" +
+            "          <tbody>" +
+            "          <tr><th scope=\"row\">diameter</th><td>" + _diameter + "</td><td>cm</td></tr>" +
+            "          <tr><th scope=\"row\">height</th><td>1</td><td>cm</td></tr>" +
+            "          </tbody>" +
+            "        </table>" +
+            "        <table class=\"table table-hover\">" +
+            "          <thead>" +
+            "          <tr><th scope=\"col\">Slab dimensions</th></tr>" +
+            "          </thead>" +
+            "          <tbody>" +
+            "          <tr><th scope=\"row\">length</th><td>" + _dimension + "</td><td>cm</td></tr>" +
+            "          <tr><th scope=\"row\">width</th><td>" + _dimension + "</td><td>cm</td></tr>" +
+            "          <tr><th scope=\"row\">height</th><td>1</td><td>cm</td></tr>" +
+            "          </tbody>" +
+            "        </table>";
+    console.log("out tReverse.html:outputTableMetric");
+  }
+
+  function preventFormSubmit() {
+    var forms = document.querySelectorAll('form');
+    for (var i = 0; i < forms.length; i++) {
+      forms[i].addEventListener('submit', function (event) {
+        event.preventDefault();
+      });
+    }
+  }
+  window.addEventListener('load', preventFormSubmit);
+</script>
+
+
+</body>
+</html>

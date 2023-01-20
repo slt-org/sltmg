@@ -197,9 +197,9 @@
     const WATER = .326;
     const BINDER = .032;
     const LMEDIUM = .027;
-    const GLASS96   = .579;
-    const WATER96   = .359;
-    const BINDER96  = .036;
+    const GLASS96 = .579;
+    const WATER96 = .359;
+    const BINDER96 = .036;
     const LMEDIUM96 = .026;
     const CUBICCM = 'cm<sup>3</sup>';
     const PI = 3.1416;
@@ -271,7 +271,7 @@
         data.heightUnits = selectHeightUnits.options[selectHeightUnits.selectedIndex].value;
 
         data.outputUnits = document.querySelector('input[name=output]:checked').value;
-        data.coe =  document.querySelector('input[name=coe]:checked').value;
+        data.coe = document.querySelector('input[name=coe]:checked').value;
         console.log("out diskInputCollector ***************************");
 
         return data;
@@ -303,9 +303,9 @@
             // turn all values that might be fractions into numbers.
             let _diameter = math.number(math.fraction(this.diameter));
             let _height = math.number(math.fraction(this.height));
-            this.diameter = this.convertToMetric(_diameter,this.diameterUnits);
+            this.diameter = this.convertToMetric(_diameter, this.diameterUnits);
             this.diameterUnits = "cm";
-            this.height = this.convertToMetric(_height,this.heightUnits);
+            this.height = this.convertToMetric(_height, this.heightUnits);
             this.heightUnits = "cm";
             console.log("out Disk.normalize ***************************");
             return "todo";
@@ -314,8 +314,8 @@
         /**
          * calculate volume from dimensions.
          */
-        calculateVolume(){
-            let radius = this.diameter/2;
+        calculateVolume() {
+            let radius = this.diameter / 2;
             this.volume = PI * radius * radius * this.height;
             // volume here is always in cm^3
         }
@@ -377,8 +377,9 @@
 
         console.log("*************** out handleFormSubmit ");
     }
-// the last line of page specific code in the script.
-// All the code from this point on is common to all pages.
+
+    // the last line of page specific code in the script.
+    // All the code from this point on is common to all pages.
 
     function preventFormSubmit() {
         let forms = document.querySelectorAll('form');
@@ -451,21 +452,23 @@
         // Now multiply the total weight by the ratio for each ingredient.
         // That we give you the weight amount for each ingredient.
         volumeObject.total_weight = volumeObject.volume * 2;
-        if(volumeObject.coe == "90"){
+        if (volumeObject.coe == "90") {
             volumeObject.glass = (volumeObject.total_weight * GLASS).toFixed(1); // grams of glass powder to use
             volumeObject.water = (volumeObject.total_weight * WATER).toFixed(1);
             volumeObject.binder = (volumeObject.total_weight * BINDER).toFixed(1);
             volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM).toFixed(1);
             return volumeObject;
-        };
+        }
+        ;
 
-        if(volumeObject.coe == "96"){
+        if (volumeObject.coe == "96") {
             volumeObject.glass = (volumeObject.total_weight * GLASS96).toFixed(1); // grams of glass powder to use
             volumeObject.water = (volumeObject.total_weight * WATER96).toFixed(1);
             volumeObject.binder = (volumeObject.total_weight * BINDER96).toFixed(1);
             volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM96).toFixed(1);
             return volumeObject;
-        };
+        }
+        ;
 
         console.log("out metric.js:createBaseVolume ***********************");
         // return volumeObject;
@@ -612,33 +615,39 @@
         while (tsp > 48) {
             conObj.cups = conObj.cups + 1;
             tsp = tsp - 48;
-        };
+        }
+        ;
 
         if (tsp <= 47.99 && tsp >= 36) {
             conObj.threeqtrCup = 1;
             tsp = tsp - 36;
-        };
+        }
+        ;
 
         if (tsp <= 35.99 && tsp >= 24) {
             conObj.halfCup = 1;
             tsp = tsp - 24;
-        };
+        }
+        ;
 
         if (tsp <= 23.99 && tsp >= 12) {
             conObj.qtrCup = 1;
             tsp = tsp - 12;
-        };
+        }
+        ;
 
         while (tsp <= 11.99 && tsp >= 3) {
             conObj.tblsp = conObj.tblsp + 1;
             tsp = tsp - 3;
-        };
+        }
+        ;
 
         while (tsp < 2.99 && tsp >= 1) {
             tsp = tsp.toFixed(2);
             conObj.tsp = conObj.tsp + 1;
             tsp = tsp - 1;
-        };
+        }
+        ;
 
         console.log("after here there is less than 1 teaspoon left. " + tsp.toFixed(2));
         if (tsp < 0.99 && tsp >= .75) {
