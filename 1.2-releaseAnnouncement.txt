@@ -1,0 +1,13 @@
+I would like to announce a new release of the Modeling Glass Toolbox version 1.2. MG Toolbox is an online set of tools for calculating shapes and auto-generating batch recipes. It will help you answer questions like "How much Modeling Glass do I need to make a disk ten inches in diameter?" and "What size piece can I make with my leftover Modeling Glass?".
+
+https://sites.google.com/view/slt-mg/home
+
+New features.
+* Disk generators and calculators now use diameter instead of radius for input.
+* You can now choose your units for each input, choices are inches, millimeters and centimeters.
+* Volume calculators now include calculations for the weight of Standard Bullseye glass needed to fill the volume.
+
+The MG Toolbox is free to use and requires no signup.
+
+ 
+   
