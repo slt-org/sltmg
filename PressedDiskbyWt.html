@@ -91,7 +91,7 @@
   <div class="row">
     <div class="col-8">
       <form id="myForm" class="row g-3 was-validated" onsubmit="handleFormSubmit()">
-        <p class="h4 sm-4 text-center">Reverse Calculations</p><br>
+        <p class="h4 sm-4 text-center">Pressed Glass Prediction</p><br>
         <small id="hint" class="form-text">acceptable values are any numbers whole, decimals or fractions
           <br> e.g. 3, 0.3, 3.6, 6 1/4 & 1/2
           <br> be aware! 1 1/4 and 11/4 are not the same!</small>
@@ -103,6 +103,14 @@
               <select class="form-select-sm" id="weightInputUnits">
                 <option value="g" >grams</option>
                 <option value="oz" selected>oz</option>
+              </select>
+            </div>
+            <div class="form-group input-group mb-3">
+              <input type="text" class="form-control" id="endingheight" placeholder="ending height" required>
+              <select class="form-select-sm" id="endingheightInputUnits">
+                <option value="in" selected>in</option>
+                <option value="mm">mm</option>
+                <option value="cm">cm</option>
               </select>
             </div>
           </div>
@@ -122,18 +130,18 @@
 
         </div>
         <div class="col-12">
-          <button type="submit" class="btn btn-primary btn-block">Shapes</button>
+          <button type="submit" class="btn btn-primary btn-block">Disk</button>
         </div>
       </form>
       <br>
       <div class="col-sm-auto">
         <div id="dimensions">
-          <p><em>Possible shapes dimensions:</em></p>
+          <!--<p><em>Possible shapes dimensions:</em></p>-->
           <b>MG total volume:</b> 0 cm<sup>3</sup>
           <table class="table table-hover">
             <thead>
             <tr>
-              <th scope="col">Disk dimensions</th>
+              <th scope="col">Pressed Disk dimensions</th>
             </tr>
             </thead>
             <tbody>
@@ -149,6 +157,7 @@
             </tr>
             </tbody>
           </table>
+<!--
           <table class="table table-hover">
             <thead>
             <tr>
@@ -173,17 +182,19 @@
             </tr>
             </tbody>
           </table>
+-->
         </div>
       </div>
     </div>
   </div>
   <br>
-  <div id="ver"><p>MGToolbox ver. 1.0.16 </p></div>
+  <div id="ver"><p>MGToolbox ver. 1.2 candidate </p></div>
 </div>
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+</script>
 <!-- 1. Constants -->
 <script>
   const GLASS = .614;
@@ -217,6 +228,7 @@
 
   const patterns = {
     weight: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/,
+    endingheight: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/
   };
 
   inputs.forEach((input) => {
@@ -241,68 +253,123 @@
 </script>
 <!-- 3. Initial input handling different for each page-->
 <script>
-  function reverseInputCollector(){
-    console.log("in reverseInputCollector ***************************");
+  function pressedDiskInputCollector(){
+    console.log("in pressedDiskInputCollector ***************************");
 
     let data = new Object();
     data.weight = document.querySelector('#weight').value;
     let selectWeightUnits = document.getElementById('weightInputUnits');
     data.weightUnits = selectWeightUnits.options[selectWeightUnits.selectedIndex].value;
+
+    data.endingheight = document.querySelector('#endingheight').value;
+    let selectEndingHeightUnits = document.getElementById('endingheightInputUnits');
+    data.endingheightUnits = selectEndingHeightUnits.options[selectEndingHeightUnits.selectedIndex].value;
+
     data.outputUnits = document.querySelector('input[name=output]:checked').value;
-    console.log("in reverseInputCollector ***************************");
+    console.log("in pressedDiskInputCollector ***************************");
 
     return data;
   }
 
-  class Reverse {
+  class PressedDiskbyWt {
     weight;
     weightUnits;
-    diameter
-    slabSide;
+    endingheight;
+    endingheightUnits;
+    endingdiameter;
+    // weight;       // for MG calcs
+    // weightUnits;  // for MG calcs
+    weightStdGlass;
+    weightStdUnits;
     outputUnits;
 
     constructor(data) {
       this.weight = data.weight;
       this.weightUnits = data.weightUnits;
+      this.endingheight = data.endingheight;
+      this.endingheightUnits = data.endingheightUnits;
       this.outputUnits = data.outputUnits;
     }
 
+    /**
+     * turns all units of measurement into centimeters.
+     * transforms diameter, height,
+     */
     normalizeUnits() {
-      console.log("in Reverse.normalize ***************************");
-      // inputs pass the validity test so turn them into numbers
-      // all inputs are in inches so volume will be in inches
+      console.log("in PressedDisk.normalize ***************************");
+      // turn all values that might be fractions into numbers.
       let _weight = math.number(math.fraction(this.weight));
+      let _endingheight = math.number(math.fraction(this.endingheight));
+      // make centimeters
       this.weight = this.convertToMetric(_weight, this.weightUnits);
       this.weightUnits = "g";
+      // make centimeters
+      this.endingheight = this.convertToMetric(_endingheight, this.endingheightUnits);
+      this.endingheightUnits = "cm";
+      console.log("out PressedDisk.normalize ***************************");
+      return "todo";
+    };
 
-      console.log("out Reverse.normalize ***************************");
-    }
-
+    /**
+     * turns all units of measurement into centimeters.
+     */
     convertToMetric(value, units) {
       switch (units) {
         case "oz": {
-          // var convertedWeight = Number(weight)*OZTOGM;
-          value = value * OZTOGM;
+          // convert to grams
+          value = (value * OZTOGM).toFixed(3);
+          break;
+        }
+        case "in": {
+          // convert to cm
+          value = (value * INTOCM).toFixed(3);
+          break;
+        }
+        case "mm": {
+          // convert to cm
+          value = (value / 10).toFixed(3);
           break;
         }
         default: {
-          // must be grams so
           // no conversion necessary do nothing and return the value
         }
       }
       return value;
+    };
+
+
+    /**
+     * calculate volume from starting weight and starting height.
+     * calculate weight from volume and set units
+     */
+    calculateVolume() {
+      console.log("*************** in PressedDisk.calculateVolume ");
+      // let radius = this.weight / 2;
+      this.volume = (this.weight / 2.5).toFixed(2);
+      this.volume = Number(this.volume).toFixed(1);
+      // MG weight not Std. BE glass weight
+      //this.weight = (this.volume * 2).toFixed(2);
+      // this.weightUnits = "g";
+
+      // Std. BE glass weight
+      // this.weightStdGlass = (this.volume * 2.5).toFixed(2);
+      // this.weightStdUnits = "g";
+      // volume here is always in cm^30
+      this.volumeUnits = "cm<sup>3</sup>"
+      // volume here is always in cm^3
+      console.log("*************** out PressedDisk.calculateVolume ");
     }
 
     calculateShapes(){
-      console.log("*************** in Reverse.calculateShapes ");
-      this.volume = this.weight / 2;
-      this.volume = this.volume.toFixed(1);
+      console.log("*************** in PressedDisk.calculateShapes ");
+      // this.volume = this.weightStdGlass / 2.5;
+      // this.volume = this.volume.toFixed(1);
       // Disk dimensions based on 1 cm height.
-      var radius = Math.sqrt(this.volume / (PI * 1));
-      this.diameter = radius.toFixed(1) * 2;
+      var radius = Math.sqrt(this.volume / (PI * this.endingheight));
+      this.endingdiameter = radius.toFixed(1) * 2;
       // Slab dimensions based on 1 cm height
-      this.slabSide = Math.sqrt(this.volume).toFixed(1);
-      console.log("*************** out Reverse.calculateShapes ");
+      // this.slabSide = Math.sqrt(this.volume).toFixed(1);
+      console.log("*************** out PressedDisk.calculateShapes ");
     }
 
     convertToImperial(){
@@ -313,36 +380,18 @@
       // if < 1 they can be turned into fractions directly
       // if > 1 they need to be split then a fractional part
       //     created.
-      imperial.volume = (this.volume / CITOCC).toFixed(3);
-      imperial.volume = this.splitDecimal(imperial.volume);
+      let _weight = this.volume * 2.5;
+      imperial.weight = _weight / OZTOGM;
+      imperial.weight = this.splitDecimal(imperial.weight);
 
-      imperial.diameter = (this.diameter / INTOCM).toFixed(3);
+      imperial.volume = (this.volume / CITOCC).toFixed(3);   // cubic inches to cubic centimeters
+      imperial.volume = this.splitDecimal(imperial.volume);  // fractional approximation
+
+      imperial.diameter = (this.endingdiameter / INTOCM).toFixed(3);
       imperial.diameter = this.splitDecimal(imperial.diameter);
 
-      imperial.slabSide = (this.slabSide / INTOCM).toFixed(1);
-      imperial.slabSide = this.splitDecimal(imperial.slabSide);
-
-      /*
-            if(imperial.volume < 1){
-              imperial.volume =  convertDecimalToFraction(this.volume);
-            }else{
-              imperial.volume = this.splitDecimal(imperial.volume);
-            }
-
-            imperial.diameter = (this.diameter / INTOCM).toFixed(3);
-            if(imperial.diameter < 1){
-              imperial.diameter =  convertDecimalToFraction(imperial.diameter);
-            }else{
-              imperial.diameter = this.splitDecimal(imperial.diameter);
-            }
-
-            imperial.slabSide = (this.slabSide / INTOCM).toFixed(1);
-            if(imperial.slabSide < 1){
-              imperial.slabSide =  convertDecimalToFraction(imperial.slabSide);
-            }else{
-              imperial.slabSide = this.splitDecimal(imperial.slabSide);
-            }
-      */
+      imperial.endingheight = (this.endingheight / INTOCM).toFixed(3);
+      imperial.endingheight = this.splitDecimal(imperial.endingheight);
 
       return imperial;
     }
@@ -360,41 +409,45 @@
         let whole = value.toString().split(".")[0];
         let decimal = "."+value.toString().split(".")[1];
         let newFraction = convertDecimalToFraction(decimal);
+        if(newFraction == "1"){
+          let rounded = Number(whole)+1;
+          return rounded.toString();
+        }
         return whole+" "+newFraction;
       }
       return value;
     }
 
-
-
   }
   function handleFormSubmit() {
-    console.log("*************** in tReverse.html:handleFormSubmit ");
+    console.log("*************** in PressedDisk.html:handleFormSubmit ");
 
     let updateLocation = document.querySelector('#dimensions');
 
-    let reverse = new Reverse(reverseInputCollector());
-    reverse.normalizeUnits();
+    let pressedDisk = new PressedDiskbyWt(pressedDiskInputCollector());
+    pressedDisk.normalizeUnits();
+    // calculate volume
+    pressedDisk.calculateVolume();
     // calculate the dimensions for disk and slab
-    reverse.calculateShapes();
+    pressedDisk.calculateShapes();
     //
 
-    if (reverse.outputUnits == "metric") {
-      var output = outputTableMetric(reverse.volume,reverse.diameter,reverse.slabSide);
+    if (pressedDisk.outputUnits == "metric") {
+      var output = outputTableMetric(pressedDisk.volume,pressedDisk.endingdiameter,Number(pressedDisk.endingheight).toFixed(1));
       updateLocation.innerHTML = output;
-      // updateLocation.innerHTML = "<em> Volume: " + volume + "cm<sup>3</sup></em><br><em> Disk dimensions: </em> radius: " + radius + "cm, height: 1cm <br> " + "<em> Slab dimensions: </em> length: " + dimension + "cm, width: " + dimension + "cm, height: 1cm ";
-    } else if (reverse.outputUnits  == "imperial") {
+    } else if (pressedDisk.outputUnits  == "imperial") {
       // convert the metric units to imperial units
       /* todo: do we want a conversion to fractional representation here
       *   with a clean call to outputTableImperial
       */
-      let imperial = reverse.convertToImperial();
-      updateLocation.innerHTML = outputTableImperial(imperial.volume, imperial.diameter, imperial.slabSide);
+      let imperial = pressedDisk.convertToImperial();
+
+      updateLocation.innerHTML = outputTableImperial(imperial.volume, imperial.diameter, imperial.endingheight, imperial.weight);
     } else {
       Logger.log("We should never get here 'Big old Error'");
       resultHtml = "Failed to create recipe...  ERROR";
     }
-    console.log("*************** out tReverse.html:handleFormSubmit ");
+    console.log("*************** out PressedDisk.html:handleFormSubmit ");
   };
 
 
@@ -406,33 +459,22 @@
    * @param _diameter
    * @param _dimension
    */
-  function outputTableImperial(volume, diameter, dimension) {
-    let wellChosen = "7/16"; // this is always the value
-
-    return "     <p class=\"h5 sm-4 \"><em>Possible shape dimensions:</em></p>\n" +
-            "        <b>MG total volume:</b> " + volume + " in<sup>3</sup>\n" +
-            "        <table class=\"table table-hover\">\n" +
-            "          <thead>\n" +
-            "          <tr><th scope=\"col\">Disk dimensions</th></tr>\n" +
-            "          </thead>\n" +
-            "          <tbody>\n" +
-            "          <tr><th scope=\"row\">diameter</th><td>" + diameter + "</td><td>in</td></tr>\n" +
-            "          <tr><th scope=\"row\">height</th><td>" + wellChosen + "</td><td>in</td></tr>\n" +
-            "          </tbody>\n" +
-            "        </table>\n" +
-            "        <table class=\"table table-hover\">\n" +
-            "          <thead>\n" +
-            "          <tr><th scope=\"col\">Slab dimensions</th></tr>\n" +
-            "          </thead>\n" +
-            "          <tbody>\n" +
-            "          <tr><th scope=\"row\">length</th><td>" + dimension + "</td><td>in</td></tr>\n" +
-            "          <tr><th scope=\"row\">width</th><td>" + dimension + "</td><td>in</td></tr>\n" +
-            "          <tr><th scope=\"row\">height</th><td>" + wellChosen + "</td><td>in</td></tr>\n" +
-            "          </tbody>\n" +
-            "        </table>\n";
+  function outputTableImperial(volume, diameter, height, weight) {
+   // let wellChosen = "7/16"; // this is always the value
+   // volume is in cubic inches convert cubic inches volume into weight in ounces.
+    let _volume = volume
+    return  "        <b>Disk total volume:</b> " + volume + " in<sup>3</sup><br>" +
+            "        <b>Disk total weight:</b> " + weight  + " oz</sup>" +
+            "        <table class=\"table table-hover\">" +
+            "          <thead>" +
+            "          <tr><th scope=\"col\">Pressed Disk dimensions</th></tr>" +
+            "          </thead>" +
+            "          <tbody>" +
+            "          <tr><th scope=\"row\">diameter</th><td>" + diameter + "</td><td>in</td></tr>" +
+            "          <tr><th scope=\"row\">height</th><td>" + height + "</td><td>in</td></tr>" +
+            "          </tbody>" +
+            "        </table>";
   }
-
-
 
   function convertDecimalToFraction(value){
     // value is always less than 1 and greater than 0
@@ -440,13 +482,22 @@
     let _value = Number(value);
     if (value == 0) return "";
     switch (true) {
-      case ((_value > 0) && (_value <= .125)) : {
+      case ((_value > 0) && (_value <= .0625)) : {
+        return "1/16";
+      }
+      case ((_value > .0625) && (_value <= .125)) : {
         return "1/8";
       }
-      case (_value > .125 && _value <= .25) : {
+      case ((_value > .125) && (_value <= .1875)) : {
+        return "3/16";
+      }
+      case (_value > .1875 && _value <= .25) : {
         return "1/4";
       }
-      case ((_value > .25) && (_value <= .375)) : {
+      case ((_value > .25) && (_value <= .3125)) : {
+        return "5/16";
+      }
+      case ((_value > .3125) && (_value <= .375)) : {
         return "3/8";
       }
       case ((_value > .375) && (_value <= .4375)) : {
@@ -455,17 +506,29 @@
       case (_value > .4375 && _value <= .5) : {
         return "1/2";
       }
-      case (_value > .5 && _value <= .625) : {
+      case ((_value > .5) && (_value <= .5625)) : {
+        return "9/16";
+      }
+      case (_value > .5625 && _value <= .625) : {
         return "5/8";
       }
-      case (_value > .625 && _value <= .75) : {
+      case ((_value > .625) && (_value <= .6875)) : {
+        return "11/16";
+      }
+      case (_value > .6875 && _value <= .75) : {
         return "3/4";
+      }
+      case ((_value > .75) && (_value <= .8125)) : {
+        return "13/16";
       }
       case (_value > .75 && _value <= .875) : {
         return "7/8";
       }
-      case (_value > .875 && _value < 1) : {
+      case ((_value > .875) && (_value <= .95)) : {
         return "15/16";
+      }
+      case (_value > .95 && _value < 1) : {
+        return "1";   // need to accommodate a rounding to 1. means that calling function increment to whole number.
       }
     }
     return result;
@@ -477,30 +540,20 @@
    * @param _radius
    * @param _dimension
    */
-  function outputTableMetric(_volume, _diameter, _dimension) {
-    console.log("in tReverse.html:outputTableMetric");
-    return "     <p class=\"h5 sm-4 \"><em>Possible shape dimensions:</em></p>" +
-            "        <b>MG total volume:</b> " + _volume + " cm<sup>3</sup>" +
+  function outputTableMetric(_volume, _diameter, _height) {
+    console.log("in PressedDisk.html:outputTableMetric");
+    return  "        <b>Disk total volume:</b> " + _volume + " cm<sup>3</sup><br>" +
+            "        <b>Disk total weight:</b> " + (_volume * 2.5).toFixed(2)  + " grams</sup>" +
             "        <table class=\"table table-hover\">" +
             "          <thead>" +
-            "          <tr><th scope=\"col\">Disk dimensions</th></tr>" +
+            "          <tr><th scope=\"col\">Pressed Disk dimensions</th></tr>" +
             "          </thead>" +
             "          <tbody>" +
             "          <tr><th scope=\"row\">diameter</th><td>" + _diameter + "</td><td>cm</td></tr>" +
-            "          <tr><th scope=\"row\">height</th><td>1</td><td>cm</td></tr>" +
-            "          </tbody>" +
-            "        </table>" +
-            "        <table class=\"table table-hover\">" +
-            "          <thead>" +
-            "          <tr><th scope=\"col\">Slab dimensions</th></tr>" +
-            "          </thead>" +
-            "          <tbody>" +
-            "          <tr><th scope=\"row\">length</th><td>" + _dimension + "</td><td>cm</td></tr>" +
-            "          <tr><th scope=\"row\">width</th><td>" + _dimension + "</td><td>cm</td></tr>" +
-            "          <tr><th scope=\"row\">height</th><td>1</td><td>cm</td></tr>" +
+            "          <tr><th scope=\"row\">height</th><td>" + _height + "</td><td>cm</td></tr>" +
             "          </tbody>" +
             "        </table>";
-    console.log("out tReverse.html:outputTableMetric");
+    console.log("out PressedDisk.html:outputTableMetric");
   }
 
   function preventFormSubmit() {
