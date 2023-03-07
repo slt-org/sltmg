@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="file" name="file" id="file" />
+<script>
+    document.getElementById('file').onchange = function(){
+        var file = this.files[0];
+        var reader = new FileReader();
+        var colorArray = new Array();
+
+        // var lines = 180;
+        reader.onload = function(progressEvent){
+            // var fileContentArray = this.result.split(/\r\n|\n/);
+            var lines = this.result.split(/\r\n|\n/);
+            for(var line = 0; line <= lines.length-1; line++){
+                // console.log(line + " --> "+ lines[line]);
+                if(lines[line] == "") break;
+                colorArray.push(parseLine(lines[line]));
+            }
+            for(var i = 0; i <= colorArray.length-1; i++){
+                // console.log(colorArray[i].id+" "+colorArray[i].name+" "+colorArray[i].hex);
+                console.log(JSON.stringify(colorArray[i]));
+            }
+        };
+
+        reader.readAsText(file);
+    };
+
+    function parseLine(line){
+        //console.log("parse me : "+ line);
+        var _id = line.split(" ",1)[0];
+        //console.log("id: "+_id);
+        var _name = line.split("\"",2)[1];
+        //console.log("name: "+_name);
+        var left = line.split("\"",3);
+        //console.log("left: "+left);
+        var lastbits = left[2].split(" ",3);
+        //console.log("lastbits: "+lastbits);
+        var _cmyk = lastbits[1];
+        var _rgb = lastbits[2];
+        //console.log();
+
+        //newColorObject.id = _id;
+        //newColorObject.name = _name;
+        //newColorObject.cmyk = _cmyk;
+        //newColorObject.rgb = _rgb;
+        var tmpRGB = _rgb.split("-");
+        var _hex = ConvertRGBtoHex(Number(tmpRGB[0]), Number(tmpRGB[1]), Number(tmpRGB[2]));
+        var newColorObject = {id:_id,name:_name,cmyk:_cmyk,rgb:_rgb,hex:_hex};
+        //console.log();
+        return newColorObject;
+    };
+
+    function ColorToHex(color) {
+        var hexadecimal = color.toString(16);
+        return hexadecimal.length == 1 ? "0" + hexadecimal : hexadecimal;
+    }
+
+    function ConvertRGBtoHex(red, green, blue) {
+        return "#" + ColorToHex(red) + ColorToHex(green) + ColorToHex(blue);
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+000009 "Reactive Cloud" 4-2-1-0 241-243-247
+000013 "Opaque White" 4-2-2-1 246-247-249
+000016 "Turquoise Opaque Rod" 65-4-27-6 75-174-179
+000024 "Tomato Red" 1-99-81-16 198-15-36
+000025 "Tangerine Orange" 1-63-100-0 240-119-2

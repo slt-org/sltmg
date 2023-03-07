@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bulls Eye Glass Color catalog</title>
+</head>
+<body>
+<style>
+    .row {display : flex;align-items : center;margin-bottom: 15px;}
+    .column {float: left;width: 33.33%;}
+    .box {height: 20px;width: 20px;margin-bottom: 1px;border: 1px solid black;}
+    .o009 {background-color: #F1F3F7;}
+    .o117 {background-color: #508B60;}
+    .o145 {background-color: #006351;}
+
+</style>
+<div class="row";>
+    <div class="column">
+        <div id='009' class='box o009'; value="#508B60"; onclick="sayHello('#508B60')"></div><div>&nbsp;009 reactive cloud</div>
+    </div>
+    <div class="column">
+        <div class='box o117';></div>&nbsp;117 mineral green
+    </div>
+    <div class="column">
+        <div class='box o145'></div>&nbsp;145 emerald green
+    </div>
+</div>
+
+<script>
+
+    function sayHello(value){
+        console.log(value);
+    }
+</script>
+</body>
+</html>
