@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
+    <script src="https://unpkg.com/mathjs@10.6.0/lib/browser/math.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:600i&display=swap');
+
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            background: white;
+        }
+
+        form {
+            background: white;
+        }
+
+        label {
+            margin-bottom: .5rem;
+            text-align: right;
+            display: block;
+            letter-spacing: 2px;
+            color: #adb5bd;
+            text-transform: uppercase;
+        }
+
+        .form-control {
+            border: none;
+            background: none;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+            transition: border-color .4s ease-out;
+            border-radius: 0;
+        }
+
+        .form-control:active,
+        .form-control:focus,
+        .btn.focus,
+        .btn:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: black;
+        }
+
+        .form-control.valid {
+            border-color: green;
+        }
+
+        .form-control.invalid {
+            border-color: red;
+        }
+
+        .form-control + small {
+            color: red;
+            opacity: 0;
+            height: 0;
+            transition: opacity .4s ease-out;
+        }
+
+        .form-control.invalid + small {
+            opacity: 1;
+            height: auto;
+            margin-bottom: 20px;
+            transition: opacity .4s ease-out;
+        }
+
+        .btn {
+            border: 2px solid black;
+            padding: 0.375rem 2.75rem;
+            text-transform: uppercase;
+            font-weight: 900;
+            border-radius: 0;
+        }
+
+        .btn:hover {
+            color: white;
+            background: black;
+            transition: all .4s ease-out;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <form class="row g-3" id="myForm" onsubmit="handleFormSubmit()"> <!--handleFormSubmit()-->
+                <p class="h4 sm-4 text-center">Disk Recipe</p><br>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-block">Recipe</button>
+                </div>
+            </form>
+            <br>
+            <div class="col-sm-auto" id="reactions">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Color</th>
+                        <th scope="col">Bearing</th>
+                        <th scope="col">Glass#</th>
+                        <th scope="col">Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td style="background-color:#9fff;"><div></div></td>
+                        <td>copper</td>
+                        <td>00001164</td>
+                        <td>Some Blue</td>
+                    </tr>
+                    </tbody>
+                </table>
+<!--
+                <table id="display_json_data"></table>
+-->
+            </div>
+        </div>
+    </div>
+    <br>
+    <div id="ver"><p>MGToolbox ver. 1.3</p></div>
+</div>
+<script>
+
+
+</script>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous">
+</script>
+<script>
+/*
+    // 2. inline validation for input fields -->
+    const inputs = document.querySelectorAll('input');
+
+    const patterns = {
+        diameter: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*!/,
+        height: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*!/
+    };
+
+    inputs.forEach((input) => {
+        input.addEventListener('keyup', (e) => {
+            validate(e.target, patterns[e.target.attributes.id.value]);
+        });
+    });
+
+    /!**
+     * This validation framework could enhanced to do more complex validation
+     * this could include checking the to see if the value fell into a range
+     * we define. It could possibly be applied to numbers. Walk the debugger
+     * to see how it works.
+     *!/
+    function validate(field, regex) {
+        if (regex.test(field.value)) {
+            field.className = 'form-control valid';
+        } else {
+            field.className = 'form-control invalid';
+        }
+    }
+*/
+
+    function handleFormSubmit() {
+        console.log("*************** in handleFormSubmit ");
+        // inputs are valid
+        // page specific function here for gathering named inputs, units and output units
+        let updateLocation = document.querySelector('#reactions');
+
+        convertJsonToHtmlTable();
+
+        // updateLocation.innerHTML = convertJsonToHtmlTable();
+
+        console.log("*************** out handleFormSubmit ");
+    }
+
+    // the last line of page specific code in the script.
+    // All the code from this point on is common to all pages.
+    function preventFormSubmit() {
+        let forms = document.querySelectorAll('form');
+        for (let i = 0; i < forms.length; i++) {
+            forms[i].addEventListener('submit', function (event) {
+                event.preventDefault();
+            });
+        }
+    }
+
+    window.addEventListener('load', preventFormSubmit);
+
+    function convertJsonToHtmlTable(){
+        //Get the headers from JSON data
+        // var headers = Object.keys(reactionsLead[0]);
+
+        //Prepare html header
+        var headerRowHTML='<tr>';
+        for(var i=0;i<headers.length;i++){
+            headerRowHTML+='<th scope="col">'+headers[i]+'</th>';
+        }
+        headerRowHTML+='</tr>';
+
+        //Prepare all the employee records as HTML
+        var allRecordsHTML='';
+        for(var i=0;i<reactionsLead.length;i++){
+
+            //Prepare html row
+            allRecordsHTML+= fillRow(reactionsLead[i]);
+
+            /*
+            allRecordsHTML+='<tr>';
+            for(var j=0;j<headers.length;j++){
+                var header=headers[j];
+                allRecordsHTML+='<td>'+reactionsLead[i][header]+'</td>';
+            }
+            allRecordsHTML+='</tr>';
+*/
+
+        }
+
+        //Append the table header and all records
+        // var table=document.getElementById("display_json_data");
+        // table.innerHTML=headerRowHTML + allRecordsHTML;
+    }
+
+    function fillRow(data){
+       let row =  "<tr><td style='background-color:"+data.hex+";'><div></div></td>" +
+            "<td>"+data.bearing+"</td>" +
+            "<td>"+data.id+"</td>" +
+            "<td>"+data.color+"</td>" +
+          "</tr>"
+
+    }
+    let reactionsLead = [
+        {"id":"000301","name":"Pink Opal          ","bearing":"lead","hex":"#c45579"},
+        {"id":"000303","name":"Dusty Lilac Opal   ","bearing":"lead","hex":"#987a8c"},
+        {"id":"000304","name":"LAVENDER           ","bearing":"lead","hex":"#8e899c"},
+        {"id":"000305","name":"Salmon Pink Opal   ","bearing":"lead","hex":"#d95c56"},
+        {"id":"000313","name":"Dense White Opal   ","bearing":"lead","hex":"#ffffff"},
+        {"id":"000334","name":"Gold Purple Opal   ","bearing":"lead","hex":"#53245f"},
+        {"id":"001205","name":"Light Coral        ","bearing":"lead","hex":"#f1aa76"},
+        {"id":"001215","name":"Light Pink         ","bearing":"lead","hex":"#d15e88"},
+        {"id":"001234","name":"Violet             ","bearing":"lead","hex":"#853987"},
+        {"id":"001305","name":"Sunset Coral       ","bearing":"lead","hex":"#e47a2e"},
+        {"id":"001311","name":"Cranberry Pink     ","bearing":"lead","hex":"#ba355e"},
+        {"id":"001332","name":"FuCHSia            ","bearing":"lead","hex":"#a3396b"},
+        {"id":"001334","name":"Gold Purple        ","bearing":"lead","hex":"#5a4986"},
+        {"id":"001823","name":"Burnt Scarlet Tint ","bearing":"lead","hex":"#e59e94"},
+        {"id":"001824","name":"Ruby Red Tint      ","bearing":"lead","hex":"#ea9aac"},
+        {"id":"001831","name":"Ruby Pink Tint     ","bearing":"lead","hex":"#f3b8d1"},
+    ];
+    let reactionsCopper = [
+        {"bearing":"copper","id":"000104","color":"GlACIER BLUE OPAL    "},
+        {"bearing":"copper","id":"000116","color":"Turquoise Blue Opal  "},
+        {"bearing":"copper","id":"000144","color":"Teal Green Opal      "},
+        {"bearing":"copper","id":"000145","color":"Jade Green Opal      "},
+        {"bearing":"copper","id":"000146","color":"Steel Blue Opal      "},
+        {"bearing":"copper","id":"000161","color":"ROBIN'S EGG BLUE OPAL"},
+        {"bearing":"copper","id":"000164","color":"Egyptian Blue Opal   "},
+        {"bearing":"copper","id":"000216","color":"Light Cyan Opal      "},
+        {"bearing":"copper","id":"000345","color":"STEEL JADE OPAL      "},
+        {"bearing":"copper","id":"001116","color":"Turquoise Blue       "},
+        {"bearing":"copper","id":"001145","color":"Kelly Green          "},
+        {"bearing":"copper","id":"001164","color":"caribbean blue       "},
+        {"bearing":"copper","id":"001176","color":"Peacock Blue         "},
+        {"bearing":"copper","id":"001217","color":"LEAF GREEN           "},
+        {"bearing":"copper","id":"001226","color":"LILY PAD GREEN       "},
+        {"bearing":"copper","id":"001246","color":"Copper Blue          "},
+        {"bearing":"copper","id":"001408","color":"Light Aquamarine     "},
+        {"bearing":"copper","id":"001416","color":"Light Turquoise Blue "},
+        {"bearing":"copper","id":"001417","color":"Emerald Green        "},
+        {"bearing":"copper","id":"001464","color":"True Blue            "},
+        {"bearing":"copper","id":"001808","color":"Aqua Blue Tint       "},
+        {"bearing":"copper","id":"001816","color":"Turquoise Blue Tint  "},
+        {"bearing":"copper","id":"001845","color":"MING GREEN Tint      "},
+        {"bearing":"copper","id":"001917","color":"Cilantro Green Tint  "},
+    ];
+    let reactionsSulfurSelenium = [
+        {"bearing": "sulfur-selenium","id":"000024","color":"Tomato Red Opal      "},
+        {"bearing": "sulfur-selenium","id":"000025","color":"Tangerine Orange Opal"},
+        {"bearing": "sulfur-selenium","id":"000120","color":"Canary Yellow Opal   "},
+        {"bearing": "sulfur-selenium","id":"000124","color":"Red Opal             "},
+        {"bearing": "sulfur-selenium","id":"000125","color":"Orange Opal          "},
+        {"bearing": "sulfur-selenium","id":"000126","color":"Spring Green Opal    "},
+        {"bearing": "sulfur-selenium","id":"000137","color":"French Vanilla Opal  "},
+        {"bearing": "sulfur-selenium","id":"000203","color":"Woodland Brown Opal  "},
+        {"bearing": "sulfur-selenium","id":"000220","color":"Sunflower Yellow Opal"},
+        {"bearing": "sulfur-selenium","id":"000221","color":"CITRONELLE OPAL      "},
+        {"bearing": "sulfur-selenium","id":"000222","color":"AVOCADO GREEN OPAL   "},
+        {"bearing": "sulfur-selenium","id":"000224","color":"Deep Red Opal        "},
+        {"bearing": "sulfur-selenium","id":"000225","color":"Pimento Red Opal     "},
+        {"bearing": "sulfur-selenium","id":"000227","color":"Golden Green Opal    "},
+        {"bearing": "sulfur-selenium","id":"000309","color":"Cinnabar Opal        "},
+        {"bearing": "sulfur-selenium","id":"000310","color":"Umber Opal           "},
+        {"bearing": "sulfur-selenium","id":"000320","color":"Marigold Yellow Opal "},
+        {"bearing": "sulfur-selenium","id":"000321","color":"Pumpkin Orange Opal  "},
+        {"bearing": "sulfur-selenium","id":"000329","color":"burnt orange opal    "},
+        {"bearing": "sulfur-selenium","id":"000337","color":"Butterscotch Opal    "},
+        {"bearing": "sulfur-selenium","id":"001025","color":"Light Orange         "},
+        {"bearing": "sulfur-selenium","id":"001119","color":"Sienna               "},
+        {"bearing": "sulfur-selenium","id":"001120","color":"Yellow               "},
+        {"bearing": "sulfur-selenium","id":"001122","color":"Red,                 "},
+        {"bearing": "sulfur-selenium","id":"001125","color":"Orange               "},
+        {"bearing": "sulfur-selenium","id":"001126","color":"Chartreuse           "},
+        {"bearing": "sulfur-selenium","id":"001137","color":"Medium Amber         "},
+        {"bearing": "sulfur-selenium","id":"001138","color":"DARK AMBER           "},
+        {"bearing": "sulfur-selenium","id":"001207","color":"Fern Green           "},
+        {"bearing": "sulfur-selenium","id":"001241","color":"Pine Green           "},
+        {"bearing": "sulfur-selenium","id":"001320","color":"Marigold Yellow      "},
+        {"bearing": "sulfur-selenium","id":"001321","color":"Carnelian            "},
+        {"bearing": "sulfur-selenium","id":"001322","color":"Garnet Red           "},
+        {"bearing": "sulfur-selenium","id":"001422","color":"LEMON LIME GREEN     "},
+        {"bearing": "sulfur-selenium","id":"001437","color":"Light Amber          "},
+        {"bearing": "sulfur-selenium","id":"001857","color":"red amber tint       "},
+    ];
+    let reactionsGeneral = [
+        {"bearing": "reactive","id":"000009","color": "Reactive Cloud Opal        "},
+        {"bearing": "reactive","id":"001009","color":"Reactive Ice Clear          "},
+        {"bearing": "reactive","id":"001019","color": "red reactive clear         "},
+        {"bearing": "alchemy","id":"001015", "color": "clear, silver to gold      "},
+        {"bearing": "alchemy","id":"001016", "color": "clear, silver to bronze    "},
+    ];
+
+</script>
+</body>
+</html>

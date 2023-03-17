@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
+    <script src="https://unpkg.com/mathjs@10.6.0/lib/browser/math.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:600i&display=swap');
+
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            background: white;
+        }
+
+        form {
+            background: white;
+        }
+
+        label {
+            margin-bottom: .5rem;
+            text-align: right;
+            display: block;
+            letter-spacing: 2px;
+            color: #adb5bd;
+            text-transform: uppercase;
+        }
+
+        .form-control {
+            border: none;
+            background: none;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+            transition: border-color .4s ease-out;
+            border-radius: 0;
+        }
+
+        .form-control:active,
+        .form-control:focus,
+        .btn.focus,
+        .btn:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: black;
+        }
+
+        .form-control.valid {
+            border-color: green;
+        }
+
+        .form-control.invalid {
+            border-color: red;
+        }
+
+        .form-control + small {
+            color: red;
+            opacity: 0;
+            height: 0;
+            transition: opacity .4s ease-out;
+        }
+
+        .form-control.invalid + small {
+            opacity: 1;
+            height: auto;
+            margin-bottom: 20px;
+            transition: opacity .4s ease-out;
+        }
+
+        .btn {
+            border: 2px solid black;
+            padding: 0.375rem 2.75rem;
+            text-transform: uppercase;
+            font-weight: 900;
+            border-radius: 0;
+        }
+
+        .btn:hover {
+            color: white;
+            background: black;
+            transition: all .4s ease-out;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <form class="row g-3" id="myForm" onsubmit="handleFormSubmit()">
+                <p class="h4 sm-4 text-center">Reactions Lookup</p><br>
+                <!--<small id="hint" class="form-text">Supply the Bullseye Glass number </small>-->
+                <div class="form-row align-items-center">
+                    <div class="input-group mb-3">
+                        <!--<input type="text" class="form-control" id="diameter" placeholder="id number" required>-->
+                        <select id="number" class="selectpicker show-tick form-control" data-live-search="true">
+                            <option>glass number</option>
+                            <option value=9>9, Reactive Cloud Opal</option>
+                            <option value=13>13, Opaque White Opal</option>
+                            <option value=16>16, Turquoise Opaque Rod</option>
+                            <option value=24>24, Tomato Red Opal</option>
+                            <option value=25>25, Tangerine Orange Opal</option>
+                            <option value=34>34, Light Peach Cream Opal</option>
+                            <option value=100>100, Black Opal</option>
+                            <option value=101>101, Stiff Black Opal</option>
+                            <option value=102>102, Blue Black Opal</option>
+                            <option value=104>104, Glacier Blue Opal</option>
+                            <option value=108>108, Powder Blue Opal</option>
+                            <option value=112>112, Mint Green Opal</option>
+                            <option value=113>113, White Opal</option>
+                            <option value=114>114, Cobalt Blue Opal</option>
+                            <option value=116>116, Turquoise Blue Opal</option>
+                            <option value=117>117, Mineral Green Opal</option>
+                            <option value=118>118, Periwinkle Opal</option>
+                            <option value=119>119, Mink Opal</option>
+                            <option value=120>120, Canary Yellow Opal</option>
+                            <option value=124>124, Red Opal</option>
+                            <option value=125>125, Orange Opal</option>
+                            <option value=126>126, Spring Green Opal</option>
+                            <option value=127>127, Nougat Rod</option>
+                            <option value=131>131, Artichoke Opal</option>
+                            <option value=132>132, Driftwood Gray Opal</option>
+                            <option value=136>136, Deco Gray Opal</option>
+                            <option value=137>137, French Vanilla Opal</option>
+                            <option value=138>138, Marzipan Opal</option>
+                            <option value=139>139, Almond Opal</option>
+                            <option value=141>141, Dark Forest Green Opal</option>
+                            <option value=142>142, Neo-lavender Opal</option>
+                            <option value=143>143, Lacy White Opal</option>
+                            <option value=144>144, Teal Green Opal</option>
+                            <option value=145>145, Jade Green Opal</option>
+                            <option value=146>146, Steel Blue Opal</option>
+                            <option value=147>147, Deep Cobalt Blue Opal</option>
+                            <option value=148>148, Indigo Blue Opal</option>
+                            <option value=161>161, Robins Egg Blue Opal</option>
+                            <option value=164>164, Egyptian Blue Opal</option>
+                            <option value=203>203, Woodland Brown Opal</option>
+                            <option value=206>206, Elephant Gray Opal</option>
+                            <option value=207>207, Celadon Green Opal</option>
+                            <option value=208>208, Dusty Blue Opal</option>
+                            <option value=212>212, Olive Green Opal</option>
+                            <option value=216>216, Light Cyan Opal</option>
+                            <option value=217>217, Green Gold Stringer</option>
+                            <option value=220>220, Sunflower Yellow Opal</option>
+                            <option value=221>221, Citronelle Opal</option>
+                            <option value=222>222, Avocado Green Opal</option>
+                            <option value=224>224, Deep Red Opal</option>
+                            <option value=225>225, Pimento Red Opal</option>
+                            <option value=227>227, Golden Green Opal</option>
+                            <option value=236>236, Slate Gray Opal</option>
+                            <option value=241>241, Moss Green Opal</option>
+                            <option value=243>243, Translucent White Opal*</option>
+                            <option value=301>301, Pink Opal</option>
+                            <option value=303>303, Dusty Lilac Opal</option>
+                            <option value=304>304, Lavender</option>
+                            <option value=305>305, Salmon Pink Opal</option>
+                            <option value=309>309, Cinnabar Opal</option>
+                            <option value=310>310, Umber Opal</option>
+                            <option value=312>312, Pea Pod Green Opal</option>
+                            <option value=313>313, Dense White Opal</option>
+                            <option value=320>320, Marigold Yellow Opal</option>
+                            <option value=321>321, Pumpkin Orange Opal</option>
+                            <option value=329>329, Burnt Orange Opal</option>
+                            <option value=332>332, Plum Opal</option>
+                            <option value=334>334, Gold Purple Opal</option>
+                            <option value=336>336, Deep Gray Opal</option>
+                            <option value=337>337, Butterscotch Opal</option>
+                            <option value=345>345, Steel Jade Opal</option>
+                            <option value=349>349, Gray Green Opal</option>
+                            <option value=403>403, Opaline Opal</option>
+                            <option value=420>420, Cream Opal</option>
+                            <option value=421>421, Petal Pink Opal</option>
+                            <option value=459>459, Rhubarb Pastel</option>
+                            <option value=920>920, Warm White Opal</option>
+                            <option value=1009>1009, Reactive Ice Clear</option>
+                            <option value=1015>1015, Clear, Silver To Gold</option>
+                            <option value=1016>1016, Clear, Silver To Bronze</option>
+                            <option value=1019>1019, Red Reactive Clear</option>
+                            <option value=1022>1022, Red Orange Rod</option>
+                            <option value=1025>1025, Light Orange</option>
+                            <option value=1101>1101, Clear</option>
+                            <option value=1105>1105, Deep Plum</option>
+                            <option value=1107>1107, Light Green</option>
+                            <option value=1108>1108, Aquamarine Blue</option>
+                            <option value=1109>1109, Dark Rose Brown</option>
+                            <option value=1112>1112, Aventurine Green</option>
+                            <option value=1114>1114, Deep Royal Blue</option>
+                            <option value=1116>1116, Turquoise Blue</option>
+                            <option value=1118>1118, Midnight Blue</option>
+                            <option value=1119>1119, Sienna</option>
+                            <option value=1120>1120, Yellow</option>
+                            <option value=1122>1122, Red,</option>
+                            <option value=1125>1125, Orange</option>
+                            <option value=1126>1126, Chartreuse</option>
+                            <option value=1128>1128, Deep Royal Purple</option>
+                            <option value=1129>1129, Charcoal Gray</option>
+                            <option value=1137>1137, Medium Amber</option>
+                            <option value=1138>1138, Dark Amber</option>
+                            <option value=1140>1140, Aventurine Blue</option>
+                            <option value=1141>1141, Olive Green</option>
+                            <option value=1145>1145, Kelly Green</option>
+                            <option value=1164>1164, Caribbean Blue</option>
+                            <option value=1176>1176, Peacock Blue</option>
+                            <option value=1205>1205, Light Coral</option>
+                            <option value=1207>1207, Fern Green</option>
+                            <option value=1215>1215, Light Pink</option>
+                            <option value=1217>1217, Leaf Green</option>
+                            <option value=1226>1226, Lily Pad Green</option>
+                            <option value=1228>1228, Amethyst</option>
+                            <option value=1229>1229, Pewter</option>
+                            <option value=1232>1232, Light Fuchsia Rod</option>
+                            <option value=1234>1234, Violet</option>
+                            <option value=1241>1241, Pine Green</option>
+                            <option value=1246>1246, Copper Blue</option>
+                            <option value=1305>1305, Sunset Coral</option>
+                            <option value=1311>1311, Cranberry Pink</option>
+                            <option value=1320>1320, Marigold Yellow</option>
+                            <option value=1321>1321, Carnelian</option>
+                            <option value=1322>1322, Garnet Red</option>
+                            <option value=1332>1332, Fuchsia</option>
+                            <option value=1334>1334, Gold Purple</option>
+                            <option value=1342>1342, Cranberry Sapphirine Rod</option>
+                            <option value=1401>1401, Crystal Clear</option>
+                            <option value=1405>1405, Light Plum</option>
+                            <option value=1406>1406, Steel Blue</option>
+                            <option value=1408>1408, Light Aquamarine</option>
+                            <option value=1409>1409, Light Bronze</option>
+                            <option value=1412>1412, Light Aventurine Green</option>
+                            <option value=1414>1414, Light Sky Blue</option>
+                            <option value=1416>1416, Light Turquoise Blue</option>
+                            <option value=1417>1417, Emerald Green</option>
+                            <option value=1419>1419, Tan</option>
+                            <option value=1422>1422, Lemon Lime Green</option>
+                            <option value=1426>1426, Spring Green</option>
+                            <option value=1428>1428, Light Violet</option>
+                            <option value=1429>1429, Light Silver Gray</option>
+                            <option value=1437>1437, Light Amber</option>
+                            <option value=1439>1439, Khaki</option>
+                            <option value=1442>1442, Neo-lavender</option>
+                            <option value=1444>1444, Sea Blue</option>
+                            <option value=1449>1449, Oregon Gray</option>
+                            <option value=1464>1464, True Blue</option>
+                            <option value=1506>1506, Pale Steel Blue Rod</option>
+                            <option value=1514>1514, Pale Sky Blue Rod</option>
+                            <option value=1517>1517, Pale Emerald Rod</option>
+                            <option value=1528>1528, Pale Amethyst Rod</option>
+                            <option value=1806>1806, Juniper Blue Tint</option>
+                            <option value=1807>1807, Grass Green Tint</option>
+                            <option value=1808>1808, Aqua Blue Tint</option>
+                            <option value=1812>1812, Seaweed Aventurine Rod</option>
+                            <option value=1814>1814, Sapphire Blue Tint</option>
+                            <option value=1816>1816, Turquoise Blue Tint</option>
+                            <option value=1818>1818, Indigo Tint</option>
+                            <option value=1819>1819, Brown Topaz Tint</option>
+                            <option value=1820>1820, Pale Yellow Tint</option>
+                            <option value=1821>1821, Erbium Pink Tint</option>
+                            <option value=1823>1823, Burnt Scarlet Tint</option>
+                            <option value=1824>1824, Ruby Red Tint</option>
+                            <option value=1826>1826, Green Tea Tint*</option>
+                            <option value=1827>1827, Light Amber Tint*</option>
+                            <option value=1829>1829, Gray Tint</option>
+                            <option value=1831>1831, Ruby Pink Tint</option>
+                            <option value=1834>1834, Coral Orange Tint</option>
+                            <option value=1837>1837, Medium Amber Tint*</option>
+                            <option value=1841>1841, Spruce Green Tint</option>
+                            <option value=1842>1842, Light Neo-lavender Shift Tint</option>
+                            <option value=1844>1844, Lavender Green Shift Tint</option>
+                            <option value=1845>1845, Ming Green Tint</option>
+                            <option value=1857>1857, Red Amber Tint</option>
+                            <option value=1858>1858, Lt Rhubarb Shift Tint</option>
+                            <option value=1859>1859, Rhubarb Shift Tint</option>
+                            <option value=1864>1864, Gray Blue Tint</option>
+                            <option value=1867>1867, Olive Smoke Tint</option>
+                            <option value=1877>1877, Olivine Tint</option>
+                            <option value=1917>1917, Cilantro Green Tint</option>
+                            <option value=1920>1920, Lemon Tint</option>
+                            <option value=1932>1932, Fuchsia Tint</option>
+                            <option value=1934>1934, Copper Tint</option>
+                            <option value=1948>1948, Purple Blue Tint</option>
+                            <option value=1964>1964, Lavender Gray Tint</option>
+                            <option value=1977>1977, Pine Green Tint</option>
+                        </select>
+                    </div>
+                </div>
+                <div><h5>OR</h5></div>
+                <!--<small id="hint" class="form-text">Supply the Bullseye Glass name </small>-->
+                <select id="id" class="selectpicker show-tick form-control" data-live-search="true">
+                    <option>glass name</option>
+                    <option value=139>Almond Opal, 139</option>
+                    <option value=1228>Amethyst, 1228</option>
+                    <option value=1808>Aqua Blue Tint, 1808</option>
+                    <option value=1108>Aquamarine Blue, 1108</option>
+                    <option value=131>Artichoke Opal, 131</option>
+                    <option value=1140>Aventurine Blue, 1140</option>
+                    <option value=1112>Aventurine Green, 1112</option>
+                    <option value=222>Avocado Green Opal, 222</option>
+                    <option value=100>Black Opal, 100</option>
+                    <option value=102>Blue Black Opal, 102</option>
+                    <option value=1819>Brown Topaz Tint, 1819</option>
+                    <option value=329>Burnt Orange Opal, 329</option>
+                    <option value=1823>Burnt Scarlet Tint, 1823</option>
+                    <option value=337>Butterscotch Opal, 337</option>
+                    <option value=120>Canary Yellow Opal, 120</option>
+                    <option value=1164>Caribbean Blue, 1164</option>
+                    <option value=1321>Carnelian, 1321</option>
+                    <option value=207>Celadon Green Opal, 207</option>
+                    <option value=1129>Charcoal Gray, 1129</option>
+                    <option value=1126>Chartreuse, 1126</option>
+                    <option value=1917>Cilantro Green Tint, 1917</option>
+                    <option value=309>Cinnabar Opal, 309</option>
+                    <option value=221>Citronelle Opal, 221</option>
+                    <option value=1101>Clear, 1101</option>
+                    <option value=1016>Clear, Silver To Bronze, 1016</option>
+                    <option value=1015>Clear, Silver To Gold, 1015</option>
+                    <option value=114>Cobalt Blue Opal, 114</option>
+                    <option value=1246>Copper Blue, 1246</option>
+                    <option value=1934>Copper Tint, 1934</option>
+                    <option value=1834>Coral Orange Tint, 1834</option>
+                    <option value=1311>Cranberry Pink, 1311</option>
+                    <option value=1342>Cranberry Sapphirine Rod, 1342</option>
+                    <option value=420>Cream Opal, 420</option>
+                    <option value=1401>Crystal Clear, 1401</option>
+                    <option value=1138>Dark Amber, 1138</option>
+                    <option value=141>Dark Forest Green Opal, 141</option>
+                    <option value=1109>Dark Rose Brown, 1109</option>
+                    <option value=136>Deco Gray Opal, 136</option>
+                    <option value=147>Deep Cobalt Blue Opal, 147</option>
+                    <option value=336>Deep Gray Opal, 336</option>
+                    <option value=1105>Deep Plum, 1105</option>
+                    <option value=224>Deep Red Opal, 224</option>
+                    <option value=1114>Deep Royal Blue, 1114</option>
+                    <option value=1128>Deep Royal Purple, 1128</option>
+                    <option value=313>Dense White Opal, 313</option>
+                    <option value=132>Driftwood Gray Opal, 132</option>
+                    <option value=208>Dusty Blue Opal, 208</option>
+                    <option value=303>Dusty Lilac Opal, 303</option>
+                    <option value=164>Egyptian Blue Opal, 164</option>
+                    <option value=206>Elephant Gray Opal, 206</option>
+                    <option value=1417>Emerald Green, 1417</option>
+                    <option value=1821>Erbium Pink Tint, 1821</option>
+                    <option value=1207>Fern Green, 1207</option>
+                    <option value=137>French Vanilla Opal, 137</option>
+                    <option value=1332>Fuchsia, 1332</option>
+                    <option value=1932>Fuchsia Tint, 1932</option>
+                    <option value=1322>Garnet Red, 1322</option>
+                    <option value=104>Glacier Blue Opal, 104</option>
+                    <option value=1334>Gold Purple, 1334</option>
+                    <option value=334>Gold Purple Opal, 334</option>
+                    <option value=227>Golden Green Opal, 227</option>
+                    <option value=1807>Grass Green Tint, 1807</option>
+                    <option value=1864>Gray Blue Tint, 1864</option>
+                    <option value=349>Gray Green Opal, 349</option>
+                    <option value=1829>Gray Tint, 1829</option>
+                    <option value=217>Green Gold Stringer, 217</option>
+                    <option value=1826>Green Tea Tint*, 1826</option>
+                    <option value=148>Indigo Blue Opal, 148</option>
+                    <option value=1818>Indigo Tint, 1818</option>
+                    <option value=145>Jade Green Opal, 145</option>
+                    <option value=1806>Juniper Blue Tint, 1806</option>
+                    <option value=1145>Kelly Green, 1145</option>
+                    <option value=1439>Khaki, 1439</option>
+                    <option value=143>Lacy White Opal, 143</option>
+                    <option value=304>Lavender, 304</option>
+                    <option value=1964>Lavender Gray Tint, 1964</option>
+                    <option value=1844>Lavender Green Shift Tint, 1844</option>
+                    <option value=1217>Leaf Green, 1217</option>
+                    <option value=1422>Lemon Lime Green, 1422</option>
+                    <option value=1920>Lemon Tint, 1920</option>
+                    <option value=1437>Light Amber, 1437</option>
+                    <option value=1827>Light Amber Tint*, 1827</option>
+                    <option value=1408>Light Aquamarine, 1408</option>
+                    <option value=1412>Light Aventurine Green, 1412</option>
+                    <option value=1409>Light Bronze, 1409</option>
+                    <option value=1205>Light Coral, 1205</option>
+                    <option value=216>Light Cyan Opal, 216</option>
+                    <option value=1232>Light Fuchsia Rod, 1232</option>
+                    <option value=1107>Light Green, 1107</option>
+                    <option value=1842>Light Neo-lavender Shift Tint, 1842</option>
+                    <option value=1025>Light Orange, 1025</option>
+                    <option value=34>Light Peach Cream Opal, 34</option>
+                    <option value=1215>Light Pink, 1215</option>
+                    <option value=1405>Light Plum, 1405</option>
+                    <option value=1429>Light Silver Gray, 1429</option>
+                    <option value=1414>Light Sky Blue, 1414</option>
+                    <option value=1416>Light Turquoise Blue, 1416</option>
+                    <option value=1428>Light Violet, 1428</option>
+                    <option value=1226>Lily Pad Green, 1226</option>
+                    <option value=1858>Lt Rhubarb Shift Tint, 1858</option>
+                    <option value=1320>Marigold Yellow, 1320</option>
+                    <option value=320>Marigold Yellow Opal, 320</option>
+                    <option value=138>Marzipan Opal, 138</option>
+                    <option value=1137>Medium Amber, 1137</option>
+                    <option value=1837>Medium Amber Tint*, 1837</option>
+                    <option value=1118>Midnight Blue, 1118</option>
+                    <option value=117>Mineral Green Opal, 117</option>
+                    <option value=1845>Ming Green Tint, 1845</option>
+                    <option value=119>Mink Opal, 119</option>
+                    <option value=112>Mint Green Opal, 112</option>
+                    <option value=241>Moss Green Opal, 241</option>
+                    <option value=1442>Neo-lavender, 1442</option>
+                    <option value=142>Neo-lavender Opal, 142</option>
+                    <option value=127>Nougat Rod, 127</option>
+                    <option value=1141>Olive Green, 1141</option>
+                    <option value=212>Olive Green Opal, 212</option>
+                    <option value=1867>Olive Smoke Tint, 1867</option>
+                    <option value=1877>Olivine Tint, 1877</option>
+                    <option value=403>Opaline Opal, 403</option>
+                    <option value=13>Opaque White Opal, 13</option>
+                    <option value=1125>Orange, 1125</option>
+                    <option value=125>Orange Opal, 125</option>
+                    <option value=1449>Oregon Gray, 1449</option>
+                    <option value=1528>Pale Amethyst Rod, 1528</option>
+                    <option value=1517>Pale Emerald Rod, 1517</option>
+                    <option value=1514>Pale Sky Blue Rod, 1514</option>
+                    <option value=1506>Pale Steel Blue Rod, 1506</option>
+                    <option value=1820>Pale Yellow Tint, 1820</option>
+                    <option value=312>Pea Pod Green Opal, 312</option>
+                    <option value=1176>Peacock Blue, 1176</option>
+                    <option value=118>Periwinkle Opal, 118</option>
+                    <option value=421>Petal Pink Opal, 421</option>
+                    <option value=1229>Pewter, 1229</option>
+                    <option value=225>Pimento Red Opal, 225</option>
+                    <option value=1241>Pine Green, 1241</option>
+                    <option value=1977>Pine Green Tint, 1977</option>
+                    <option value=301>Pink Opal, 301</option>
+                    <option value=332>Plum Opal, 332</option>
+                    <option value=108>Powder Blue Opal, 108</option>
+                    <option value=321>Pumpkin Orange Opal, 321</option>
+                    <option value=1948>Purple Blue Tint, 1948</option>
+                    <option value=9>Reactive Cloud Opal, 9</option>
+                    <option value=1009>Reactive Ice Clear, 1009</option>
+                    <option value=1857>Red Amber Tint, 1857</option>
+                    <option value=124>Red Opal, 124</option>
+                    <option value=1022>Red Orange Rod, 1022</option>
+                    <option value=1019>Red Reactive Clear, 1019</option>
+                    <option value=1122>Red,, 1122</option>
+                    <option value=459>Rhubarb Pastel, 459</option>
+                    <option value=1859>Rhubarb Shift Tint, 1859</option>
+                    <option value=161>Robins Egg Blue Opal, 161</option>
+                    <option value=1831>Ruby Pink Tint, 1831</option>
+                    <option value=1824>Ruby Red Tint, 1824</option>
+                    <option value=305>Salmon Pink Opal, 305</option>
+                    <option value=1814>Sapphire Blue Tint, 1814</option>
+                    <option value=1444>Sea Blue, 1444</option>
+                    <option value=1812>Seaweed Aventurine Rod, 1812</option>
+                    <option value=1119>Sienna, 1119</option>
+                    <option value=236>Slate Gray Opal, 236</option>
+                    <option value=1426>Spring Green, 1426</option>
+                    <option value=126>Spring Green Opal, 126</option>
+                    <option value=1841>Spruce Green Tint, 1841</option>
+                    <option value=1406>Steel Blue, 1406</option>
+                    <option value=146>Steel Blue Opal, 146</option>
+                    <option value=345>Steel Jade Opal, 345</option>
+                    <option value=101>Stiff Black Opal, 101</option>
+                    <option value=220>Sunflower Yellow Opal, 220</option>
+                    <option value=1305>Sunset Coral, 1305</option>
+                    <option value=1419>Tan, 1419</option>
+                    <option value=25>Tangerine Orange Opal, 25</option>
+                    <option value=144>Teal Green Opal, 144</option>
+                    <option value=24>Tomato Red Opal, 24</option>
+                    <option value=243>Translucent White Opal*, 243</option>
+                    <option value=1464>True Blue, 1464</option>
+                    <option value=1116>Turquoise Blue, 1116</option>
+                    <option value=116>Turquoise Blue Opal, 116</option>
+                    <option value=1816>Turquoise Blue Tint, 1816</option>
+                    <option value=16>Turquoise Opaque Rod, 16</option>
+                    <option value=310>Umber Opal, 310</option>
+                    <option value=1234>Violet, 1234</option>
+                    <option value=920>Warm White Opal, 920</option>
+                    <option value=113>White Opal, 113</option>
+                    <option value=203>Woodland Brown Opal, 203</option>
+                    <option value=1120>Yellow, 1120</option>                </select>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-block">Reactions</button>
+                </div>
+            </form>
+            <br>
+            <div class="col-sm-auto">
+                "the input glass"  reacts with <br>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">color</th>
+                        <th scope="col">bearing</th>
+                        <th scope="col">glass#</th>
+                        <th scope="col">name</th>
+                    </tr>
+                    </thead>
+                    <tbody id="reactions">
+                    </tbody>
+
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+    <br>
+    <div id="ver"><p>MGToolbox ver. 1.3</p></div>
+</div>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous">
+</script>
+<script>
+    var reactionsLead = [
+        {"id":"301","name":"Pink Opal","bearing":"lead","hex":"#c45579"},
+        {"id":"303","name":"Dusty Lilac Opal","bearing":"lead","hex":"#987a8c"},
+        {"id":"304","name":"Lavender","bearing":"lead","hex":"#8e899c"},
+        {"id":"305","name":"Salmon Pink Opal","bearing":"lead","hex":"#d95c56"},
+        {"id":"313","name":"Dense White Opal","bearing":"lead","hex":"#ffffff"},
+        {"id":"334","name":"Gold Purple Opal","bearing":"lead","hex":"#53245f"},
+        {"id":"1205","name":"Light Coral","bearing":"lead","hex":"#f1aa76"},
+        {"id":"1215","name":"Light Pink","bearing":"lead","hex":"#d15e88"},
+        {"id":"1234","name":"Violet","bearing":"lead","hex":"#853987"},
+        {"id":"1305","name":"Sunset Coral","bearing":"lead","hex":"#e47a2e"},
+        {"id":"1311","name":"Cranberry Pink","bearing":"lead","hex":"#ba355e"},
+        {"id":"1332","name":"Fuchsia","bearing":"lead","hex":"#a3396b"},
+        {"id":"1334","name":"Gold Purple","bearing":"lead","hex":"#5a4986"},
+        {"id":"1342","name":"Cranberry Sapphirine Rod","bearing":"lead","hex":"#bb2f56"},
+        {"id":"1823","name":"Burnt Scarlet Tint","bearing":"lead","hex":"#e59e94"},
+        {"id":"1824","name":"Ruby Red Tint","bearing":"lead","hex":"#ea9aac"},
+        {"id":"1831","name":"Ruby Pink Tint","bearing":"lead","hex":"#f3b8d1"}
+    ];
+    let reactionsCopper = [
+        {"id":"000104","name":"GlACIER BLUE OPAL    ","bearing":"copper","hex":"#a2d3eb"},
+        {"id":"000116","name":"Turquoise Blue Opal  ","bearing":"copper","hex":"#6dc5cb"},
+        {"id":"000144","name":"Teal Green Opal      ","bearing":"copper","hex":"#007b71"},
+        {"id":"000145","name":"Jade Green Opal      ","bearing":"copper","hex":"#006351"},
+        {"id":"000146","name":"Steel Blue Opal      ","bearing":"copper","hex":"#006384"},
+        {"id":"000161","name":"ROBINS EGG BLUE OPAL","bearing":"copper","hex":"#b4ddd9"},
+        {"id":"000164","name":"Egyptian Blue Opal   ","bearing":"copper","hex":"#3174b8"},
+        {"id":"000216","name":"Light Cyan Opal      ","bearing":"copper","hex":"#58bedd"},
+        {"id":"000345","name":"STEEL JADE OPAL      ","bearing":"copper","hex":"#188270"},
+        {"id":"001116","name":"Turquoise Blue       ","bearing":"copper","hex":"#02b7e8"},
+        {"id":"001145","name":"Kelly Green          ","bearing":"copper","hex":"#026036"},
+        {"id":"001164","name":"caribbean blue       ","bearing":"copper","hex":"#0054a0"},
+        {"id":"001176","name":"Peacock Blue         ","bearing":"copper","hex":"#006f7c"},
+        {"id":"001217","name":"LEAF GREEN           ","bearing":"copper","hex":"#b8d8a4"},
+        {"id":"001226","name":"LILY PAD GREEN       ","bearing":"copper","hex":"#77892c"},
+        {"id":"001246","name":"Copper Blue          ","bearing":"copper","hex":"#173b65"},
+        {"id":"001408","name":"Light Aquamarine     ","bearing":"copper","hex":"#b3dddc"},
+        {"id":"001416","name":"Light Turquoise Blue ","bearing":"copper","hex":"#86cad6"},
+        {"id":"001417","name":"Emerald Green        ","bearing":"copper","hex":"#55bb97"},
+        {"id":"001464","name":"True Blue            ","bearing":"copper","hex":"#437cbd"},
+        {"id":"001808","name":"Aqua Blue Tint       ","bearing":"copper","hex":"#e5f3f0"},
+        {"id":"001816","name":"Turquoise Blue Tint  ","bearing":"copper","hex":"#bbe2f0"},
+        {"id":"001845","name":"MING GREEN Tint      ","bearing":"copper","hex":"#cee5d7"},
+        {"id":"001917","name":"Cilantro Green Tint  ","bearing":"copper","hex":"#f3f4ef"},
+    ];
+    let reactionsSulfurSelenium = [
+        {"id":"000024","name":"Tomato Red Opal      ","bearing":"sulfur-selenium","hex":"#c60f24"},
+        {"id":"000025","name":"Tangerine Orange Opal","bearing":"sulfur-selenium","hex":"#f07702"},
+        {"id":"000120","name":"Canary Yellow Opal   ","bearing":"sulfur-selenium","hex":"#f6df00"},
+        {"id":"000124","name":"Red Opal             ","bearing":"sulfur-selenium","hex":"#b0120e"},
+        {"id":"000125","name":"Orange Opal          ","bearing":"sulfur-selenium","hex":"#ea510c"},
+        {"id":"000126","name":"Spring Green Opal    ","bearing":"sulfur-selenium","hex":"#a4c81c"},
+        {"id":"000137","name":"French Vanilla Opal  ","bearing":"sulfur-selenium","hex":"#ece6c2"},
+        {"id":"000203","name":"Woodland Brown Opal  ","bearing":"sulfur-selenium","hex":"#78461d"},
+        {"id":"000220","name":"Sunflower Yellow Opal","bearing":"sulfur-selenium","hex":"#f0ae00"},
+        {"id":"000221","name":"CITRONELLE OPAL      ","bearing":"sulfur-selenium","hex":"#b3b82b"},
+        {"id":"000222","name":"AVOCADO GREEN OPAL   ","bearing":"sulfur-selenium","hex":"#7d9b30"},
+        {"id":"000224","name":"Deep Red Opal        ","bearing":"sulfur-selenium","hex":"#8c1826"},
+        {"id":"000225","name":"Pimento Red Opal     ","bearing":"sulfur-selenium","hex":"#d00a0d"},
+        {"id":"000227","name":"Golden Green Opal    ","bearing":"sulfur-selenium","hex":"#b18d00"},
+        {"id":"000309","name":"Cinnabar Opal        ","bearing":"sulfur-selenium","hex":"#883b0d"},
+        {"id":"000310","name":"Umber Opal           ","bearing":"sulfur-selenium","hex":"#865518"},
+        {"id":"000320","name":"Marigold Yellow Opal ","bearing":"sulfur-selenium","hex":"#f69a00"},
+        {"id":"000321","name":"Pumpkin Orange Opal  ","bearing":"sulfur-selenium","hex":"#f38400"},
+        {"id":"000329","name":"burnt orange opal    ","bearing":"sulfur-selenium","hex":"#b0430a"},
+        {"id":"000337","name":"Butterscotch Opal    ","bearing":"sulfur-selenium","hex":"#b06e0d"},
+        {"id":"001025","name":"Light Orange         ","bearing":"sulfur-selenium","hex":"#f07104"},
+        {"id":"001119","name":"Sienna               ","bearing":"sulfur-selenium","hex":"#6f4634"},
+        {"id":"001120","name":"Yellow               ","bearing":"sulfur-selenium","hex":"#f8d100"},
+        {"id":"001122","name":"Red,                 ","bearing":"sulfur-selenium","hex":"#af0e2f"},
+        {"id":"001125","name":"Orange               ","bearing":"sulfur-selenium","hex":"#ea4d0c"},
+        {"id":"001126","name":"Chartreuse           ","bearing":"sulfur-selenium","hex":"#c8af01"},
+        {"id":"001137","name":"Medium Amber         ","bearing":"sulfur-selenium","hex":"#f1ce2f"},
+        {"id":"001138","name":"DARK AMBER           ","bearing":"sulfur-selenium","hex":"#de9c06"},
+        {"id":"001207","name":"Fern Green           ","bearing":"sulfur-selenium","hex":"#9dae12"},
+        {"id":"001241","name":"Pine Green           ","bearing":"sulfur-selenium","hex":"#939f1b"},
+        {"id":"001320","name":"Marigold Yellow      ","bearing":"sulfur-selenium","hex":"#fcc700"},
+        {"id":"001321","name":"Carnelian            ","bearing":"sulfur-selenium","hex":"#b8460d"},
+        {"id":"001322","name":"Garnet Red           ","bearing":"sulfur-selenium","hex":"#9a1430"},
+        {"id":"001422","name":"LEMON LIME GREEN     ","bearing":"sulfur-selenium","hex":"#c7d514"},
+        {"id":"001437","name":"Light Amber          ","bearing":"sulfur-selenium","hex":"#eee6b5"},
+        {"id":"001857","name":"red amber tint       ","bearing":"sulfur-selenium","hex":"#f8e4b8"},
+    ];
+    let reactionsGeneral = [
+        {"id":"000009","name":"Reactive Cloud Opal        ","bearing":"reactive","hex":"#f1f3f7"},
+        {"id":"001009","name":"Reactive Ice Clear          ","bearing":"reactive","hex":"#28f2f2"},
+        {"id":"001019","name":"red reactive clear         ","bearing":"reactive"},
+        {"id":"001015","name":"clear, silver to gold      ","bearing":"alchemy"},
+        {"id":"001016","name":"clear, silver to bronze    ","bearing":"alchemy"}
+    ];
+    // 1. Constants -->
+    const GLASS = .614;
+    const WATER = .326;
+    const BINDER = .032;
+    const LMEDIUM = .027;
+    const GLASS96 = .579;
+    const WATER96 = .359;
+    const BINDER96 = .036;
+    const LMEDIUM96 = .026;
+    const CUBICCM = 'cm<sup>3</sup>';
+    const PI = 3.1416;
+    const GLASSCONV = 0.232;
+    const WATERCONV = 0.236;
+    const BINDERCONV = 0.416;
+    const LMEDIUMCONV = 0.2;
+    const CUP = "cup";
+    const a3QTR = "3/4";
+    const aHALF = "1/2";
+    const a1QTR = "1/4"
+    const TBSP = "tbsp";
+    const TSP = "tsp";
+    const IMPERIAL = "imperial";
+    const METRIC = "metric";
+    const CITOCC = 16.387;
+    const INTOCM = 2.54;
+    const OZTOGM = 28.3495;
+    const AUTHOR = "Steve Terry";
+    const VERSION = "1.2";
+    const REL = "candidate";
+
+    // 2. inline validation for input fields -->
+    const inputs = document.querySelectorAll('input');
+
+    const patterns = {
+        // glassid:/([0-9]|[1-9][0-9]{1,2}|1[0-4][0-9]{2}|1500)/
+        // diameter: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/
+        // height: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/
+        diameter:/^[0-9]{1,6}$/
+    };
+
+    inputs.forEach((input) => {
+        input.addEventListener('keyup', (e) => {
+            validate(e.target, patterns[e.target.attributes.id.value]);
+        });
+    });
+
+    /**
+     * This validation framework could enhanced to do more complex validation
+     * this could include checking the to see if the value fell into a range
+     * we define. It could possibly be applied to numbers. Walk the debugger
+     * to see how it works.
+     */
+    function validate(field, regex) {
+        if (regex.test(field.value)) {
+            field.className = 'form-control valid';
+        } else {
+            field.className = 'form-control invalid';
+        }
+    }
+
+    /**
+     * Disk page specific code for
+     * * Initial input handling with form submit
+     * * Calculations by Shape Disk object
+     * takes the form input values and turns
+     * them into normalized metric numbers and output unit preferences1
+     * @type {Disk}
+     */
+    function diskInputCollector() {
+        console.log("in diskInputCollector ***************************");
+/*
+        let data = new Object();
+        data.diameter = document.querySelector('#diameter').value;
+        let selectDiameterUnits = document.getElementById('diameterInputUnits');
+        data.diameterUnits = selectDiameterUnits.options[selectDiameterUnits.selectedIndex].value;
+        // console.log(value); // en
+
+        data.height = document.querySelector('#height').value;
+        let selectHeightUnits = document.getElementById('heightInputUnits');
+        data.heightUnits = selectHeightUnits.options[selectHeightUnits.selectedIndex].value;
+
+        data.outputUnits = document.querySelector('input[name=output]:checked').value;
+        data.coe = document.querySelector('input[name=coe]:checked').value;
+*/
+        console.log("out diskInputCollector ***************************");
+
+        // return data;
+    }
+
+
+
+    function handleFormSubmit() {
+        console.log("*************** in handleFormSubmit ");
+        // inputs are valid
+        // page specific function here for gathering named inputs, units and output units
+        console.log("rows in list "+reactionsLead.length);
+        let updateLocation = document.querySelector('#reactions');
+
+        // diskInputCollector();
+        let reactions = convertJsonToHtmlTable();
+        updateLocation.innerHTML = reactions;
+
+        console.log("*************** out handleFormSubmit ");
+    }
+
+    // the last line of page specific code in the script.
+    // All the code from this point on is common to all pages.
+
+    function preventFormSubmit() {
+        let forms = document.querySelectorAll('form');
+        for (let i = 0; i < forms.length; i++) {
+            forms[i].addEventListener('submit', function (event) {
+                event.preventDefault();
+            });
+        }
+    }
+
+    window.addEventListener('load', preventFormSubmit);
+
+    function convertJsonToHtmlTable() {
+        //Get JSON data
+        // var headers = Object.keys(reactionsLead[0]);
+
+        //Prepare all the employee records as HTML
+        var allRecordsHTML = '';
+        for (var i = 0; i < reactionsLead.length; i++) {
+
+            //Prepare html row
+            allRecordsHTML += fillRow(reactionsLead[i]);
+            // console.log( fillRow(reactionsLead[i]));
+        }
+        return allRecordsHTML;
+    }
+
+    function fillRow(data){
+        let row =  "<tr><td style='background-color:"+data.hex+";'><div></div></td>" +
+            "<td>"+data.bearing+"</td>" +
+            "<td>"+data.id+"</td>" +
+            "<td>"+data.name+"</td>" +
+            "</tr>"
+        return row;
+    }
+
+
+</script>
+</body>
+</html>

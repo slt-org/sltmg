@@ -1,0 +1,387 @@
+copper, 000104, GlACIER BLUE OPAL
+copper, 000116, Turquoise Blue Opal
+copper, 000144, Teal Green Opal
+copper, 000145, Jade Green Opal
+copper, 000146, Steel Blue Opal
+copper, 000161, ROBIN'S EGG BLUE OPAL
+copper, 000164, Egyptian Blue Opal
+copper, 000216, Light Cyan Opal
+copper, 000345, STEEL JADE OPAL
+copper, 001116, Turquoise Blue
+copper, 001145, Kelly Green
+copper, 001164, caribbean blue
+copper, 001176, Peacock Blue
+copper, 001217, LEAF GREEN
+copper, 001226, LILY PAD GREEN
+copper, 001246, Copper Blue
+copper, 001408, Light Aquamarine
+copper, 001416, Light Turquoise Blue
+copper, 001417, Emerald Green
+copper, 001464, True Blue
+copper, 001808, Aqua Blue Tint
+copper, 001816, Turquoise Blue Tint
+copper, 001845, MING GREEN Tint
+copper, 001917, Cilantro Green Tint
+lead, 000301, Pink Opal
+lead, 000303, Dusty Lilac Opal
+lead, 000304, LAVENDER
+lead, 000305, Salmon Pink Opal
+lead, 000313, Dense White Opal
+lead, 000334, Gold Purple Opal
+lead, 001205, Light Coral
+lead, 001215, Light Pink
+lead, 001234, Violet
+lead, 001305, Sunset Coral
+lead, 001311, Cranberry Pink
+lead, 001332, FuCHSia
+lead, 001334, Gold Purple
+lead, 001823, Burnt Scarlet Tint
+lead, 001824, Ruby Red Tint
+lead, 001831, Ruby Pink Tint
+reactive, 000009, Reactive Cloud Opal
+reactive, 001009, Reactive Ice Clear
+reactive, 001019, red reactive clear
+sulfur-selenium, 000024, Tomato Red Opal
+sulfur-selenium, 000025, Tangerine Orange Opal
+sulfur-selenium, 000120, Canary Yellow Opal
+sulfur-selenium, 000124, Red Opal
+sulfur-selenium, 000125, Orange Opal
+sulfur-selenium, 000126, Spring Green Opal
+sulfur-selenium, 000137, French Vanilla Opal
+sulfur-selenium, 000203, Woodland Brown Opal
+sulfur-selenium, 000220, Sunflower Yellow Opal
+sulfur-selenium, 000221, CITRONELLE OPAL
+sulfur-selenium, 000222, AVOCADO GREEN OPAL
+sulfur-selenium, 000224, Deep Red Opal
+sulfur-selenium, 000225, Pimento Red Opal
+sulfur-selenium, 000227, Golden Green Opal
+sulfur-selenium, 000309, Cinnabar Opal
+sulfur-selenium, 000310, Umber Opal
+sulfur-selenium, 000320, Marigold Yellow Opal
+sulfur-selenium, 000321, Pumpkin Orange Opal
+sulfur-selenium, 000329, burnt orange opal
+sulfur-selenium, 000337, Butterscotch Opal
+sulfur-selenium, 001025, Light Orange
+sulfur-selenium, 001119, Sienna
+sulfur-selenium, 001120, Yellow
+sulfur-selenium, 001122, Red
+sulfur-selenium, 001125, Orange
+sulfur-selenium, 001126, Chartreuse
+sulfur-selenium, 001137, Medium Amber
+sulfur-selenium, 001138, DARK AMBER
+sulfur-selenium, 001207, Fern Green
+sulfur-selenium, 001241, Pine Green
+sulfur-selenium, 001320, Marigold Yellow
+sulfur-selenium, 001321, Carnelian
+sulfur-selenium, 001322, Garnet Red
+sulfur-selenium, 001422, LEMON LIME GREEN
+sulfur-selenium, 001437, Light Amber
+sulfur-selenium, 001857, red amber tint
+alchemy, 001015, clear silver to gold
+alchemy, 001016, clear silver to bronze
+none, 000013, Opaque White Opal
+none, 000034, light peach cream opal
+none, 000100, Black Opal
+none, 000101, Stiff Black Opal
+none, 000102, BLUE BLACK OPAL
+none, 000108, Powder Blue Opal
+none, 000112, Mint Green Opal
+none, 000113, White Opal
+none, 000114, Cobalt Blue Opal
+none, 000117, Mineral Green Opal
+none, 000118, Periwinkle Opal
+none, 000119, Mink opal
+none, 000131, artichoke opal
+none, 000132, Driftwood Gray Opal
+none, 000136, Deco Gray Opal
+none, 000138, Marzipan Opal
+none, 000139, Almond Opal
+none, 000141, Dark Forest Green Opal
+none, 000142, Neo-Lavender Opal
+none, 000143, Lacy White Opal
+none, 000147, Deep Cobalt Blue Opal
+none, 000148, indigo blue opal
+none, 000206, elephant gray opal
+none, 000207, celadon green opal
+none, 000208, dusty blue opal
+none, 000212, Olive Green Opal
+none, 000236, Slate Gray Opal
+none, 000241, moss green opal
+none, 000243, TRANSLUCENT WHITE OPAL*
+none, 000312, Pea Pod Green Opal
+none, 000332, Plum Opal
+none, 000336, Deep Gray Opal
+none, 000349, GRAY GREEN OPAL
+none, 000403, Opaline Opal
+none, 000420, cream opal
+none, 000421, Petal Pink Opal
+none, 000920, warm white opal
+none, 001101, Clear
+none, 001105, Deep Plum
+none, 001107, Light Green
+none, 001108, Aquamarine Blue
+none, 001109, Dark Rose Brown
+none, 001112, Aventurine Green
+none, 001114, Deep Royal Blue
+none, 001118, Midnight Blue
+none, 001128, Deep Royal Purple
+none, 001129, Charcoal Gray
+none, 001140, Aventurine Blue
+none, 001141, Olive Green
+none, 001228, AMETHYST
+none, 001229, Pewter
+none, 001401, Crystal Clear
+none, 001405, Light Plum
+none, 001406, Steel Blue
+none, 001409, Light Bronze
+none, 001412, Light Aventurine Green
+none, 001414, Light Sky Blue
+none, 001419, Tan
+none, 001426, Spring Green
+none, 001428, Light Violet
+none, 001429, Light Silver Gray
+none, 001439, Khaki
+none, 001442, Neo-Lavender
+none, 001444, Sea Blue
+none, 001449, Oregon Gray
+none, 001806, Juniper Blue Tint
+none, 001807, Grass Green Tint
+none, 001814, Sapphire blue Tint
+none, 001818, Indigo Tint
+none, 001819, Brown Topaz Tint
+none, 001820, Pale Yellow Tint
+none, 001821, Erbium Pink Tint
+none, 001826, GREEN TEA TINT*
+none, 001827, LIGHT AMBER TINT*
+none, 001829, Gray Tint
+none, 001834, coral orange tint
+none, 001837, MEDIUM AMBER TINT*
+none, 001841, Spruce Green Tint
+none, 001842, Light Neo-Lavender Shift Tint
+none, 001844, Lavender Green Shift Tint
+none, 001858, Lt Rhubarb Shift Tint
+none, 001859, rhubarb shift tint
+none, 001864, Gray Blue Tint
+none, 001867, Olive Smoke Tint
+none, 001877, Olivine Tint
+none, 001920, lemon tint
+none, 001932, fuCHSia tint
+none, 001934, copper tint
+none, 001948, purple blue tint
+none, 001964, lavender gray tint
+none, 001977, pine green tint
+lead, 000243, Translucent White Opal Rod
+lead, 000301, Pink Opal Rod
+lead, 000301, Pink Opal Stringer
+lead, 000303, Dusty Lilac Opal Rod
+lead, 000313, Dense White Opal Rod
+lead, 000313, Dense White Opal Stringer
+lead, 000334, Gold Purple Opal Rod
+lead, 000334, Gold Purple Opal Stringer
+lead, 001215, Light Pink Rod
+lead, 001232, light fuchsia Rod
+lead, 001234, Violet Stringer
+lead, 001305, Sunset Coral Rod
+lead, 001305, Sunset Coral Stringer
+lead, 001311, Cranberry Pink Rod
+lead, 001311, Cranberry Pink Stringer
+lead, 001342, cranberry sapphirine Rod
+lead, 001701, amber lustre Rod
+lead, 001707, green lustre Rod
+lead, 001714, blue lustre Rod
+lead, 001717, copper green lustre Rod
+copper, 000016, turquoise opaque Rod
+copper, 000046, bluestone opaque Rod
+copper, 000116, Turquoise Blue Opal Rod
+copper, 000116, Turquoise Blue Opal Stringer
+copper, 000144, Teal Green Opal Rod
+copper, 000144, Teal Green Opal Stringer
+copper, 000145, Jade Green Opal Rod
+copper, 000145, Jade Green Opal Stringer
+copper, 000145, Jade Green Opal Ribbon
+copper, 000146, Steel Blue Opal Rod
+copper, 000146, Steel Blue Opal Stringer
+copper, 000164, Egyptian Blue Opal Rod
+copper, 000164, Egyptian Blue Opal Stringer
+copper, 000216, Light Cyan Opal Rod
+copper, 000216, Light Cyan Opal Stringer
+copper, 000216, Light Cyan Opal Ribbon
+copper, 001116, Turquoise Blue Rod
+copper, 001116, Turquoise Blue Stringer
+copper, 001116, Turquoise Blue Ribbon
+copper, 001145, Kelly Green Rod
+copper, 001145, Kelly Green Stringer
+copper, 001164, caribbean blue Rod
+copper, 001164, caribbean blue Stringer
+copper, 001408, Light Aquamarine BLUE Rod
+copper, 001408, Light Aquamarine BLUE Stringer
+copper, 001417, Emerald Green Rod
+copper, 001417, Emerald Green Stringer
+copper, 001517, pale emerald Rod
+copper, 001717, copper green lustre Rod
+copper, 001808, Aqua Blue Tint Rod
+reactive, 000009, Reactive Cloud Opal Stringer
+reactive, 001009, Reactive Ice Clear Stringer
+sulfur-selenium, 000024, Tomato Red Opal Rod
+sulfur-selenium, 000024, Tomato Red Opal Stringer
+sulfur-selenium, 000120, Canary Yellow Opal Rod
+sulfur-selenium, 000120, Canary Yellow Opal Stringer
+sulfur-selenium, 000124, Red Opal Rod
+sulfur-selenium, 000124, Red Opal Stringer
+sulfur-selenium, 000124, Red Opal Ribbon
+sulfur-selenium, 000125, Orange Opal Rod
+sulfur-selenium, 000125, Orange Opal Stringer
+sulfur-selenium, 000125, Orange Opal Ribbon
+sulfur-selenium, 000126, Spring Green Opal Rod
+sulfur-selenium, 000126, Spring Green Opal Stringer
+sulfur-selenium, 000126, Spring Green Opal Ribbon
+sulfur-selenium, 000127, nougat opal Rod
+sulfur-selenium, 000137, French Vanilla Opal Rod
+sulfur-selenium, 000137, French Vanilla Opal Stringer
+sulfur-selenium, 000137, French Vanilla Opal Ribbon
+sulfur-selenium, 000203, Woodland Brown Opal Rod
+sulfur-selenium, 000203, Woodland Brown Opal Stringer
+sulfur-selenium, 000217, green gold opal Rod
+sulfur-selenium, 000220, Sunflower Yellow Opal Rod
+sulfur-selenium, 000220, Sunflower Yellow Opal Stringer
+sulfur-selenium, 000224, Deep Red Opal Rod
+sulfur-selenium, 000224, Deep Red Opal Stringer
+sulfur-selenium, 000227, Golden Green Opal Rod
+sulfur-selenium, 000309, Cinnabar Opal Rod
+sulfur-selenium, 000321, Pumpkin Orange Opal Rod
+sulfur-selenium, 000321, Pumpkin Orange Opal Stringer
+sulfur-selenium, 000329, burnt orange opal Rod
+sulfur-selenium, 000329, burnt orange opal Stringer
+sulfur-selenium, 000337, Butterscotch Opal Rod
+sulfur-selenium, 000337, Butterscotch Opal Stringer
+sulfur-selenium, 001022, red orange Rod
+sulfur-selenium, 001119, Sienna Rod
+sulfur-selenium, 001119, Sienna Stringer
+sulfur-selenium, 001120, Yellow Rod
+sulfur-selenium, 001120, Yellow Stringer
+sulfur-selenium, 001122, Red Rod
+sulfur-selenium, 001122, Red Stringer
+sulfur-selenium, 001125, Orange Rod
+sulfur-selenium, 001125, Orange Stringer
+sulfur-selenium, 001126, Chartreuse Rod
+sulfur-selenium, 001126, Chartreuse Stringer
+sulfur-selenium, 001137, Medium Amber Rod
+sulfur-selenium, 001137, Medium Amber Stringer
+sulfur-selenium, 001138, Dark Amber Rod
+sulfur-selenium, 001321, Carnelian Rod
+sulfur-selenium, 001322, Garnet Red Rod
+sulfur-selenium, 001437, Light Amber Rod
+none, 000013, Opaque White Opal Rod
+none, 000013, Opaque White Opal Stringer
+none, 000017, mineral green opaque Rod
+none, 000018, periwinkle opaque Rod
+none, 000034, light peach cream opal Rod
+none, 000100, Black Opal Rod
+none, 000100, Black Opal Stringer
+none, 000100, Black Opal Ribbon
+none, 000101, Stiff Black Opal Rod
+none, 000101, Stiff Black Opal Stringer
+none, 000108, Powder Blue Opal Rod
+none, 000108, Powder Blue Opal Stringer
+none, 000112, Mint Green Opal Rod
+none, 000112, Mint Green Opal Stringer
+none, 000114, Cobalt Blue Opal Rod
+none, 000114, Cobalt Blue Opal Stringer
+none, 000113, White Opal Ribbon
+none, 000117, Mineral Green Opal Rod
+none, 000132, Driftwood Gray Opal Rod
+none, 000136, Deco Gray Opal Rod
+none, 000136, Deco Gray Opal Stringer
+none, 000141, Dark Forest Green Opal Rod
+none, 000141, Dark Forest Green Opal Stringer
+none, 000142, Neo-Lavender Opal Rod
+none, 000142, Neo-Lavender Opal Stringer
+none, 000147, Deep Cobalt Blue Opal Rod
+none, 000147, Deep Cobalt Blue Opal Stringer
+none, 000147, Deep Cobalt Blue Opal Ribbon
+none, 000148, indigo opal Rod
+none, 000207, celadon green opal Rod
+none, 000212, Olive Green Opal Rod
+none, 000212, Olive Green Opal Stringer
+none, 000236, slate gray opal Stringer
+none, 000241, moss green opal Rod
+none, 000241, moss green opal Stringer
+none, 000312, Pea Pod Green Opal Rod
+none, 000312, Pea Pod Green Opal Stringer
+none, 000420, cream opal Rod
+none, 000420, cream opal Stringer
+none, 000421, Petal Pink Opal Rod
+none, 000421, Petal Pink Opal Stringer
+none, 000421, Petal Pink Opal Ribbon
+none, 000429, rhubarb pastel opal Rod
+none, 000920, warm white opal Rod
+none, 001101, Clear Rod
+none, 001101, Clear Stringer
+none, 001101, Clear Ribbon
+none, 001105, Deep Plum Rod
+none, 001105, Deep Plum Stringer
+none, 001107, Light Green Rod
+none, 001107, Light Green Stringer
+none, 001108, Aquamarine Blue Rod
+none, 001108, Aquamarine Blue Stringer
+none, 001109, Dark Rose Brown Rod
+none, 001109, Dark Rose Brown Stringer
+none, 001109, Dark Rose Brown Ribbon
+none, 001112, Aventurine Green Rod
+none, 001112, Aventurine Green Stringer
+none, 001114, Deep Royal Blue Rod
+none, 001114, Deep Royal Blue Stringer
+none, 001114, Deep Royal Blue Ribbon
+none, 001118, Midnight Blue Rod
+none, 001118, Midnight Blue Stringer
+none, 001118, Midnight Blue Ribbon
+none, 001128, Deep Royal Purple Rod
+none, 001128, Deep Royal Purple Stringer
+none, 001128, Deep Royal Purple Ribbon
+none, 001129, Charcoal Gray Rod
+none, 001129, Charcoal Gray Stringer
+none, 001129, Charcoal Gray Ribbon
+none, 001140, aventurine blue Stringer
+none, 001141, Olive Green Rod
+none, 001141, Olive Green Stringer
+none, 001401, Crystal Clear Rod
+none, 001405, Light Plum Rod
+none, 001406, Steel Blue Rod
+none, 001406, Steel Blue Stringer
+none, 001409, Light Bronze Rod
+none, 001409, Light Bronze Stringer
+none, 001412, Light Aventurine Green Rod
+none, 001412, Light Aventurine Green Stringer
+none, 001412, Light Aventurine Green Ribbon
+none, 001414, Light Sky Blue Rod
+none, 001414, Light Sky Blue Stringer
+none, 001426, Spring Green Rod
+none, 001426, Spring Green Stringer
+none, 001426, Spring Green Ribbon
+none, 001428, Light Violet Rod
+none, 001429, Light Silver Gray Rod
+none, 001429, Light Silver Gray Stringer
+none, 001439, Khaki Rod
+none, 001442, Neo-Lavender Rod
+none, 001442, Neo-Lavender Stringer
+none, 001442, Neo-Lavender Ribbon
+none, 001444, sea blue Stringer
+none, 001506, pale steel blue Rod
+none, 001514, pale sky blue Rod
+none, 001528, pale amethyst Rod
+none, 001806, Juniper Blue Tint Rod
+none, 001807, Grass Green Tint Rod
+none, 001807, Grass Green Tint Stringer
+none, 001812, seaweed aventurine Rod
+none, 001820, Pale Yellow Tint Rod
+none, 001820, Pale Yellow Tint Stringer
+none, 001821, Erbium Pink Tint Rod
+none, 001821, Erbium Pink Tint Stringer
+none, 001834, coral orange tint Rod
+none, 001834, coral orange tint Stringer
+none, 001841, Spruce Green Tint Rod
+none, 001841, Spruce Green Tint Stringer
+none, 001842, Light Neo-Lavender shift tint Rod
+none, 001842, Light Neo-Lavender shift tint Stringer
+none, 001859, rhubarb shift tint Rod
+none, 001859, rhubarb shift tint Stringer

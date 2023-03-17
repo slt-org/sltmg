@@ -1,0 +1,186 @@
+Number of glass ids with color hex values : 182
+
+Number of glass ids with color hex values : 182
+000212,#68852a,Olive Green
+000332,#883763,Plum
+001820,#fbf9e4,Pale Yellow Tint
+001821,#fcf0f3,Erbium Pink Tint
+001305,#e47a2e,Sunset Coral
+001426,#aac811,Spring Green
+000216,#58bedd,Light Cyan
+000337,#b06e0d,Butterscotch
+000336,#393c40,Deep Gray
+001145,#026036,Kelly Green
+001025,#f07104,Light Orange
+000334,#53245f,Gold Purple
+001422,#c7d514,Lemon Lime
+001827,#fbf9e8,Light Amber Tint
+001948,#f3ecf3,Purple Blue Tint
+001829,#edeff0,Gray Tint
+000217,#cec237,Green Gold Stringer
+000459,#cad8c8,Rhubarb Pastel
+001823,#e59e94,Burnt Scarlet Tint
+001428,#c09dad,Light Violet
+001824,#ea9aac,Ruby Red Tint
+001429,#b6beaf,Light Silver Gray
+001826,#f3f4eb,Green Tea Tint
+001137,#f1ce2f,Medium Amber
+001412,#344e21,Light Aventurine Green
+000321,#f38400,Pumpkin Orange
+001138,#de9c06,Dark Amber
+000320,#f69a00,Marigold Yellow
+001414,#99b0db,Light Sky Blue
+001932,#f0f1f7,Fuchsia Tint
+000203,#78461d,Woodland Brown
+001816,#bbe2f0,Turquoise Blue Tint
+000208,#537b9a,Dusty Blue
+000329,#b0430a,Burnt Orange
+000207,#8da789,Celadon Green
+001818,#eef2f4,Indigo Tint
+000206,#96918e,Elephant Gray
+001819,#f7f3ea,Brown Topaz Tint
+001416,#86cad6,Light Turquoise Blue
+001812,#96c771,Seaweed Aventurine Rod
+001417,#55bb97,Emerald Green
+001934,#fff9ef,Copper Tint
+001814,#e2ebf8,Sapphire Blue Tint
+001419,#ae7f43,Tan
+001140,#283342,Aventurine Blue
+001141,#86a14c,Olive Green
+001022,#db332a,Red Orange Rod
+000113,#f4f5f1,White
+001841,#e3ebde,Spruce Green Tint
+000112,#9bc998,Mint Green
+001842,#e9eaf3,Light Neo-lavender Shift Tint
+001205,#f1aa76,Light Coral
+001964,#f7f6f8,Lavender Gray Tint
+001844,#e5eff6,Lavender Green Shift Tint
+000117,#508b60,Mineral Green
+001320,#fcc700,Marigold Yellow
+000116,#6dc5cb,Turquoise Blue
+001321,#b8460d,Carnelian
+001442,#bfc2e2,Neo-Lavender Shift
+000236,#565861,Slate Gray
+001322,#9a1430,Garnet Red
+000114,#2b60aa,Cobalt Blue
+001444,#6899a3,Sea Blue
+000119,#847171,Mink
+000118,#667fbc,Periwinkle
+001207,#9dae12,Fern Green
+001449,#b8b8a0,Oregon Gray
+001845,#cee5d7,Ming Green Tint
+001176,#006f7c,Peacock Blue
+000120,#f6df00,Canary Yellow
+000241,#495424,Moss Green
+000102,#06070d,Blue Black
+000101,#4b423c,Stiff
+000222,#7d9b30,Avocado Green
+001831,#f3b8d1,Ruby Pink Tint
+000100,#0a090a,Black
+000221,#b3b82b,Citronelle
+000220,#f0ae00,Sunflower Yellow
+001437,#eee6b5,Light Amber
+000227,#b18d00,Golden Green
+000104,#a2d3eb,Glacier Blue
+000225,#d00a0d,Pimento Red
+001311,#ba355e,Cranberry Pink
+000224,#8c1826,Deep Red
+000345,#188270,Steel Jade
+000108,#99bacf,Powder Blue
+000349,#6a6f69,Gray Green
+001834,#fef5f0,Coral Orange Tint
+001439,#b3aa86,Khaki
+001837,#fdf9e1,Medium Amber Tint
+001164,#0054a0,Caribbean Blue
+000013,#f6f7f9,Opaque White
+001105,#7c3b52,Deep Plum
+001226,#77892c,Lily Pad Green
+001864,#e8f0f6,Gray Blue Tint
+000132,#cfceb7,Driftwood Gray
+001107,#95c971,Light Green
+001228,#5c3759,Amethyst
+000139,#eedbbd,Almond
+001342,#bb2f56,Cranberry Sapphirine Rod
+000018,#667fbc,Periwinkle
+000017,#508b60,Mineral Green
+000138,#f5e2c2,Marzipan
+001101,#ffffff,Clear
+001464,#437cbd,True Blue
+000016,#4baeb3,Turquoise Opaque Rod
+000137,#ece6c2,French Vanilla
+000136,#727678,Deco Gray
+001108,#00566f,Aquamarine Blue
+001229,#918d8e,Pewter
+001867,#f4f4eb,Olive Smoke Tint
+001109,#3f2422,Dark Rose Brown
+001506,#3a91b9,Pale Steel Blue Rod
+000142,#c5bcdd,Neo-lavender
+000141,#35683d,Dark Forest Green
+000124,#b0120e,Red
+001215,#d15e88,Light Pink
+000243,#f1f0f0,Translucent White
+001217,#b8d8a4,Leaf Green
+000403,#e4e5e8,Opaline
+000920,#f4f1dd,Warm White
+000127,#e4d6b2,Nougat Rod
+001332,#a3396b,Fuchsia
+000126,#a4c81c,Spring Green
+000125,#ea510c,Orange
+001334,#5a4986,Gold Purple
+000009,#f1f3f7,Reactive Cloud
+001977,#f7faf2,Pine Green Tint
+001857,#f8e4b8,Red Amber Tint
+001858,#ecf3e3,Light Rhubarb Shift Tint
+001859,#e4ecd6,Rhubarb Shift Tint
+000131,#cdd1ae,Artichoke
+001126,#c8af01,Chartreuse
+001401,#ffffff,Crystal Clear
+000310,#865518,Umber
+000034,#f3e2d5,Light Peach Cream
+001128,#46215A,Deep Royal Purple
+001920,#fcfcec,Lemon Tint
+001129,#666d60,Charcoal Gray
+001122,#af0e2f,Red
+000313,#ffffff,Dense White
+000312,#839e1c,Pea Pod Green
+001125,#ea4d0c,Orange
+001246,#173b65,Copper Blue
+001409,#d0ba86,Light Bronze
+001806,#f0f3ec,Juniper Blue Tint
+001807,#ecf3e5,Grass Green Tint
+001808,#e5f3f0,Aqua Blue Tint
+001009,#28f2f2,Reactive Ice Clear
+001405,#e1b8b8,Light Plum
+001406,#6ca3b7,Steel Blue
+001528,#cca9b7,Pale Amethyst Rod
+001408,#b3dddc,Light Aquamarine Blue
+000164,#3174b8,Egyptian Blue
+000161,#b4ddd9,Robin�s Egg Blue
+000025,#f07702,Tangerine Orange
+000146,#006384,Steel Blue
+000421,#fadbe9,Petal Pink
+000024,#c60f24,Tomato Red
+000145,#006351,Jade Green
+000420,#f6f0c9,Cream
+001116,#02b7e8,Turquoise Blue
+000144,#007b71,Teal Green
+000143,#f0f4f1,Lacy White
+001118,#003777,Midnight Blue
+001514,#a9c0e4,Pale Sky Blue Rod
+001877,#f1f5e2,Olivine Tint
+000304,#8e899c,Lavender
+001232,#b83a84,Light Fuchsia Rod
+000303,#987a8c,Dusty Lilac
+001112,#23553b,Aventurine Green
+000148,#083c71,Indigo Blue
+001234,#853987,Violet
+000147,#1d3486,Deep Cobalt Blue
+000301,#c45579,Pink
+001114,#034393,Deep Royal Blue
+001917,#f3f4ef,Cilantro Green Tint
+000305,#d95c56,Salmon Pink
+001119,#6f4634,Sienna
+001517,#7ac9aa,Pale Emerald Rod
+000309,#883b0d,Cinnabar
+001120,#f8d100,Yellow
+001241,#939f1b,Pine Green

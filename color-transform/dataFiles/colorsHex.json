@@ -112,6 +112,13 @@
     "hex": "#508b60"
   },
   {
+    "id": "000017",
+    "name": "Mineral Green",
+    "cmyk": "62-9-64-27",
+    "rgb": "80-139-96",
+    "hex": "#508b60"
+  },
+  {
     "id": "000118",
     "name": "Periwinkle",
     "cmyk": "66-46-1-0",
@@ -260,7 +267,7 @@
   },
   {
     "id": "000161",
-    "name": "Robin’s Egg Blue",
+    "name": "Robins Egg Blue",
     "cmyk": "32-0-16-0",
     "rgb": "180-221-217",
     "hex": "#b4ddd9"

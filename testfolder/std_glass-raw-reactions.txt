@@ -1,0 +1,172 @@
+copper, 000104, GlACIER BLUE OPAL
+copper, 000116, Turquoise Blue Opal
+copper, 000144, Teal Green Opal
+copper, 000145, Jade Green Opal
+copper, 000146, Steel Blue Opal
+copper, 000161, ROBIN'S EGG BLUE OPAL
+copper, 000164, Egyptian Blue Opal
+copper, 000216, Light Cyan Opal
+copper, 000345, STEEL JADE OPAL
+copper, 001116, Turquoise Blue
+copper, 001145, Kelly Green
+copper, 001164, caribbean blue
+copper, 001176, Peacock Blue
+copper, 001217, LEAF GREEN
+copper, 001226, LILY PAD GREEN
+copper, 001246, Copper Blue
+copper, 001408, Light Aquamarine
+copper, 001416, Light Turquoise Blue
+copper, 001417, Emerald Green
+copper, 001464, True Blue
+copper, 001808, Aqua Blue Tint
+copper, 001816, Turquoise Blue Tint
+copper, 001845, MING GREEN Tint
+copper, 001917, Cilantro Green Tint
+lead, 000301, Pink Opal
+lead, 000303, Dusty Lilac Opal
+lead, 000304, LAVENDER
+lead, 000305, Salmon Pink Opal
+lead, 000313, Dense White Opal
+lead, 000334, Gold Purple Opal
+lead, 001205, Light Coral
+lead, 001215, Light Pink
+lead, 001234, Violet
+lead, 001305, Sunset Coral
+lead, 001311, Cranberry Pink
+lead, 001332, FuCHSia
+lead, 001334, Gold Purple
+lead, 001823, Burnt Scarlet Tint
+lead, 001824, Ruby Red Tint
+lead, 001831, Ruby Pink Tint
+reactive, 000009, Reactive Cloud Opal
+reactive, 001009, Reactive Ice Clear
+reactive, 001019, red reactive clear
+sulfur-selenium, 000024, Tomato Red Opal
+sulfur-selenium, 000025, Tangerine Orange Opal
+sulfur-selenium, 000120, Canary Yellow Opal
+sulfur-selenium, 000124, Red Opal
+sulfur-selenium, 000125, Orange Opal
+sulfur-selenium, 000126, Spring Green Opal
+sulfur-selenium, 000137, French Vanilla Opal
+sulfur-selenium, 000203, Woodland Brown Opal
+sulfur-selenium, 000220, Sunflower Yellow Opal
+sulfur-selenium, 000221, CITRONELLE OPAL
+sulfur-selenium, 000222, AVOCADO GREEN OPAL
+sulfur-selenium, 000224, Deep Red Opal
+sulfur-selenium, 000225, Pimento Red Opal
+sulfur-selenium, 000227, Golden Green Opal
+sulfur-selenium, 000309, Cinnabar Opal
+sulfur-selenium, 000310, Umber Opal
+sulfur-selenium, 000320, Marigold Yellow Opal
+sulfur-selenium, 000321, Pumpkin Orange Opal
+sulfur-selenium, 000329, burnt orange opal
+sulfur-selenium, 000337, Butterscotch Opal
+sulfur-selenium, 001025, Light Orange
+sulfur-selenium, 001119, Sienna
+sulfur-selenium, 001120, Yellow
+sulfur-selenium, 001122, Red
+sulfur-selenium, 001125, Orange
+sulfur-selenium, 001126, Chartreuse
+sulfur-selenium, 001137, Medium Amber
+sulfur-selenium, 001138, DARK AMBER
+sulfur-selenium, 001207, Fern Green
+sulfur-selenium, 001241, Pine Green
+sulfur-selenium, 001320, Marigold Yellow
+sulfur-selenium, 001321, Carnelian
+sulfur-selenium, 001322, Garnet Red
+sulfur-selenium, 001422, LEMON LIME GREEN
+sulfur-selenium, 001437, Light Amber
+sulfur-selenium, 001857, red amber tint
+alchemy, 001015, clear silver to gold
+alchemy, 001016, clear silver to bronze
+none, 000013, Opaque White Opal
+none, 000034, light peach cream opal
+none, 000100, Black Opal
+none, 000101, Stiff Black Opal
+none, 000102, BLUE BLACK OPAL
+none, 000108, Powder Blue Opal
+none, 000112, Mint Green Opal
+none, 000113, White Opal
+none, 000114, Cobalt Blue Opal
+none, 000117, Mineral Green Opal
+none, 000118, Periwinkle Opal
+none, 000119, Mink opal
+none, 000131, artichoke opal
+none, 000132, Driftwood Gray Opal
+none, 000136, Deco Gray Opal
+none, 000138, Marzipan Opal
+none, 000139, Almond Opal
+none, 000141, Dark Forest Green Opal
+none, 000142, Neo-Lavender Opal
+none, 000143, Lacy White Opal
+none, 000147, Deep Cobalt Blue Opal
+none, 000148, indigo blue opal
+none, 000206, elephant gray opal
+none, 000207, celadon green opal
+none, 000208, dusty blue opal
+none, 000212, Olive Green Opal
+none, 000236, Slate Gray Opal
+none, 000241, moss green opal
+none, 000243, TRANSLUCENT WHITE OPAL*
+none, 000312, Pea Pod Green Opal
+none, 000332, Plum Opal
+none, 000336, Deep Gray Opal
+none, 000349, GRAY GREEN OPAL
+none, 000403, Opaline Opal
+none, 000420, cream opal
+none, 000421, Petal Pink Opal
+none, 000920, warm white opal
+none, 001101, Clear
+none, 001105, Deep Plum
+none, 001107, Light Green
+none, 001108, Aquamarine Blue
+none, 001109, Dark Rose Brown
+none, 001112, Aventurine Green
+none, 001114, Deep Royal Blue
+none, 001118, Midnight Blue
+none, 001128, Deep Royal Purple
+none, 001129, Charcoal Gray
+none, 001140, Aventurine Blue
+none, 001141, Olive Green
+none, 001228, AMETHYST
+none, 001229, Pewter
+none, 001401, Crystal Clear
+none, 001405, Light Plum
+none, 001406, Steel Blue
+none, 001409, Light Bronze
+none, 001412, Light Aventurine Green
+none, 001414, Light Sky Blue
+none, 001419, Tan
+none, 001426, Spring Green
+none, 001428, Light Violet
+none, 001429, Light Silver Gray
+none, 001439, Khaki
+none, 001442, Neo-Lavender
+none, 001444, Sea Blue
+none, 001449, Oregon Gray
+none, 001806, Juniper Blue Tint
+none, 001807, Grass Green Tint
+none, 001814, Sapphire blue Tint
+none, 001818, Indigo Tint
+none, 001819, Brown Topaz Tint
+none, 001820, Pale Yellow Tint
+none, 001821, Erbium Pink Tint
+none, 001826, GREEN TEA TINT*
+none, 001827, LIGHT AMBER TINT*
+none, 001829, Gray Tint
+none, 001834, coral orange tint
+none, 001837, MEDIUM AMBER TINT*
+none, 001841, Spruce Green Tint
+none, 001842, Light Neo-Lavender Shift Tint
+none, 001844, Lavender Green Shift Tint
+none, 001858, Lt Rhubarb Shift Tint
+none, 001859, rhubarb shift tint
+none, 001864, Gray Blue Tint
+none, 001867, Olive Smoke Tint
+none, 001877, Olivine Tint
+none, 001920, lemon tint
+none, 001932, fuCHSia tint
+none, 001934, copper tint
+none, 001948, purple blue tint
+none, 001964, lavender gray tint
+none, 001977, pine green tint
