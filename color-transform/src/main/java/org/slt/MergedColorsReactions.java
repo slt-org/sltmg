@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class MergedColorsReactions {
+    private static final String nl = ",\n";
 
     public static void main(String[] args) {
         MergedColorsReactions mcr = new MergedColorsReactions();
@@ -33,16 +34,123 @@ public class MergedColorsReactions {
             }
         }
 
+        mcr.stripLeadingZerosFromId(reactionsDTOArrayList);
+        // the data is clean(?) and can be used to generate the total color/reactions table
 
+        mcr.sortOnId(reactionsDTOArrayList);
+
+        // mcr.verifyOutput(reactionsDTOArrayList);
+
+        mcr.jsonOutput(reactionsDTOArrayList);
+
+        // write univeral table to json file to include in html reactions page
+        mcr.writeUniveralTableToFile(reactionsDTOArrayList);
+
+        // write id options list for reactions page
+        mcr.writeIdSelectionToFile(reactionsDTOArrayList);
+
+        // write name options list for reactions page
+        mcr.writeNameSelectionToFile(reactionsDTOArrayList);
+
+        //System.out.println();
+
+    }
+
+    public void verifyOutput(ArrayList<ReactionsDTO> reactions){
         System.out.println();
+        System.out.println(" Verify basic output");
+        for (ReactionsDTO r : reactions) {
+            System.out.println(r.toString());
+        }
+    }
 
+    public void jsonOutput(ArrayList<ReactionsDTO> reactions){
+        System.out.println();
+        System.out.println(" Verify Json output");
+        for (ReactionsDTO r : reactions) {
+            System.out.println(r.toJson());
+        }
+    }
 
+    public void sortOnId(ArrayList<ReactionsDTO> reactions){
+        Collections.sort(reactions, new Comparator<ReactionsDTO>() {
+            @Override
+            public int compare(ReactionsDTO o1, ReactionsDTO o2) {
+                return Integer.valueOf(o1.getId()) - Integer.valueOf(o2.getId()) ;
+            }
+        });
+    }
 
+    public void sortOnName(ArrayList<ReactionsDTO> reactions){
+        Collections.sort(reactions, new Comparator<ReactionsDTO>() {
+            @Override
+            public int compare(ReactionsDTO o1, ReactionsDTO o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+    }
+
+    public void writeUniveralTableToFile(ArrayList<ReactionsDTO> reactions){
+        StringBuffer sb = new StringBuffer();
+        sortOnId(reactions);
+
+        sb.append("[");
+        for (ReactionsDTO r : reactions) {
+            sb.append(r.toJson()+nl);
+        }
+        sb.append("]");
+        try {
+            BufferedWriter writer = Files.newBufferedWriter(Path.of("G:\\My Drive\\development\\sltmg\\color-transform\\dataFiles\\univeralTable.json"));
+            writer.write(sb.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeIdSelectionToFile(ArrayList<ReactionsDTO> reactions){
+        StringBuffer sb = new StringBuffer();
+        sortOnId(reactions);
+
+        for (ReactionsDTO r : reactions) {
+            // System.out.println(rt.gson.toJson(r));
+            sb.append("<option value="+r.getId()+">"+r.getId()+", "+r.getName()+"</option>"+"\n");
+        }
+        try {
+            BufferedWriter writer = Files.newBufferedWriter(Path.of("G:\\My Drive\\development\\sltmg\\color-transform\\dataFiles\\idOptionTable.html"));
+            writer.write(sb.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeNameSelectionToFile(ArrayList<ReactionsDTO> reactions){
+        StringBuffer sb = new StringBuffer();
+        sortOnName(reactions);
+
+        for (ReactionsDTO r : reactions) {
+            // System.out.println(rt.gson.toJson(r));
+            sb.append("<option value="+r.getId()+">"+r.getName().trim()+", "+r.getId()+"</option>\n");
+        }
+        try {
+            BufferedWriter writer = Files.newBufferedWriter(Path.of("G:\\My Drive\\development\\sltmg\\color-transform\\dataFiles\\nameOptionTable.html"));
+            writer.write(sb.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void stripLeadingZerosFromId(ArrayList<ReactionsDTO> reactionsDTOArrayList){
+        for (ReactionsDTO r : reactionsDTOArrayList) {
+            // remove leading zeros
+            r.setId(Integer.valueOf(r.getId()).toString());
+        }
     }
 
     public void groomReactionNamesAndIds(ArrayList<ReactionsDTO> reactionsDTOArrayList){
         for (ReactionsDTO r : reactionsDTOArrayList) {
-            // System.out.println(r.getName());
             r.setName(StringFormatter.capitalizeWord(r.getName().trim()));
             r.setId(r.getId().trim());
         }

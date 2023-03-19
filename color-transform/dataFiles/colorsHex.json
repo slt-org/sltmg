@@ -966,6 +966,13 @@
     "hex": "#eee6b5"
   },
   {
+    "id": "001701",
+    "name": " Amber Lustre Rod",
+    "cmyk": "5-4-33-4",
+    "rgb": "238-230-181",
+    "hex": "#eee6b5"
+  },
+  {
     "id": "001439",
     "name": "Khaki",
     "cmyk": "20-18-43-18",
@@ -1199,6 +1206,13 @@
   {
     "id": "001859",
     "name": "Rhubarb Shift Tint",
+    "cmyk": "12-2-18-0",
+    "rgb": "228-236-214",
+    "hex": "#e4ecd6"
+  },
+  {
+    "id": "000429",
+    "name": "Rhubarb Pastel Opal Rod",
     "cmyk": "12-2-18-0",
     "rgb": "228-236-214",
     "hex": "#e4ecd6"

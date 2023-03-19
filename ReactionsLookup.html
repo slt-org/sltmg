@@ -1,0 +1,992 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+    <title>Reactions Lookup</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <p class="h4 sm-4 text-center">Reactions Lookup</p><br>
+            <form class="row g-3" id="twoForm" onsubmit="namepicker()">
+                <div class="form-row align-items-center">
+                    <div class="input-group mb-3">
+                        <select id="name" class="selectpicker show-tick form-control" data-live-search="true">
+                            <option>glass</option>
+                            <option value=139>Almond Opal, 139</option>
+                            <option value=1701>Amber Lustre Rod, 1701</option>
+                            <option value=1228>Amethyst, 1228</option>
+                            <option value=1808>Aqua Blue Tint, 1808</option>
+                            <option value=1808>Aqua Blue Tint Rod, 1808</option>
+                            <option value=1108>Aquamarine Blue, 1108</option>
+                            <option value=1108>Aquamarine Blue Rod, 1108</option>
+                            <option value=1108>Aquamarine Blue Stringer, 1108</option>
+                            <option value=131>Artichoke Opal, 131</option>
+                            <option value=1140>Aventurine Blue, 1140</option>
+                            <option value=1140>Aventurine Blue Stringer, 1140</option>
+                            <option value=1112>Aventurine Green, 1112</option>
+                            <option value=1112>Aventurine Green Rod, 1112</option>
+                            <option value=1112>Aventurine Green Stringer, 1112</option>
+                            <option value=222>Avocado Green Opal, 222</option>
+                            <option value=100>Black Opal, 100</option>
+                            <option value=100>Black Opal Ribbon, 100</option>
+                            <option value=100>Black Opal Rod, 100</option>
+                            <option value=100>Black Opal Stringer, 100</option>
+                            <option value=102>Blue Black Opal, 102</option>
+                            <option value=1714>Blue Lustre Rod, 1714</option>
+                            <option value=46>Bluestone Opaque Rod, 46</option>
+                            <option value=1819>Brown Topaz Tint, 1819</option>
+                            <option value=329>Burnt Orange Opal, 329</option>
+                            <option value=329>Burnt Orange Opal Rod, 329</option>
+                            <option value=329>Burnt Orange Opal Stringer, 329</option>
+                            <option value=1823>Burnt Scarlet Tint, 1823</option>
+                            <option value=337>Butterscotch Opal, 337</option>
+                            <option value=337>Butterscotch Opal Rod, 337</option>
+                            <option value=337>Butterscotch Opal Stringer, 337</option>
+                            <option value=120>Canary Yellow Opal, 120</option>
+                            <option value=120>Canary Yellow Opal Rod, 120</option>
+                            <option value=120>Canary Yellow Opal Stringer, 120</option>
+                            <option value=1164>Caribbean Blue, 1164</option>
+                            <option value=1164>Caribbean Blue Rod, 1164</option>
+                            <option value=1164>Caribbean Blue Stringer, 1164</option>
+                            <option value=1321>Carnelian, 1321</option>
+                            <option value=1321>Carnelian Rod, 1321</option>
+                            <option value=207>Celadon Green Opal, 207</option>
+                            <option value=207>Celadon Green Opal Rod, 207</option>
+                            <option value=1129>Charcoal Gray, 1129</option>
+                            <option value=1129>Charcoal Gray Ribbon, 1129</option>
+                            <option value=1129>Charcoal Gray Rod, 1129</option>
+                            <option value=1129>Charcoal Gray Stringer, 1129</option>
+                            <option value=1126>Chartreuse, 1126</option>
+                            <option value=1126>Chartreuse Rod, 1126</option>
+                            <option value=1126>Chartreuse Stringer, 1126</option>
+                            <option value=1917>Cilantro Green Tint, 1917</option>
+                            <option value=309>Cinnabar Opal, 309</option>
+                            <option value=309>Cinnabar Opal Rod, 309</option>
+                            <option value=221>Citronelle Opal, 221</option>
+                            <option value=1101>Clear, 1101</option>
+                            <option value=1101>Clear Ribbon, 1101</option>
+                            <option value=1101>Clear Rod, 1101</option>
+                            <option value=1016>Clear Silver To Bronze, 1016</option>
+                            <option value=1015>Clear Silver To Gold, 1015</option>
+                            <option value=1101>Clear Stringer, 1101</option>
+                            <option value=114>Cobalt Blue Opal, 114</option>
+                            <option value=114>Cobalt Blue Opal Rod, 114</option>
+                            <option value=114>Cobalt Blue Opal Stringer, 114</option>
+                            <option value=1246>Copper Blue, 1246</option>
+                            <option value=1717>Copper Green Lustre Rod, 1717</option>
+                            <option value=1717>Copper Green Lustre Rod, 1717</option>
+                            <option value=1934>Copper Tint, 1934</option>
+                            <option value=1834>Coral Orange Tint, 1834</option>
+                            <option value=1834>Coral Orange Tint Rod, 1834</option>
+                            <option value=1834>Coral Orange Tint Stringer, 1834</option>
+                            <option value=1311>Cranberry Pink, 1311</option>
+                            <option value=1311>Cranberry Pink Rod, 1311</option>
+                            <option value=1311>Cranberry Pink Stringer, 1311</option>
+                            <option value=1342>Cranberry Sapphirine Rod, 1342</option>
+                            <option value=420>Cream Opal, 420</option>
+                            <option value=420>Cream Opal Rod, 420</option>
+                            <option value=420>Cream Opal Stringer, 420</option>
+                            <option value=1401>Crystal Clear, 1401</option>
+                            <option value=1401>Crystal Clear Rod, 1401</option>
+                            <option value=1138>Dark Amber, 1138</option>
+                            <option value=1138>Dark Amber Rod, 1138</option>
+                            <option value=141>Dark Forest Green Opal, 141</option>
+                            <option value=141>Dark Forest Green Opal Rod, 141</option>
+                            <option value=141>Dark Forest Green Opal Stringer, 141</option>
+                            <option value=1109>Dark Rose Brown, 1109</option>
+                            <option value=1109>Dark Rose Brown Ribbon, 1109</option>
+                            <option value=1109>Dark Rose Brown Rod, 1109</option>
+                            <option value=1109>Dark Rose Brown Stringer, 1109</option>
+                            <option value=136>Deco Gray Opal, 136</option>
+                            <option value=136>Deco Gray Opal Rod, 136</option>
+                            <option value=136>Deco Gray Opal Stringer, 136</option>
+                            <option value=147>Deep Cobalt Blue Opal, 147</option>
+                            <option value=147>Deep Cobalt Blue Opal Ribbon, 147</option>
+                            <option value=147>Deep Cobalt Blue Opal Rod, 147</option>
+                            <option value=147>Deep Cobalt Blue Opal Stringer, 147</option>
+                            <option value=336>Deep Gray Opal, 336</option>
+                            <option value=1105>Deep Plum, 1105</option>
+                            <option value=1105>Deep Plum Rod, 1105</option>
+                            <option value=1105>Deep Plum Stringer, 1105</option>
+                            <option value=224>Deep Red Opal, 224</option>
+                            <option value=224>Deep Red Opal Rod, 224</option>
+                            <option value=224>Deep Red Opal Stringer, 224</option>
+                            <option value=1114>Deep Royal Blue, 1114</option>
+                            <option value=1114>Deep Royal Blue Ribbon, 1114</option>
+                            <option value=1114>Deep Royal Blue Rod, 1114</option>
+                            <option value=1114>Deep Royal Blue Stringer, 1114</option>
+                            <option value=1128>Deep Royal Purple, 1128</option>
+                            <option value=1128>Deep Royal Purple Ribbon, 1128</option>
+                            <option value=1128>Deep Royal Purple Rod, 1128</option>
+                            <option value=1128>Deep Royal Purple Stringer, 1128</option>
+                            <option value=313>Dense White Opal, 313</option>
+                            <option value=313>Dense White Opal Rod, 313</option>
+                            <option value=313>Dense White Opal Stringer, 313</option>
+                            <option value=132>Driftwood Gray Opal, 132</option>
+                            <option value=132>Driftwood Gray Opal Rod, 132</option>
+                            <option value=208>Dusty Blue Opal, 208</option>
+                            <option value=303>Dusty Lilac Opal, 303</option>
+                            <option value=303>Dusty Lilac Opal Rod, 303</option>
+                            <option value=164>Egyptian Blue Opal, 164</option>
+                            <option value=164>Egyptian Blue Opal Rod, 164</option>
+                            <option value=164>Egyptian Blue Opal Stringer, 164</option>
+                            <option value=206>Elephant Gray Opal, 206</option>
+                            <option value=1417>Emerald Green, 1417</option>
+                            <option value=1417>Emerald Green Rod, 1417</option>
+                            <option value=1417>Emerald Green Stringer, 1417</option>
+                            <option value=1821>Erbium Pink Tint, 1821</option>
+                            <option value=1821>Erbium Pink Tint Rod, 1821</option>
+                            <option value=1821>Erbium Pink Tint Stringer, 1821</option>
+                            <option value=1207>Fern Green, 1207</option>
+                            <option value=137>French Vanilla Opal, 137</option>
+                            <option value=137>French Vanilla Opal Ribbon, 137</option>
+                            <option value=137>French Vanilla Opal Rod, 137</option>
+                            <option value=137>French Vanilla Opal Stringer, 137</option>
+                            <option value=1332>Fuchsia, 1332</option>
+                            <option value=1932>Fuchsia Tint, 1932</option>
+                            <option value=1322>Garnet Red, 1322</option>
+                            <option value=1322>Garnet Red Rod, 1322</option>
+                            <option value=104>Glacier Blue Opal, 104</option>
+                            <option value=1334>Gold Purple, 1334</option>
+                            <option value=334>Gold Purple Opal, 334</option>
+                            <option value=334>Gold Purple Opal Rod, 334</option>
+                            <option value=334>Gold Purple Opal Stringer, 334</option>
+                            <option value=227>Golden Green Opal, 227</option>
+                            <option value=227>Golden Green Opal Rod, 227</option>
+                            <option value=1807>Grass Green Tint, 1807</option>
+                            <option value=1807>Grass Green Tint Rod, 1807</option>
+                            <option value=1807>Grass Green Tint Stringer, 1807</option>
+                            <option value=1864>Gray Blue Tint, 1864</option>
+                            <option value=349>Gray Green Opal, 349</option>
+                            <option value=1829>Gray Tint, 1829</option>
+                            <option value=217>Green Gold Opal Rod, 217</option>
+                            <option value=1707>Green Lustre Rod, 1707</option>
+                            <option value=1826>Green Tea Tint*, 1826</option>
+                            <option value=148>Indigo Blue Opal, 148</option>
+                            <option value=148>Indigo Opal Rod, 148</option>
+                            <option value=1818>Indigo Tint, 1818</option>
+                            <option value=145>Jade Green Opal, 145</option>
+                            <option value=145>Jade Green Opal Ribbon, 145</option>
+                            <option value=145>Jade Green Opal Rod, 145</option>
+                            <option value=145>Jade Green Opal Stringer, 145</option>
+                            <option value=1806>Juniper Blue Tint, 1806</option>
+                            <option value=1806>Juniper Blue Tint Rod, 1806</option>
+                            <option value=1145>Kelly Green, 1145</option>
+                            <option value=1145>Kelly Green Rod, 1145</option>
+                            <option value=1145>Kelly Green Stringer, 1145</option>
+                            <option value=1439>Khaki, 1439</option>
+                            <option value=1439>Khaki Rod, 1439</option>
+                            <option value=143>Lacy White Opal, 143</option>
+                            <option value=304>Lavender, 304</option>
+                            <option value=1964>Lavender Gray Tint, 1964</option>
+                            <option value=1844>Lavender Green Shift Tint, 1844</option>
+                            <option value=1217>Leaf Green, 1217</option>
+                            <option value=1422>Lemon Lime Green, 1422</option>
+                            <option value=1920>Lemon Tint, 1920</option>
+                            <option value=1437>Light Amber, 1437</option>
+                            <option value=1437>Light Amber Rod, 1437</option>
+                            <option value=1827>Light Amber Tint*, 1827</option>
+                            <option value=1408>Light Aquamarine, 1408</option>
+                            <option value=1408>Light Aquamarine Blue Rod, 1408</option>
+                            <option value=1408>Light Aquamarine Blue Stringer, 1408</option>
+                            <option value=1412>Light Aventurine Green, 1412</option>
+                            <option value=1412>Light Aventurine Green Ribbon, 1412</option>
+                            <option value=1412>Light Aventurine Green Rod, 1412</option>
+                            <option value=1412>Light Aventurine Green Stringer, 1412</option>
+                            <option value=1409>Light Bronze, 1409</option>
+                            <option value=1409>Light Bronze Rod, 1409</option>
+                            <option value=1409>Light Bronze Stringer, 1409</option>
+                            <option value=1205>Light Coral, 1205</option>
+                            <option value=216>Light Cyan Opal, 216</option>
+                            <option value=216>Light Cyan Opal Ribbon, 216</option>
+                            <option value=216>Light Cyan Opal Rod, 216</option>
+                            <option value=216>Light Cyan Opal Stringer, 216</option>
+                            <option value=1232>Light Fuchsia Rod, 1232</option>
+                            <option value=1107>Light Green, 1107</option>
+                            <option value=1107>Light Green Rod, 1107</option>
+                            <option value=1107>Light Green Stringer, 1107</option>
+                            <option value=1842>Light Neo-lavender Shift Tint, 1842</option>
+                            <option value=1842>Light Neo-lavender Shift Tint Rod, 1842</option>
+                            <option value=1842>Light Neo-lavender Shift Tint Stringer, 1842</option>
+                            <option value=1025>Light Orange, 1025</option>
+                            <option value=34>Light Peach Cream Opal, 34</option>
+                            <option value=34>Light Peach Cream Opal Rod, 34</option>
+                            <option value=1215>Light Pink, 1215</option>
+                            <option value=1215>Light Pink Rod, 1215</option>
+                            <option value=1405>Light Plum, 1405</option>
+                            <option value=1405>Light Plum Rod, 1405</option>
+                            <option value=1429>Light Silver Gray, 1429</option>
+                            <option value=1429>Light Silver Gray Rod, 1429</option>
+                            <option value=1429>Light Silver Gray Stringer, 1429</option>
+                            <option value=1414>Light Sky Blue, 1414</option>
+                            <option value=1414>Light Sky Blue Rod, 1414</option>
+                            <option value=1414>Light Sky Blue Stringer, 1414</option>
+                            <option value=1416>Light Turquoise Blue, 1416</option>
+                            <option value=1428>Light Violet, 1428</option>
+                            <option value=1428>Light Violet Rod, 1428</option>
+                            <option value=1226>Lily Pad Green, 1226</option>
+                            <option value=1858>Lt Rhubarb Shift Tint, 1858</option>
+                            <option value=1320>Marigold Yellow, 1320</option>
+                            <option value=320>Marigold Yellow Opal, 320</option>
+                            <option value=138>Marzipan Opal, 138</option>
+                            <option value=1137>Medium Amber, 1137</option>
+                            <option value=1137>Medium Amber Rod, 1137</option>
+                            <option value=1137>Medium Amber Stringer, 1137</option>
+                            <option value=1837>Medium Amber Tint*, 1837</option>
+                            <option value=1118>Midnight Blue, 1118</option>
+                            <option value=1118>Midnight Blue Ribbon, 1118</option>
+                            <option value=1118>Midnight Blue Rod, 1118</option>
+                            <option value=1118>Midnight Blue Stringer, 1118</option>
+                            <option value=117>Mineral Green Opal, 117</option>
+                            <option value=117>Mineral Green Opal Rod, 117</option>
+                            <option value=17>Mineral Green Opaque Rod, 17</option>
+                            <option value=1845>Ming Green Tint, 1845</option>
+                            <option value=119>Mink Opal, 119</option>
+                            <option value=112>Mint Green Opal, 112</option>
+                            <option value=112>Mint Green Opal Rod, 112</option>
+                            <option value=112>Mint Green Opal Stringer, 112</option>
+                            <option value=241>Moss Green Opal, 241</option>
+                            <option value=241>Moss Green Opal Rod, 241</option>
+                            <option value=241>Moss Green Opal Stringer, 241</option>
+                            <option value=1442>Neo-lavender, 1442</option>
+                            <option value=142>Neo-lavender Opal, 142</option>
+                            <option value=142>Neo-lavender Opal Rod, 142</option>
+                            <option value=142>Neo-lavender Opal Stringer, 142</option>
+                            <option value=1442>Neo-lavender Ribbon, 1442</option>
+                            <option value=1442>Neo-lavender Rod, 1442</option>
+                            <option value=1442>Neo-lavender Stringer, 1442</option>
+                            <option value=127>Nougat Opal Rod, 127</option>
+                            <option value=1141>Olive Green, 1141</option>
+                            <option value=212>Olive Green Opal, 212</option>
+                            <option value=212>Olive Green Opal Rod, 212</option>
+                            <option value=212>Olive Green Opal Stringer, 212</option>
+                            <option value=1141>Olive Green Rod, 1141</option>
+                            <option value=1141>Olive Green Stringer, 1141</option>
+                            <option value=1867>Olive Smoke Tint, 1867</option>
+                            <option value=1877>Olivine Tint, 1877</option>
+                            <option value=403>Opaline Opal, 403</option>
+                            <option value=13>Opaque White Opal, 13</option>
+                            <option value=13>Opaque White Opal Rod, 13</option>
+                            <option value=13>Opaque White Opal Stringer, 13</option>
+                            <option value=1125>Orange, 1125</option>
+                            <option value=125>Orange Opal, 125</option>
+                            <option value=125>Orange Opal Ribbon, 125</option>
+                            <option value=125>Orange Opal Rod, 125</option>
+                            <option value=125>Orange Opal Stringer, 125</option>
+                            <option value=1125>Orange Rod, 1125</option>
+                            <option value=1125>Orange Stringer, 1125</option>
+                            <option value=1449>Oregon Gray, 1449</option>
+                            <option value=1528>Pale Amethyst Rod, 1528</option>
+                            <option value=1517>Pale Emerald Rod, 1517</option>
+                            <option value=1514>Pale Sky Blue Rod, 1514</option>
+                            <option value=1506>Pale Steel Blue Rod, 1506</option>
+                            <option value=1820>Pale Yellow Tint, 1820</option>
+                            <option value=1820>Pale Yellow Tint Rod, 1820</option>
+                            <option value=1820>Pale Yellow Tint Stringer, 1820</option>
+                            <option value=312>Pea Pod Green Opal, 312</option>
+                            <option value=312>Pea Pod Green Opal Rod, 312</option>
+                            <option value=312>Pea Pod Green Opal Stringer, 312</option>
+                            <option value=1176>Peacock Blue, 1176</option>
+                            <option value=118>Periwinkle Opal, 118</option>
+                            <option value=18>Periwinkle Opaque Rod, 18</option>
+                            <option value=421>Petal Pink Opal, 421</option>
+                            <option value=421>Petal Pink Opal Ribbon, 421</option>
+                            <option value=421>Petal Pink Opal Rod, 421</option>
+                            <option value=421>Petal Pink Opal Stringer, 421</option>
+                            <option value=1229>Pewter, 1229</option>
+                            <option value=225>Pimento Red Opal, 225</option>
+                            <option value=1241>Pine Green, 1241</option>
+                            <option value=1977>Pine Green Tint, 1977</option>
+                            <option value=301>Pink Opal, 301</option>
+                            <option value=301>Pink Opal Rod, 301</option>
+                            <option value=301>Pink Opal Stringer, 301</option>
+                            <option value=332>Plum Opal, 332</option>
+                            <option value=108>Powder Blue Opal, 108</option>
+                            <option value=108>Powder Blue Opal Rod, 108</option>
+                            <option value=108>Powder Blue Opal Stringer, 108</option>
+                            <option value=321>Pumpkin Orange Opal, 321</option>
+                            <option value=321>Pumpkin Orange Opal Rod, 321</option>
+                            <option value=321>Pumpkin Orange Opal Stringer, 321</option>
+                            <option value=1948>Purple Blue Tint, 1948</option>
+                            <option value=9>Reactive Cloud Opal, 9</option>
+                            <option value=9>Reactive Cloud Opal Stringer, 9</option>
+                            <option value=1009>Reactive Ice Clear, 1009</option>
+                            <option value=1009>Reactive Ice Clear Stringer, 1009</option>
+                            <option value=1122>Red, 1122</option>
+                            <option value=1857>Red Amber Tint, 1857</option>
+                            <option value=124>Red Opal, 124</option>
+                            <option value=124>Red Opal Ribbon, 124</option>
+                            <option value=124>Red Opal Rod, 124</option>
+                            <option value=124>Red Opal Stringer, 124</option>
+                            <option value=1022>Red Orange Rod, 1022</option>
+                            <option value=1019>Red Reactive Clear, 1019</option>
+                            <option value=1122>Red Rod, 1122</option>
+                            <option value=1122>Red Stringer, 1122</option>
+                            <option value=429>Rhubarb Pastel Opal Rod, 429</option>
+                            <option value=1859>Rhubarb Shift Tint, 1859</option>
+                            <option value=1859>Rhubarb Shift Tint Rod, 1859</option>
+                            <option value=1859>Rhubarb Shift Tint Stringer, 1859</option>
+                            <option value=161>Robin's Egg Blue Opal, 161</option>
+                            <option value=1831>Ruby Pink Tint, 1831</option>
+                            <option value=1824>Ruby Red Tint, 1824</option>
+                            <option value=305>Salmon Pink Opal, 305</option>
+                            <option value=1814>Sapphire Blue Tint, 1814</option>
+                            <option value=1444>Sea Blue, 1444</option>
+                            <option value=1444>Sea Blue Stringer, 1444</option>
+                            <option value=1812>Seaweed Aventurine Rod, 1812</option>
+                            <option value=1119>Sienna, 1119</option>
+                            <option value=1119>Sienna Rod, 1119</option>
+                            <option value=1119>Sienna Stringer, 1119</option>
+                            <option value=236>Slate Gray Opal, 236</option>
+                            <option value=236>Slate Gray Opal Stringer, 236</option>
+                            <option value=1426>Spring Green, 1426</option>
+                            <option value=126>Spring Green Opal, 126</option>
+                            <option value=126>Spring Green Opal Ribbon, 126</option>
+                            <option value=126>Spring Green Opal Rod, 126</option>
+                            <option value=126>Spring Green Opal Stringer, 126</option>
+                            <option value=1426>Spring Green Ribbon, 1426</option>
+                            <option value=1426>Spring Green Rod, 1426</option>
+                            <option value=1426>Spring Green Stringer, 1426</option>
+                            <option value=1841>Spruce Green Tint, 1841</option>
+                            <option value=1841>Spruce Green Tint Rod, 1841</option>
+                            <option value=1841>Spruce Green Tint Stringer, 1841</option>
+                            <option value=1406>Steel Blue, 1406</option>
+                            <option value=146>Steel Blue Opal, 146</option>
+                            <option value=146>Steel Blue Opal Rod, 146</option>
+                            <option value=146>Steel Blue Opal Stringer, 146</option>
+                            <option value=1406>Steel Blue Rod, 1406</option>
+                            <option value=1406>Steel Blue Stringer, 1406</option>
+                            <option value=345>Steel Jade Opal, 345</option>
+                            <option value=101>Stiff Black Opal, 101</option>
+                            <option value=101>Stiff Black Opal Rod, 101</option>
+                            <option value=101>Stiff Black Opal Stringer, 101</option>
+                            <option value=220>Sunflower Yellow Opal, 220</option>
+                            <option value=220>Sunflower Yellow Opal Rod, 220</option>
+                            <option value=220>Sunflower Yellow Opal Stringer, 220</option>
+                            <option value=1305>Sunset Coral, 1305</option>
+                            <option value=1305>Sunset Coral Rod, 1305</option>
+                            <option value=1305>Sunset Coral Stringer, 1305</option>
+                            <option value=1419>Tan, 1419</option>
+                            <option value=25>Tangerine Orange Opal, 25</option>
+                            <option value=144>Teal Green Opal, 144</option>
+                            <option value=144>Teal Green Opal Rod, 144</option>
+                            <option value=144>Teal Green Opal Stringer, 144</option>
+                            <option value=24>Tomato Red Opal, 24</option>
+                            <option value=24>Tomato Red Opal Rod, 24</option>
+                            <option value=24>Tomato Red Opal Stringer, 24</option>
+                            <option value=243>Translucent White Opal Rod, 243</option>
+                            <option value=243>Translucent White Opal*, 243</option>
+                            <option value=1464>True Blue, 1464</option>
+                            <option value=1116>Turquoise Blue, 1116</option>
+                            <option value=116>Turquoise Blue Opal, 116</option>
+                            <option value=116>Turquoise Blue Opal Rod, 116</option>
+                            <option value=116>Turquoise Blue Opal Stringer, 116</option>
+                            <option value=1116>Turquoise Blue Ribbon, 1116</option>
+                            <option value=1116>Turquoise Blue Rod, 1116</option>
+                            <option value=1116>Turquoise Blue Stringer, 1116</option>
+                            <option value=1816>Turquoise Blue Tint, 1816</option>
+                            <option value=16>Turquoise Opaque Rod, 16</option>
+                            <option value=310>Umber Opal, 310</option>
+                            <option value=1234>Violet, 1234</option>
+                            <option value=1234>Violet Stringer, 1234</option>
+                            <option value=920>Warm White Opal, 920</option>
+                            <option value=920>Warm White Opal Rod, 920</option>
+                            <option value=113>White Opal, 113</option>
+                            <option value=113>White Opal Ribbon, 113</option>
+                            <option value=203>Woodland Brown Opal, 203</option>
+                            <option value=203>Woodland Brown Opal Rod, 203</option>
+                            <option value=203>Woodland Brown Opal Stringer, 203</option>
+                            <option value=1120>Yellow, 1120</option>
+                            <option value=1120>Yellow Rod, 1120</option>
+                            <option value=1120>Yellow Stringer, 1120</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">REACTIONS</button>
+                </div>
+            </form>
+            <br>
+            <div class="col-sm">
+                <b><i>Input glass</i></b> <br>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Color</th>
+                        <th scope="col">Bearing</th>
+                        <th scope="col">Glass#</th>
+                        <th scope="col">Name</th>
+                    </tr>
+                    </thead>
+                    <tbody id="glassid">
+                    </tbody>
+
+                </table>
+                <br>
+                <div><b><i>input glass reacts with</i></b></div>
+
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Color</th>
+                        <th scope="col">Bearing</th>
+                        <th scope="col">Glass#</th>
+                        <th scope="col">Name</th>
+                    </tr>
+                    </thead>
+                    <tbody id="reactions">
+                    </tbody>
+
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+    <br>
+    <div id="ver"><p>MGToolbox ver. 1.3</p></div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+<script>
+    function namepicker() {
+        console.log("--------------- in name ");
+        let id = document.querySelector('#name').value;
+        let inputGlass = findTargetGlass(id);
+        handleFormSubmit(inputGlass);
+
+
+        console.log("--------------- out name ");
+    }
+
+    function preventFormSubmit() {
+        let forms = document.querySelectorAll('form');
+        for (let i = 0; i < forms.length; i++) {
+            forms[i].addEventListener('submit', function (event) {
+                event.preventDefault();
+            });
+        }
+    }
+
+    window.addEventListener('load', preventFormSubmit);
+
+    function handleFormSubmit(inputGlass) {
+        console.log("*************** in handleFormSubmit ");
+        // inputs are valid
+        // page specific function here for gathering named inputs, units and output units
+        // console.log("rows in list "+reactionsLead.length);
+        let updateReactionLocation = document.querySelector('#reactions');
+        let inputGlassLocation =  document.querySelector('#glassid');
+
+        // show results
+        inputGlassLocation.innerHTML = fillRow(inputGlass);
+
+        // check the bearing of target glass to reaction potential
+        // other glasses and display a list.
+
+
+
+        let reactiveGlassList =  filterReactiveGlasses(inputGlass.bearing);
+        // check reaction potential table
+
+        let reactions = convertJsonToReactionsHtmlTable(reactiveGlassList);
+        updateReactionLocation.innerHTML = reactions;
+
+        console.log("*************** out handleFormSubmit ");
+    }
+    function filterReactiveGlasses(inputBearing){
+        // the input bearing value tells us how to filter the
+        // universal table to find glasses that react.
+        let reactsWith = reactiveBearing(inputBearing);
+
+        // iterate over array and return all glasses that react with this one
+        let it = reactsWith.length;
+        let reactions = [];
+
+        for ( bearing of reactsWith) {
+            // now filter table with reactsWith array
+            reactions = reactions.concat(filterUniversalTable(bearing));
+        }
+        console.log("filtered all reactions");
+        return reactions;
+    }
+    function filterUniversalTable(bearing){
+        let res = [];
+        res = reactionsAll.filter((reaction) => {
+            return reaction.bearing === bearing;
+        });
+        return res;
+    }
+
+    function checkBearing(){
+        return reaction.bearing === bearing;
+    }
+
+    function reactiveBearing(inputBearing){
+        switch (inputBearing){
+            case 'alchemy' :
+                return ["silver"];
+                break;
+            case 'copper' :
+                return ["reactive", "sulfur-selenium"];
+                break;
+            case 'lead' :
+                return ["sulfur-selenium"];
+                break;
+            case 'reactive' :
+                return ["copper"];
+                break;
+            case 'silver' :
+                return [];
+                break;
+            case 'sulfur-selenium' :
+                return ["copper","lead"];
+                break;
+            case 'none' :
+                return [];
+                break;
+        }
+    }
+
+    function findTargetGlass(glassid){
+        console.log("*************** in findTargetGlass ");
+        // find the glass data by id in our list of glasses
+        let targetGlass = reactionsAll.find(item => item.id === glassid);
+        // if this is undefined send an error
+        console.log("*************** out findTargetGlass ");
+        return targetGlass;
+    }
+
+    function convertJsonToReactionsHtmlTable(reactionsData) {
+        //Get JSON data
+        //Prepare all the employee records as HTML
+        var allRecordsHTML = '';
+        for (var i = 0; i < reactionsData.length; i++) {
+            //Prepare html row
+            allRecordsHTML += fillRow(reactionsData[i]);
+            // console.log( fillRow(reactionsLead[i]));
+        }
+        return allRecordsHTML;
+    }
+
+    function fillRow(data){
+        let row =  "<tr><td style='background-color:"+data.hex+";'><div></div></td>" +
+            "<td>"+data.bearing+"</td>" +
+            "<td>"+data.id+"</td>" +
+            "<td>"+data.name+"</td>" +
+            "</tr>"
+        return row;
+    }
+    var reactionsAll = [{"id":"9","name":"Reactive Cloud Opal","bearing":"reactive","hex":"#f1f3f7"},
+        {"id":"9","name":"Reactive Cloud Opal Stringer","bearing":"reactive","hex":"#f1f3f7"},
+        {"id":"13","name":"Opaque White Opal","bearing":"none","hex":"#f6f7f9"},
+        {"id":"13","name":"Opaque White Opal Rod","bearing":"none","hex":"#f6f7f9"},
+        {"id":"13","name":"Opaque White Opal Stringer","bearing":"none","hex":"#f6f7f9"},
+        {"id":"16","name":"Turquoise Opaque Rod","bearing":"copper","hex":"#4baeb3"},
+        {"id":"17","name":"Mineral Green Opaque Rod","bearing":"none","hex":"#508b60"},
+        {"id":"18","name":"Periwinkle Opaque Rod","bearing":"none","hex":"#667fbc"},
+        {"id":"24","name":"Tomato Red Opal","bearing":"sulfur-selenium","hex":"#c60f24"},
+        {"id":"24","name":"Tomato Red Opal Rod","bearing":"sulfur-selenium","hex":"#c60f24"},
+        {"id":"24","name":"Tomato Red Opal Stringer","bearing":"sulfur-selenium","hex":"#c60f24"},
+        {"id":"25","name":"Tangerine Orange Opal","bearing":"sulfur-selenium","hex":"#f07702"},
+        {"id":"34","name":"Light Peach Cream Opal","bearing":"none","hex":"#f3e2d5"},
+        {"id":"34","name":"Light Peach Cream Opal Rod","bearing":"none","hex":"#f3e2d5"},
+        {"id":"46","name":"Bluestone Opaque Rod","bearing":"copper"},
+        {"id":"100","name":"Black Opal","bearing":"none","hex":"#0a090a"},
+        {"id":"100","name":"Black Opal Rod","bearing":"none","hex":"#0a090a"},
+        {"id":"100","name":"Black Opal Stringer","bearing":"none","hex":"#0a090a"},
+        {"id":"100","name":"Black Opal Ribbon","bearing":"none","hex":"#0a090a"},
+        {"id":"101","name":"Stiff Black Opal","bearing":"none","hex":"#4b423c"},
+        {"id":"101","name":"Stiff Black Opal Rod","bearing":"none","hex":"#4b423c"},
+        {"id":"101","name":"Stiff Black Opal Stringer","bearing":"none","hex":"#4b423c"},
+        {"id":"102","name":"Blue Black Opal","bearing":"none","hex":"#06070d"},
+        {"id":"104","name":"Glacier Blue Opal","bearing":"copper","hex":"#a2d3eb"},
+        {"id":"108","name":"Powder Blue Opal","bearing":"none","hex":"#99bacf"},
+        {"id":"108","name":"Powder Blue Opal Rod","bearing":"none","hex":"#99bacf"},
+        {"id":"108","name":"Powder Blue Opal Stringer","bearing":"none","hex":"#99bacf"},
+        {"id":"112","name":"Mint Green Opal","bearing":"none","hex":"#9bc998"},
+        {"id":"112","name":"Mint Green Opal Rod","bearing":"none","hex":"#9bc998"},
+        {"id":"112","name":"Mint Green Opal Stringer","bearing":"none","hex":"#9bc998"},
+        {"id":"113","name":"White Opal","bearing":"none","hex":"#f4f5f1"},
+        {"id":"113","name":"White Opal Ribbon","bearing":"none","hex":"#f4f5f1"},
+        {"id":"114","name":"Cobalt Blue Opal","bearing":"none","hex":"#2b60aa"},
+        {"id":"114","name":"Cobalt Blue Opal Rod","bearing":"none","hex":"#2b60aa"},
+        {"id":"114","name":"Cobalt Blue Opal Stringer","bearing":"none","hex":"#2b60aa"},
+        {"id":"116","name":"Turquoise Blue Opal","bearing":"copper","hex":"#6dc5cb"},
+        {"id":"116","name":"Turquoise Blue Opal Rod","bearing":"copper","hex":"#6dc5cb"},
+        {"id":"116","name":"Turquoise Blue Opal Stringer","bearing":"copper","hex":"#6dc5cb"},
+        {"id":"117","name":"Mineral Green Opal","bearing":"none","hex":"#508b60"},
+        {"id":"117","name":"Mineral Green Opal Rod","bearing":"none","hex":"#508b60"},
+        {"id":"118","name":"Periwinkle Opal","bearing":"none","hex":"#667fbc"},
+        {"id":"119","name":"Mink Opal","bearing":"none","hex":"#847171"},
+        {"id":"120","name":"Canary Yellow Opal","bearing":"sulfur-selenium","hex":"#f6df00"},
+        {"id":"120","name":"Canary Yellow Opal Rod","bearing":"sulfur-selenium","hex":"#f6df00"},
+        {"id":"120","name":"Canary Yellow Opal Stringer","bearing":"sulfur-selenium","hex":"#f6df00"},
+        {"id":"124","name":"Red Opal","bearing":"sulfur-selenium","hex":"#b0120e"},
+        {"id":"124","name":"Red Opal Rod","bearing":"sulfur-selenium","hex":"#b0120e"},
+        {"id":"124","name":"Red Opal Stringer","bearing":"sulfur-selenium","hex":"#b0120e"},
+        {"id":"124","name":"Red Opal Ribbon","bearing":"sulfur-selenium","hex":"#b0120e"},
+        {"id":"125","name":"Orange Opal","bearing":"sulfur-selenium","hex":"#ea510c"},
+        {"id":"125","name":"Orange Opal Rod","bearing":"sulfur-selenium","hex":"#ea510c"},
+        {"id":"125","name":"Orange Opal Stringer","bearing":"sulfur-selenium","hex":"#ea510c"},
+        {"id":"125","name":"Orange Opal Ribbon","bearing":"sulfur-selenium","hex":"#ea510c"},
+        {"id":"126","name":"Spring Green Opal","bearing":"sulfur-selenium","hex":"#a4c81c"},
+        {"id":"126","name":"Spring Green Opal Rod","bearing":"sulfur-selenium","hex":"#a4c81c"},
+        {"id":"126","name":"Spring Green Opal Stringer","bearing":"sulfur-selenium","hex":"#a4c81c"},
+        {"id":"126","name":"Spring Green Opal Ribbon","bearing":"sulfur-selenium","hex":"#a4c81c"},
+        {"id":"127","name":"Nougat Opal Rod","bearing":"sulfur-selenium","hex":"#e4d6b2"},
+        {"id":"131","name":"Artichoke Opal","bearing":"none","hex":"#cdd1ae"},
+        {"id":"132","name":"Driftwood Gray Opal","bearing":"none","hex":"#cfceb7"},
+        {"id":"132","name":"Driftwood Gray Opal Rod","bearing":"none","hex":"#cfceb7"},
+        {"id":"136","name":"Deco Gray Opal","bearing":"none","hex":"#727678"},
+        {"id":"136","name":"Deco Gray Opal Rod","bearing":"none","hex":"#727678"},
+        {"id":"136","name":"Deco Gray Opal Stringer","bearing":"none","hex":"#727678"},
+        {"id":"137","name":"French Vanilla Opal","bearing":"sulfur-selenium","hex":"#ece6c2"},
+        {"id":"137","name":"French Vanilla Opal Rod","bearing":"sulfur-selenium","hex":"#ece6c2"},
+        {"id":"137","name":"French Vanilla Opal Stringer","bearing":"sulfur-selenium","hex":"#ece6c2"},
+        {"id":"137","name":"French Vanilla Opal Ribbon","bearing":"sulfur-selenium","hex":"#ece6c2"},
+        {"id":"138","name":"Marzipan Opal","bearing":"none","hex":"#f5e2c2"},
+        {"id":"139","name":"Almond Opal","bearing":"none","hex":"#eedbbd"},
+        {"id":"141","name":"Dark Forest Green Opal","bearing":"none","hex":"#35683d"},
+        {"id":"141","name":"Dark Forest Green Opal Rod","bearing":"none","hex":"#35683d"},
+        {"id":"141","name":"Dark Forest Green Opal Stringer","bearing":"none","hex":"#35683d"},
+        {"id":"142","name":"Neo-lavender Opal","bearing":"none","hex":"#c5bcdd"},
+        {"id":"142","name":"Neo-lavender Opal Rod","bearing":"none","hex":"#c5bcdd"},
+        {"id":"142","name":"Neo-lavender Opal Stringer","bearing":"none","hex":"#c5bcdd"},
+        {"id":"143","name":"Lacy White Opal","bearing":"none","hex":"#f0f4f1"},
+        {"id":"144","name":"Teal Green Opal","bearing":"copper","hex":"#007b71"},
+        {"id":"144","name":"Teal Green Opal Rod","bearing":"copper","hex":"#007b71"},
+        {"id":"144","name":"Teal Green Opal Stringer","bearing":"copper","hex":"#007b71"},
+        {"id":"145","name":"Jade Green Opal","bearing":"copper","hex":"#006351"},
+        {"id":"145","name":"Jade Green Opal Rod","bearing":"copper","hex":"#006351"},
+        {"id":"145","name":"Jade Green Opal Stringer","bearing":"copper","hex":"#006351"},
+        {"id":"145","name":"Jade Green Opal Ribbon","bearing":"copper","hex":"#006351"},
+        {"id":"146","name":"Steel Blue Opal","bearing":"copper","hex":"#006384"},
+        {"id":"146","name":"Steel Blue Opal Rod","bearing":"copper","hex":"#006384"},
+        {"id":"146","name":"Steel Blue Opal Stringer","bearing":"copper","hex":"#006384"},
+        {"id":"147","name":"Deep Cobalt Blue Opal","bearing":"none","hex":"#1d3486"},
+        {"id":"147","name":"Deep Cobalt Blue Opal Rod","bearing":"none","hex":"#1d3486"},
+        {"id":"147","name":"Deep Cobalt Blue Opal Stringer","bearing":"none","hex":"#1d3486"},
+        {"id":"147","name":"Deep Cobalt Blue Opal Ribbon","bearing":"none","hex":"#1d3486"},
+        {"id":"148","name":"Indigo Blue Opal","bearing":"none","hex":"#083c71"},
+        {"id":"148","name":"Indigo Opal Rod","bearing":"none","hex":"#083c71"},
+        {"id":"161","name":"Robin\u0027s Egg Blue Opal","bearing":"copper","hex":"#b4ddd9"},
+        {"id":"164","name":"Egyptian Blue Opal","bearing":"copper","hex":"#3174b8"},
+        {"id":"164","name":"Egyptian Blue Opal Rod","bearing":"copper","hex":"#3174b8"},
+        {"id":"164","name":"Egyptian Blue Opal Stringer","bearing":"copper","hex":"#3174b8"},
+        {"id":"203","name":"Woodland Brown Opal","bearing":"sulfur-selenium","hex":"#78461d"},
+        {"id":"203","name":"Woodland Brown Opal Rod","bearing":"sulfur-selenium","hex":"#78461d"},
+        {"id":"203","name":"Woodland Brown Opal Stringer","bearing":"sulfur-selenium","hex":"#78461d"},
+        {"id":"206","name":"Elephant Gray Opal","bearing":"none","hex":"#96918e"},
+        {"id":"207","name":"Celadon Green Opal","bearing":"none","hex":"#8da789"},
+        {"id":"207","name":"Celadon Green Opal Rod","bearing":"none","hex":"#8da789"},
+        {"id":"208","name":"Dusty Blue Opal","bearing":"none","hex":"#537b9a"},
+        {"id":"212","name":"Olive Green Opal","bearing":"none","hex":"#68852a"},
+        {"id":"212","name":"Olive Green Opal Rod","bearing":"none","hex":"#68852a"},
+        {"id":"212","name":"Olive Green Opal Stringer","bearing":"none","hex":"#68852a"},
+        {"id":"216","name":"Light Cyan Opal","bearing":"copper","hex":"#58bedd"},
+        {"id":"216","name":"Light Cyan Opal Rod","bearing":"copper","hex":"#58bedd"},
+        {"id":"216","name":"Light Cyan Opal Stringer","bearing":"copper","hex":"#58bedd"},
+        {"id":"216","name":"Light Cyan Opal Ribbon","bearing":"copper","hex":"#58bedd"},
+        {"id":"217","name":"Green Gold Opal Rod","bearing":"sulfur-selenium","hex":"#cec237"},
+        {"id":"220","name":"Sunflower Yellow Opal","bearing":"sulfur-selenium","hex":"#f0ae00"},
+        {"id":"220","name":"Sunflower Yellow Opal Rod","bearing":"sulfur-selenium","hex":"#f0ae00"},
+        {"id":"220","name":"Sunflower Yellow Opal Stringer","bearing":"sulfur-selenium","hex":"#f0ae00"},
+        {"id":"221","name":"Citronelle Opal","bearing":"sulfur-selenium","hex":"#b3b82b"},
+        {"id":"222","name":"Avocado Green Opal","bearing":"sulfur-selenium","hex":"#7d9b30"},
+        {"id":"224","name":"Deep Red Opal","bearing":"sulfur-selenium","hex":"#8c1826"},
+        {"id":"224","name":"Deep Red Opal Rod","bearing":"sulfur-selenium","hex":"#8c1826"},
+        {"id":"224","name":"Deep Red Opal Stringer","bearing":"sulfur-selenium","hex":"#8c1826"},
+        {"id":"225","name":"Pimento Red Opal","bearing":"sulfur-selenium","hex":"#d00a0d"},
+        {"id":"227","name":"Golden Green Opal","bearing":"sulfur-selenium","hex":"#b18d00"},
+        {"id":"227","name":"Golden Green Opal Rod","bearing":"sulfur-selenium","hex":"#b18d00"},
+        {"id":"236","name":"Slate Gray Opal","bearing":"none","hex":"#565861"},
+        {"id":"236","name":"Slate Gray Opal Stringer","bearing":"none","hex":"#565861"},
+        {"id":"241","name":"Moss Green Opal","bearing":"none","hex":"#495424"},
+        {"id":"241","name":"Moss Green Opal Rod","bearing":"none","hex":"#495424"},
+        {"id":"241","name":"Moss Green Opal Stringer","bearing":"none","hex":"#495424"},
+        {"id":"243","name":"Translucent White Opal*","bearing":"none","hex":"#f1f0f0"},
+        {"id":"243","name":"Translucent White Opal Rod","bearing":"lead","hex":"#f1f0f0"},
+        {"id":"301","name":"Pink Opal","bearing":"lead","hex":"#c45579"},
+        {"id":"301","name":"Pink Opal Rod","bearing":"lead","hex":"#c45579"},
+        {"id":"301","name":"Pink Opal Stringer","bearing":"lead","hex":"#c45579"},
+        {"id":"303","name":"Dusty Lilac Opal","bearing":"lead","hex":"#987a8c"},
+        {"id":"303","name":"Dusty Lilac Opal Rod","bearing":"lead","hex":"#987a8c"},
+        {"id":"304","name":"Lavender","bearing":"lead","hex":"#8e899c"},
+        {"id":"305","name":"Salmon Pink Opal","bearing":"lead","hex":"#d95c56"},
+        {"id":"309","name":"Cinnabar Opal","bearing":"sulfur-selenium","hex":"#883b0d"},
+        {"id":"309","name":"Cinnabar Opal Rod","bearing":"sulfur-selenium","hex":"#883b0d"},
+        {"id":"310","name":"Umber Opal","bearing":"sulfur-selenium","hex":"#865518"},
+        {"id":"312","name":"Pea Pod Green Opal","bearing":"none","hex":"#839e1c"},
+        {"id":"312","name":"Pea Pod Green Opal Rod","bearing":"none","hex":"#839e1c"},
+        {"id":"312","name":"Pea Pod Green Opal Stringer","bearing":"none","hex":"#839e1c"},
+        {"id":"313","name":"Dense White Opal","bearing":"lead","hex":"#ffffff"},
+        {"id":"313","name":"Dense White Opal Rod","bearing":"lead","hex":"#ffffff"},
+        {"id":"313","name":"Dense White Opal Stringer","bearing":"lead","hex":"#ffffff"},
+        {"id":"320","name":"Marigold Yellow Opal","bearing":"sulfur-selenium","hex":"#f69a00"},
+        {"id":"321","name":"Pumpkin Orange Opal","bearing":"sulfur-selenium","hex":"#f38400"},
+        {"id":"321","name":"Pumpkin Orange Opal Rod","bearing":"sulfur-selenium","hex":"#f38400"},
+        {"id":"321","name":"Pumpkin Orange Opal Stringer","bearing":"sulfur-selenium","hex":"#f38400"},
+        {"id":"329","name":"Burnt Orange Opal","bearing":"sulfur-selenium","hex":"#b0430a"},
+        {"id":"329","name":"Burnt Orange Opal Rod","bearing":"sulfur-selenium","hex":"#b0430a"},
+        {"id":"329","name":"Burnt Orange Opal Stringer","bearing":"sulfur-selenium","hex":"#b0430a"},
+        {"id":"332","name":"Plum Opal","bearing":"none","hex":"#883763"},
+        {"id":"334","name":"Gold Purple Opal","bearing":"lead","hex":"#53245f"},
+        {"id":"334","name":"Gold Purple Opal Rod","bearing":"lead","hex":"#53245f"},
+        {"id":"334","name":"Gold Purple Opal Stringer","bearing":"lead","hex":"#53245f"},
+        {"id":"336","name":"Deep Gray Opal","bearing":"none","hex":"#393c40"},
+        {"id":"337","name":"Butterscotch Opal","bearing":"sulfur-selenium","hex":"#b06e0d"},
+        {"id":"337","name":"Butterscotch Opal Rod","bearing":"sulfur-selenium","hex":"#b06e0d"},
+        {"id":"337","name":"Butterscotch Opal Stringer","bearing":"sulfur-selenium","hex":"#b06e0d"},
+        {"id":"345","name":"Steel Jade Opal","bearing":"copper","hex":"#188270"},
+        {"id":"349","name":"Gray Green Opal","bearing":"none","hex":"#6a6f69"},
+        {"id":"403","name":"Opaline Opal","bearing":"none","hex":"#e4e5e8"},
+        {"id":"420","name":"Cream Opal","bearing":"none","hex":"#f6f0c9"},
+        {"id":"420","name":"Cream Opal Rod","bearing":"none","hex":"#f6f0c9"},
+        {"id":"420","name":"Cream Opal Stringer","bearing":"none","hex":"#f6f0c9"},
+        {"id":"421","name":"Petal Pink Opal","bearing":"none","hex":"#fadbe9"},
+        {"id":"421","name":"Petal Pink Opal Rod","bearing":"none","hex":"#fadbe9"},
+        {"id":"421","name":"Petal Pink Opal Stringer","bearing":"none","hex":"#fadbe9"},
+        {"id":"421","name":"Petal Pink Opal Ribbon","bearing":"none","hex":"#fadbe9"},
+        {"id":"429","name":"Rhubarb Pastel Opal Rod","bearing":"none","hex":"#e4ecd6"},
+        {"id":"920","name":"Warm White Opal","bearing":"none","hex":"#f4f1dd"},
+        {"id":"920","name":"Warm White Opal Rod","bearing":"none","hex":"#f4f1dd"},
+        {"id":"1009","name":"Reactive Ice Clear","bearing":"reactive","hex":"#28f2f2"},
+        {"id":"1009","name":"Reactive Ice Clear Stringer","bearing":"reactive","hex":"#28f2f2"},
+        {"id":"1015","name":"Clear Silver To Gold","bearing":"alchemy"},
+        {"id":"1016","name":"Clear Silver To Bronze","bearing":"alchemy"},
+        {"id":"1019","name":"Red Reactive Clear","bearing":"reactive"},
+        {"id":"1022","name":"Red Orange Rod","bearing":"sulfur-selenium","hex":"#db332a"},
+        {"id":"1025","name":"Light Orange","bearing":"sulfur-selenium","hex":"#f07104"},
+        {"id":"1101","name":"Clear","bearing":"none","hex":"#ffffff"},
+        {"id":"1101","name":"Clear Rod","bearing":"none","hex":"#ffffff"},
+        {"id":"1101","name":"Clear Stringer","bearing":"none","hex":"#ffffff"},
+        {"id":"1101","name":"Clear Ribbon","bearing":"none","hex":"#ffffff"},
+        {"id":"1105","name":"Deep Plum","bearing":"none","hex":"#7c3b52"},
+        {"id":"1105","name":"Deep Plum Rod","bearing":"none","hex":"#7c3b52"},
+        {"id":"1105","name":"Deep Plum Stringer","bearing":"none","hex":"#7c3b52"},
+        {"id":"1107","name":"Light Green","bearing":"none","hex":"#95c971"},
+        {"id":"1107","name":"Light Green Rod","bearing":"none","hex":"#95c971"},
+        {"id":"1107","name":"Light Green Stringer","bearing":"none","hex":"#95c971"},
+        {"id":"1108","name":"Aquamarine Blue","bearing":"none","hex":"#00566f"},
+        {"id":"1108","name":"Aquamarine Blue Rod","bearing":"none","hex":"#00566f"},
+        {"id":"1108","name":"Aquamarine Blue Stringer","bearing":"none","hex":"#00566f"},
+        {"id":"1109","name":"Dark Rose Brown","bearing":"none","hex":"#3f2422"},
+        {"id":"1109","name":"Dark Rose Brown Rod","bearing":"none","hex":"#3f2422"},
+        {"id":"1109","name":"Dark Rose Brown Stringer","bearing":"none","hex":"#3f2422"},
+        {"id":"1109","name":"Dark Rose Brown Ribbon","bearing":"none","hex":"#3f2422"},
+        {"id":"1112","name":"Aventurine Green","bearing":"none","hex":"#23553b"},
+        {"id":"1112","name":"Aventurine Green Rod","bearing":"none","hex":"#23553b"},
+        {"id":"1112","name":"Aventurine Green Stringer","bearing":"none","hex":"#23553b"},
+        {"id":"1114","name":"Deep Royal Blue","bearing":"none","hex":"#034393"},
+        {"id":"1114","name":"Deep Royal Blue Rod","bearing":"none","hex":"#034393"},
+        {"id":"1114","name":"Deep Royal Blue Stringer","bearing":"none","hex":"#034393"},
+        {"id":"1114","name":"Deep Royal Blue Ribbon","bearing":"none","hex":"#034393"},
+        {"id":"1116","name":"Turquoise Blue","bearing":"copper","hex":"#02b7e8"},
+        {"id":"1116","name":"Turquoise Blue Rod","bearing":"copper","hex":"#02b7e8"},
+        {"id":"1116","name":"Turquoise Blue Stringer","bearing":"copper","hex":"#02b7e8"},
+        {"id":"1116","name":"Turquoise Blue Ribbon","bearing":"copper","hex":"#02b7e8"},
+        {"id":"1118","name":"Midnight Blue","bearing":"none","hex":"#003777"},
+        {"id":"1118","name":"Midnight Blue Rod","bearing":"none","hex":"#003777"},
+        {"id":"1118","name":"Midnight Blue Stringer","bearing":"none","hex":"#003777"},
+        {"id":"1118","name":"Midnight Blue Ribbon","bearing":"none","hex":"#003777"},
+        {"id":"1119","name":"Sienna","bearing":"sulfur-selenium","hex":"#6f4634"},
+        {"id":"1119","name":"Sienna Rod","bearing":"sulfur-selenium","hex":"#6f4634"},
+        {"id":"1119","name":"Sienna Stringer","bearing":"sulfur-selenium","hex":"#6f4634"},
+        {"id":"1120","name":"Yellow","bearing":"sulfur-selenium","hex":"#f8d100"},
+        {"id":"1120","name":"Yellow Rod","bearing":"sulfur-selenium","hex":"#f8d100"},
+        {"id":"1120","name":"Yellow Stringer","bearing":"sulfur-selenium","hex":"#f8d100"},
+        {"id":"1122","name":"Red","bearing":"sulfur-selenium","hex":"#af0e2f"},
+        {"id":"1122","name":"Red Rod","bearing":"sulfur-selenium","hex":"#af0e2f"},
+        {"id":"1122","name":"Red Stringer","bearing":"sulfur-selenium","hex":"#af0e2f"},
+        {"id":"1125","name":"Orange","bearing":"sulfur-selenium","hex":"#ea4d0c"},
+        {"id":"1125","name":"Orange Rod","bearing":"sulfur-selenium","hex":"#ea4d0c"},
+        {"id":"1125","name":"Orange Stringer","bearing":"sulfur-selenium","hex":"#ea4d0c"},
+        {"id":"1126","name":"Chartreuse","bearing":"sulfur-selenium","hex":"#c8af01"},
+        {"id":"1126","name":"Chartreuse Rod","bearing":"sulfur-selenium","hex":"#c8af01"},
+        {"id":"1126","name":"Chartreuse Stringer","bearing":"sulfur-selenium","hex":"#c8af01"},
+        {"id":"1128","name":"Deep Royal Purple","bearing":"none","hex":"#46215A"},
+        {"id":"1128","name":"Deep Royal Purple Rod","bearing":"none","hex":"#46215A"},
+        {"id":"1128","name":"Deep Royal Purple Stringer","bearing":"none","hex":"#46215A"},
+        {"id":"1128","name":"Deep Royal Purple Ribbon","bearing":"none","hex":"#46215A"},
+        {"id":"1129","name":"Charcoal Gray","bearing":"none","hex":"#666d60"},
+        {"id":"1129","name":"Charcoal Gray Rod","bearing":"none","hex":"#666d60"},
+        {"id":"1129","name":"Charcoal Gray Stringer","bearing":"none","hex":"#666d60"},
+        {"id":"1129","name":"Charcoal Gray Ribbon","bearing":"none","hex":"#666d60"},
+        {"id":"1137","name":"Medium Amber","bearing":"sulfur-selenium","hex":"#f1ce2f"},
+        {"id":"1137","name":"Medium Amber Rod","bearing":"sulfur-selenium","hex":"#f1ce2f"},
+        {"id":"1137","name":"Medium Amber Stringer","bearing":"sulfur-selenium","hex":"#f1ce2f"},
+        {"id":"1138","name":"Dark Amber","bearing":"sulfur-selenium","hex":"#de9c06"},
+        {"id":"1138","name":"Dark Amber Rod","bearing":"sulfur-selenium","hex":"#de9c06"},
+        {"id":"1140","name":"Aventurine Blue","bearing":"none","hex":"#283342"},
+        {"id":"1140","name":"Aventurine Blue Stringer","bearing":"none","hex":"#283342"},
+        {"id":"1141","name":"Olive Green","bearing":"none","hex":"#86a14c"},
+        {"id":"1141","name":"Olive Green Rod","bearing":"none","hex":"#86a14c"},
+        {"id":"1141","name":"Olive Green Stringer","bearing":"none","hex":"#86a14c"},
+        {"id":"1145","name":"Kelly Green","bearing":"copper","hex":"#026036"},
+        {"id":"1145","name":"Kelly Green Rod","bearing":"copper","hex":"#026036"},
+        {"id":"1145","name":"Kelly Green Stringer","bearing":"copper","hex":"#026036"},
+        {"id":"1164","name":"Caribbean Blue","bearing":"copper","hex":"#0054a0"},
+        {"id":"1164","name":"Caribbean Blue Rod","bearing":"copper","hex":"#0054a0"},
+        {"id":"1164","name":"Caribbean Blue Stringer","bearing":"copper","hex":"#0054a0"},
+        {"id":"1176","name":"Peacock Blue","bearing":"copper","hex":"#006f7c"},
+        {"id":"1205","name":"Light Coral","bearing":"lead","hex":"#f1aa76"},
+        {"id":"1207","name":"Fern Green","bearing":"sulfur-selenium","hex":"#9dae12"},
+        {"id":"1215","name":"Light Pink","bearing":"lead","hex":"#d15e88"},
+        {"id":"1215","name":"Light Pink Rod","bearing":"lead","hex":"#d15e88"},
+        {"id":"1217","name":"Leaf Green","bearing":"copper","hex":"#b8d8a4"},
+        {"id":"1226","name":"Lily Pad Green","bearing":"copper","hex":"#77892c"},
+        {"id":"1228","name":"Amethyst","bearing":"none","hex":"#5c3759"},
+        {"id":"1229","name":"Pewter","bearing":"none","hex":"#918d8e"},
+        {"id":"1232","name":"Light Fuchsia Rod","bearing":"lead","hex":"#b83a84"},
+        {"id":"1234","name":"Violet","bearing":"lead","hex":"#853987"},
+        {"id":"1234","name":"Violet Stringer","bearing":"lead","hex":"#853987"},
+        {"id":"1241","name":"Pine Green","bearing":"sulfur-selenium","hex":"#939f1b"},
+        {"id":"1246","name":"Copper Blue","bearing":"copper","hex":"#173b65"},
+        {"id":"1305","name":"Sunset Coral","bearing":"lead","hex":"#e47a2e"},
+        {"id":"1305","name":"Sunset Coral Rod","bearing":"lead","hex":"#e47a2e"},
+        {"id":"1305","name":"Sunset Coral Stringer","bearing":"lead","hex":"#e47a2e"},
+        {"id":"1311","name":"Cranberry Pink","bearing":"lead","hex":"#ba355e"},
+        {"id":"1311","name":"Cranberry Pink Rod","bearing":"lead","hex":"#ba355e"},
+        {"id":"1311","name":"Cranberry Pink Stringer","bearing":"lead","hex":"#ba355e"},
+        {"id":"1320","name":"Marigold Yellow","bearing":"sulfur-selenium","hex":"#fcc700"},
+        {"id":"1321","name":"Carnelian","bearing":"sulfur-selenium","hex":"#b8460d"},
+        {"id":"1321","name":"Carnelian Rod","bearing":"sulfur-selenium","hex":"#b8460d"},
+        {"id":"1322","name":"Garnet Red","bearing":"sulfur-selenium","hex":"#9a1430"},
+        {"id":"1322","name":"Garnet Red Rod","bearing":"sulfur-selenium","hex":"#9a1430"},
+        {"id":"1332","name":"Fuchsia","bearing":"lead","hex":"#a3396b"},
+        {"id":"1334","name":"Gold Purple","bearing":"lead","hex":"#5a4986"},
+        {"id":"1342","name":"Cranberry Sapphirine Rod","bearing":"lead","hex":"#bb2f56"},
+        {"id":"1401","name":"Crystal Clear","bearing":"none","hex":"#ffffff"},
+        {"id":"1401","name":"Crystal Clear Rod","bearing":"none","hex":"#ffffff"},
+        {"id":"1405","name":"Light Plum","bearing":"none","hex":"#e1b8b8"},
+        {"id":"1405","name":"Light Plum Rod","bearing":"none","hex":"#e1b8b8"},
+        {"id":"1406","name":"Steel Blue","bearing":"none","hex":"#6ca3b7"},
+        {"id":"1406","name":"Steel Blue Rod","bearing":"none","hex":"#6ca3b7"},
+        {"id":"1406","name":"Steel Blue Stringer","bearing":"none","hex":"#6ca3b7"},
+        {"id":"1408","name":"Light Aquamarine","bearing":"copper","hex":"#b3dddc"},
+        {"id":"1408","name":"Light Aquamarine Blue Rod","bearing":"copper","hex":"#b3dddc"},
+        {"id":"1408","name":"Light Aquamarine Blue Stringer","bearing":"copper","hex":"#b3dddc"},
+        {"id":"1409","name":"Light Bronze","bearing":"none","hex":"#d0ba86"},
+        {"id":"1409","name":"Light Bronze Rod","bearing":"none","hex":"#d0ba86"},
+        {"id":"1409","name":"Light Bronze Stringer","bearing":"none","hex":"#d0ba86"},
+        {"id":"1412","name":"Light Aventurine Green","bearing":"none","hex":"#344e21"},
+        {"id":"1412","name":"Light Aventurine Green Rod","bearing":"none","hex":"#344e21"},
+        {"id":"1412","name":"Light Aventurine Green Stringer","bearing":"none","hex":"#344e21"},
+        {"id":"1412","name":"Light Aventurine Green Ribbon","bearing":"none","hex":"#344e21"},
+        {"id":"1414","name":"Light Sky Blue","bearing":"none","hex":"#99b0db"},
+        {"id":"1414","name":"Light Sky Blue Rod","bearing":"none","hex":"#99b0db"},
+        {"id":"1414","name":"Light Sky Blue Stringer","bearing":"none","hex":"#99b0db"},
+        {"id":"1416","name":"Light Turquoise Blue","bearing":"copper","hex":"#86cad6"},
+        {"id":"1417","name":"Emerald Green","bearing":"copper","hex":"#55bb97"},
+        {"id":"1417","name":"Emerald Green Rod","bearing":"copper","hex":"#55bb97"},
+        {"id":"1417","name":"Emerald Green Stringer","bearing":"copper","hex":"#55bb97"},
+        {"id":"1419","name":"Tan","bearing":"none","hex":"#ae7f43"},
+        {"id":"1422","name":"Lemon Lime Green","bearing":"sulfur-selenium","hex":"#c7d514"},
+        {"id":"1426","name":"Spring Green","bearing":"none","hex":"#aac811"},
+        {"id":"1426","name":"Spring Green Rod","bearing":"none","hex":"#aac811"},
+        {"id":"1426","name":"Spring Green Stringer","bearing":"none","hex":"#aac811"},
+        {"id":"1426","name":"Spring Green Ribbon","bearing":"none","hex":"#aac811"},
+        {"id":"1428","name":"Light Violet","bearing":"none","hex":"#c09dad"},
+        {"id":"1428","name":"Light Violet Rod","bearing":"none","hex":"#c09dad"},
+        {"id":"1429","name":"Light Silver Gray","bearing":"none","hex":"#b6beaf"},
+        {"id":"1429","name":"Light Silver Gray Rod","bearing":"none","hex":"#b6beaf"},
+        {"id":"1429","name":"Light Silver Gray Stringer","bearing":"none","hex":"#b6beaf"},
+        {"id":"1437","name":"Light Amber","bearing":"sulfur-selenium","hex":"#eee6b5"},
+        {"id":"1437","name":"Light Amber Rod","bearing":"sulfur-selenium","hex":"#eee6b5"},
+        {"id":"1439","name":"Khaki","bearing":"none","hex":"#b3aa86"},
+        {"id":"1439","name":"Khaki Rod","bearing":"none","hex":"#b3aa86"},
+        {"id":"1442","name":"Neo-lavender","bearing":"none","hex":"#bfc2e2"},
+        {"id":"1442","name":"Neo-lavender Rod","bearing":"none","hex":"#bfc2e2"},
+        {"id":"1442","name":"Neo-lavender Stringer","bearing":"none","hex":"#bfc2e2"},
+        {"id":"1442","name":"Neo-lavender Ribbon","bearing":"none","hex":"#bfc2e2"},
+        {"id":"1444","name":"Sea Blue","bearing":"none","hex":"#6899a3"},
+        {"id":"1444","name":"Sea Blue Stringer","bearing":"none","hex":"#6899a3"},
+        {"id":"1449","name":"Oregon Gray","bearing":"none","hex":"#b8b8a0"},
+        {"id":"1464","name":"True Blue","bearing":"copper","hex":"#437cbd"},
+        {"id":"1506","name":"Pale Steel Blue Rod","bearing":"none","hex":"#3a91b9"},
+        {"id":"1514","name":"Pale Sky Blue Rod","bearing":"none","hex":"#a9c0e4"},
+        {"id":"1517","name":"Pale Emerald Rod","bearing":"copper","hex":"#7ac9aa"},
+        {"id":"1528","name":"Pale Amethyst Rod","bearing":"none","hex":"#cca9b7"},
+        {"id":"1701","name":"Amber Lustre Rod","bearing":"lead","hex":"#eee6b5"},
+        {"id":"1707","name":"Green Lustre Rod","bearing":"lead","hex":"#f3f4ef"},
+        {"id":"1714","name":"Blue Lustre Rod","bearing":"lead"},
+        {"id":"1717","name":"Copper Green Lustre Rod","bearing":"lead","hex":"#f3f4ef"},
+        {"id":"1717","name":"Copper Green Lustre Rod","bearing":"copper","hex":"#f3f4ef"},
+        {"id":"1806","name":"Juniper Blue Tint","bearing":"none","hex":"#f0f3ec"},
+        {"id":"1806","name":"Juniper Blue Tint Rod","bearing":"none","hex":"#f0f3ec"},
+        {"id":"1807","name":"Grass Green Tint","bearing":"none","hex":"#ecf3e5"},
+        {"id":"1807","name":"Grass Green Tint Rod","bearing":"none","hex":"#ecf3e5"},
+        {"id":"1807","name":"Grass Green Tint Stringer","bearing":"none","hex":"#ecf3e5"},
+        {"id":"1808","name":"Aqua Blue Tint","bearing":"copper","hex":"#e5f3f0"},
+        {"id":"1808","name":"Aqua Blue Tint Rod","bearing":"copper","hex":"#e5f3f0"},
+        {"id":"1812","name":"Seaweed Aventurine Rod","bearing":"none","hex":"#96c771"},
+        {"id":"1814","name":"Sapphire Blue Tint","bearing":"none","hex":"#e2ebf8"},
+        {"id":"1816","name":"Turquoise Blue Tint","bearing":"copper","hex":"#bbe2f0"},
+        {"id":"1818","name":"Indigo Tint","bearing":"none","hex":"#eef2f4"},
+        {"id":"1819","name":"Brown Topaz Tint","bearing":"none","hex":"#f7f3ea"},
+        {"id":"1820","name":"Pale Yellow Tint","bearing":"none","hex":"#fbf9e4"},
+        {"id":"1820","name":"Pale Yellow Tint Rod","bearing":"none","hex":"#fbf9e4"},
+        {"id":"1820","name":"Pale Yellow Tint Stringer","bearing":"none","hex":"#fbf9e4"},
+        {"id":"1821","name":"Erbium Pink Tint","bearing":"none","hex":"#fcf0f3"},
+        {"id":"1821","name":"Erbium Pink Tint Rod","bearing":"none","hex":"#fcf0f3"},
+        {"id":"1821","name":"Erbium Pink Tint Stringer","bearing":"none","hex":"#fcf0f3"},
+        {"id":"1823","name":"Burnt Scarlet Tint","bearing":"lead","hex":"#e59e94"},
+        {"id":"1824","name":"Ruby Red Tint","bearing":"lead","hex":"#ea9aac"},
+        {"id":"1826","name":"Green Tea Tint*","bearing":"none","hex":"#f3f4eb"},
+        {"id":"1827","name":"Light Amber Tint*","bearing":"none","hex":"#fbf9e8"},
+        {"id":"1829","name":"Gray Tint","bearing":"none","hex":"#edeff0"},
+        {"id":"1831","name":"Ruby Pink Tint","bearing":"lead","hex":"#f3b8d1"},
+        {"id":"1834","name":"Coral Orange Tint","bearing":"none","hex":"#fef5f0"},
+        {"id":"1834","name":"Coral Orange Tint Rod","bearing":"none","hex":"#fef5f0"},
+        {"id":"1834","name":"Coral Orange Tint Stringer","bearing":"none","hex":"#fef5f0"},
+        {"id":"1837","name":"Medium Amber Tint*","bearing":"none","hex":"#fdf9e1"},
+        {"id":"1841","name":"Spruce Green Tint","bearing":"none","hex":"#e3ebde"},
+        {"id":"1841","name":"Spruce Green Tint Rod","bearing":"none","hex":"#e3ebde"},
+        {"id":"1841","name":"Spruce Green Tint Stringer","bearing":"none","hex":"#e3ebde"},
+        {"id":"1842","name":"Light Neo-lavender Shift Tint","bearing":"none","hex":"#e9eaf3"},
+        {"id":"1842","name":"Light Neo-lavender Shift Tint Rod","bearing":"none","hex":"#e9eaf3"},
+        {"id":"1842","name":"Light Neo-lavender Shift Tint Stringer","bearing":"none","hex":"#e9eaf3"},
+        {"id":"1844","name":"Lavender Green Shift Tint","bearing":"none","hex":"#e5eff6"},
+        {"id":"1845","name":"Ming Green Tint","bearing":"copper","hex":"#cee5d7"},
+        {"id":"1857","name":"Red Amber Tint","bearing":"sulfur-selenium","hex":"#f8e4b8"},
+        {"id":"1858","name":"Lt Rhubarb Shift Tint","bearing":"none","hex":"#ecf3e3"},
+        {"id":"1859","name":"Rhubarb Shift Tint","bearing":"none","hex":"#e4ecd6"},
+        {"id":"1859","name":"Rhubarb Shift Tint Rod","bearing":"none","hex":"#e4ecd6"},
+        {"id":"1859","name":"Rhubarb Shift Tint Stringer","bearing":"none","hex":"#e4ecd6"},
+        {"id":"1864","name":"Gray Blue Tint","bearing":"none","hex":"#e8f0f6"},
+        {"id":"1867","name":"Olive Smoke Tint","bearing":"none","hex":"#f4f4eb"},
+        {"id":"1877","name":"Olivine Tint","bearing":"none","hex":"#f1f5e2"},
+        {"id":"1917","name":"Cilantro Green Tint","bearing":"copper","hex":"#f3f4ef"},
+        {"id":"1920","name":"Lemon Tint","bearing":"none","hex":"#fcfcec"},
+        {"id":"1932","name":"Fuchsia Tint","bearing":"none","hex":"#f0f1f7"},
+        {"id":"1934","name":"Copper Tint","bearing":"none","hex":"#fff9ef"},
+        {"id":"1948","name":"Purple Blue Tint","bearing":"none","hex":"#f3ecf3"},
+        {"id":"1964","name":"Lavender Gray Tint","bearing":"none","hex":"#f7f6f8"},
+        {"id":"1977","name":"Pine Green Tint","bearing":"none","hex":"#f7faf2"},
+    ];
+</script>
+</body>
+</html>

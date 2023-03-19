@@ -1,5 +1,7 @@
 package org.slt;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -55,16 +57,21 @@ public class ReactionsDTO {
         this.name = values.get(2);
     }
 
+    public String toJson(){
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
+
     // String colorId, String colorName, String hexColor
-/*
     @Override
     public String toString() {
-        return  "  <div class=\"column\" style=\"background-color:"+getHex()+";\">\n" +
-                "    <h4>"+getName()+"</h4>\n" +
-                "    <p>"+getId()+" hex: "+getHex()+"</p>\n" +
-                "  </div>\n";
+        StringBuffer sb = new StringBuffer();
+        sb.append(this.id+", ");
+        sb.append(this.bearing+", ");
+        sb.append(this.hex+", ");
+        sb.append(this.name);
+        return  sb.toString();
     }
-*/
 
 
 
