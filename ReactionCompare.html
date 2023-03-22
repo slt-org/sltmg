@@ -903,6 +903,7 @@
             resultReactionLocation.innerHTML = '<h4>These glasses do not react</h4>'
         }
 
+
         // check the bearing of target glass to reaction potential
         // other glasses and display a list.
 
@@ -916,6 +917,11 @@
     }
     function compareForReactive(glass1,glass2){
         let reactsWith = reactiveBearing(glass1.bearing);
+        if(glass1.bearing === glass2.bearing)
+            return false;
+        if(glass1.bearing === "none" || glass2.bearing === "none" )
+            return false;
+
         if(reactsWith.length > 0){
             return true;
         }else{
