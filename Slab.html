@@ -395,52 +395,9 @@
         let generatedRecipe = slab.getRecipe();
         updateLocation.innerHTML = generatedRecipe;
 
-/*
-        let _inputUnits = "imperial";
-        let _length = document.querySelector('#length').value;
-        let _width = document.querySelector('#width').value;
-        let _height = document.querySelector('#height').value;
-        let _outputUnits = document.querySelector('input[name=output]:checked').value;
-        let _coe = document.querySelector('input[name=coe]:checked').value;
-
-        // inputs pass the validity test so turn them into numbers
-        // all inputs are in inches so volume will be in inches
-        var length = math.fraction(_length);
-        var width = math.fraction(_width);
-        var height = math.fraction(_height);
-
-        // We've turned the fraction or decimal text input into numbers.
-        // the numbers are still in the imperial units number system.
-        // Convert them to metric and use the metric path.
-        var convertedInputs = convertInputsToMetric(Number(length), Number(width), Number(height));
-
-        var dataToSend = createData(convertedInputs.length, convertedInputs.width, convertedInputs.height, _outputUnits, _inputUnits, _coe);
-
-        var generatedRecipe = getSlabRecipe(dataToSend)
-
-        updateLocation.innerHTML = generatedRecipe;
-
-*/
         console.log("*************** out tSlab.html:handleFormSubmit ");
     };
 
-/*    /!**
-     * this method takes the text input values and turns
-     * them into a data object.
-     *!/
-    function createData(_length, _width, _height, _outputUnits, _inputUnits, _coe) {
-        console.log("in origTSlab.html:createData ***************************");
-        var data = new Object();
-        data.length = _length;
-        data.width = _width;
-        data.height = _height;
-        data.outputUnits = _outputUnits;
-        data.inputUnits = _inputUnits;
-        data.coe = _coe;
-
-        console.log("out origTSlab.html:createData ***************************");
-        return data;
-    };*/
 
     function preventFormSubmit() {
         var forms = document.querySelectorAll('form');

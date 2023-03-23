@@ -106,8 +106,20 @@
               </select>
             </div>
           </div>
+          <br>
           <div class="form-group col-sm-6">
-            <br>
+            <p class="h6 sm-4 ">COE 90 or 96 Recipe</p>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="coe" id="90" value="90"
+                     checked>
+              <label class="form-check-label" for="metric">COE 90</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="coe" id="96" value="96">
+              <label class="form-check-label" for="imperial">COE 96</label>
+            </div>
+          </div>
+          <div class="form-group col-sm-6">
             <p class="h6 sm-4 ">Dimension Units </p>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="output" id="metric" value="metric"
@@ -119,7 +131,6 @@
               <label class="form-check-label" for="imperial">Imperial</label>
             </div>
           </div>
-
         </div>
         <div class="col-12">
           <button type="submit" class="btn btn-primary btn-block">Shapes</button>
@@ -128,7 +139,7 @@
       <br>
       <div class="col-sm-auto">
         <div id="dimensions">
-          <p><em>Possible shapes dimensions:</em></p>
+          <p class="h5 sm-4 "><em>Possible shapes dimensions:</em></p>
           <b>MG total volume:</b> 0 cm<sup>3</sup>
           <table class="table table-hover">
             <thead>
@@ -175,6 +186,42 @@
           </table>
         </div>
       </div>
+      <br>
+      <div class="col-sm-auto" id="recipe">
+        <p class="h5 sm-4 "><em>Batch recipe based on this weight:</em></p>
+        <b>MG total volume:</b> 0 cm<sup>3</sup><br> <b>MG total weight:</b> 0 grams
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th scope="col">Ingredient</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Units</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">Glass</th>
+            <td>0</td>
+            <td>grams</td>
+          </tr>
+          <tr>
+            <th scope="row">H2O</th>
+            <td>0</td>
+            <td>grams</td>
+          </tr>
+          <tr>
+            <th scope="row">Binder</th>
+            <td>0</td>
+            <td>grams</td>
+          </tr>
+          <tr>
+            <th scope="row">Liquid Medium</th>
+            <td>0</td>
+            <td>grams</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
   <br>
@@ -196,6 +243,10 @@
   const WATERCONV = 0.236;
   const BINDERCONV = 0.416;
   const LMEDIUMCONV = 0.2;
+  const GLASS96 = .579;
+  const WATER96 = .359;
+  const BINDER96 = .036;
+  const LMEDIUM96 = .026;
   const CUP = "cup";
   const a3QTR = "3/4";
   const aHALF = "1/2";
@@ -249,6 +300,7 @@
     let selectWeightUnits = document.getElementById('weightInputUnits');
     data.weightUnits = selectWeightUnits.options[selectWeightUnits.selectedIndex].value;
     data.outputUnits = document.querySelector('input[name=output]:checked').value;
+    data.coe =  document.querySelector('input[name=coe]:checked').value;
     console.log("in reverseInputCollector ***************************");
 
     return data;
@@ -260,11 +312,13 @@
     diameter
     slabSide;
     outputUnits;
+    coe;
 
     constructor(data) {
       this.weight = data.weight;
       this.weightUnits = data.weightUnits;
       this.outputUnits = data.outputUnits;
+      this.coe = data.coe;
     }
 
     normalizeUnits() {
@@ -305,6 +359,26 @@
       console.log("*************** out Reverse.calculateShapes ");
     }
 
+    getRecipe() {
+      console.log("in Slab:getRecipe:*******************");
+      let resultHtml;
+
+      if (this.outputUnits == "metric") {
+        // produce the metric version of recipe
+        this.volume = Number(this.volume);
+        resultHtml = mCreateRecipeTableHtml(this);
+      } else if (this.outputUnits == "imperial") {
+        // produce the imperial version of recipe
+        // need to take the volumeObject down the Imperial path.
+        resultHtml = iCreateRecipeTableHtml(this);
+      } else {
+        cosole.log("We should never get here 'Big old Error'");
+        resultHtml = "<h3>Failed to create recipe...  ERROR</h3>";
+      }
+      console.log("out  Slab:getRecipe:*******************");
+      return resultHtml;
+    };
+
     convertToImperial(){
       let imperial = new Object();
       // wellchosen 1 cm is .3937 in
@@ -321,28 +395,6 @@
 
       imperial.slabSide = (this.slabSide / INTOCM).toFixed(1);
       imperial.slabSide = this.splitDecimal(imperial.slabSide);
-
-      /*
-            if(imperial.volume < 1){
-              imperial.volume =  convertDecimalToFraction(this.volume);
-            }else{
-              imperial.volume = this.splitDecimal(imperial.volume);
-            }
-
-            imperial.diameter = (this.diameter / INTOCM).toFixed(3);
-            if(imperial.diameter < 1){
-              imperial.diameter =  convertDecimalToFraction(imperial.diameter);
-            }else{
-              imperial.diameter = this.splitDecimal(imperial.diameter);
-            }
-
-            imperial.slabSide = (this.slabSide / INTOCM).toFixed(1);
-            if(imperial.slabSide < 1){
-              imperial.slabSide =  convertDecimalToFraction(imperial.slabSide);
-            }else{
-              imperial.slabSide = this.splitDecimal(imperial.slabSide);
-            }
-      */
 
       return imperial;
     }
@@ -368,35 +420,39 @@
 
 
   }
+
   function handleFormSubmit() {
     console.log("*************** in tReverse.html:handleFormSubmit ");
 
     let updateLocation = document.querySelector('#dimensions');
+    let recipeLocation = document.querySelector('#recipe');
+
 
     let reverse = new Reverse(reverseInputCollector());
     reverse.normalizeUnits();
     // calculate the dimensions for disk and slab
     reverse.calculateShapes();
-    //
 
     if (reverse.outputUnits == "metric") {
       var output = outputTableMetric(reverse.volume,reverse.diameter,reverse.slabSide);
+      var recipeOutput = reverse.getRecipe();
       updateLocation.innerHTML = output;
-      // updateLocation.innerHTML = "<em> Volume: " + volume + "cm<sup>3</sup></em><br><em> Disk dimensions: </em> radius: " + radius + "cm, height: 1cm <br> " + "<em> Slab dimensions: </em> length: " + dimension + "cm, width: " + dimension + "cm, height: 1cm ";
+      recipeLocation.innerHTML = recipeOutput;
     } else if (reverse.outputUnits  == "imperial") {
       // convert the metric units to imperial units
       /* todo: do we want a conversion to fractional representation here
       *   with a clean call to outputTableImperial
       */
       let imperial = reverse.convertToImperial();
+      var recipeOutput = reverse.getRecipe();
       updateLocation.innerHTML = outputTableImperial(imperial.volume, imperial.diameter, imperial.slabSide);
+      recipeLocation.innerHTML = recipeOutput;
     } else {
       Logger.log("We should never get here 'Big old Error'");
       resultHtml = "Failed to create recipe...  ERROR";
     }
     console.log("*************** out tReverse.html:handleFormSubmit ");
   };
-
 
 
   /**
@@ -432,7 +488,38 @@
             "        </table>\n";
   }
 
-
+  /**
+   *  Metric output
+   *  to table for possible shape dimensions
+   * @param _volume
+   * @param _radius
+   * @param _dimension
+   */
+  function outputTableMetric(_volume, _diameter, _dimension) {
+    console.log("in tReverse.html:outputTableMetric");
+    return "     <p class=\"h5 sm-4 \"><em>Possible shape dimensions:</em></p>" +
+            "        <b>MG total volume:</b> " + _volume + " cm<sup>3</sup>" +
+            "        <table class=\"table table-hover\">" +
+            "          <thead>" +
+            "          <tr><th scope=\"col\">Disk dimensions</th></tr>" +
+            "          </thead>" +
+            "          <tbody>" +
+            "          <tr><th scope=\"row\">diameter</th><td>" + _diameter + "</td><td>cm</td></tr>" +
+            "          <tr><th scope=\"row\">height</th><td>1</td><td>cm</td></tr>" +
+            "          </tbody>" +
+            "        </table>" +
+            "        <table class=\"table table-hover\">" +
+            "          <thead>" +
+            "          <tr><th scope=\"col\">Slab dimensions</th></tr>" +
+            "          </thead>" +
+            "          <tbody>" +
+            "          <tr><th scope=\"row\">length</th><td>" + _dimension + "</td><td>cm</td></tr>" +
+            "          <tr><th scope=\"row\">width</th><td>" + _dimension + "</td><td>cm</td></tr>" +
+            "          <tr><th scope=\"row\">height</th><td>1</td><td>cm</td></tr>" +
+            "          </tbody>" +
+            "        </table>";
+    console.log("out tReverse.html:outputTableMetric");
+  }
 
   function convertDecimalToFraction(value){
     // value is always less than 1 and greater than 0
@@ -470,38 +557,280 @@
     }
     return result;
   }
+
   /**
-   *  Metric output
-   *  to table for possible shape dimensions
-   * @param _volume
-   * @param _radius
-   * @param _dimension
+   * this method takes an object and turns it into
+   * an html table of the MG recipe with Imperial units to be displayed to the user
+   * The volumeObject should be complete should and
+   * have the 4 fields of glass,water,binder and liquid medium.
    */
-  function outputTableMetric(_volume, _diameter, _dimension) {
-    console.log("in tReverse.html:outputTableMetric");
-    return "     <p class=\"h5 sm-4 \"><em>Possible shape dimensions:</em></p>" +
-            "        <b>MG total volume:</b> " + _volume + " cm<sup>3</sup>" +
-            "        <table class=\"table table-hover\">" +
-            "          <thead>" +
-            "          <tr><th scope=\"col\">Disk dimensions</th></tr>" +
-            "          </thead>" +
-            "          <tbody>" +
-            "          <tr><th scope=\"row\">diameter</th><td>" + _diameter + "</td><td>cm</td></tr>" +
-            "          <tr><th scope=\"row\">height</th><td>1</td><td>cm</td></tr>" +
-            "          </tbody>" +
-            "        </table>" +
-            "        <table class=\"table table-hover\">" +
-            "          <thead>" +
-            "          <tr><th scope=\"col\">Slab dimensions</th></tr>" +
-            "          </thead>" +
-            "          <tbody>" +
-            "          <tr><th scope=\"row\">length</th><td>" + _dimension + "</td><td>cm</td></tr>" +
-            "          <tr><th scope=\"row\">width</th><td>" + _dimension + "</td><td>cm</td></tr>" +
-            "          <tr><th scope=\"row\">height</th><td>1</td><td>cm</td></tr>" +
-            "          </tbody>" +
-            "        </table>";
-    console.log("out tReverse.html:outputTableMetric");
-  }
+  function iCreateRecipeTableHtml(volumeObject) {     // a portion of this is duplicate code for metric and imperial
+    console.log("in imperial.gs : iCreateRecipeTableHtml ***********************");
+    console.log("iCreateRecipeTableHtml: object passed to createRecipe " + JSON.stringify(volumeObject));
+
+    volumeObject = createBaseVolume(volumeObject);
+
+    let recipe = "";
+
+    // We need to translate from grams to imperial measurements of teaspoons ect.
+    // for each ingredient. Then output the amount to table
+    console.log("glass .................");
+    var glassAmount = formatIngredientList(convert(volumeObject.glass, GLASSCONV));
+    console.log("water .................");
+    var waterAmount = formatIngredientList(convert(volumeObject.water, WATERCONV));
+    console.log("binder .................");
+    var binderAmount = formatIngredientList(convert(volumeObject.binder, BINDERCONV));
+    console.log("medium .................");
+    var mediumAmount = formatIngredientList(convert(volumeObject.liquid_medium, LMEDIUMCONV));
+
+    var cubicInches = "in<sup>3</sup>";
+    var oz = "oz";
+    var impVolume;
+    var impWeight;
+    if (volumeObject.outputUnits == "imperial") {
+      // convert volume from cc to ci and weight from gm to oz.
+      impVolume = (volumeObject.volume / CITOCC).toFixed(2);
+      impWeight = (volumeObject.total_weight / OZTOGM).toFixed(2);
+    }
+
+    // Logger.log("glassAmount : " + glassAmount.toString());
+    recipe = "<p class=\"h5 sm-4 \"><em>Batch recipe based on this weight:</em></p>" +
+            "<b>MG total volume:</b> " + impVolume + " " + cubicInches + "<br> <b>MG total weight:</b> " + impWeight + " ounces\n" +
+            "                <table class=\"table table-hover\">\n" +
+            "                    <thead>\n" +
+            "                    <tr><th scope=\"col\">Ingredient</th><th scope=\"col\">Amount</th></tr>\n" +
+            "                    </thead>\n" +
+            "                    <tbody>\n" +
+            "                    <tr><th scope=\"row\">Glass</th><td>" + glassAmount.toString() + "</td></tr>\n" +
+            "                    <tr><th scope=\"row\">H2O</th><td>" + waterAmount.toString() + "</td></tr>\n" +
+            "                    <tr><th scope=\"row\">Binder</th><td>" + binderAmount.toString() + "</td></tr>\n" +
+            "                    <tr><th scope=\"row\">Liquid Medium</th><td>" + mediumAmount.toString() + "</td></tr>\n" +
+            "                    </tbody>\n" +
+            "                </table>\n";
+
+    console.log("out imperial.gs : iCreateRecipeTableHtml ***********************");
+    return recipe;
+  };
+
+  // finalObject has collected values from conversion
+  function formatIngredientList(formatObject) {
+    console.log("in imperial.gs : formatIngredientList ***********************");
+    // Walk the possible values and format for
+    // html template.
+
+    var cup = false;
+    var tsp = false;
+    var result = "";
+    var glassAmountFormatted;
+    if (formatObject.cups > 0) {
+      result = result + formatObject.cups + " ";
+      cup = true;
+    }
+    if (formatObject.threeqtrCup > 0) {
+      result = result + "3/4";
+      cup = true;
+    }
+    if (formatObject.halfCup > 0) {
+      result = result + "1/2";
+      cup = true;
+    }
+    if (formatObject.qtrCup > 0) {
+      result = result + "1/4";
+      cup = true;
+    }
+    if (cup == true) {
+      result = result + " cup + ";
+    }
+    if (formatObject.tblsp > 0) {
+      result = result + formatObject.tblsp + " tblsp + ";
+    }
+    if (formatObject.tsp > 0) {
+      result = result + formatObject.tsp + " ";
+      tsp = true;
+    }
+    if (formatObject.threeqtrTsp > 0) {
+      result = result + "3/4";
+      tsp = true;
+    }
+    if (formatObject.halfTsp > 0) {
+      result = result + "1/2";
+      tsp = true;
+    }
+    if (formatObject.qtrTsp > 0) {
+      result = result + "1/4";
+      tsp = true;
+    }
+    if (tsp == true) {
+      result = result + " tsp.";
+    }
+
+    console.log("out imperial.gs : formatIngredientList ***********************");
+
+    return result;
+  };
+
+
+  /**
+   * this method takes json and turns it into
+   * an html table of the MG recipe to be displayed to the user
+   * json should have the 4 fields of glass,water,binder and liquid medium.
+   *  @param {object} volumeObject - DTO for aggregating data.
+   */
+  function mCreateRecipeTableHtml(volumeObject) {
+    console.log("metric.js:mCreateRecipeTableHtml: object passed to createRecipe " + JSON.stringify(volumeObject));
+
+    volumeObject = createBaseVolume(volumeObject);
+
+    let recipe = "";
+
+    if (volumeObject.outputUnits != "imperial") {
+      volumeObject.units = "grams";
+      // set this functionality up in the metric script space
+      recipe =  "<p class=\"h5 sm-4 \"><em>Batch recipe based on this weight:</em></p>" +
+              "<b>MG total volume:</b> " + volumeObject.volume.toFixed(1) + " cm<sup>3</sup><br> <b>MG total weight:</b> " + volumeObject.total_weight.toFixed(1) + " grams\n" +
+              "                <table class=\"table table-hover\">\n" +
+              "                    <thead>\n" +
+              "                    <tr><th scope=\"col\">Ingredient</th><th scope=\"col\">Amount</th><th scope=\"col\">Units</th></tr>\n" +
+              "                    </thead>\n" +
+              "                    <tbody>\n" +
+              "                    <tr><th scope=\"row\">Glass</th><td>" + volumeObject.glass + "</td><td>" + volumeObject.units + "</td></tr>\n" +
+              "                    <tr><th scope=\"row\">H2O</th><td>" + volumeObject.water + "</td><td>" + volumeObject.units + "</td></tr>\n" +
+              "                    <tr><th scope=\"row\">Binder</th><td>" + volumeObject.binder + "</td><td>" + volumeObject.units + "</td></tr>\n" +
+              "                    <tr><th scope=\"row\">Liquid Medium</th><td>" + volumeObject.liquid_medium + "</td><td>" + volumeObject.units + "</td></tr>\n" +
+              "                    </tbody>\n" +
+              "                </table>\n";
+
+    } else {
+      console.log("metric.js:mCreateRecipeTableHtml: needs to call function for Imperial transform");
+      recipe = iCreateRecipeTableHtml(volumeObject);
+    }
+    return recipe;
+  };
+
+
+  /**
+   * this method takes json and turns it into
+   * an html table of the MG recipe to be displayed to the user
+   * json should have the 4 fields of glass,water,binder and liquid medium.
+   * @param {Object} volumeObject - volume DTO.
+   * @param {string} volumeObject.volume -
+   * @param {string} employee.department - The employee's department.
+   */
+  function createBaseVolume(volumeObject) {
+    console.log("in metric.js:createBaseVolume ***********************");
+    console.log("createBaseVolume: object passed to createRecipe " + JSON.stringify(volumeObject));
+    // The total volume multiplied by 2 (the sg of MG) will give you the weight
+    //  of the MG needed to fill the volume.
+    // Now multiply the total weight by the ratio for each ingredient.
+    // That we give you the weight amount for each ingredient.
+    volumeObject.total_weight = volumeObject.volume * 2;
+    if (volumeObject.coe == "90") {
+      volumeObject.glass = (volumeObject.total_weight * GLASS).toFixed(1); // grams of glass powder to use
+      volumeObject.water = (volumeObject.total_weight * WATER).toFixed(1);
+      volumeObject.binder = (volumeObject.total_weight * BINDER).toFixed(1);
+      volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM).toFixed(1);
+      return volumeObject;
+    }
+    ;
+
+    if (volumeObject.coe == "96") {
+      volumeObject.glass = (volumeObject.total_weight * GLASS96).toFixed(1); // grams of glass powder to use
+      volumeObject.water = (volumeObject.total_weight * WATER96).toFixed(1);
+      volumeObject.binder = (volumeObject.total_weight * BINDER96).toFixed(1);
+      volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM96).toFixed(1);
+      return volumeObject;
+    }
+    ;
+
+    console.log("out metric.js:createBaseVolume ***********************");
+    // return volumeObject;
+  };
+
+  /**
+   * convert ingredient weight in grams to imperial measurements.
+   * @param {number} ingredientWeightInGrams
+   */
+  function convert(ingredientWeightInGrams, ingredientConversionFactor) {
+    console.log("in imperial.gs : convert ***********************");
+    console.log("input value in grams " + ingredientWeightInGrams + " input conversion factor " + ingredientConversionFactor);
+    var tsp = ingredientWeightInGrams * ingredientConversionFactor;
+    console.log("teaspoons from weight: " + tsp.toFixed(2));
+    var conObj = new Object();
+    conObj.cups = 0;            // 48 tsps
+    conObj.threeqtrCup = 0;     // 36 tsps
+    // conObj.twoThirdsCup = 0; // 32 tsps
+    conObj.halfCup = 0;         // 24 tsps
+    conObj.qtrCup = 0;          // 12 tsps
+    conObj.tblsp = 0;           //  3 tsps
+    conObj.threeqtrTsp = 0;
+    conObj.halfTsp = 0;
+    conObj.qtrTsp = 0;
+    conObj.eightTsp = 0;
+    conObj.tsp = 0;
+
+    while (tsp > 48) {
+      conObj.cups = conObj.cups + 1;
+      tsp = tsp - 48;
+    }
+    ;
+
+    if (tsp <= 47.99 && tsp >= 36) {
+      conObj.threeqtrCup = 1;
+      tsp = tsp - 36;
+    }
+    ;
+
+    if (tsp <= 35.99 && tsp >= 24) {
+      conObj.halfCup = 1;
+      tsp = tsp - 24;
+    }
+    ;
+
+    if (tsp <= 23.99 && tsp >= 12) {
+      conObj.qtrCup = 1;
+      tsp = tsp - 12;
+    }
+    ;
+
+    while (tsp <= 11.99 && tsp >= 3) {
+      conObj.tblsp = conObj.tblsp + 1;
+      tsp = tsp - 3;
+    }
+    ;
+
+    while (tsp < 2.99 && tsp >= 1) {
+      tsp = tsp.toFixed(2);
+      conObj.tsp = conObj.tsp + 1;
+      tsp = tsp - 1;
+    }
+    ;
+
+    console.log("after here there is less than 1 teaspoon left. " + tsp.toFixed(2));
+
+    if (tsp < 1.0 && tsp >= .75) {
+      conObj.threeqtrTsp = conObj.threeqtrTsp + 1;
+      tsp = 0;
+    }
+
+    if (tsp < .749 && tsp >= .50) {
+      conObj.halfTsp = conObj.halfTsp + 1;
+      tsp = 0;
+    }
+
+    if (tsp < .499 && tsp >= .25) {
+      conObj.qtrTsp = conObj.qtrTsp + 1;
+      tsp = 0;
+    }
+
+    if (tsp < .249 && tsp >= .125) {
+      conObj.eightTsp = conObj.eightTsp + 1;
+      tsp = 0;
+    }
+
+    console.log("out imperial.gs : convert ***********************");
+    return conObj;
+  };
+
 
   function preventFormSubmit() {
     var forms = document.querySelectorAll('form');
