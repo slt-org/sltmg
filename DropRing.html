@@ -91,16 +91,17 @@
 <div class="container">
     <div class="row">
         <div class="col-8">
-            <form class="row g-3 was-validated" id="myForm" onsubmit="handleFormSubmit()">
-                <p class="h4 sm-4 text-center">Bowl Recipe</p><br>
+            <form class="row g-3" id="myForm" onsubmit="handleFormSubmit()">
+                <p class="h4 sm-4 text-center">DropRing Calculation</p><br>
                 <small id="hint" class="form-text">acceptable values are any numbers whole, decimals or fractions
                     <br> e.g. 3, 0.3, 3.6, 6 1/4 & 1/2
                     <br> be aware! 1 1/4 and 11/4 are not the same!</small>
                 <div class="form-row align-items-center">
+                    <p class="h6 sm-4 ">Rim ring</p>
                     <div class="input-group mb-3">
-                        <input type="text" id="insideDiameter" class="form-control" placeholder="inside diameter"
+                        <input type="text" id="rimDiameter" class="form-control" placeholder="rim diameter"
                                required>
-                        <select class="form-select-sm" id="insideDiameterInputUnits">
+                        <select class="form-select-sm" id="rimDiameterInputUnits">
                             <option value="in" selected>in</option>
                             <option value="mm">mm</option>
                             <option value="cm">cm</option>
@@ -108,16 +109,40 @@
                     </div>
                     <div class="col-sm-auto">
                         <div class="form-group input-group">
-                            <input type="text" id="outsideDiameter" class="form-control" placeholder="outside diameter"
-                                   required>
-                            <select class="form-select-sm" id="outsideDiameterInputUnits">
+                            <input type="text" class="form-control" id="rimHeight" placeholder="rim height" required>
+                            <select class="form-select-sm" id="rimHeightInputUnits">
                                 <option value="in" selected>in</option>
                                 <option value="mm">mm</option>
                                 <option value="cm">cm</option>
                             </select>
                         </div>
                     </div>
+                    <br><br>
+                    <p class="h6 sm-4 ">Color disk</p>
+                    <div class="col-sm-auto">
+                        <div class="form-group input-group">
+                            <input type="text" id="colorDiameter" class="form-control" placeholder="color diameter"
+                                   required>
+                            <select class="form-select-sm" id="colorDiameterInputUnits">
+                                <option value="in" selected>in</option>
+                                <option value="mm">mm</option>
+                                <option value="cm">cm</option>
+                            </select>
+                        </div>
+                    </div><br>
+                    <div class="col-sm-auto">
+                        <div class="form-group input-group">
+                            <input type="text" class="form-control" id="colorHeight" placeholder="color height" required>
+                            <select class="form-select-sm" id="colorHeightInputUnits">
+                                <option value="in" selected>in</option>
+                                <option value="mm">mm</option>
+                                <option value="cm">cm</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <br>
+<!--
                     <div class="form-group col-sm-6">
                         <p class="h6 sm-4 ">COE 90 or 96 Recipe</p>
                         <div class="form-check form-check-inline">
@@ -130,9 +155,9 @@
                             <label class="form-check-label" for="imperial">COE 96</label>
                         </div>
                     </div>
+-->
                     <div class="form-group col-sm-6">
-                        <p class="h6 sm-4 ">Recipe output units</p>
-
+                        <p class="h6 sm-4 ">Drop output units</p>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="output" id="metric" value="metric"
                                    checked>
@@ -145,43 +170,31 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <button type="submit" class="btn btn-primary btn-block">Recipe</button>
+                    <button type="submit" class="btn btn-primary btn-block">Drop</button>
                 </div>
             </form>
             <br>
-            <div class="col-sm-auto" id="recipe">
-                <b>MG total volume:</b> 0 cm<sup>3</sup><br> <b>MG total weight:</b> 0 grams
+            <div id="recipe">
+            <!--<div class="col-sm-auto" id="rim">-->
+                <!--
+<b>MG total volume:</b> 0 cm<sup>3</sup><br> <b>MG total weight:</b> 0 grams
+-->
+                <p class="h6 sm-4 ">Rim values</p>
                 <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">Ingredient</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">Units</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">Glass</th>
-                        <td>0</td>
-                        <td>grams</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">H2O</th>
-                        <td>0</td>
-                        <td>grams</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Binder</th>
-                        <td>0</td>
-                        <td>grams</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Liquid Medium</th>
-                        <td>0</td>
-                        <td>grams</td>
-                    </tr>
-                    </tbody>
+                    <thead><tr><th scope="col">Volume</th><th scope="col">Weight</th></tr></thead>
+                    <tbody><tr><th scope="row">0</th><td>0</td></tr></tbody>
                 </table>
+            <!--</div>-->
+            <br>
+            <!--<div class="col-sm-auto" id="color">-->
+                <p class="h6 sm-4 ">Color values</p>
+                <table class="table table-hover">
+                    <thead><tr><th scope="col">Volume</th><th scope="col">Weight</th></tr></thead>
+                    <tbody><tr><th scope="row">0</th><td>0</td></tr></tbody>
+                </table>
+            <!--</div>-->
+                <br>
+                <div><b>Total volume:</b> 0 cm<sup>3</sup><br> <b>Total weight:</b> 0 grams</div>
             </div>
         </div>
     </div>
@@ -228,8 +241,10 @@
     const inputs = document.querySelectorAll('input');
 
     const patterns = {
-        insideRadius: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/,
-        outsideRadius: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/
+        rimDiameter: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/,
+        rimHeight: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/,
+        colorDiameter: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/,
+        colorHeight: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/
     };
 
     inputs.forEach((input) => {
@@ -256,60 +271,81 @@
 <script>
     // <!-- 3. Initial input handling different for each page -->
     /**
-     * Bowl page specific code for
+     * DropRing page specific code for
      * * Initial input handling with form submit
-     * * Calculations by Shape Bowl object
+     * * Calculations by Shape DropRing object
      * takes the form input values and turns
      * them into normalized metric numbers and output unit preferences1
-     * @type {Bowl}
+     * @type {DropRing}
      */
-    function bowlInputCollector() {
-        console.log("in bowlInputCollector ***************************");
+    function dropRingInputCollector() {
+        console.log("in dropRingInputCollector ***************************");
         var data = new Object();
-        data.insideDiameter = document.querySelector('#insideDiameter').value;
-        data.insideDiameterUnits = document.getElementById('insideDiameterInputUnits').value;
-        // let selectInsideDiameterInputUnits = document.getElementById('insideDiameterInputUnits');
-        data.outsideDiameter = document.querySelector('#outsideDiameter').value;
-        data.outsideDiameterUnits = document.querySelector('#outsideDiameterInputUnits').value;
-        data.outputUnits = document.querySelector('input[name=output]:checked').value;
-        data.coe = document.querySelector('input[name=coe]:checked').value;
+        data.colorDiameter = document.querySelector('#colorDiameter').value;
+        data.colorDiameterUnits = document.getElementById('colorDiameterInputUnits').value;
+        data.colorHeight = document.querySelector('#colorHeight').value;
+        data.colorHeightUnits = document.getElementById('colorHeightInputUnits').value;
 
-        console.log("out bowlInputCollector ***************************");
+        data.rimDiameter = document.querySelector('#rimDiameter').value;
+        data.rimDiameterUnits = document.querySelector('#rimDiameterInputUnits').value;
+        data.rimHeight = document.querySelector('#rimHeight').value;
+        data.rimHeightUnits = document.querySelector('#rimHeightInputUnits').value;
+
+        data.outputUnits = document.querySelector('input[name=output]:checked').value;
+        // data.coe = document.querySelector('input[name=coe]:checked').value;
+
+        console.log("out dropRingInputCollector ***************************");
         return data;
     }
 
-    class Bowl {
-        insideDiameter;
-        insideDiameterUnits;
-        outsideDiameter;
-        outsideDiameterUnits;
-        volume;
+    class DropRing {
+        colorDiameter;
+        colorDiameterUnits;
+        colorHeight;
+        colorHeightUnits;
+        rimDiameter;
+        rimDiameterUnits;
+        rimHeight;
+        rimHeightUnits;
+        volumeTotal;
+        volumeRim;
+        volumeColor;
         outputUnits;
-        coe;
+        //coe;
 
         constructor(data) {
-            this.insideDiameter = data.insideDiameter;
-            this.insideDiameterUnits = data.insideDiameterUnits;
-            this.outsideDiameter = data.outsideDiameter;
-            this.outsideDiameterUnits = data.outsideDiameterUnits;
+            this.colorDiameter = data.colorDiameter;
+            this.colorDiameterUnits = data.colorDiameterUnits;
+            this.colorHeight = data.colorHeight;
+            this.colorHeightUnits = data.colorHeightUnits;
+            this.rimDiameter = data.rimDiameter;
+            this.rimDiameterUnits = data.rimDiameterUnits;
+            this.rimHeight = data.rimHeight;
+            this.rimHeightUnits = data.rimHeightUnits;
             this.outputUnits = data.outputUnits;
-            this.coe = data.coe;
+            //this.coe = data.coe;
         };
 
         /**
          * turns all units of measurement into centimeters.
          */
         normalizeUnits() {
-            console.log("in Bowl.normalize ***************************");
+            console.log("in DropRing.normalize ***************************");
             // turn all values that might be fractions into numbers.
             // and convert into centimeters.
-            let _insideDiameter = math.number(math.fraction(this.insideDiameter));
-            let _outsideDiameter = math.number(math.fraction(this.outsideDiameter));
-            this.insideDiameter = this.convertToMetric(_insideDiameter, this.insideDiameterUnits);
-            this.outsideDiameter = this.convertToMetric(_outsideDiameter, this.outsideDiameterUnits);
-            this.insideDiameterUnits = "cm";
-            this.outsideDiameterUnits = "cm";
-            console.log("out Bowl.normalize ***************************");
+            let _colorDiameter = math.number(math.fraction(this.colorDiameter));
+            let _colorHeight = math.number(math.fraction(this.colorHeight));
+            let _rimDiameter = math.number(math.fraction(this.rimDiameter));
+            let _rimHeight = math.number(math.fraction(this.rimHeight));
+            this.colorDiameter = this.convertToMetric(_colorDiameter, this.colorDiameterUnits);
+            this.colorHeight = this.convertToMetric(_colorHeight, this.colorHeightUnits);
+            this.rimDiameter = this.convertToMetric(_rimDiameter, this.rimDiameterUnits);
+            this.rimHeight = this.convertToMetric(_rimHeight, this.rimHeightUnits);
+            this.colorDiameterUnits = "cm";
+            this.colorHeightUnits = "cm"
+            this.rimDiameterUnits = "cm";
+            this.rimHeightUnits = "cm";
+            console.log("out DropRing.normalize ***************************");
             return "todo";
         };
 
@@ -317,16 +353,18 @@
          * calculate volume from dimensions.
          */
         calculateVolume() {
-            console.log("in Bowl.calculateVolume ***************************");
-            let insideRadius = this.insideDiameter / 2;
-            let outsideRadius = this.outsideDiameter / 2;
+            console.log("in DropRing.calculateVolume ***************************");
+            // Rim volume calculations
+            let insideRadius = this.colorDiameter / 2;
+            let outsideRadius = this.rimDiameter / 2;
             let r3 = insideRadius * insideRadius * insideRadius;
             let R3 = outsideRadius * outsideRadius * outsideRadius;
-            this.volume = ((4 / 3) * PI * (R3 - r3)) / 2;
-            this.insideRadius = insideRadius;
-            this.outsideRadius = outsideRadius;
+            this.volumeRim = ((4 / 3) * PI * (R3 - r3)) / 2;
+            // Color volume calculations
+            this.volumeColor = ((4 / 3) * PI * r3) / 2;
+            this.volumeTotal = this.volumeRim + this.volumeColor;
             // volume here is always in cm^3
-            console.log("out Bowl.calculateVolume ***************************");
+            console.log("out DropRing.calculateVolume ***************************");
         }
 
         /**
@@ -336,12 +374,12 @@
             switch (units) {
                 case "in": {
                     // convert to cm
-                    value = (value * INTOCM).toFixed(3);
+                    value = (value * INTOCM);
                     break;
                 }
                 case "mm": {
                     // convert to cm
-                    value = (value / 10).toFixed(3);
+                    value = (value / 10);
                     break;
                 }
                 default: {
@@ -351,24 +389,52 @@
             return value;
         };
 
-        getRecipe() {
-            console.log("in Bowl:getBowlRecipe:*******************");
+        getResults() {
+            console.log("in DropRing:getDropRingRecipe:*******************");
             let resultHtml;
 
             if (this.outputUnits == "metric") {
                 // produce the metric version of recipe
-                resultHtml = mCreateRecipeTableHtml(this);
+                let metricObject = this.convertToNumber();
+                resultHtml = createResultTable(metricObject);
             } else if (this.outputUnits == "imperial") {
                 // produce the imperial version of recipe
                 // need to take the volumeObject down the Imperial path.
-                resultHtml = iCreateRecipeTableHtml(this);
+                let imperialObject = this.convertToImperial();
+                resultHtml = createResultTable(imperialObject);
             } else {
                 cosole.log("We should never get here 'Big old Error'");
-                resultHtml = "<h3>Failed to create recipe...  ERROR</h3>";
+                resultHtml = "<h3>Failed to create Drop information...  ERROR</h3>";
             }
-            console.log("out  Bowl:getBowlRecipe:*******************");
+            console.log("out  DropRing:getDropRingRecipe:*******************");
             return resultHtml;
         };
+
+        convertToNumber(){
+            var impObject = new Object();
+            impObject.unitsVolume  = "cm<sup>3</sup>";
+            impObject.unitsWeight = "grams";
+            // set this functionality up in the metric script space
+            impObject.rimVolume = Number(this.volumeRim);
+            impObject.colorVolume = Number(this.volumeColor);
+            impObject.rimWeight = Number((impObject.rimVolume * 2.5));
+            impObject.colorWeight = Number((impObject.colorVolume * 2.5));
+
+            return impObject;
+        }
+
+        convertToImperial(){
+            var impObject = new Object();
+            impObject.unitsVolume = "in<sup>3</sup>";
+            impObject.unitsWeight = "oz";
+            impObject.rimVolume = Number((this.volumeRim / CITOCC));
+            impObject.colorVolume = Number((this.volumeColor / CITOCC));
+            impObject.rimWeight = Number(((this.volumeRim * 2.5) / OZTOGM));
+            impObject.colorWeight = Number(((this.volumeColor * 2.5) / OZTOGM));
+
+            return impObject;
+        }
+
     }
 
 
@@ -378,10 +444,10 @@
         // page specific function here for gathering named inputs, units and output units
         let updateLocation = document.querySelector('#recipe');
 
-        let bowl = new Bowl(bowlInputCollector());
-        bowl.normalizeUnits();
-        bowl.calculateVolume();
-        let generatedRecipe = bowl.getRecipe();
+        let dropRing = new DropRing(dropRingInputCollector());
+        dropRing.normalizeUnits();
+        dropRing.calculateVolume();
+        let generatedRecipe = dropRing.getResults();
         updateLocation.innerHTML = generatedRecipe;
 
         console.log("*************** out handleFormSubmit ");
@@ -413,17 +479,36 @@
      * json should have the 4 fields of glass,water,binder and liquid medium.
      *  @param {object} volumeObject - DTO for aggregating data.
      */
-    function mCreateRecipeTableHtml(volumeObject) {
+    function createResultTable(volumeObject) {
         console.log("metric.js:mCreateRecipeTableHtml: object passed to createRecipe " + JSON.stringify(volumeObject));
 
-        volumeObject = createBaseVolume(volumeObject);
-
-        let recipe = "";
+        let recipe = "No recipe available";
 
         if (volumeObject.outputUnits != "imperial") {
+/*
             volumeObject.units = "grams";
             // set this functionality up in the metric script space
-            recipe = "<b>MG total volume:</b> " + volumeObject.volume.toFixed(1) + " cm<sup>3</sup><br> <b>MG total weight:</b> " + volumeObject.total_weight.toFixed(1) + " grams\n" +
+            let _volumeRim = Number(volumeObject.volumeRim.toFixed(1));
+            let _volumeColor = Number(volumeObject.volumeColor.toFixed(1));
+            let _rimWeight = Number((_volumeRim * 2.5).toFixed(1));
+            let _colorWeight = Number((_volumeColor * 2.5).toFixed(1));
+*/
+            recipe = "<p class=\"h6 sm-4 \">Rim values</p>\n" +
+                "                <table class=\"table table-hover\">\n" +
+                "                    <thead><tr><th scope=\"col\">Volume</th><th scope=\"col\">Weight</th></tr></thead>\n" +
+                "                    <tbody><tr><td scope=\"row\">"+volumeObject.rimVolume.toFixed(2)+" "+volumeObject.unitsVolume+" </td><td>"+volumeObject.rimWeight.toFixed(2)+" "+volumeObject.unitsWeight+"</td></tr></tbody>\n" +
+                "                </table>\n" +
+                "            <br>\n" +
+                "                <p class=\"h6 sm-4 \">Color values</p>\n" +
+                "                <table class=\"table table-hover\">\n" +
+                "                    <thead><tr><th scope=\"col\">Volume</th><th scope=\"col\">Weight</th></tr></thead>\n" +
+                "                    <tbody><tr><td scope=\"row\">"+volumeObject.colorVolume.toFixed(2)+" "+volumeObject.unitsVolume+" </td><td>"+volumeObject.colorWeight.toFixed(2)+" "+volumeObject.unitsWeight+"</td></tr></tbody>\n" +
+                "                </table>\n" +
+                "                <div><b>Total volume:</b> "+(volumeObject.rimVolume+volumeObject.colorVolume).toFixed(2)+" "+volumeObject.unitsVolume+" <br> <b>Total weight:</b> "+(volumeObject.rimWeight+volumeObject.colorWeight).toFixed(2)+" "+volumeObject.unitsWeight+" </div>"
+
+             /*
+                "                <br>\n" +
+                "                <p class=\"h6 sm-4 \">Color recipe</p>\n" +
                 "                <table class=\"table table-hover\">\n" +
                 "                    <thead>\n" +
                 "                    <tr><th scope=\"col\">Ingredient</th><th scope=\"col\">Amount</th><th scope=\"col\">Units</th></tr>\n" +
@@ -435,51 +520,9 @@
                 "                    <tr><th scope=\"row\">Liquid Medium</th><td>" + volumeObject.liquid_medium + "</td><td>" + volumeObject.units + "</td></tr>\n" +
                 "                    </tbody>\n" +
                 "                </table>\n";
-
-        } else {
-            console.log("metric.js:mCreateRecipeTableHtml: needs to call function for Imperial transform");
-            recipe = iCreateRecipeTableHtml(volumeObject);
-        }
+*/
+        };
         return recipe;
-    };
-
-
-    /**
-     * this method takes json and turns it into
-     * an html table of the MG recipe to be displayed to the user
-     * json should have the 4 fields of glass,water,binder and liquid medium.
-     * @param {Object} volumeObject - volume DTO.
-     * @param {string} volumeObject.volume -
-     * @param {string} employee.department - The employee's department.
-     */
-    function createBaseVolume(volumeObject) {
-        console.log("in metric.js:createBaseVolume ***********************");
-        console.log("createBaseVolume: object passed to createRecipe " + JSON.stringify(volumeObject));
-        // The total volume multiplied by 2 (the sg of MG) will give you the weight
-        //  of the MG needed to fill the volume.
-        // Now multiply the total weight by the ratio for each ingredient.
-        // That we give you the weight amount for each ingredient.
-        volumeObject.total_weight = volumeObject.volume * 2;
-        if (volumeObject.coe == "90") {
-            volumeObject.glass = (volumeObject.total_weight * GLASS).toFixed(1); // grams of glass powder to use
-            volumeObject.water = (volumeObject.total_weight * WATER).toFixed(1);
-            volumeObject.binder = (volumeObject.total_weight * BINDER).toFixed(1);
-            volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM).toFixed(1);
-            return volumeObject;
-        }
-        ;
-
-        if (volumeObject.coe == "96") {
-            volumeObject.glass = (volumeObject.total_weight * GLASS96).toFixed(1); // grams of glass powder to use
-            volumeObject.water = (volumeObject.total_weight * WATER96).toFixed(1);
-            volumeObject.binder = (volumeObject.total_weight * BINDER96).toFixed(1);
-            volumeObject.liquid_medium = (volumeObject.total_weight * LMEDIUM96).toFixed(1);
-            return volumeObject;
-        }
-        ;
-
-        console.log("out metric.js:createBaseVolume ***********************");
-        // return volumeObject;
     };
 
     /********************************************************************************************************
@@ -494,16 +537,16 @@
      * The volumeObject should be complete should and
      * have the 4 fields of glass,water,binder and liquid medium.
      */
+/*
     function iCreateRecipeTableHtml(volumeObject) {     // a portion of this is duplicate code for metric and imperial
         console.log("in imperial.gs : iCreateRecipeTableHtml ***********************");
         console.log("iCreateRecipeTableHtml: object passed to createRecipe " + JSON.stringify(volumeObject));
 
-        volumeObject = createBaseVolume(volumeObject);
-
-        let recipe = "";
+        let recipe = "No Recipe available";
 
         // We need to translate from grams to imperial measurements of teaspoons ect.
         // for each ingredient. Then output the amount to table
+/!*
         console.log("glass .................");
         var glassAmount = formatIngredientList(convert(volumeObject.glass, GLASSCONV));
         console.log("water .................");
@@ -512,15 +555,20 @@
         var binderAmount = formatIngredientList(convert(volumeObject.binder, BINDERCONV));
         console.log("medium .................");
         var mediumAmount = formatIngredientList(convert(volumeObject.liquid_medium, LMEDIUMCONV));
+*!/
 
-        var cubicInches = "in<sup>3</sup>";
-        var oz = "oz";
-        var impVolume;
-        var impWeight;
+        let cubicInches = "in<sup>3</sup>";
+        let oz = "oz";
+        let _rimVolume = volumeObject.volumeRim.toFixed(1);
+        let _colorVolume = volumeObject.volumeColor.toFixed(1)
+        let _rimWeight = (_rimVolume * 2.5).toFixed(1);
+        let _colorWeight = (_colorVolume * 2.5).toFixed(1);
         if (volumeObject.outputUnits == "imperial") {
             // convert volume from cc to ci and weight from gm to oz.
-            impVolume = (volumeObject.volume / CITOCC).toFixed(2);
-            impWeight = (volumeObject.total_weight / OZTOGM).toFixed(2);
+            _rimVolume = (_rimVolume / CITOCC).toFixed(2);
+            _rimWeight = (_rimWeight / OZTOGM).toFixed(2);
+            _colorVolume = (_colorVolume / CITOCC).toFixed(2);
+            _colorWeight = (_colorWeight / OZTOGM).toFixed(2);
         }
 
         // Logger.log("glassAmount : " + glassAmount.toString());
@@ -540,17 +588,18 @@
         console.log("out imperial.gs : iCreateRecipeTableHtml ***********************");
         return recipe;
     };
+*/
 
     // finalObject has collected values from conversion
-    function formatIngredientList(formatObject) {
+   /* function formatIngredientList(formatObject) {
         console.log("in imperial.gs : formatIngredientList ***********************");
         // Walk the possible values and format for
         // html template.
 
-        var cup = false;
-        var tsp = false;
-        var result = "";
-        var glassAmountFormatted;
+        let cup = false;
+        let tsp = false;
+        let result = "";
+        let glassAmountFormatted;
         if (formatObject.cups > 0) {
             result = result + formatObject.cups + " ";
             cup = true;
@@ -597,17 +646,17 @@
 
         return result;
     }
-
+*/
     /**
      * convert ingredient weight in grams to imperial measurements.
      * @param {number} ingredientWeightInGrams
      */
-    function convert(ingredientWeightInGrams, ingredientConversionFactor) {
+  /*  function convert(ingredientWeightInGrams, ingredientConversionFactor) {
         console.log("in imperial.gs : convert ***********************");
         console.log("input value in grams " + ingredientWeightInGrams + " input conversion factor " + ingredientConversionFactor);
-        var tsp = ingredientWeightInGrams * ingredientConversionFactor;
+        let tsp = ingredientWeightInGrams * ingredientConversionFactor;
         console.log("teaspoons from weight: " + tsp.toFixed(2));
-        var conObj = new Object();
+        let conObj = new Object();
         conObj.cups = 0;            // 48 tsps
         conObj.threeqtrCup = 0;     // 36 tsps
         // conObj.twoThirdsCup = 0; // 32 tsps
@@ -682,7 +731,7 @@
         console.log("out imperial.gs : convert ***********************");
         return conObj;
     };
-
+    */
 </script>
 
 </body>
