@@ -73,11 +73,12 @@
 
         .btn {
             border: 2px solid black;
-            padding: 0.375rem 2.75rem;
+            padding: 0.175rem 1.75rem;
             text-transform: uppercase;
             font-weight: 900;
-            border-radius: 0;
+            border-radius: 9px;
         }
+
 
         .btn:hover {
             color: white;
@@ -93,26 +94,42 @@
         <div class="col-8">
             <form class="row g-3" id="myForm" onsubmit="handleFormSubmit()">
                 <p class="h4 sm-4 text-center">Disk Recipe</p><br>
-                <small id="hint" class="form-text">acceptable values are any numbers whole, decimals or fractions
-                    <br> e.g. 3, 0.3, 3.6, 6 1/4 & 1/2
-                    <br> be aware! 1 1/4 and 11/4 are not the same!</small>
-                <div class="form-row align-items-center">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" id="diameter" placeholder="diameter" required>
-                        <select class="form-select-sm" id="diameterInputUnits">
-                            <option value="in" selected>in</option>
-                            <option value="mm">mm</option>
-                            <option value="cm">cm</option>
-                        </select>
+                <p>
+                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        help
+                    </button>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <p> I want to create a flat disk for fusing and want to know the minimum amount of Modeling Glass I
+                        need to fill the space.
+                    </p>
+                    <div class="card card-body">
+                        <small id="hint" class="form-text">acceptable values are any numbers whole, decimals or
+                            fractions
+                            <br> e.g. 3, 0.3, 3.6, 6 1/4 & 1/2
+                            <br> be aware! 1 1/4 and 11/4 are not the same!</small>
                     </div>
-                    <div class="col-sm-auto">
-                        <div class="form-group input-group">
-                            <input type="text" class="form-control" id="height" placeholder="height" required>
-                            <select class="form-select-sm" id="heightInputUnits">
+                </div>
+                <div class="form-row align-items-center">
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="diameter" placeholder="diameter" required>
+                            <select class="form-select-sm" id="diameterInputUnits">
                                 <option value="in" selected>in</option>
                                 <option value="mm">mm</option>
                                 <option value="cm">cm</option>
                             </select>
+                        </div>
+                        <div class="col-sm-auto">
+                            <div class="form-group input-group">
+                                <input type="text" class="form-control" id="height" placeholder="height" required>
+                                <select class="form-select-sm" id="heightInputUnits">
+                                    <option value="in" selected>in</option>
+                                    <option value="mm">mm</option>
+                                    <option value="cm">cm</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <br>
@@ -143,7 +160,7 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <button type="submit" class="btn btn-primary btn-block">Recipe</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Recipe</button>
                 </div>
             </form>
             <br>
