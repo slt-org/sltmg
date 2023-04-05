@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -10,7 +10,7 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
     <script src="https://unpkg.com/mathjs@10.6.0/lib/browser/math.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Montserrat:600i&display=swap');
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400i&display=swap');
 
 
         body {
@@ -73,10 +73,10 @@
 
         .btn {
             border: 2px solid black;
-            padding: 0.375rem 2.75rem;
+            padding: 0.175rem 1.75rem;
             text-transform: uppercase;
             font-weight: 900;
-            border-radius: 0;
+            border-radius: 9px;
         }
 
         .btn:hover {
@@ -91,61 +91,81 @@
 <div class="container">
     <div class="row">
         <div class="col-8">
-            <form class="row g-3 was-validated" id="myForm" onsubmit="handleFormSubmit()">
-                <p class="h4 sm-4 text-center">Bowl Recipe</p><br>
-                <small id="hint" class="form-text">acceptable values are any numbers whole, decimals or fractions
-                    <br> e.g. 3, 0.3, 3.6, 6 1/4 & 1/2
-                    <br> be aware! 1 1/4 and 11/4 are not the same!</small>
-                <div class="form-row align-items-center">
-                    <div class="input-group mb-3">
-                        <input type="text" id="insideDiameter" class="form-control" placeholder="inside diameter"
-                               required>
-                        <select class="form-select-sm" id="insideDiameterInputUnits">
-                            <option value="in" selected>in</option>
-                            <option value="mm">mm</option>
-                            <option value="cm">cm</option>
-                        </select>
+            <form class="row g-3" id="myForm" onsubmit="handleFormSubmit()">
+                <p class="h4 sm-4 text-center">Bowl Recipe</p>
+                <br>
+                <p>
+                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        help
+                    </button>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <p> I want to create a spherical bowl and want to know the minimum amount of Modeling Glass I need
+                        to fill the space.
+                    </p>
+                    <div class="card card-body">
+                        <small id="hint" class="form-text">acceptable values are any numbers whole, decimals or
+                            fractions
+                            <br> e.g. 3, 0.3, 3.6, 6 1/4 & 1/2
+                            <br> be aware! 1 1/4 and 11/4 are not the same!</small>
                     </div>
-                    <div class="col-sm-auto">
-                        <div class="form-group input-group">
-                            <input type="text" id="outsideDiameter" class="form-control" placeholder="outside diameter"
+                </div>
+                <div class="form-row align-items-center">
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <input type="text" id="insideDiameter" class="form-control" placeholder="inside diameter"
                                    required>
-                            <select class="form-select-sm" id="outsideDiameterInputUnits">
+                            <select class="form-select-sm" id="insideDiameterInputUnits">
                                 <option value="in" selected>in</option>
                                 <option value="mm">mm</option>
                                 <option value="cm">cm</option>
                             </select>
                         </div>
-                    </div>
-                    <br>
-                    <div class="form-group col-sm-6">
-                        <p class="h6 sm-4 ">COE 90 or 96 Recipe</p>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="coe" id="90" value="90"
-                                   checked>
-                            <label class="form-check-label" for="metric">COE 90</label>
+                        <div class="col-sm-auto">
+                            <div class="form-group input-group">
+                                <input type="text" id="outsideDiameter" class="form-control"
+                                       placeholder="outside diameter"
+                                       required>
+                                <select class="form-select-sm" id="outsideDiameterInputUnits">
+                                    <option value="in" selected>in</option>
+                                    <option value="mm">mm</option>
+                                    <option value="cm">cm</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="coe" id="96" value="96">
-                            <label class="form-check-label" for="imperial">COE 96</label>
+                        <br>
+                        <div class="form-group col-sm-6">
+                            <p class="h6 sm-4 ">COE 90 or 96 Recipe</p>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="coe" id="90" value="90"
+                                       checked>
+                                <label class="form-check-label" for="metric">COE 90</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="coe" id="96" value="96">
+                                <label class="form-check-label" for="imperial">COE 96</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <p class="h6 sm-4 ">Recipe output units</p>
+                        <div class="form-group col-sm-6">
+                            <p class="h6 sm-4 ">Recipe output units</p>
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="output" id="metric" value="metric"
-                                   checked>
-                            <label class="form-check-label" for="metric">Metric</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="output" id="imperial" value="imperial">
-                            <label class="form-check-label" for="imperial">Imperial</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="output" id="metric" value="metric"
+                                       checked>
+                                <label class="form-check-label" for="metric">Metric</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="output" id="imperial"
+                                       value="imperial">
+                                <label class="form-check-label" for="imperial">Imperial</label>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-12">
-                    <button type="submit" class="btn btn-primary btn-block">Recipe</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Recipe</button>
                 </div>
             </form>
             <br>
@@ -251,7 +271,7 @@
             field.className = 'form-control invalid';
         }
     }
-    </script>
+</script>
 
 <script>
     // <!-- 3. Initial input handling different for each page -->
