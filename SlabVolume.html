@@ -9,7 +9,7 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
     <script src="https://unpkg.com/mathjs@10.6.0/lib/browser/math.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Montserrat:600i&display=swap');
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400i&display=swap');
 
 
         body {
@@ -72,10 +72,10 @@
 
         .btn {
             border: 2px solid black;
-            padding: 0.375rem 2.75rem;
+            padding: 0.175rem 1.75rem;
             text-transform: uppercase;
             font-weight: 900;
-            border-radius: 0;
+            border-radius: 9px;
         }
 
         .btn:hover {
@@ -93,11 +93,25 @@
 <div class="container">
     <div class="row">
         <div class="col-8">
-            <form class="row g-3 was-validated" id="myForm" onsubmit="handleFormSubmit()">
-                <p class="h4 sm-4 text-center">Slab Volume</p><br>
-                <small id="hint" class="form-text">acceptable values are any numbers whole, decimals or fractions
-                    <br> e.g. 3, 0.3, 3.6, 6 1/4 & 1/2
-                    <br> be aware! 1 1/4 and 11/4 are not the same!</small>
+            <form class="row g-3" id="myForm" onsubmit="handleFormSubmit()">
+                <p class="h4 sm-4 text-center">Slab Volume</p>
+                <br>
+                <p>
+                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        help
+                    </button>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <p>Calculate a Volume in cubic units for a defined shape.
+                        In our case we have slabs/blocks.</p>
+                    <div class="card card-body">
+                        <small id="hint" class="form-text">acceptable values are any numbers whole, decimals or
+                            fractions
+                            <br> e.g. 3, 0.3, 3.6, 6 1/4 & 1/2
+                            <br> be aware! 1 1/4 and 11/4 are not the same!</small>
+                    </div>
+                </div>
                 <div class="form-row align-items-center">
                     <div class="col-sm-auto">
                         <div class="form-group input-group">
@@ -145,7 +159,7 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <button type="submit" class="btn btn-primary btn-block">Volume</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Volume</button>
                 </div>
             </form>
             <br>
@@ -154,11 +168,11 @@
                 <div class="standard">
                     <p>Use this value as input to <a href="https://sites.google.com/view/slt-mg/mg-recipe-generators/custom">Custom</a>
                     to generate a Modeling Glass recipe.
-                    </p>
-                    <p>
-                    <h6>Weight of Bullseye glass to fill this volume: 0 cm<sup>3</sup></h6>
-                    <p>
+                    </p>...
                 </div>
+                <p>
+                <h6>Weight of Standard glass to fill this volume: 0 cm<sup>3</sup></h6>
+                <p>
             </div>
         </div>
     </div>

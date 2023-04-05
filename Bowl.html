@@ -123,7 +123,7 @@
                             </select>
                         </div>
                         <div class="col-sm-auto">
-                            <div class="form-group input-group">
+                            <div class="input-group">
                                 <input type="text" id="outsideDiameter" class="form-control"
                                        placeholder="outside diameter"
                                        required>
@@ -134,36 +134,35 @@
                                 </select>
                             </div>
                         </div>
-                        <br>
-                        <div class="form-group col-sm-6">
-                            <p class="h6 sm-4 ">COE 90 or 96 Recipe</p>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="coe" id="90" value="90"
-                                       checked>
-                                <label class="form-check-label" for="metric">COE 90</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="coe" id="96" value="96">
-                                <label class="form-check-label" for="imperial">COE 96</label>
-                            </div>
+                    </div>
+                    <br>
+                    <div class="form-group col-sm-6">
+                        <p class="h6 sm-4 ">COE 90 or 96 Recipe</p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="coe" id="90" value="90"
+                                   checked>
+                            <label class="form-check-label" for="metric">COE 90</label>
                         </div>
-                        <div class="form-group col-sm-6">
-                            <p class="h6 sm-4 ">Recipe output units</p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="coe" id="96" value="96">
+                            <label class="form-check-label" for="imperial">COE 96</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <p class="h6 sm-4 ">Recipe output units</p>
 
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="output" id="metric" value="metric"
-                                       checked>
-                                <label class="form-check-label" for="metric">Metric</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="output" id="imperial"
-                                       value="imperial">
-                                <label class="form-check-label" for="imperial">Imperial</label>
-                            </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="output" id="metric" value="metric"
+                                   checked>
+                            <label class="form-check-label" for="metric">Metric</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="output" id="imperial"
+                                   value="imperial">
+                            <label class="form-check-label" for="imperial">Imperial</label>
                         </div>
                     </div>
                 </div>
-
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary btn-sm">Recipe</button>
                 </div>
@@ -248,8 +247,8 @@
     const inputs = document.querySelectorAll('input');
 
     const patterns = {
-        insideRadius: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/,
-        outsideRadius: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/
+        insideDiameter: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/,
+        outsideDiameter: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/
     };
 
     inputs.forEach((input) => {

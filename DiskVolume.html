@@ -10,7 +10,7 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
     <script src="https://unpkg.com/mathjs@10.6.0/lib/browser/math.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Montserrat:600i&display=swap');
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400i&display=swap');
 
 
         body {
@@ -73,10 +73,10 @@
 
         .btn {
             border: 2px solid black;
-            padding: 0.375rem 2.75rem;
+            padding: 0.175rem 1.75rem;
             text-transform: uppercase;
             font-weight: 900;
-            border-radius: 0;
+            border-radius: 9px;
         }
 
         .btn:hover {
@@ -86,7 +86,7 @@
         }
 
         .standard {
-            background:  #f0f4ef;
+            background: #f0f4ef;
         }
     </style>
 </head>
@@ -94,13 +94,28 @@
 <div class="container">
     <div class="row">
         <div class="col-8">
-            <form class="row g-3 was-validated" id="myForm" onsubmit="handleFormSubmit()">
-                <p class="h4 sm-4 text-center">Disk Volume</p><br>
-                <small id="hint" class="form-text">acceptable values are any numbers whole, decimals or fractions
-                    <br> e.g. 3, 0.3, 3.6, 6 1/4 & 1/2
-                    <br> be aware! 1 1/4 and 11/4 are not the same!</small>
+            <form class="row g-3" id="myForm" onsubmit="handleFormSubmit()">
+                <p class="h4 sm-4 text-center">Disk Volume</p>
+                <br>
+                <p>
+                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        help
+                    </button>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <p> Calculate a Volume in cubic units for a defined shape.
+                        In our case we have cylinders/disks.
+                    </p>
+                    <div class="card card-body">
+                        <small id="hint" class="form-text">acceptable values are any numbers whole, decimals or
+                            fractions
+                            <br> e.g. 3, 0.3, 3.6, 6 1/4 & 1/2
+                            <br> be aware! 1 1/4 and 11/4 are not the same!</small>
+                    </div>
+                </div>
                 <div class="form-row align-items-center">
-                    <div class="input-group mb-3">
+                    <div class="form-group input-group mb-3">
                         <input type="text" class="form-control" id="diameter" placeholder="diameter" required>
                         <select class="form-select-sm" id="diameterInputUnits">
                             <option value="in" selected>in</option>
@@ -134,15 +149,16 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <button type="submit" class="btn btn-primary btn-block">Volume</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Volume</button>
                 </div>
             </form>
             <br>
             <div class="col-sm-auto" id="recipe">
                 <h6><b>Volume of Disk:</b> 0 cm<sup>3</sup></h6>
                 <div class="standard">
-                    <p>Use this value as input to <a href="https://sites.google.com/view/slt-mg/mg-recipe-generators/custom">Custom</a>
-                    to generate a Modeling Glass recipe.
+                    <p>Use this value as input to <a
+                            href="https://sites.google.com/view/slt-mg/mg-recipe-generators/custom">Custom</a>
+                        to generate a Modeling Glass recipe.
                     </p>
                     <p>
                     <h6>Weight of Bullseye glass to fill this volume: 0 cm<sup>3</sup></h6>
@@ -348,31 +364,31 @@
         convertToImperial() {
             console.log("in  DiskVolume:convertToImperial:*******************");
             let imperial = new Object();
-            imperial.diameter=(this.diameter / INTOCM).toFixed(3);
-            imperial.diameterUnits="in";
-            imperial.height=(this.height / INTOCM).toFixed(3);
-            imperial.heightUnits="in";
-            imperial.volume=(this.volume / CITOCC).toFixed(3);
-            imperial.volumeUnits="in<sup>3</sup>";
-            imperial.weight=(this.weight / OZTOGM).toFixed(3);
-            imperial.weightUnits="oz";
-            imperial.weightStdGlass=(this.weightStdGlass / OZTOGM).toFixed(2)
-            imperial.outputUnits=this.outputUnits;
+            imperial.diameter = (this.diameter / INTOCM).toFixed(3);
+            imperial.diameterUnits = "in";
+            imperial.height = (this.height / INTOCM).toFixed(3);
+            imperial.heightUnits = "in";
+            imperial.volume = (this.volume / CITOCC).toFixed(3);
+            imperial.volumeUnits = "in<sup>3</sup>";
+            imperial.weight = (this.weight / OZTOGM).toFixed(3);
+            imperial.weightUnits = "oz";
+            imperial.weightStdGlass = (this.weightStdGlass / OZTOGM).toFixed(2)
+            imperial.outputUnits = this.outputUnits;
 
             console.log("out  DiskVolume:convertToImperial:*******************");
             return imperial;
         }
 
-        generateHtml(outObject){
+        generateHtml(outObject) {
             console.log("in  DiskVolume:generateHtml:*******************");
             let tmplt =
-                "<h6><b>Volume of Disk: </b>"+outObject.volume+" "+outObject.volumeUnits+"</h6>\n" +
+                "<h6><b>Volume of Disk: </b>" + outObject.volume + " " + outObject.volumeUnits + "</h6>\n" +
                 "<div class=\"standard\">\n" +
                 "  <p>Use this value as input to <a href=\"https://sites.google.com/view/slt-mg/mg-recipe-generators/custom\">Custom</a>\n" +
                 "  to generate a Modeling Glass recipe.\n" +
                 "  </p>\n" +
                 "  <p>\n" +
-                "  <h6>Weight of Bullseye glass to fill this volume: "+outObject.weightStdGlass+" "+outObject.weightUnits+"</h6>\n" +
+                "  <h6>Weight of Bullseye glass to fill this volume: " + outObject.weightStdGlass + " " + outObject.weightUnits + "</h6>\n" +
                 "  <p>\n" +
                 "  </div>\n";
             console.log("out  DiskVolume:generateHtml:*******************");
