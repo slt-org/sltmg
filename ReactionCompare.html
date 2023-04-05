@@ -10,6 +10,84 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400i&display=swap');
+
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            background: white;
+        }
+
+        form {
+            background: white;
+        }
+
+        label {
+            margin-bottom: .5rem;
+            text-align: right;
+            display: block;
+            letter-spacing: 2px;
+            color: #adb5bd;
+            text-transform: uppercase;
+        }
+
+        .form-control {
+            border: none;
+            background: none;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+            transition: border-color .4s ease-out;
+            border-radius: 0;
+        }
+
+        .form-control:active,
+        .form-control:focus,
+        .btn.focus,
+        .btn:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: black;
+        }
+
+        .form-control.valid {
+            border-color: green;
+        }
+
+        .form-control.invalid {
+            border-color: red;
+        }
+
+        .form-control + small {
+            color: red;
+            opacity: 0;
+            height: 0;
+            transition: opacity .4s ease-out;
+        }
+
+        .form-control.invalid + small {
+            opacity: 1;
+            height: auto;
+            margin-bottom: 20px;
+            transition: opacity .4s ease-out;
+        }
+
+        .btn {
+            border: 2px solid black;
+            padding: 0.175rem 1.75rem;
+            text-transform: uppercase;
+            font-weight: 900;
+            border-radius: 9px;
+        }
+
+
+        .btn:hover {
+            color: white;
+            background: black;
+            transition: all .4s ease-out;
+        }
+
+    </style>
 
     <title>Reactions Compare</title>
 </head>
@@ -806,7 +884,7 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <button type="submit" class="btn btn-primary">REACTIONS</button>
+                    <button type="submit" class="btn btn-primary btn-sm">REACTIONS</button>
                 </div>
             </form>
             <br>
