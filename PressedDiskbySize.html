@@ -1,176 +1,194 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1" name="viewport">
-  <!-- Bootstrap CSS -->
-  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
-  <script src="https://unpkg.com/mathjs@10.6.0/lib/browser/math.js"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css?family=Montserrat:600i&display=swap');
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
+    <script src="https://unpkg.com/mathjs@10.6.0/lib/browser/math.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 
-    body {
-      font-family: 'Montserrat', sans-serif;
-      color: #333;
-      background: white;
-    }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            background: white;
+        }
 
-    form {
-      background: white;
-    }
+        form {
+            background: white;
+        }
 
-    label {
-      margin-bottom: .5rem;
-      text-align: right;
-      display: block;
-      letter-spacing: 2px;
-      color: #adb5bd;
-      text-transform: uppercase;
-    }
+        label {
+            margin-bottom: .5rem;
+            text-align: right;
+            display: block;
+            letter-spacing: 2px;
+            color: #adb5bd;
+            text-transform: uppercase;
+        }
 
-    .form-control {
-      border: none;
-      background: none;
-      border-bottom: 2px solid rgba(0, 0, 0, 0.2);
-      transition: border-color .4s ease-out;
-      border-radius: 0;
-    }
+        .form-control {
+            border: none;
+            background: none;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+            transition: border-color .4s ease-out;
+            border-radius: 0;
+        }
 
-    .form-control:active,
-    .form-control:focus,
-    .btn.focus,
-    .btn:focus {
-      outline: none;
-      box-shadow: none;
-      border-color: black;
-    }
+        .form-control:active,
+        .form-control:focus,
+        .btn.focus,
+        .btn:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: black;
+        }
 
-    .form-control.valid {
-      border-color: green;
-    }
+        .form-control.valid {
+            border-color: green;
+        }
 
-    .form-control.invalid {
-      border-color: red;
-    }
+        .form-control.invalid {
+            border-color: red;
+        }
 
-    .form-control + small {
-      color: red;
-      opacity: 0;
-      height: 0;
-      transition: opacity .4s ease-out;
-    }
+        .form-control + small {
+            color: red;
+            opacity: 0;
+            height: 0;
+            transition: opacity .4s ease-out;
+        }
 
-    .form-control.invalid + small {
-      opacity: 1;
-      height: auto;
-      margin-bottom: 20px;
-      transition: opacity .4s ease-out;
-    }
+        .form-control.invalid + small {
+            opacity: 1;
+            height: auto;
+            margin-bottom: 20px;
+            transition: opacity .4s ease-out;
+        }
 
-    .btn {
-      border: 2px solid black;
-      padding: 0.375rem 2.75rem;
-      text-transform: uppercase;
-      font-weight: 900;
-      border-radius: 0;
-    }
+        .btn {
+            border: 2px solid black;
+            padding: 0.175rem 1.75rem;
+            text-transform: uppercase;
+            font-weight: 900;
+            border-radius: 9px;
+        }
 
-    .btn:hover {
-      color: white;
-      background: black;
-      transition: all .4s ease-out;
-    }
+        .btn:hover {
+            color: white;
+            background: black;
+            transition: all .4s ease-out;
+        }
 
-  </style>
+    </style>
 </head>
 <body>
 <div class="container">
-  <div class="row">
-    <div class="col-8">
-      <form id="myForm" class="row g-3 was-validated" onsubmit="handleFormSubmit()">
-        <p class="h4 sm-4 text-center">Pressed Glass Prediction</p><br>
-        <small id="hint" class="form-text">acceptable values are any numbers whole, decimals or fractions
-          <br> e.g. 3, 0.3, 3.6, 6 1/4 & 1/2
-          <br> be aware! 1 1/4 and 11/4 are not the same!</small>
-        <div class="form-row align-items-center">
-          <div class="col-sm-auto">
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" id="startingdiameter" placeholder="diameter" required>
-              <select class="form-select-sm" id="startingdiameterInputUnits">
-                <option value="in" selected>in</option>
-                <option value="mm">mm</option>
-                <option value="cm">cm</option>
-              </select>
-            </div>
-            <div class="form-group input-group mb-3">
-              <input type="text" class="form-control" id="startingheight" placeholder="height" required>
-              <select class="form-select-sm" id="startingheightInputUnits">
-                <option value="in" selected>in</option>
-                <option value="mm">mm</option>
-                <option value="cm">cm</option>
-              </select>
-            </div>
-            <div class="form-group input-group mb-3">
-              <input type="text" class="form-control" id="endingheight" placeholder="ending height" required>
-              <select class="form-select-sm" id="endingheightInputUnits">
-                <option value="in" selected>in</option>
-                <option value="mm">mm</option>
-                <option value="cm">cm</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group col-sm-6">
-            <br>
-            <p class="h6 sm-4 ">Dimension Units </p>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="output" id="metric" value="metric"
-                     checked>
-              <label class="form-check-label" for="metric">Metric</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="output" id="imperial" value="imperial">
-              <label class="form-check-label" for="imperial">Imperial</label>
-            </div>
-          </div>
+    <div class="row">
+        <div class="col-8">
+            <form id="myForm" class="row g-3" onsubmit="handleFormSubmit()">
+                <p class="h4 sm-4 text-center">Pressed Glass by Size</p><br>
+                <p>
+                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        help
+                    </button>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <p>This calculation can help predict the size of a Pressed Glass Disk from initial measurements.
+                    </p>
+                    <div class="card card-body">
+                        <small id="hint" class="form-text">acceptable values are any numbers whole, decimals or
+                            fractions
+                            <br> e.g. 3, 0.3, 3.6, 6 1/4 & 1/2
+                            <br> be aware! 1 1/4 and 11/4 are not the same!</small>
+                    </div>
+                </div>
+                <div class="form-row align-items-center">
+                    <div class="col-sm-auto">
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="startingdiameter" placeholder="diameter"
+                                       required>
+                                <select class="form-select-sm" id="startingdiameterInputUnits">
+                                    <option value="in" selected>in</option>
+                                    <option value="mm">mm</option>
+                                    <option value="cm">cm</option>
+                                </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="startingheight" placeholder="height"
+                                       required>
+                                <select class="form-select-sm" id="startingheightInputUnits">
+                                    <option value="in" selected>in</option>
+                                    <option value="mm">mm</option>
+                                    <option value="cm">cm</option>
+                                </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="endingheight" placeholder="ending height"
+                                       required>
+                                <select class="form-select-sm" id="endingheightInputUnits">
+                                    <option value="in" selected>in</option>
+                                    <option value="mm">mm</option>
+                                    <option value="cm">cm</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <br>
+                        <p class="h6 sm-4 ">Dimension Units </p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="output" id="metric" value="metric"
+                                   checked>
+                            <label class="form-check-label" for="metric">Metric</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="output" id="imperial" value="imperial">
+                            <label class="form-check-label" for="imperial">Imperial</label>
+                        </div>
+                    </div>
 
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-sm">Disk</button>
+                </div>
+            </form>
+            <br>
+            <div class="col-sm-auto">
+                <div id="dimensions">
+                    <!--<p><em>Possible shapes dimensions:</em></p>-->
+                    <b>MG total volume:</b> 0 cm<sup>3</sup>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Pressed Disk dimensions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">diameter</th>
+                            <td>0</td>
+                            <td>centimeters</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">height</th>
+                            <td>0</td>
+                            <td>centimeters</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div class="col-12">
-          <button type="submit" class="btn btn-primary btn-block">Disk</button>
-        </div>
-      </form>
-      <br>
-      <div class="col-sm-auto">
-        <div id="dimensions">
-          <!--<p><em>Possible shapes dimensions:</em></p>-->
-          <b>MG total volume:</b> 0 cm<sup>3</sup>
-          <table class="table table-hover">
-            <thead>
-            <tr>
-              <th scope="col">Pressed Disk dimensions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <th scope="row">diameter</th>
-              <td>0</td>
-              <td>centimeters</td>
-            </tr>
-            <tr>
-              <th scope="row">height</th>
-              <td>0</td>
-              <td>centimeters</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
-  </div>
-  <br>
-  <div id="ver"><p>MGToolbox ver. 1.3</p></div>
+    <br>
+    <div id="ver"><p>MGToolbox ver. 1.3</p></div>
 </div>
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -178,281 +196,281 @@
         crossorigin="anonymous"></script>
 <!-- 1. Constants -->
 <script>
-  const GLASS = .614;
-  const WATER = .326;
-  const BINDER = .032;
-  const LMEDIUM = .027;
-  const CUBICCM = 'cm<sup>3</sup>';
-  const PI = 3.1416;
-  const GLASSCONV = 0.232;
-  const WATERCONV = 0.236;
-  const BINDERCONV = 0.416;
-  const LMEDIUMCONV = 0.2;
-  const CUP = "cup";
-  const a3QTR = "3/4";
-  const aHALF = "1/2";
-  const a1QTR = "1/4"
-  const TBSP = "tbsp";
-  const TSP = "tsp";
-  const IMPERIAL = "imperial";
-  const METRIC = "metric";
-  const CITOCC = 16.387;
-  const INTOCM = 2.54;
-  const OZTOGM = 28.3495;
-  const AUTHOR = "Steve Terry";
-  const VERSION = "1.0";
-  const REL = "15";
+    const GLASS = .614;
+    const WATER = .326;
+    const BINDER = .032;
+    const LMEDIUM = .027;
+    const CUBICCM = 'cm<sup>3</sup>';
+    const PI = 3.1416;
+    const GLASSCONV = 0.232;
+    const WATERCONV = 0.236;
+    const BINDERCONV = 0.416;
+    const LMEDIUMCONV = 0.2;
+    const CUP = "cup";
+    const a3QTR = "3/4";
+    const aHALF = "1/2";
+    const a1QTR = "1/4"
+    const TBSP = "tbsp";
+    const TSP = "tsp";
+    const IMPERIAL = "imperial";
+    const METRIC = "metric";
+    const CITOCC = 16.387;
+    const INTOCM = 2.54;
+    const OZTOGM = 28.3495;
+    const AUTHOR = "Steve Terry";
+    const VERSION = "1.0";
+    const REL = "15";
 </script>
 <!-- 2. inline validation for input fields -->
 <script>
-  const inputs = document.querySelectorAll('input');
+    const inputs = document.querySelectorAll('input');
 
-  const patterns = {
-    startingdiameter: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/,
-    startingheight: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/,
-    endingheight: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/
-  };
+    const patterns = {
+        startingdiameter: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/,
+        startingheight: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/,
+        endingheight: /^[0-9]+[,.]?[0-9]*([\/][0-9]+[,.]?[0-9]*)*/
+    };
 
-  inputs.forEach((input) => {
-    input.addEventListener('keyup', (e) => {
-      validate(e.target, patterns[e.target.attributes.id.value]);
+    inputs.forEach((input) => {
+        input.addEventListener('keyup', (e) => {
+            validate(e.target, patterns[e.target.attributes.id.value]);
+        });
     });
-  });
 
-  /**
-   * This validation framework could enhanced to do more complex validation
-   * this could include checking the to see if the value fell into a range
-   * we define. It could possibly be applied to numbers. Walk the debugger
-   * to see how it works.
-   */
-  function validate(field, regex) {
-    if (regex.test(field.value)) {
-      field.className = 'form-control valid';
-    } else {
-      field.className = 'form-control invalid';
+    /**
+     * This validation framework could enhanced to do more complex validation
+     * this could include checking the to see if the value fell into a range
+     * we define. It could possibly be applied to numbers. Walk the debugger
+     * to see how it works.
+     */
+    function validate(field, regex) {
+        if (regex.test(field.value)) {
+            field.className = 'form-control valid';
+        } else {
+            field.className = 'form-control invalid';
+        }
     }
-  }
 </script>
 <!-- 3. Initial input handling different for each page-->
 <script>
-  function pressedDiskInputCollector(){
-    console.log("in pressedDiskInputCollector ***************************");
+    function pressedDiskInputCollector() {
+        console.log("in pressedDiskInputCollector ***************************");
 
-    let data = new Object();
-    data.startingdiameter = document.querySelector('#startingdiameter').value;
-    let selectStartingdiameterUnits = document.getElementById('startingdiameterInputUnits');
-    data.startingdiameterUnits = selectStartingdiameterUnits.options[selectStartingdiameterUnits.selectedIndex].value;
+        let data = new Object();
+        data.startingdiameter = document.querySelector('#startingdiameter').value;
+        let selectStartingdiameterUnits = document.getElementById('startingdiameterInputUnits');
+        data.startingdiameterUnits = selectStartingdiameterUnits.options[selectStartingdiameterUnits.selectedIndex].value;
 
-    data.startingheight = document.querySelector('#startingheight').value;
-    let selectStartingHeightUnits = document.getElementById('startingheightInputUnits');
-    data.startingheightUnits = selectStartingHeightUnits.options[selectStartingHeightUnits.selectedIndex].value;
+        data.startingheight = document.querySelector('#startingheight').value;
+        let selectStartingHeightUnits = document.getElementById('startingheightInputUnits');
+        data.startingheightUnits = selectStartingHeightUnits.options[selectStartingHeightUnits.selectedIndex].value;
 
-    data.endingheight = document.querySelector('#endingheight').value;
-    let selectEndingHeightUnits = document.getElementById('endingheightInputUnits');
-    data.endingheightUnits = selectEndingHeightUnits.options[selectEndingHeightUnits.selectedIndex].value;
+        data.endingheight = document.querySelector('#endingheight').value;
+        let selectEndingHeightUnits = document.getElementById('endingheightInputUnits');
+        data.endingheightUnits = selectEndingHeightUnits.options[selectEndingHeightUnits.selectedIndex].value;
 
-    data.outputUnits = document.querySelector('input[name=output]:checked').value;
-    console.log("in pressedDiskInputCollector ***************************");
+        data.outputUnits = document.querySelector('input[name=output]:checked').value;
+        console.log("in pressedDiskInputCollector ***************************");
 
-    return data;
-  }
-
-  class PressedDisk {
-    startingdiameter;
-    startingdiameterUnits;
-    startingheight;
-    startingheightUnits;
-    endingheight;
-    endingheightUnits;
-    endingdiameter;
-    // weight;       // for MG calcs
-    // weightUnits;  // for MG calcs
-    weightStdGlass;
-    weightStdUnits;
-    outputUnits;
-
-    constructor(data) {
-      this.startingdiameter = data.startingdiameter;
-      this.startingdiameterUnits = data.startingdiameterUnits;
-      this.startingheight = data.startingheight;
-      this.startingheightUnits = data.startingheightUnits;
-      this.endingheight = data.endingheight;
-      this.endingheightUnits = data.endingheightUnits;
-      this.outputUnits = data.outputUnits;
+        return data;
     }
 
-    /**
-     * turns all units of measurement into centimeters.
-     * transforms diameter, height,
-     */
-    normalizeUnits() {
-      console.log("in PressedDisk.normalize ***************************");
-      // turn all values that might be fractions into numbers.
-      let _diameter = math.number(math.fraction(this.startingdiameter));
-      let _startingheight = math.number(math.fraction(this.startingheight));
-      let _endingheight = math.number(math.fraction(this.endingheight));
-      // make centimeters
-      this.startingdiameter = this.convertToMetric(_diameter, this.startingdiameterUnits);
-      this.startingdiameterUnits = "cm";
-      // make centimeters
-      this.startingheight  = this.convertToMetric(_startingheight, this.startingheightUnits);
-      this.startingheightUnits = "cm";
-      this.endingheight = this.convertToMetric(_endingheight, this.endingheightUnits);
-      this.endingheightUnits = "cm";
-      console.log("out PressedDisk.normalize ***************************");
-      return "todo";
+    class PressedDisk {
+        startingdiameter;
+        startingdiameterUnits;
+        startingheight;
+        startingheightUnits;
+        endingheight;
+        endingheightUnits;
+        endingdiameter;
+        // weight;       // for MG calcs
+        // weightUnits;  // for MG calcs
+        weightStdGlass;
+        weightStdUnits;
+        outputUnits;
+
+        constructor(data) {
+            this.startingdiameter = data.startingdiameter;
+            this.startingdiameterUnits = data.startingdiameterUnits;
+            this.startingheight = data.startingheight;
+            this.startingheightUnits = data.startingheightUnits;
+            this.endingheight = data.endingheight;
+            this.endingheightUnits = data.endingheightUnits;
+            this.outputUnits = data.outputUnits;
+        }
+
+        /**
+         * turns all units of measurement into centimeters.
+         * transforms diameter, height,
+         */
+        normalizeUnits() {
+            console.log("in PressedDisk.normalize ***************************");
+            // turn all values that might be fractions into numbers.
+            let _diameter = math.number(math.fraction(this.startingdiameter));
+            let _startingheight = math.number(math.fraction(this.startingheight));
+            let _endingheight = math.number(math.fraction(this.endingheight));
+            // make centimeters
+            this.startingdiameter = this.convertToMetric(_diameter, this.startingdiameterUnits);
+            this.startingdiameterUnits = "cm";
+            // make centimeters
+            this.startingheight = this.convertToMetric(_startingheight, this.startingheightUnits);
+            this.startingheightUnits = "cm";
+            this.endingheight = this.convertToMetric(_endingheight, this.endingheightUnits);
+            this.endingheightUnits = "cm";
+            console.log("out PressedDisk.normalize ***************************");
+            return "todo";
+        };
+
+        /**
+         * turns all units of measurement into centimeters.
+         */
+        convertToMetric(value, units) {
+            switch (units) {
+                case "in": {
+                    // convert to cm
+                    value = (value * INTOCM).toFixed(3);
+                    break;
+                }
+                case "mm": {
+                    // convert to cm
+                    value = (value / 10).toFixed(3);
+                    break;
+                }
+                default: {
+                    // no conversion necessary do nothing and return the value
+                }
+            }
+            return value;
+        };
+
+
+        /**
+         * calculate volume from starting diameter and starting height.
+         * calculate weight from volume and set units
+         */
+        calculateVolume() {
+            console.log("*************** in PressedDisk.calculateVolume ");
+            let radius = this.startingdiameter / 2;
+            this.volume = (PI * radius * radius * this.startingheight).toFixed(2);
+            this.volume = Number(this.volume).toFixed(1);
+            // MG weight not Std. BE glass weight
+            //this.weight = (this.volume * 2).toFixed(2);
+            // this.weightUnits = "g";
+
+            // Std. BE glass weight
+            this.weightStdGlass = (this.volume * 2.5).toFixed(2);
+            this.weightStdUnits = "g";
+            // volume here is always in cm^3
+            this.volumeUnits = "cm<sup>3</sup>"
+            // volume here is always in cm^3
+            console.log("*************** out PressedDisk.calculateVolume ");
+        }
+
+        calculateShapes() {
+            console.log("*************** in PressedDisk.calculateShapes ");
+            // this.volume = this.weightStdGlass / 2.5;
+            // this.volume = this.volume.toFixed(1);
+            // Disk dimensions based on 1 cm height.
+            var radius = Math.sqrt(this.volume / (PI * this.endingheight));
+            this.endingdiameter = radius.toFixed(1) * 2;
+            // Slab dimensions based on 1 cm height
+            // this.slabSide = Math.sqrt(this.volume).toFixed(1);
+            console.log("*************** out PressedDisk.calculateShapes ");
+        }
+
+        convertToImperial() {
+            let imperial = new Object();
+            // wellchosen 1 cm is .3937 in
+            // these values of this are in metric form
+            // they may be >= 1 or <= 1
+            // if < 1 they can be turned into fractions directly
+            // if > 1 they need to be split then a fractional part
+            //     created.
+            let _weight = this.volume * 2.5;
+            imperial.weight = _weight / OZTOGM;
+            imperial.weight = this.splitDecimal(imperial.weight);
+
+            imperial.volume = (this.volume / CITOCC).toFixed(3);   // cubic inches to cubic centimeters
+            imperial.volume = this.splitDecimal(imperial.volume);  // fractional approximation
+
+            imperial.diameter = (this.endingdiameter / INTOCM).toFixed(3);
+            imperial.diameter = this.splitDecimal(imperial.diameter);
+
+            imperial.endingheight = (this.endingheight / INTOCM).toFixed(3);
+            imperial.endingheight = this.splitDecimal(imperial.endingheight);
+
+            return imperial;
+        }
+
+        /**
+         * we guaranteed this number is greater than 1
+         * so we pass back a string of mixed number
+         * @param value
+         * @return string value
+         */
+        splitDecimal(value) {
+            if (value < 1) {
+                value = convertDecimalToFraction(value);
+            } else {
+                let whole = value.toString().split(".")[0];
+                let decimal = "." + value.toString().split(".")[1];
+                let newFraction = convertDecimalToFraction(decimal);
+                if (newFraction == "1") {
+                    let rounded = Number(whole) + 1;
+                    return rounded.toString();
+                }
+                return whole + " " + newFraction;
+            }
+            return value;
+        }
+
+    }
+
+    function handleFormSubmit() {
+        console.log("*************** in PressedDisk.html:handleFormSubmit ");
+
+        let updateLocation = document.querySelector('#dimensions');
+
+        let pressedDisk = new PressedDisk(pressedDiskInputCollector());
+        pressedDisk.normalizeUnits();
+        // calculate volume
+        pressedDisk.calculateVolume();
+        // calculate the dimensions for disk and slab
+        pressedDisk.calculateShapes();
+        //
+
+        if (pressedDisk.outputUnits == "metric") {
+            var output = outputTableMetric(pressedDisk.volume, pressedDisk.endingdiameter, Number(pressedDisk.endingheight).toFixed(1));
+            updateLocation.innerHTML = output;
+        } else if (pressedDisk.outputUnits == "imperial") {
+            // convert the metric units to imperial units
+            /* todo: do we want a conversion to fractional representation here
+            *   with a clean call to outputTableImperial
+            */
+            let imperial = pressedDisk.convertToImperial();
+
+            updateLocation.innerHTML = outputTableImperial(imperial.volume, imperial.diameter, imperial.endingheight, imperial.weight);
+        } else {
+            Logger.log("We should never get here 'Big old Error'");
+            resultHtml = "Failed to create recipe...  ERROR";
+        }
+        console.log("*************** out PressedDisk.html:handleFormSubmit ");
     };
 
-    /**
-     * turns all units of measurement into centimeters.
-     */
-    convertToMetric(value, units) {
-      switch (units) {
-        case "in": {
-          // convert to cm
-          value = (value * INTOCM).toFixed(3);
-          break;
-        }
-        case "mm": {
-          // convert to cm
-          value = (value / 10).toFixed(3);
-          break;
-        }
-        default: {
-          // no conversion necessary do nothing and return the value
-        }
-      }
-      return value;
-    };
-
 
     /**
-     * calculate volume from starting diameter and starting height.
-     * calculate weight from volume and set units
+     *  imperial values passed for
+     *  table output for possible shape dimensions
+     * @param _volume
+     * @param _diameter
+     * @param _dimension
      */
-    calculateVolume() {
-      console.log("*************** in PressedDisk.calculateVolume ");
-      let radius = this.startingdiameter / 2;
-      this.volume = (PI * radius * radius * this.startingheight).toFixed(2);
-      this.volume = Number(this.volume).toFixed(1);
-      // MG weight not Std. BE glass weight
-      //this.weight = (this.volume * 2).toFixed(2);
-      // this.weightUnits = "g";
-
-      // Std. BE glass weight
-      this.weightStdGlass = (this.volume * 2.5).toFixed(2);
-      this.weightStdUnits = "g";
-      // volume here is always in cm^3
-      this.volumeUnits = "cm<sup>3</sup>"
-      // volume here is always in cm^3
-      console.log("*************** out PressedDisk.calculateVolume ");
-    }
-
-    calculateShapes(){
-      console.log("*************** in PressedDisk.calculateShapes ");
-      // this.volume = this.weightStdGlass / 2.5;
-      // this.volume = this.volume.toFixed(1);
-      // Disk dimensions based on 1 cm height.
-      var radius = Math.sqrt(this.volume / (PI * this.endingheight));
-      this.endingdiameter = radius.toFixed(1) * 2;
-      // Slab dimensions based on 1 cm height
-      // this.slabSide = Math.sqrt(this.volume).toFixed(1);
-      console.log("*************** out PressedDisk.calculateShapes ");
-    }
-
-    convertToImperial(){
-      let imperial = new Object();
-      // wellchosen 1 cm is .3937 in
-      // these values of this are in metric form
-      // they may be >= 1 or <= 1
-      // if < 1 they can be turned into fractions directly
-      // if > 1 they need to be split then a fractional part
-      //     created.
-      let _weight = this.volume * 2.5;
-      imperial.weight = _weight / OZTOGM;
-      imperial.weight = this.splitDecimal(imperial.weight);
-
-      imperial.volume = (this.volume / CITOCC).toFixed(3);   // cubic inches to cubic centimeters
-      imperial.volume = this.splitDecimal(imperial.volume);  // fractional approximation
-
-      imperial.diameter = (this.endingdiameter / INTOCM).toFixed(3);
-      imperial.diameter = this.splitDecimal(imperial.diameter);
-
-      imperial.endingheight = (this.endingheight / INTOCM).toFixed(3);
-      imperial.endingheight = this.splitDecimal(imperial.endingheight);
-
-      return imperial;
-    }
-
-    /**
-     * we guaranteed this number is greater than 1
-     * so we pass back a string of mixed number
-     * @param value
-     * @return string value
-     */
-    splitDecimal(value){
-      if(value < 1){
-        value =  convertDecimalToFraction(value);
-      }else{
-        let whole = value.toString().split(".")[0];
-        let decimal = "."+value.toString().split(".")[1];
-        let newFraction = convertDecimalToFraction(decimal);
-        if(newFraction == "1"){
-          let rounded = Number(whole)+1;
-          return rounded.toString();
-        }
-        return whole+" "+newFraction;
-      }
-      return value;
-    }
-
-  }
-  function handleFormSubmit() {
-    console.log("*************** in PressedDisk.html:handleFormSubmit ");
-
-    let updateLocation = document.querySelector('#dimensions');
-
-    let pressedDisk = new PressedDisk(pressedDiskInputCollector());
-    pressedDisk.normalizeUnits();
-    // calculate volume
-    pressedDisk.calculateVolume();
-    // calculate the dimensions for disk and slab
-    pressedDisk.calculateShapes();
-    //
-
-    if (pressedDisk.outputUnits == "metric") {
-      var output = outputTableMetric(pressedDisk.volume,pressedDisk.endingdiameter,Number(pressedDisk.endingheight).toFixed(1));
-      updateLocation.innerHTML = output;
-    } else if (pressedDisk.outputUnits  == "imperial") {
-      // convert the metric units to imperial units
-      /* todo: do we want a conversion to fractional representation here
-      *   with a clean call to outputTableImperial
-      */
-      let imperial = pressedDisk.convertToImperial();
-
-      updateLocation.innerHTML = outputTableImperial(imperial.volume, imperial.diameter, imperial.endingheight, imperial.weight);
-    } else {
-      Logger.log("We should never get here 'Big old Error'");
-      resultHtml = "Failed to create recipe...  ERROR";
-    }
-    console.log("*************** out PressedDisk.html:handleFormSubmit ");
-  };
-
-
-
-  /**
-   *  imperial values passed for
-   *  table output for possible shape dimensions
-   * @param _volume
-   * @param _diameter
-   * @param _dimension
-   */
-  function outputTableImperial(volume, diameter, height, weight) {
-   // let wellChosen = "7/16"; // this is always the value
-   // volume is in cubic inches convert cubic inches volume into weight in ounces.
-    let _volume = volume
-    return  "        <b>Disk total volume:</b> " + volume + " in<sup>3</sup><br>" +
-            "        <b>Disk total weight:</b> " + weight  + " oz</sup>" +
+    function outputTableImperial(volume, diameter, height, weight) {
+        // let wellChosen = "7/16"; // this is always the value
+        // volume is in cubic inches convert cubic inches volume into weight in ounces.
+        let _volume = volume
+        return "        <b>Disk total volume:</b> " + volume + " in<sup>3</sup><br>" +
+            "        <b>Disk total weight:</b> " + weight + " oz</sup>" +
             "        <table class=\"table table-hover\">" +
             "          <thead>" +
             "          <tr><th scope=\"col\">Pressed Disk dimensions</th></tr>" +
@@ -463,76 +481,77 @@
             "          </tbody>" +
             "        </table>";
 
-  }
-
-  function convertDecimalToFraction(value){
-    // value is always less than 1 and greater than 0
-    // round to 1/16th of an inch.
-    let _value = Number(value);
-    if (value == 0) return "";
-    switch (true) {
-      case ((_value > 0) && (_value <= .0625)) : {
-        return "1/16";
-      }
-      case ((_value > .0625) && (_value <= .125)) : {
-        return "1/8";
-      }
-      case ((_value > .125) && (_value <= .1875)) : {
-        return "3/16";
-      }
-      case (_value > .1875 && _value <= .25) : {
-        return "1/4";
-      }
-      case ((_value > .25) && (_value <= .3125)) : {
-        return "5/16";
-      }
-      case ((_value > .3125) && (_value <= .375)) : {
-        return "3/8";
-      }
-      case ((_value > .375) && (_value <= .4375)) : {
-        return "7/16";
-      }
-      case (_value > .4375 && _value <= .5) : {
-        return "1/2";
-      }
-      case ((_value > .5) && (_value <= .5625)) : {
-        return "9/16";
-      }
-      case (_value > .5625 && _value <= .625) : {
-        return "5/8";
-      }
-      case ((_value > .625) && (_value <= .6875)) : {
-        return "11/16";
-      }
-      case (_value > .6875 && _value <= .75) : {
-        return "3/4";
-      }
-      case ((_value > .75) && (_value <= .8125)) : {
-        return "13/16";
-      }
-      case (_value > .75 && _value <= .875) : {
-        return "7/8";
-      }
-      case ((_value > .875) && (_value <= .95)) : {
-        return "15/16";
-      }
-      case (_value > .95 && _value < 1) : {
-        return "1";   // need to accommodate a rounding to 1. means that calling function increment to whole number.
-      }
     }
-    return result;
-  }
-  /**
-   *  Metric output
-   *  to table for possible shape dimensions
-   * @param _volume
-   * @param _radius
-   * @param _dimension
-   */
-  function outputTableMetric(_volume, _diameter, _height) {
-    console.log("in PressedDisk.html:outputTableMetric");
-    return  "        <b>Disk total volume:</b> " + _volume + " cm<sup>3</sup><br>" +
-            "        <b>Disk total weight:</b> " + (_volume * 2.5).toFixed(2)  + " grams</sup>" +
+
+    function convertDecimalToFraction(value) {
+        // value is always less than 1 and greater than 0
+        // round to 1/16th of an inch.
+        let _value = Number(value);
+        if (value == 0) return "";
+        switch (true) {
+            case ((_value > 0) && (_value <= .0625)) : {
+                return "1/16";
+            }
+            case ((_value > .0625) && (_value <= .125)) : {
+                return "1/8";
+            }
+            case ((_value > .125) && (_value <= .1875)) : {
+                return "3/16";
+            }
+            case (_value > .1875 && _value <= .25) : {
+                return "1/4";
+            }
+            case ((_value > .25) && (_value <= .3125)) : {
+                return "5/16";
+            }
+            case ((_value > .3125) && (_value <= .375)) : {
+                return "3/8";
+            }
+            case ((_value > .375) && (_value <= .4375)) : {
+                return "7/16";
+            }
+            case (_value > .4375 && _value <= .5) : {
+                return "1/2";
+            }
+            case ((_value > .5) && (_value <= .5625)) : {
+                return "9/16";
+            }
+            case (_value > .5625 && _value <= .625) : {
+                return "5/8";
+            }
+            case ((_value > .625) && (_value <= .6875)) : {
+                return "11/16";
+            }
+            case (_value > .6875 && _value <= .75) : {
+                return "3/4";
+            }
+            case ((_value > .75) && (_value <= .8125)) : {
+                return "13/16";
+            }
+            case (_value > .75 && _value <= .875) : {
+                return "7/8";
+            }
+            case ((_value > .875) && (_value <= .95)) : {
+                return "15/16";
+            }
+            case (_value > .95 && _value < 1) : {
+                return "1";   // need to accommodate a rounding to 1. means that calling function increment to whole number.
+            }
+        }
+        return result;
+    }
+
+    /**
+     *  Metric output
+     *  to table for possible shape dimensions
+     * @param _volume
+     * @param _radius
+     * @param _dimension
+     */
+    function outputTableMetric(_volume, _diameter, _height) {
+        console.log("in PressedDisk.html:outputTableMetric");
+        return "        <b>Disk total volume:</b> " + _volume + " cm<sup>3</sup><br>" +
+            "        <b>Disk total weight:</b> " + (_volume * 2.5).toFixed(2) + " grams</sup>" +
             "        <table class=\"table table-hover\">" +
             "          <thead>" +
             "          <tr><th scope=\"col\">Pressed Disk dimensions</th></tr>" +
@@ -542,18 +561,19 @@
             "          <tr><th scope=\"row\">height</th><td>" + _height + "</td><td>cm</td></tr>" +
             "          </tbody>" +
             "        </table>";
-    console.log("out PressedDisk.html:outputTableMetric");
-  }
-
-  function preventFormSubmit() {
-    var forms = document.querySelectorAll('form');
-    for (var i = 0; i < forms.length; i++) {
-      forms[i].addEventListener('submit', function (event) {
-        event.preventDefault();
-      });
+        console.log("out PressedDisk.html:outputTableMetric");
     }
-  }
-  window.addEventListener('load', preventFormSubmit);
+
+    function preventFormSubmit() {
+        var forms = document.querySelectorAll('form');
+        for (var i = 0; i < forms.length; i++) {
+            forms[i].addEventListener('submit', function (event) {
+                event.preventDefault();
+            });
+        }
+    }
+
+    window.addEventListener('load', preventFormSubmit);
 </script>
 
 

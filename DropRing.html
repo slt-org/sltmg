@@ -10,7 +10,7 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
     <script src="https://unpkg.com/mathjs@10.6.0/lib/browser/math.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Montserrat:600i&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 
         body {
@@ -73,10 +73,10 @@
 
         .btn {
             border: 2px solid black;
-            padding: 0.375rem 2.75rem;
+            padding: 0.175rem 1.75rem;
             text-transform: uppercase;
             font-weight: 900;
-            border-radius: 0;
+            border-radius: 9px;
         }
 
         .btn:hover {
@@ -93,69 +93,86 @@
         <div class="col-8">
             <form class="row g-3" id="myForm" onsubmit="handleFormSubmit()">
                 <p class="h4 sm-4 text-center">DropRing Calculation</p><br>
-                <small id="hint" class="form-text">acceptable values are any numbers whole, decimals or fractions
-                    <br> e.g. 3, 0.3, 3.6, 6 1/4 & 1/2
-                    <br> be aware! 1 1/4 and 11/4 are not the same!</small>
+                <p>
+                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        help
+                    </button>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <p>Calculations for a Drop Ring project that give separate rim and color measurements.
+                    </p>
+                    <div class="card card-body">
+                        <small id="hint" class="form-text">acceptable values are any numbers whole, decimals or
+                            fractions
+                            <br> e.g. 3, 0.3, 3.6, 6 1/4 & 1/2
+                            <br> be aware! 1 1/4 and 11/4 are not the same!</small>
+                    </div>
+                </div>
                 <div class="form-row align-items-center">
                     <p class="h6 sm-4 ">Rim ring</p>
-                    <div class="input-group mb-3">
-                        <input type="text" id="rimDiameter" class="form-control" placeholder="rim diameter"
-                               required>
-                        <select class="form-select-sm" id="rimDiameterInputUnits">
-                            <option value="in" selected>in</option>
-                            <option value="mm">mm</option>
-                            <option value="cm">cm</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-auto">
-                        <div class="form-group input-group">
-                            <input type="text" class="form-control" id="rimHeight" placeholder="rim height" required>
-                            <select class="form-select-sm" id="rimHeightInputUnits">
-                                <option value="in" selected>in</option>
-                                <option value="mm">mm</option>
-                                <option value="cm">cm</option>
-                            </select>
-                        </div>
-                    </div>
-                    <br><br>
-                    <p class="h6 sm-4 ">Color disk</p>
-                    <div class="col-sm-auto">
-                        <div class="form-group input-group">
-                            <input type="text" id="colorDiameter" class="form-control" placeholder="color diameter"
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <input type="text" id="rimDiameter" class="form-control" placeholder="rim diameter"
                                    required>
-                            <select class="form-select-sm" id="colorDiameterInputUnits">
+                            <select class="form-select-sm" id="rimDiameterInputUnits">
                                 <option value="in" selected>in</option>
                                 <option value="mm">mm</option>
                                 <option value="cm">cm</option>
                             </select>
                         </div>
-                    </div><br>
-                    <div class="col-sm-auto">
-                        <div class="form-group input-group">
-                            <input type="text" class="form-control" id="colorHeight" placeholder="color height" required>
-                            <select class="form-select-sm" id="colorHeightInputUnits">
-                                <option value="in" selected>in</option>
-                                <option value="mm">mm</option>
-                                <option value="cm">cm</option>
-                            </select>
+                        <div class="col-sm-auto">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="rimHeight" placeholder="rim height"
+                                       required>
+                                <select class="form-select-sm" id="rimHeightInputUnits">
+                                    <option value="in" selected>in</option>
+                                    <option value="mm">mm</option>
+                                    <option value="cm">cm</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
+                        <br><br>
+                        <p class="h6 sm-4 ">Color disk</p>
+                        <div class="col-sm-auto">
+                            <div class="input-group mb-3">
+                                <input type="text" id="colorDiameter" class="form-control" placeholder="color diameter"
+                                       required>
+                                <select class="form-select-sm" id="colorDiameterInputUnits">
+                                    <option value="in" selected>in</option>
+                                    <option value="mm">mm</option>
+                                    <option value="cm">cm</option>
+                                </select>
+                            </div>
+                        </div>
 
-                    <br>
-<!--
-                    <div class="form-group col-sm-6">
-                        <p class="h6 sm-4 ">COE 90 or 96 Recipe</p>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="coe" id="90" value="90"
-                                   checked>
-                            <label class="form-check-label" for="metric">COE 90</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="coe" id="96" value="96">
-                            <label class="form-check-label" for="imperial">COE 96</label>
+                        <div class="col-sm-auto">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="colorHeight" placeholder="color height"
+                                       required>
+                                <select class="form-select-sm" id="colorHeightInputUnits">
+                                    <option value="in" selected>in</option>
+                                    <option value="mm">mm</option>
+                                    <option value="cm">cm</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
--->
+                    <br>
+                    <!--
+                                        <div class="form-group col-sm-6">
+                                            <p class="h6 sm-4 ">COE 90 or 96 Recipe</p>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="coe" id="90" value="90"
+                                                       checked>
+                                                <label class="form-check-label" for="metric">COE 90</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="coe" id="96" value="96">
+                                                <label class="form-check-label" for="imperial">COE 96</label>
+                                            </div>
+                                        </div>
+                    -->
                     <div class="form-group col-sm-6">
                         <p class="h6 sm-4 ">Drop output units</p>
                         <div class="form-check form-check-inline">
@@ -170,29 +187,49 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <button type="submit" class="btn btn-primary btn-block">Drop</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Drop</button>
                 </div>
             </form>
             <br>
             <div id="recipe">
-            <!--<div class="col-sm-auto" id="rim">-->
+                <!--<div class="col-sm-auto" id="rim">-->
                 <!--
 <b>MG total volume:</b> 0 cm<sup>3</sup><br> <b>MG total weight:</b> 0 grams
 -->
                 <p class="h6 sm-4 ">Rim values</p>
                 <table class="table table-hover">
-                    <thead><tr><th scope="col">Volume</th><th scope="col">Weight</th></tr></thead>
-                    <tbody><tr><th scope="row">0</th><td>0</td></tr></tbody>
+                    <thead>
+                    <tr>
+                        <th scope="col">Volume</th>
+                        <th scope="col">Weight</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">0</th>
+                        <td>0</td>
+                    </tr>
+                    </tbody>
                 </table>
-            <!--</div>-->
-            <br>
-            <!--<div class="col-sm-auto" id="color">-->
+                <!--</div>-->
+                <br>
+                <!--<div class="col-sm-auto" id="color">-->
                 <p class="h6 sm-4 ">Color values</p>
                 <table class="table table-hover">
-                    <thead><tr><th scope="col">Volume</th><th scope="col">Weight</th></tr></thead>
-                    <tbody><tr><th scope="row">0</th><td>0</td></tr></tbody>
+                    <thead>
+                    <tr>
+                        <th scope="col">Volume</th>
+                        <th scope="col">Weight</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">0</th>
+                        <td>0</td>
+                    </tr>
+                    </tbody>
                 </table>
-            <!--</div>-->
+                <!--</div>-->
                 <br>
                 <div><b>Total volume:</b> 0 cm<sup>3</sup><br> <b>Total weight:</b> 0 grams</div>
             </div>
@@ -266,7 +303,7 @@
             field.className = 'form-control invalid';
         }
     }
-    </script>
+</script>
 
 <script>
     // <!-- 3. Initial input handling different for each page -->
@@ -311,6 +348,7 @@
         volumeRim;
         volumeColor;
         outputUnits;
+
         //coe;
 
         constructor(data) {
@@ -355,14 +393,14 @@
         calculateVolume() {
             console.log("in DropRing.calculateVolume ***************************");
             // Rim volume calculations
-            let insideRadius = this.colorDiameter / 2;
-            let outsideRadius = this.rimDiameter / 2;
-            let r3 = insideRadius * insideRadius * insideRadius;
-            let R3 = outsideRadius * outsideRadius * outsideRadius;
-            this.volumeRim = ((4 / 3) * PI * (R3 - r3)) / 2;
-            // Color volume calculations
-            this.volumeColor = ((4 / 3) * PI * r3) / 2;
+            let colorRadius = this.colorDiameter / 2;
+            let rimRadius = this.rimDiameter / 2;
+            let cR2 = colorRadius * colorRadius;
+            let rR2 = rimRadius * rimRadius;
+            this.volumeColor = PI * cR2 * this.colorHeight;
+            this.volumeRim = (PI * rR2 * this.rimHeight) - (PI * cR2 * this.rimHeight);
             this.volumeTotal = this.volumeRim + this.volumeColor;
+            // Color volume calculations
             // volume here is always in cm^3
             console.log("out DropRing.calculateVolume ***************************");
         }
@@ -410,9 +448,9 @@
             return resultHtml;
         };
 
-        convertToNumber(){
+        convertToNumber() {
             var impObject = new Object();
-            impObject.unitsVolume  = "cm<sup>3</sup>";
+            impObject.unitsVolume = "cm<sup>3</sup>";
             impObject.unitsWeight = "grams";
             // set this functionality up in the metric script space
             impObject.rimVolume = Number(this.volumeRim);
@@ -423,7 +461,7 @@
             return impObject;
         }
 
-        convertToImperial(){
+        convertToImperial() {
             var impObject = new Object();
             impObject.unitsVolume = "in<sup>3</sup>";
             impObject.unitsWeight = "oz";
@@ -485,43 +523,44 @@
         let recipe = "No recipe available";
 
         if (volumeObject.outputUnits != "imperial") {
-/*
-            volumeObject.units = "grams";
-            // set this functionality up in the metric script space
-            let _volumeRim = Number(volumeObject.volumeRim.toFixed(1));
-            let _volumeColor = Number(volumeObject.volumeColor.toFixed(1));
-            let _rimWeight = Number((_volumeRim * 2.5).toFixed(1));
-            let _colorWeight = Number((_volumeColor * 2.5).toFixed(1));
-*/
+            /*
+                        volumeObject.units = "grams";
+                        // set this functionality up in the metric script space
+                        let _volumeRim = Number(volumeObject.volumeRim.toFixed(1));
+                        let _volumeColor = Number(volumeObject.volumeColor.toFixed(1));
+                        let _rimWeight = Number((_volumeRim * 2.5).toFixed(1));
+                        let _colorWeight = Number((_volumeColor * 2.5).toFixed(1));
+            */
             recipe = "<p class=\"h6 sm-4 \">Rim values</p>\n" +
                 "                <table class=\"table table-hover\">\n" +
                 "                    <thead><tr><th scope=\"col\">Volume</th><th scope=\"col\">Weight</th></tr></thead>\n" +
-                "                    <tbody><tr><td scope=\"row\">"+volumeObject.rimVolume.toFixed(2)+" "+volumeObject.unitsVolume+" </td><td>"+volumeObject.rimWeight.toFixed(2)+" "+volumeObject.unitsWeight+"</td></tr></tbody>\n" +
+                "                    <tbody><tr><td scope=\"row\">" + volumeObject.rimVolume.toFixed(2) + " " + volumeObject.unitsVolume + " </td><td>" + volumeObject.rimWeight.toFixed(2) + " " + volumeObject.unitsWeight + "</td></tr></tbody>\n" +
                 "                </table>\n" +
                 "            <br>\n" +
                 "                <p class=\"h6 sm-4 \">Color values</p>\n" +
                 "                <table class=\"table table-hover\">\n" +
                 "                    <thead><tr><th scope=\"col\">Volume</th><th scope=\"col\">Weight</th></tr></thead>\n" +
-                "                    <tbody><tr><td scope=\"row\">"+volumeObject.colorVolume.toFixed(2)+" "+volumeObject.unitsVolume+" </td><td>"+volumeObject.colorWeight.toFixed(2)+" "+volumeObject.unitsWeight+"</td></tr></tbody>\n" +
+                "                    <tbody><tr><td scope=\"row\">" + volumeObject.colorVolume.toFixed(2) + " " + volumeObject.unitsVolume + " </td><td>" + volumeObject.colorWeight.toFixed(2) + " " + volumeObject.unitsWeight + "</td></tr></tbody>\n" +
                 "                </table>\n" +
-                "                <div><b>Total volume:</b> "+(volumeObject.rimVolume+volumeObject.colorVolume).toFixed(2)+" "+volumeObject.unitsVolume+" <br> <b>Total weight:</b> "+(volumeObject.rimWeight+volumeObject.colorWeight).toFixed(2)+" "+volumeObject.unitsWeight+" </div>"
+                "                <div><b>Total volume:</b> " + (volumeObject.rimVolume + volumeObject.colorVolume).toFixed(2) + " " + volumeObject.unitsVolume + " <br> <b>Total weight:</b> " + (volumeObject.rimWeight + volumeObject.colorWeight).toFixed(2) + " " + volumeObject.unitsWeight + " </div>"
 
-             /*
-                "                <br>\n" +
-                "                <p class=\"h6 sm-4 \">Color recipe</p>\n" +
-                "                <table class=\"table table-hover\">\n" +
-                "                    <thead>\n" +
-                "                    <tr><th scope=\"col\">Ingredient</th><th scope=\"col\">Amount</th><th scope=\"col\">Units</th></tr>\n" +
-                "                    </thead>\n" +
-                "                    <tbody>\n" +
-                "                    <tr><th scope=\"row\">Glass</th><td>" + volumeObject.glass + "</td><td>" + volumeObject.units + "</td></tr>\n" +
-                "                    <tr><th scope=\"row\">H2O</th><td>" + volumeObject.water + "</td><td>" + volumeObject.units + "</td></tr>\n" +
-                "                    <tr><th scope=\"row\">Binder</th><td>" + volumeObject.binder + "</td><td>" + volumeObject.units + "</td></tr>\n" +
-                "                    <tr><th scope=\"row\">Liquid Medium</th><td>" + volumeObject.liquid_medium + "</td><td>" + volumeObject.units + "</td></tr>\n" +
-                "                    </tbody>\n" +
-                "                </table>\n";
+            /*
+               "                <br>\n" +
+               "                <p class=\"h6 sm-4 \">Color recipe</p>\n" +
+               "                <table class=\"table table-hover\">\n" +
+               "                    <thead>\n" +
+               "                    <tr><th scope=\"col\">Ingredient</th><th scope=\"col\">Amount</th><th scope=\"col\">Units</th></tr>\n" +
+               "                    </thead>\n" +
+               "                    <tbody>\n" +
+               "                    <tr><th scope=\"row\">Glass</th><td>" + volumeObject.glass + "</td><td>" + volumeObject.units + "</td></tr>\n" +
+               "                    <tr><th scope=\"row\">H2O</th><td>" + volumeObject.water + "</td><td>" + volumeObject.units + "</td></tr>\n" +
+               "                    <tr><th scope=\"row\">Binder</th><td>" + volumeObject.binder + "</td><td>" + volumeObject.units + "</td></tr>\n" +
+               "                    <tr><th scope=\"row\">Liquid Medium</th><td>" + volumeObject.liquid_medium + "</td><td>" + volumeObject.units + "</td></tr>\n" +
+               "                    </tbody>\n" +
+               "                </table>\n";
 */
-        };
+        }
+        ;
         return recipe;
     };
 
@@ -537,201 +576,201 @@
      * The volumeObject should be complete should and
      * have the 4 fields of glass,water,binder and liquid medium.
      */
-/*
-    function iCreateRecipeTableHtml(volumeObject) {     // a portion of this is duplicate code for metric and imperial
-        console.log("in imperial.gs : iCreateRecipeTableHtml ***********************");
-        console.log("iCreateRecipeTableHtml: object passed to createRecipe " + JSON.stringify(volumeObject));
+    /*
+        function iCreateRecipeTableHtml(volumeObject) {     // a portion of this is duplicate code for metric and imperial
+            console.log("in imperial.gs : iCreateRecipeTableHtml ***********************");
+            console.log("iCreateRecipeTableHtml: object passed to createRecipe " + JSON.stringify(volumeObject));
 
-        let recipe = "No Recipe available";
+            let recipe = "No Recipe available";
 
-        // We need to translate from grams to imperial measurements of teaspoons ect.
-        // for each ingredient. Then output the amount to table
-/!*
-        console.log("glass .................");
-        var glassAmount = formatIngredientList(convert(volumeObject.glass, GLASSCONV));
-        console.log("water .................");
-        var waterAmount = formatIngredientList(convert(volumeObject.water, WATERCONV));
-        console.log("binder .................");
-        var binderAmount = formatIngredientList(convert(volumeObject.binder, BINDERCONV));
-        console.log("medium .................");
-        var mediumAmount = formatIngredientList(convert(volumeObject.liquid_medium, LMEDIUMCONV));
-*!/
+            // We need to translate from grams to imperial measurements of teaspoons ect.
+            // for each ingredient. Then output the amount to table
+    /!*
+            console.log("glass .................");
+            var glassAmount = formatIngredientList(convert(volumeObject.glass, GLASSCONV));
+            console.log("water .................");
+            var waterAmount = formatIngredientList(convert(volumeObject.water, WATERCONV));
+            console.log("binder .................");
+            var binderAmount = formatIngredientList(convert(volumeObject.binder, BINDERCONV));
+            console.log("medium .................");
+            var mediumAmount = formatIngredientList(convert(volumeObject.liquid_medium, LMEDIUMCONV));
+    *!/
 
-        let cubicInches = "in<sup>3</sup>";
-        let oz = "oz";
-        let _rimVolume = volumeObject.volumeRim.toFixed(1);
-        let _colorVolume = volumeObject.volumeColor.toFixed(1)
-        let _rimWeight = (_rimVolume * 2.5).toFixed(1);
-        let _colorWeight = (_colorVolume * 2.5).toFixed(1);
-        if (volumeObject.outputUnits == "imperial") {
-            // convert volume from cc to ci and weight from gm to oz.
-            _rimVolume = (_rimVolume / CITOCC).toFixed(2);
-            _rimWeight = (_rimWeight / OZTOGM).toFixed(2);
-            _colorVolume = (_colorVolume / CITOCC).toFixed(2);
-            _colorWeight = (_colorWeight / OZTOGM).toFixed(2);
-        }
+            let cubicInches = "in<sup>3</sup>";
+            let oz = "oz";
+            let _rimVolume = volumeObject.volumeRim.toFixed(1);
+            let _colorVolume = volumeObject.volumeColor.toFixed(1)
+            let _rimWeight = (_rimVolume * 2.5).toFixed(1);
+            let _colorWeight = (_colorVolume * 2.5).toFixed(1);
+            if (volumeObject.outputUnits == "imperial") {
+                // convert volume from cc to ci and weight from gm to oz.
+                _rimVolume = (_rimVolume / CITOCC).toFixed(2);
+                _rimWeight = (_rimWeight / OZTOGM).toFixed(2);
+                _colorVolume = (_colorVolume / CITOCC).toFixed(2);
+                _colorWeight = (_colorWeight / OZTOGM).toFixed(2);
+            }
 
-        // Logger.log("glassAmount : " + glassAmount.toString());
-        recipe = "<b>MG total volume:</b> " + impVolume + " " + cubicInches + "<br> <b>MG total weight:</b> " + impWeight + " ounces\n" +
-            "                <table class=\"table table-hover\">\n" +
-            "                    <thead>\n" +
-            "                    <tr><th scope=\"col\">Ingredient</th><th scope=\"col\">Amount</th></tr>\n" +
-            "                    </thead>\n" +
-            "                    <tbody>\n" +
-            "                    <tr><th scope=\"row\">Glass</th><td>" + glassAmount.toString() + "</td></tr>\n" +
-            "                    <tr><th scope=\"row\">H2O</th><td>" + waterAmount.toString() + "</td></tr>\n" +
-            "                    <tr><th scope=\"row\">Binder</th><td>" + binderAmount.toString() + "</td></tr>\n" +
-            "                    <tr><th scope=\"row\">Liquid Medium</th><td>" + mediumAmount.toString() + "</td></tr>\n" +
-            "                    </tbody>\n" +
-            "                </table>\n";
+            // Logger.log("glassAmount : " + glassAmount.toString());
+            recipe = "<b>MG total volume:</b> " + impVolume + " " + cubicInches + "<br> <b>MG total weight:</b> " + impWeight + " ounces\n" +
+                "                <table class=\"table table-hover\">\n" +
+                "                    <thead>\n" +
+                "                    <tr><th scope=\"col\">Ingredient</th><th scope=\"col\">Amount</th></tr>\n" +
+                "                    </thead>\n" +
+                "                    <tbody>\n" +
+                "                    <tr><th scope=\"row\">Glass</th><td>" + glassAmount.toString() + "</td></tr>\n" +
+                "                    <tr><th scope=\"row\">H2O</th><td>" + waterAmount.toString() + "</td></tr>\n" +
+                "                    <tr><th scope=\"row\">Binder</th><td>" + binderAmount.toString() + "</td></tr>\n" +
+                "                    <tr><th scope=\"row\">Liquid Medium</th><td>" + mediumAmount.toString() + "</td></tr>\n" +
+                "                    </tbody>\n" +
+                "                </table>\n";
 
-        console.log("out imperial.gs : iCreateRecipeTableHtml ***********************");
-        return recipe;
-    };
-*/
+            console.log("out imperial.gs : iCreateRecipeTableHtml ***********************");
+            return recipe;
+        };
+    */
 
     // finalObject has collected values from conversion
-   /* function formatIngredientList(formatObject) {
-        console.log("in imperial.gs : formatIngredientList ***********************");
-        // Walk the possible values and format for
-        // html template.
+    /* function formatIngredientList(formatObject) {
+         console.log("in imperial.gs : formatIngredientList ***********************");
+         // Walk the possible values and format for
+         // html template.
 
-        let cup = false;
-        let tsp = false;
-        let result = "";
-        let glassAmountFormatted;
-        if (formatObject.cups > 0) {
-            result = result + formatObject.cups + " ";
-            cup = true;
-        }
-        if (formatObject.threeqtrCup > 0) {
-            result = result + "3/4";
-            cup = true;
-        }
-        if (formatObject.halfCup > 0) {
-            result = result + "1/2";
-            cup = true;
-        }
-        if (formatObject.qtrCup > 0) {
-            result = result + "1/4";
-            cup = true;
-        }
-        if (cup == true) {
-            result = result + " cup + ";
-        }
-        if (formatObject.tblsp > 0) {
-            result = result + formatObject.tblsp + " tblsp + ";
-        }
-        if (formatObject.tsp > 0) {
-            result = result + formatObject.tsp + " ";
-            tsp = true;
-        }
-        if (formatObject.threeqtrTsp > 0) {
-            result = result + "3/4";
-            tsp = true;
-        }
-        if (formatObject.halfTsp > 0) {
-            result = result + "1/2";
-            tsp = true;
-        }
-        if (formatObject.qtrTsp > 0) {
-            result = result + "1/4";
-            tsp = true;
-        }
-        if (tsp == true) {
-            result = result + " tsp.";
-        }
+         let cup = false;
+         let tsp = false;
+         let result = "";
+         let glassAmountFormatted;
+         if (formatObject.cups > 0) {
+             result = result + formatObject.cups + " ";
+             cup = true;
+         }
+         if (formatObject.threeqtrCup > 0) {
+             result = result + "3/4";
+             cup = true;
+         }
+         if (formatObject.halfCup > 0) {
+             result = result + "1/2";
+             cup = true;
+         }
+         if (formatObject.qtrCup > 0) {
+             result = result + "1/4";
+             cup = true;
+         }
+         if (cup == true) {
+             result = result + " cup + ";
+         }
+         if (formatObject.tblsp > 0) {
+             result = result + formatObject.tblsp + " tblsp + ";
+         }
+         if (formatObject.tsp > 0) {
+             result = result + formatObject.tsp + " ";
+             tsp = true;
+         }
+         if (formatObject.threeqtrTsp > 0) {
+             result = result + "3/4";
+             tsp = true;
+         }
+         if (formatObject.halfTsp > 0) {
+             result = result + "1/2";
+             tsp = true;
+         }
+         if (formatObject.qtrTsp > 0) {
+             result = result + "1/4";
+             tsp = true;
+         }
+         if (tsp == true) {
+             result = result + " tsp.";
+         }
 
-        console.log("out imperial.gs : formatIngredientList ***********************");
+         console.log("out imperial.gs : formatIngredientList ***********************");
 
-        return result;
-    }
-*/
+         return result;
+     }
+ */
     /**
      * convert ingredient weight in grams to imperial measurements.
      * @param {number} ingredientWeightInGrams
      */
-  /*  function convert(ingredientWeightInGrams, ingredientConversionFactor) {
-        console.log("in imperial.gs : convert ***********************");
-        console.log("input value in grams " + ingredientWeightInGrams + " input conversion factor " + ingredientConversionFactor);
-        let tsp = ingredientWeightInGrams * ingredientConversionFactor;
-        console.log("teaspoons from weight: " + tsp.toFixed(2));
-        let conObj = new Object();
-        conObj.cups = 0;            // 48 tsps
-        conObj.threeqtrCup = 0;     // 36 tsps
-        // conObj.twoThirdsCup = 0; // 32 tsps
-        conObj.halfCup = 0;         // 24 tsps
-        conObj.qtrCup = 0;          // 12 tsps
-        conObj.tblsp = 0;           //  3 tsps
-        conObj.threeqtrTsp = 0;
-        conObj.halfTsp = 0;
-        conObj.qtrTsp = 0;
-        conObj.eightTsp = 0;
-        conObj.tsp = 0;
+    /*  function convert(ingredientWeightInGrams, ingredientConversionFactor) {
+          console.log("in imperial.gs : convert ***********************");
+          console.log("input value in grams " + ingredientWeightInGrams + " input conversion factor " + ingredientConversionFactor);
+          let tsp = ingredientWeightInGrams * ingredientConversionFactor;
+          console.log("teaspoons from weight: " + tsp.toFixed(2));
+          let conObj = new Object();
+          conObj.cups = 0;            // 48 tsps
+          conObj.threeqtrCup = 0;     // 36 tsps
+          // conObj.twoThirdsCup = 0; // 32 tsps
+          conObj.halfCup = 0;         // 24 tsps
+          conObj.qtrCup = 0;          // 12 tsps
+          conObj.tblsp = 0;           //  3 tsps
+          conObj.threeqtrTsp = 0;
+          conObj.halfTsp = 0;
+          conObj.qtrTsp = 0;
+          conObj.eightTsp = 0;
+          conObj.tsp = 0;
 
-        while (tsp > 48) {
-            conObj.cups = conObj.cups + 1;
-            tsp = tsp - 48;
-        }
-        ;
+          while (tsp > 48) {
+              conObj.cups = conObj.cups + 1;
+              tsp = tsp - 48;
+          }
+          ;
 
-        if (tsp <= 47.99 && tsp >= 36) {
-            conObj.threeqtrCup = 1;
-            tsp = tsp - 36;
-        }
-        ;
+          if (tsp <= 47.99 && tsp >= 36) {
+              conObj.threeqtrCup = 1;
+              tsp = tsp - 36;
+          }
+          ;
 
-        if (tsp <= 35.99 && tsp >= 24) {
-            conObj.halfCup = 1;
-            tsp = tsp - 24;
-        }
-        ;
+          if (tsp <= 35.99 && tsp >= 24) {
+              conObj.halfCup = 1;
+              tsp = tsp - 24;
+          }
+          ;
 
-        if (tsp <= 23.99 && tsp >= 12) {
-            conObj.qtrCup = 1;
-            tsp = tsp - 12;
-        }
-        ;
+          if (tsp <= 23.99 && tsp >= 12) {
+              conObj.qtrCup = 1;
+              tsp = tsp - 12;
+          }
+          ;
 
-        while (tsp <= 11.99 && tsp >= 3) {
-            conObj.tblsp = conObj.tblsp + 1;
-            tsp = tsp - 3;
-        }
-        ;
+          while (tsp <= 11.99 && tsp >= 3) {
+              conObj.tblsp = conObj.tblsp + 1;
+              tsp = tsp - 3;
+          }
+          ;
 
-        while (tsp < 2.99 && tsp >= 1) {
-            tsp = tsp.toFixed(2);
-            conObj.tsp = conObj.tsp + 1;
-            tsp = tsp - 1;
-        }
-        ;
+          while (tsp < 2.99 && tsp >= 1) {
+              tsp = tsp.toFixed(2);
+              conObj.tsp = conObj.tsp + 1;
+              tsp = tsp - 1;
+          }
+          ;
 
-        console.log("after here there is less than 1 teaspoon left. " + tsp.toFixed(2));
+          console.log("after here there is less than 1 teaspoon left. " + tsp.toFixed(2));
 
-        if (tsp < 0.99 && tsp >= .75) {
-            conObj.threeqtrTsp = conObj.threeqtrTsp + 1;
-            tsp = 0;
-        }
+          if (tsp < 0.99 && tsp >= .75) {
+              conObj.threeqtrTsp = conObj.threeqtrTsp + 1;
+              tsp = 0;
+          }
 
-        if (tsp < .749 && tsp >= .50) {
-            conObj.halfTsp = conObj.halfTsp + 1;
-            tsp = 0;
-        }
+          if (tsp < .749 && tsp >= .50) {
+              conObj.halfTsp = conObj.halfTsp + 1;
+              tsp = 0;
+          }
 
-        if (tsp < .499 && tsp >= .25) {
-            conObj.qtrTsp = conObj.qtrTsp + 1;
-            tsp = 0;
-        }
+          if (tsp < .499 && tsp >= .25) {
+              conObj.qtrTsp = conObj.qtrTsp + 1;
+              tsp = 0;
+          }
 
-        if (tsp < .249 && tsp >= .125) {
-            conObj.eightTsp = conObj.eightTsp + 1;
-            tsp = 0;
-        }
+          if (tsp < .249 && tsp >= .125) {
+              conObj.eightTsp = conObj.eightTsp + 1;
+              tsp = 0;
+          }
 
-        console.log("out imperial.gs : convert ***********************");
-        return conObj;
-    };
-    */
+          console.log("out imperial.gs : convert ***********************");
+          return conObj;
+      };
+      */
 </script>
 
 </body>
