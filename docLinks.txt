@@ -1,0 +1,20 @@
+base url 
+
+-* bowl        documentation#h.5549ehkigcyt
+-* custom      documentation#h.1b2y4qk5fqyx
+-* disk        documentation#h.im6pmvo5t153
+-* reverse     documentation#h.hofw2luxjukf
+-* slab        documentation#h.lqspxqqtbtl7
+
+-* bowl vol    documentation#h.yw4p1zlm6uw2
+-* disk vol    documentation#h.fyqwyclni44m
+-* slab vol    documentation#h.cbsta86jkoi8
+-* drop ring   documentation#h.m29mksuzlzbr
+-* press size  documentation#h.r0537ehut88r
+-* press wt    documentation#h.b6wj284bcscc
+-* rx compare  documentation#h.9rd7jl5w1uqi
+-* rx search   documentation#h.wqcvbagpr5ks
+-* pwdr        documentation#h.mqn1calzpv14
+
+
+https://sites.google.com/view/slt-mg/resources/documentation#h.9rd7jl5w1uqi

@@ -95,7 +95,34 @@
 <div class="container">
     <div class="row">
         <div class="col-8">
-            <p class="h4 sm-4 text-center">Reactions Search</p><br>
+            <p class="h4 sm-4 text-center">Reactions Search</p>
+            <br>
+            <div class="accordion" id="accordionExample">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse"
+                                data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            help
+                        </button>
+                    </div>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <small id="hint" class="form-text">
+                                I want to search for Bullseye glasses that react with my chosen glass.
+                                <br><br>
+                                Begin by typing a glass name or number to find the glass you want.
+                            </small>
+                        </div>
+                        <div>
+                            <br>
+                            <a href="https://sites.google.com/view/slt-mg/resources/documentation#h.wqcvbagpr5ks"
+                               class="btn btn-primary btn-sm" role="button" aria-disabled="true">Reaction Search <br> documentation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+
             <form class="row g-3" id="twoForm" onsubmit="namepicker()">
                 <div class="form-row align-items-center">
                     <div class="input-group mb-3">
