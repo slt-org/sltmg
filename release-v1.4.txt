@@ -1,0 +1,20 @@
+
+I would like to announce the release of the Glass Toolbox v1.4.
+
+https://sites.google.com/view/slt-mg/home
+
+The name has changed slightly to signify the addition of traditional glass tools. The tools are split into Standard Glass tools (like Bullseye standard sheet glass and frit) and Modeling Glass recipe generators.
+
+Improvements have been made for
+* Presentation on phones
+* Cleaner interfaces
+* Links to help pages
+
+New functionality includes
+ * Bullseye reaction searches
+ * Pressed glass predictors
+ * Drop ring calculations.
+
+As always the Toolbox is free to use, no signups and no ads.
+
+If you find any of the tools useful please drop me a message or email me sterry1@protonmail.com. Remember, the Glass Toolbox gets better with feedback.
