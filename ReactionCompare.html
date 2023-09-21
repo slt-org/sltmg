@@ -1045,6 +1045,7 @@ SOFTWARE.
         console.log("*************** out handleFormSubmit ");
     }
 
+
     function compareForReactive(glass1, glass2) {
         let reactsWith = reactiveBearing(glass1.bearing);
         if (glass1.bearing === glass2.bearing)
@@ -1052,7 +1053,16 @@ SOFTWARE.
         if (glass1.bearing === "none" || glass2.bearing === "none")
             return false;
 
+        // if glass2.bearing is found in reactsWith
+        //  then the two glass can react.
         if (reactsWith.length > 0) {
+            let found = reactsWith.find(
+                function checkBearing(bearing){
+                console.log("bearing value is "+bearing+ " glass2.bearing "+glass2.bearing)
+                });
+            if(found == undefined){
+                return false;
+            }
             return true;
         } else {
             return false;
